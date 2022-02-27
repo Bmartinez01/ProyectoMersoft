@@ -45,7 +45,7 @@
         <div class="collapse show" id="usuarios">
           <ul class="nav">
             <li class="nav-item{{ $activePage == 'users' ? ' active' : '' }}">
-              <a class="nav-link" href="{{route('users.index')}}">
+              <a class="nav-link" href="#">
                 <i class="material-icons">account_circle</i>
                   <p>{{ __('Usuario') }}</p>
               </a>
@@ -75,7 +75,7 @@
               </a>
             </li>
             <li class="nav-item{{ $activePage == 'categorias' ? ' active' : '' }}">
-              <a class="nav-link" href="{{route('categorias.index')}}">
+              <a class="nav-link" href="#">
                 <i class="material-icons">receipt_long</i>
                   <p>{{ __('Categorias') }}</p>
               </a>
@@ -101,7 +101,7 @@
         <div class="collapse show" id="Ventas">
           <ul class="nav">
             <li class="nav-item{{ $activePage == 'clientes' ? ' active' : '' }}">
-              <a class="nav-link" href="{{route('clientes.index')}}">
+              <a class="nav-link" href={{route('clientes.index')}}>
                 <i class="material-icons">supervisor_account</i>
                   <p>{{ __('Clientes') }}</p>
               </a>
