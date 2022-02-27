@@ -45,7 +45,7 @@
         <div class="collapse show" id="usuarios">
           <ul class="nav">
             <li class="nav-item{{ $activePage == 'users' ? ' active' : '' }}">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{route('users.index')}}">
                 <i class="material-icons">account_circle</i>
                   <p>{{ __('Usuario') }}</p>
               </a>
