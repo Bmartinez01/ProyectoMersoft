@@ -75,7 +75,7 @@
               </a>
             </li>
             <li class="nav-item{{ $activePage == 'categorias' ? ' active' : '' }}">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{route('categorias.index')}}">
                 <i class="material-icons">receipt_long</i>
                   <p>{{ __('Categorias') }}</p>
               </a>
