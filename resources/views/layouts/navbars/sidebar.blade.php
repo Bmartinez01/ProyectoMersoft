@@ -82,8 +82,8 @@
             </li>
 
 
-            <li class="nav-item{{ $activePage == 'map' ? ' active' : '' }}">
-              <a class="nav-link" href="#">
+            <li class="nav-item{{ $activePage == 'productos' ? ' active' : '' }}">
+              <a class="nav-link" href="{{route('productos.index')}}">
                 <i class="material-icons">view_in_ar</i>
                   <p>{{ __('Productos') }}</p>
               </a>
