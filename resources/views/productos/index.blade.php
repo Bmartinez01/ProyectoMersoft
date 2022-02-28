@@ -1,10 +1,10 @@
-@extends('layouts.main', ['activePage' => 'clientes', 'titlePage' => 'Clientes'])
+@extends('layouts.main', ['activePage' => 'productos', 'titlePage' => 'productos'])
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" >
 @endsection
 @section('content')
-    <div class="content">
+<div class="content">
         <div class="container-fluid">
             <div class="row">
             <div class="col-md-12">
@@ -12,8 +12,8 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header card-header-info">
-                                <h4 class="card-title text-dark">Clientes</h4>
-                                <p class="card-category text-dark">Clientes Registrados</p>
+                                <h4 class="card-title text-dark">productos</h4>
+                                <p class="card-category text-dark">productos Registrados</p>
                             </div>
                             <div class="card-body">
                                 @if (session('success'))
@@ -23,38 +23,34 @@
                                 @endif
                                 <div class="row">
                                     <div class="col-12 text-right">
-                                        <a href="{{route('clientes.create')}}" class="btn btn-sm btn-facebook">Agregar Cliente</a>
+                                        <a href="{{route('productos.create')}}" class="btn btn-sm btn-facebook">Agregar productos</a>
                                     </div>
                                 </div>
                                 <div class="table-responsive">
-                                    <table  id="clientes" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
+                                    <table  id="productos" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                         <thead class="text-white bg-primary">
 
-                                            <th>No.</th>
-                                            <th>Documento</th>
+                                            <th>Código</th>
                                             <th>Nombre</th>
-                                            <th>Apellido</th>
-                                            <th>Dirección</th>
-                                            <th>Celular</th>
-                                            <th>Email</th>
+                                            <th>Categorías</th>
+                                            <th>Stock</th>
+                                            <th>precio</th>
                                             <th>Estado</th>
-                                            <th class="text-right">Función</th>
+                                            <th class="text-right">Funciones</th>
                                         </thead>
                                         <tbody>
-                                            @foreach ($clientes as $cliente)
+                                            @foreach ($productos as $Producto)
 
 
                                             <tr>
 
-                                                <td>{{ $cliente->id}}</td>
-                                                <td>{{ $cliente->documento }}</td>
-                                                <td>{{ $cliente->nombre }}</td>
-                                                <td>{{ $cliente->apellido }}</td>
-                                                <td>{{ $cliente->direccion }}</td>
-                                                <td>{{ $cliente->telefono }}</td>
-                                                <td>{{ $cliente->email }}</td>
+                                                <td>{{ $Producto->Código}}</td>
+                                                <td>{{ $Producto->Nombre }}</td>
+                                                <td>{{ $Producto->Categorías }}</td>
+                                                <td>{{ $Producto->Stock}}</td>
+                                                <td>{{ $Producto->precio}}</td>
                                                 <td class="td-actions text-right">
-                                                @if ($cliente->estado==1)
+                                                @if ($Producto->estado==1)
                                                 <button type="button" class="btn btn-success btn-sm">
                                                     Activo
                                                 </button>
@@ -67,7 +63,7 @@
                                                 @endif
                                                </td>
                                                <td class="td-actions text-right">
-                                                 <a href="{{ route('clientes.edit', $cliente->id) }}"
+                                                 <a href="{{ route('productos.edit', $Producto->id) }}"
                                                     class="btn btn-warning"><i class="material-icons">edit</i></a>
 
                                                </td>
@@ -93,7 +89,7 @@
 
     <script>
     $(document).ready(function() {
-        $('#clientes').DataTable( {
+        $('#productos').DataTable( {
             "language": {
                 "lengthMenu": "Mostrar  _MENU_  registros por pagina",
                 "zeroRecords": "No se encontraron datos",
