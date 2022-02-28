@@ -22,5 +22,6 @@ Route::resource('users',  App\Http\Controllers\UserController::class)->middlewar
 
 Route::resource('clientes',  App\Http\Controllers\ClienteController::class)->middleware('auth');
 Route::resource('categorias',  App\Http\Controllers\CategoriaController::class)->middleware('auth');
+Route::resource('proveedores',  App\Http\Controllers\ProveedorController::class)->middleware('auth');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

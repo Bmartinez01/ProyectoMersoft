@@ -62,8 +62,8 @@
         </a>
         <div class="collapse show" id="Compras">
           <ul class="nav">
-            <li class="nav-item{{ $activePage == 'typography' ? ' active' : '' }}">
-              <a class="nav-link" href="#">
+            <li class="nav-item{{ $activePage == 'proveedores' ? ' active' : '' }}">
+              <a class="nav-link" href="{{route('proveedores.index')}}">
                 <i class="material-icons">settings_accessibility</i>
                   <p>{{ __('Proveedores') }}</p>
               </a>

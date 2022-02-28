@@ -14,7 +14,7 @@
                         <div class="card-body">
                             
                             <div class="row">
-                                <label for="documento" class="col-sm-2 col-form-label">Nombre</label>
+                                <label for="documento" class="col-sm-2 col-form-label control-label asterisco">Nombre</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="nombre" placeholder="Ingrese el nombre" value="{{ old('nombre')}}"  autofocus >
                                     @if ($errors->has('nombre'))
