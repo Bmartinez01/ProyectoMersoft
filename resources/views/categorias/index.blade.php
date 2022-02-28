@@ -77,7 +77,15 @@
 $(document).ready(function() {
     $('#categorias').DataTable( {
         "language": {
-            "lengthMenu": "Mostrar  _MENU_  registros por pagina",
+            "lengthMenu": "Mostrar "+
+                `<select>
+                    <option value='5'>5</option>
+                    <option value='10'>10</option>
+                    <option value='15'>15</option>
+                    <option value='20'>20</option>
+                    <option value='-1'>Todos</option>
+                </select>`+
+                " registros por pagina",
             "zeroRecords": "No se encontraron datos",
             "info": "Mostrando la página _PAGE_ de _PAGES_",
             "infoEmpty": "No records available",
@@ -90,6 +98,7 @@ $(document).ready(function() {
         }
     } );
 } );
+
 </script>
 @endsection
 

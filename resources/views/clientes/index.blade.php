@@ -30,6 +30,7 @@
                                     <table  id="clientes" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                         <thead class="text-white bg-primary">
 
+                                            <th>No.</th>
                                             <th>Documento</th>
                                             <th>Nombre</th>
                                             <th>Apellido</th>
@@ -37,7 +38,7 @@
                                             <th>Celular</th>
                                             <th>Email</th>
                                             <th>Estado</th>
-                                            <th class="text-right">Funciones</th>
+                                            <th class="text-right">Función</th>
                                         </thead>
                                         <tbody>
                                             @foreach ($clientes as $cliente)
@@ -45,6 +46,7 @@
 
                                             <tr>
 
+                                                <td>{{ $cliente->id}}</td>
                                                 <td>{{ $cliente->documento }}</td>
                                                 <td>{{ $cliente->nombre }}</td>
                                                 <td>{{ $cliente->apellido }}</td>

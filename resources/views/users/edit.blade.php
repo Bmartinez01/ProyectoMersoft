@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label for="password" class="col-sm-2 col-form-label control-label asterisco">Contraseña</label>
+                            <label for="password" class="col-sm-2 col-form-label ">Contraseña</label>
                             <div class="col-sm-7">
                             <input type="password" class="form-control" name="password" placeholder="ingrese contraseña si desea modificarla">
                             @if ($errors->has('password'))
@@ -58,12 +58,12 @@
 
                                     @if($user->estado==1)
 
-                                </option>
+
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</<option>
 
                                     @else
-                                </option>
+
                                 <option value="0">Inactivo</option>
                                 <option value="1">Activo</<option>
 
