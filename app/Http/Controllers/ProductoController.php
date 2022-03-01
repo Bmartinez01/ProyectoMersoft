@@ -40,9 +40,9 @@ class ProductoController extends Controller
     }
 
 
-    public function show(Producto $producto){
+    /* public function show(Producto $producto){
         return view('y.show', compact('user'));
-    }
+    } */
 
     public function edit(Producto $producto)
     {

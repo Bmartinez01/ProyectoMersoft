@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('Stock');
             $table->string('precio');
             $table->boolean('estado')->nullable()->default(1);
+
+            $table->foreign('Categorías_id')->references('id')->on('categorias');
             $table->timestamps();
 
             $table->foreign('Categorías')->references('id')->on('categorias');

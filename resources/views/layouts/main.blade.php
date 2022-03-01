@@ -19,6 +19,12 @@
 
     <style>
         label.asterisco::after{content: ' * '; color:red;}
+        #fondo{
+            background-color:#333333
+        }
+        #header{
+            background-color:#ff6600
+        }
     </style>
     </head>
     <body class="{{ $class ?? '' }}">

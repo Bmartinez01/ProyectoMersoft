@@ -8,8 +8,8 @@
                     @csrf
                     <div class="card">
                         <div class="card-header card-header-info">
-                            <h4 class="card-title">Usuarios</h4>
-                            <p class="card-category">Ingresar datos</p>
+                            <h4 class="card-title text-dark"><strong>Usuarios</strong></h4>
+                            <p class="card-category text-dark">Ingresar datos</p>
                         </div>
                             <div class="card-body">
                               {{--    @if ($errors->any())

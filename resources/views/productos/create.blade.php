@@ -7,9 +7,9 @@
                 <form action= "{{route('productos.store')}}" method="post" class="form-horizontal">
                     @csrf
                     <div class="card">
-                        <div class="card-header card-header-primary">
-                            <h4 class="card-title">Productos</h4>
-                            <p class="card-category">Ingresar datos</p>
+                        <div class="card-header card-header-info">
+                            <h4 class="card-title text-dark"><strong>Productos</strong></h4>
+                            <p class="card-category text-dark">Ingresar datos</p>
                         </div>
                            <div class="card-body">
                                <!--  {{-- @if ($errors->any())
@@ -75,7 +75,7 @@
             </div>
     </div>
     <div class="card-footer ml-auto mr-auto col-md-3">
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" class="btn btn-facebook">Enviar</button>
         <div class="">
             <a href="{{route('productos.index')}}" class="btn btn-danger">Cancelar</a>
         </div>
