@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductoCreateRequest;
 use App\Http\Requests\ProductoEditRequest;
 use App\Models\Producto;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 
@@ -19,8 +20,9 @@ class ProductoController extends Controller
 
     public function create()
     {
-
-        return view('productos.create');
+        $productos=new producto();
+        $categorias=categoria::pluck('nombre','id');
+        return view('productos.create', compact('productos','categorias'));
     }
 
 
