@@ -23,23 +23,23 @@ class ProductoController extends Controller
         return view('productos.create');
     }
 
-   
+
     public function store(ProductoCreateRequest $request)
     {
      /* $request->validate([
 
            'nombre' => 'required|min:4|max:20|unique:categorias'
          ]); */
-    
-        
+
+
       Producto::create($request->all());
       return redirect()->route('productos.index')->with('success', 'Categoria creada correctamente');
     }
 
 
-    public function show(Producto $producto){
+    /* public function show(Producto $producto){
         return view('y.show', compact('user'));
-    }
+    } */
 
     public function edit(Producto $producto)
     {

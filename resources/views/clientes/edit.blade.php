@@ -9,8 +9,8 @@
                     @method('PUT')
                     <div class="card">
                         <div class="card-header card-header-info">
-                            <h4 class="card-title">Cliente</h4>
-                            <p class="card-category">Editar datos</p>
+                            <h4 class="card-title text-dark"><strong>Cliente</strong></h4>
+                            <p class="card-category text-dark">Editar datos</p>
                         </div>
                             <div class="card-body">
                                 <div class="row">
@@ -92,7 +92,7 @@
           </div>
         </div>
     <div class="card-footer ml-auto mr-auto col-md-4">
-        <button type="submit" class="btn btn-success">Actualizar</button>
+        <button type="submit" class="btn btn-facebook">Actualizar</button>
         <div class="">
         <a href="{{route('clientes.index')}}" class="btn btn-danger">Cancelar</a>
     </div>

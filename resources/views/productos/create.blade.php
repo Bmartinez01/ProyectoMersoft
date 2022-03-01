@@ -7,9 +7,9 @@
                 <form action= "{{route('productos.store')}}" method="post" class="form-horizontal">
                     @csrf
                     <div class="card">
-                        <div class="card-header card-header-primary">
-                            <h4 class="card-title">Productos</h4>
-                            <p class="card-category">Ingresar datos</p>
+                        <div class="card-header card-header-info">
+                            <h4 class="card-title text-dark"><strong>Productos</strong></h4>
+                            <p class="card-category text-dark">Ingresar datos</p>
                         </div>
                            <div class="card-body">
                                <!--  {{-- @if ($errors->any())
@@ -19,7 +19,7 @@
                                         <li>{{ $error }}</li>
                                         @endforeach
                                     </ul>
-                                </div> 
+                                </div>
                                 @endif --}} -->
                                 <div class="row">
                                     <label for="Código" class="col-sm-2 col-form-label control-label asterisco">Código</label>
@@ -43,6 +43,7 @@
                             <label for="Categorías" class="col-sm-2 col-form-label control-label asterisco">Categorías</label>
                             <div class="col-sm-7">
                             <input type="text" class="form-control" name="Categorías" placeholder="Ingrese su Categorías" value="{{old('Categorías')}}">
+                            
                             @if ($errors->has('Categorías'))
                             <span class="error text-danger" for="input-Categorías">{{ $errors->first('Categorías') }}</span>
                             @endif
@@ -68,7 +69,7 @@
             </div>
     </div>
     <div class="card-footer ml-auto mr-auto col-md-3">
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" class="btn btn-facebook">Enviar</button>
         <div class="">
             <a href="{{route('productos.index')}}" class="btn btn-danger">Cancelar</a>
         </div>

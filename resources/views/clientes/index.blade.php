@@ -12,7 +12,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header card-header-info">
-                                <h4 class="card-title text-dark">Clientes</h4>
+                                <h4 class="card-title text-dark"><strong>Clientes</strong></h4>
                                 <p class="card-category text-dark">Clientes Registrados</p>
                             </div>
                             <div class="card-body">
@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="table-responsive">
                                     <table  id="clientes" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
-                                        <thead class="text-white bg-primary">
+                                        <thead class="text-white " id="fondo">
 
                                             <th>No.</th>
                                             <th>Documento</th>

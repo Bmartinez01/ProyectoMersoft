@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="table-responsive ">
                                         <table  id="categorias" class="table table-striped table-bordered shadow-lg mt-4 mx-auto " style="width:90%">
-                                            <thead class="text-white bg-primary ">
+                                            <thead class="text-white  " id="fondo">
                                                 <th>ID</th>
                                                 <th>Nombre</th>
                                                 <th>Estado</th>
