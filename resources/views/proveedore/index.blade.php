@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" >
 @endsection
+
 @section('content')
     <div class="content">
         <div class="container-fluid ">
@@ -23,7 +24,7 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-12 text-right mb-3">
-                                            <a href="{{  route('proveedores.create') }}" class="btn btn-sm btn-facebook">Agregar Proveedor</a>
+                                            <a href="{{ route('proveedores.create') }}" class="btn btn-sm btn-facebook">Agregar Proveedor</a>
                                         </div>
                                     </div>
                                     <div class="table-responsive ">
@@ -34,40 +35,40 @@
                                                 <th>Nombre</th>
                                                 <th>Apellido</th>
                                                 <th>Empresa</th>
-                                                <th>Categoría</th>
-                                                <th>Dirección</th>
-                                                <th>Teléfono</th>
+                                                <th>Categoria</th>
+                                                <th>Direccion</th>
+                                                <th>Telefono</th>
                                                 <th>Email</th>
-                                                <!-- <th>Estado</th> -->
-                                                <th >Funciones</th>
+                                                <th>Estado</th>
+                                                <th >Función</th>
                                             </thead>
                                             <tbody>
-                                                @foreach ($proveedores as $proveedor)
+                                                @foreach ($proveedores as $proveedore)
                                                     <tr>
-                                                        <td>{{ $proveedor->id }}</td>
-                                                        <td>{{ $proveedor->nit_empresa }}</td>
-                                                        <td>{{ $proveedor->nombre }}</td>
-                                                        <td>{{ $proveedor->apellido }}</td>
-                                                        <td>{{ $proveedor->empresa }}</td>
-                                                        <td>{{ $proveedor->categoria_id }}</td>
-                                                        <td>{{ $proveedor->direccion }}</td>
-                                                        <td>{{ $proveedor->telefono }}</td>
-                                                        <td>{{ $proveedor->email }}</td>
-                                                        <!-- <td class="td-actions text-left">
-                                                        @if ($proveedor->estado==1)
-                                                        <button type="button" class="btn btn-success btn-sm">
-                                                            Activo
-                                                        </button>
+                                                        <td>{{ $proveedore->id }}</td>
+                                                        <td>{{ $proveedore->nit_empresa }}</td>
+                                                        <td>{{ $proveedore->nombre }}</td>
+                                                        <td>{{ $proveedore->apellido }}</td>
+                                                        <td>{{ $proveedore->empresa }}</td>
+                                                        <td>{{ $proveedore->categoria_id }}</td>
+                                                        <td>{{ $proveedore->direccion }}</td>
+                                                        <td>{{ $proveedore->telefono }}</td>
+                                                        <td>{{ $proveedore->email }}</td>
+                                                        <td class="td-actions text-right">
+                                                            @if ($proveedore->estado==1)
+                                                            <button type="button" class="btn btn-success btn-sm">
+                                                                Activo
+                                                            </button>
 
-                                                        @else
-                                                        <button type="button" class="btn btn-danger btn-sm">
-                                                            Inactivo
-                                                        </button>
+                                                            @else
+                                                            <button type="button" class="btn btn-danger btn-sm">
+                                                                Inactivo
+                                                            </button>
 
-                                                        @endif
-                                                        </td> -->
+                                                            @endif
+                                                        </td>
                                                         <td class="td-actions ">
-                                                            <a href="{{ route('proveedores.edit', $proveedor->id) }}" class="btn btn-warning">
+                                                            <a href="{{ route('proveedores.edit', $proveedore->id) }}" class="btn btn-warning">
                                                             <i class="material-icons">edit</i></a>
                                                         </td>
                                                     </tr>
@@ -91,7 +92,15 @@
 $(document).ready(function() {
     $('#proveedores').DataTable( {
         "language": {
-            "lengthMenu": "Mostrar  _MENU_  registros por pagina",
+            "lengthMenu": "Mostrar "+
+                `<select>
+                    <option value='5'>5</option>
+                    <option value='10'>10</option>
+                    <option value='15'>15</option>
+                    <option value='20'>20</option>
+                    <option value='-1'>Todos</option>
+                </select>`+
+                " registros por pagina",
             "zeroRecords": "No se encontraron datos",
             "info": "Mostrando la página _PAGE_ de _PAGES_",
             "infoEmpty": "No records available",
@@ -104,8 +113,10 @@ $(document).ready(function() {
         }
     } );
 } );
+
 </script>
 @endsection
 
 @endsection
+
 
