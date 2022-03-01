@@ -35,9 +35,13 @@
                             <label for="Categorías" class="col-sm-2 col-form-label control-label asterisco">Categorías</label>
                             <div class="col-sm-7">
                                 <select class="form-control" name="Categorías" id="Categorías">
-                                    <option value=""></option>
+                                   <option  value="{{old('Categorías',$producto->Categorías)}}">Seleccione solo para modificar</option>
                                     @foreach ( $categorias as $row )
-                                        <option value="{{ $row['id']}}">{{$row['nombre']}}</option>
+                                        <option @if ($row['id']==$producto->Categorías)
+
+                                            selected="true"
+
+                                        @endif  value="{{ $row['id']}}">{{$row['nombre']}}</option>
                                     @endforeach
                                 </select>
                                 @if ($errors->has('Categorías'))
