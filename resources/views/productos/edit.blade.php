@@ -34,7 +34,16 @@
                         <div class="row">
                             <label for="Categorías" class="col-sm-2 col-form-label control-label asterisco">Categorías</label>
                             <div class="col-sm-7">
-                            <input type="text" class="form-control" name="Categorías" placeholder="Ingrese su Categorías" value="{{old('Categorías',$producto-> Categorías)}}">
+                                <select class="form-control" name="Categorías" id="Categorías">
+                                    <option value=""></option>
+                                    @foreach ( $categorias as $row )
+                                        <option value="{{ $row['id']}}">{{$row['nombre']}}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('Categorías'))
+                                <span class="error text-danger" for="input-Categorías">{{ $errors->first('Categorías') }}</span>
+                                @endif
+                            {{-- <input type="select" class="form-control" name="Categorías" placeholder="Ingrese su Categorías" value="{{old('Categorías',$categorias, $producto-> Categorías)}}"> --}}
                             @if ($errors->has('Categorías'))
                             <span class="error text-danger" for="input-Categorías">{{ $errors->first('Categorías') }}</span>
                             @endif
