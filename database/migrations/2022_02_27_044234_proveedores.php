@@ -20,12 +20,13 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->string('empresa');
-            $table->bigInteger('categoria_id')->unsigned();
+            $table->string('categoria_id');
             $table->string('direccion');
             $table->string('telefono');
             $table->string('email')->unique();
+            $table->boolean('estado')->nullable()->default(1);
 
-            $table->foreign('categoria_id')->references('id')->on('categorias');
+           // $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->timestamps();
         });
     }

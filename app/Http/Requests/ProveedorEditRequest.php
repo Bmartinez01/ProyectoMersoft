@@ -23,13 +23,19 @@ class ProveedorEditRequest extends FormRequest
      */
     public function rules()
     {
-        $proveedor = $this->route('proveedor');
+        
         return [
-            //
-            //'nombre' => ['required','min:4','max:20','unique:categorias,nombre,' . request()->route('categoria')->id]
-
-
-
+        'nit_empresa' => ['required','min:3','max:13','unique:proveedores,nit_empresa,'. request()->route('proveedore')->id],    
+        'nombre' => ['required','min:3','max:20'],
+        'apellido' => ['required','min:4','max:50'],
+        'empresa' => ['required','min:4','max:50'],
+        'categoria_id' => ['required'],
+        'direccion' => ['required','min:7','max:50'],
+        'telefono' => ['required','min:4','max:20'],
+        'email'=> ['required','unique:proveedores,email,' . request()->route('proveedore')->id],
+        'estado' => ['nullable']   
         ];
+
+        
     }
 }

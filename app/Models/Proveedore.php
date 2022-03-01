@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Proveedor extends Model
+
+class Proveedore extends Model
 {
-    protected $fillable =
+      
+    protected $fillable = 
     [
     'nit_empresa',
     'nombre',
@@ -16,7 +18,10 @@ class Proveedor extends Model
     'categoria_id',
     'direccion',
     'telefono',
-    'email'
+    'email',
+    'estado'
     ];
+
     use HasFactory;
+
 }
