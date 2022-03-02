@@ -9,8 +9,8 @@
                     @method('PUT')
                     <div class="card">
                         <div class="card-header card-header-info">
-                            <h4 class="card-title">Productos</h4>
-                            <p class="card-category">Editar datos</p>
+                            <h4 class="card-title text-dark"><strong>Productos</strong></h4>
+                            <p class="card-category text-dark">Editar datos</p>
                         </div>
                             <div class="card-body">
                                 <div class="row">

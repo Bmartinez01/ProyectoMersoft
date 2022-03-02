@@ -19,6 +19,9 @@
 
     <style>
         label.asterisco::after{content: ' * '; color:red;}
+        #fondo{
+            background-color: #333333;
+        }
     </style>
     </head>
     <body class="{{ $class ?? '' }}">
@@ -51,6 +54,7 @@
                     offText: data_off_label
                 });
             }); -->
+
         @stack('js')
     </body>
 

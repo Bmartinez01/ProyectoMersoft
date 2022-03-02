@@ -9,17 +9,17 @@
                     @method('PUT')
                     <div class="card">
                         <div class="card-header card-header-info">
-                            <h4 class="card-title">Categoria</h4>
-                            <p class="card-category">Editar datos</p>
+                            <h4 class="card-title text-dark"><strong>Categoria</strong></h4>
+                            <p class="card-category text-dark">Editar datos</p>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <label for="documento" class="col-sm-2 col-form-label">Nombre</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="nombre" value="{{ old('nombre',$categoria->nombre) }}"  autofocus> 
+                                    <input type="text" class="form-control" name="nombre" value="{{ old('nombre',$categoria->nombre) }}"  autofocus>
                                     @if ($errors->has('nombre'))
                                     <span class="error text-danger" for="input-nombre">{{ $errors->first('nombre') }}</span>
-                                    @endif                                    
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">
@@ -29,20 +29,20 @@
 
                                             @if($categoria->estado==1)
 
-                                        
+
                                         <option value="1">Activo</option>
                                         <option value="0">Inactivo</<option>
 
                                             @else
-                                        
+
                                         <option value="0">Inactivo</option>
                                         <option value="1">Activo</<option>
 
                                         @endif
-                                    
+
                                     </select>
                                 </div>
-                            </div>   
+                            </div>
                         </div>
                         <div class="card-footer ml-auto mr-auto">
                             <button type="submit" class="btn btn-facebook">Actualizar</button>
@@ -50,7 +50,7 @@
                             <a href="{{route('categorias.index')}}" class="btn btn-danger ">Cancelar</a>
                         </div>
                         </div>
-                        
+
                     </div>
                 </form>
             </div>

@@ -9,8 +9,8 @@
                     @method('PUT')
                     <div class="card">
                         <div class="card-header card-header-info">
-                            <h4 class="card-title">Usuarios</h4>
-                            <p class="card-category">Actualizar datos</p>
+                            <h4 class="card-title text-dark"><strong>Usuarios</strong></h4>
+                            <p class="card-category text-dark">Actualizar datos</p>
                         </div>
                             <div class="card-body">
                                 {{-- @if ($errors->any())
@@ -73,9 +73,11 @@
                                 <option value="1">Activo</option>
                              --}}
                             </select>
+
                       </div>
 
                     </div>
+
                 </div>
                     <div class="card-footer ml-auto mr-auto col-md-3">
                         <button type="submit" class="btn btn-facebook">Enviar</button>

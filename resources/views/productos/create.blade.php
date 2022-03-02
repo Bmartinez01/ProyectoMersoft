@@ -8,8 +8,8 @@
                     @csrf
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title">Productos</h4>
-                            <p class="card-category">Ingresar datos</p>
+                            <h4 class="card-title text-dark"><strong>Productos</strong></h4>
+                            <p class="card-category text-dark">Ingresar datos</p>
                         </div>
                            <div class="card-body">
                                <!--  {{-- @if ($errors->any())
@@ -19,7 +19,7 @@
                                         <li>{{ $error }}</li>
                                         @endforeach
                                     </ul>
-                                </div> 
+                                </div>
                                 @endif --}} -->
                                 <div class="row">
                                     <label for="Código" class="col-sm-2 col-form-label control-label asterisco">Código</label>
