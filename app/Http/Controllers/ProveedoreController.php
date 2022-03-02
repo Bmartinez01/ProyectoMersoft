@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProveedorCreateRequest;
 use App\Http\Requests\ProveedorEditRequest;
 use App\Models\Proveedore;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 
@@ -13,14 +14,17 @@ class ProveedoreController extends Controller
     
     public function index()
     {
-        $proveedores = Proveedore::paginate(5);
-        return view('proveedore.index', compact('proveedores'));
+        $proveedores = Proveedore::paginate();
+        $categorias = Categoria::all();
+        return view('proveedore.index', compact('proveedores','categorias'));
     }
 
     
     public function create()
     {
-        return view('proveedore.create');
+        $proveedores = new Proveedore;
+        $categorias = Categoria::all();
+        return view('proveedore.create', compact('proveedores','categorias'));
     }
 
     
@@ -37,8 +41,8 @@ class ProveedoreController extends Controller
 
     public function edit(Proveedore $proveedore)
     {
-
-        return view('proveedore.edit', compact('proveedore'));
+        $categorias = Categoria::all();
+        return view('proveedore.edit', compact('proveedore','categorias'));
     }
 
     

@@ -13,8 +13,8 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-info">
-                                    <h4 class="card-title text-dark"><strong>Proveedores</strong></h4>
-                                    <p class="card-category text-dark">Proveedores Registrados</p>
+                                    <h4 class="card-title text-dark text-dark"><strong>Proveedores</strong></h4>
+                                    <p class="card-category text-dark text-dark">Proveedores Registrados</p>
                                 </div>
                                 <div class="card-body">
                                     @if (session('success'))
@@ -29,7 +29,7 @@
                                     </div>
                                     <div class="table-responsive ">
                                         <table  id="proveedores" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
-                                            <thead class="text-white bg-primary ">
+                                            <thead class="text-white "id="fondo">
                                                 <th>ID</th>
                                                 <th>Nit Empresa</th>
                                                 <th>Nombre</th>
@@ -50,7 +50,12 @@
                                                         <td>{{ $proveedore->nombre }}</td>
                                                         <td>{{ $proveedore->apellido }}</td>
                                                         <td>{{ $proveedore->empresa }}</td>
-                                                        <td>{{ $proveedore->categoria_id }}</td>
+                                                        @foreach ($categorias as $categoria)
+                                                        @if ($proveedore->categoria_id==$categoria->id)
+                                                        <td>{{ $categoria->nombre}}</td>
+                                                        @break
+                                                        @endif
+                                                        @endforeach
                                                         <td>{{ $proveedore->direccion }}</td>
                                                         <td>{{ $proveedore->telefono }}</td>
                                                         <td>{{ $proveedore->email }}</td>

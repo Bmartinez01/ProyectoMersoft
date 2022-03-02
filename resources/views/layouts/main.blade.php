@@ -57,6 +57,7 @@
                     offText: data_off_label
                 });
             }); -->
+
         @stack('js')
     </body>
 

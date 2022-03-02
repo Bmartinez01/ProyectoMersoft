@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="table-responsive">
                                     <table  id="clientes" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
-                                        <thead class="text-white " id="fondo">
+                                        <thead class="text-white" id="fondo">
 
                                             <th>No.</th>
                                             <th>Documento</th>

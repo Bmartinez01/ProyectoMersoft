@@ -24,7 +24,7 @@
                                 @endif --}}
 
                             <div class="row">
-                                <label for="name" class="col-sm-2 col-form-label control-label asterisco">Nombre</label>
+                                <label for="name" class="col-sm-2 col-form-label ">Nombre:</label>
                                 <div class="col-sm-7">
                                 <input type="text" class="form-control" name="name"  value="{{old('name', $user->name)}}">
                                 @if ($errors->has('name'))
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label for="email" class="col-sm-2 col-form-label control-label asterisco">Email</label>
+                            <label for="email" class="col-sm-2 col-form-label ">Email:</label>
                             <div class="col-sm-7">
                             <input type="email" class="form-control" name="email" value="{{old('email', $user->email)}}">
                             @if ($errors->has('email'))
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label for="password" class="col-sm-2 col-form-label ">Contraseña</label>
+                            <label for="password" class="col-sm-2 col-form-label ">Contraseña:</label>
                             <div class="col-sm-7">
                             <input type="password" class="form-control" name="password" placeholder="ingrese contraseña si desea modificarla">
                             @if ($errors->has('password'))
@@ -73,9 +73,11 @@
                                 <option value="1">Activo</option>
                              --}}
                             </select>
+
                       </div>
 
                     </div>
+
                 </div>
                     <div class="card-footer ml-auto mr-auto col-md-3">
                         <button type="submit" class="btn btn-facebook">Enviar</button>

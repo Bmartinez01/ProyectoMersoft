@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="card-header card-header-info" >
+                            <div class="card-header card-header-info">
                                 <h4 class="card-title text-dark"><strong>Usuarios</strong></h4>
                                 <p class="card-category text-dark">Usuarios Registrados</p>
                             </div>
@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="table-responsive">
                                     <table  id="users" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
-                                        <thead class="text-white  " id="fondo">
+                                        <thead class="text-white " id="fondo">
 
                                             <th>No.</th>
                                             <th>Nombre</th>
