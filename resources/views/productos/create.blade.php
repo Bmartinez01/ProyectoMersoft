@@ -46,9 +46,9 @@
                                     <option value="">Seleccione una categoría</option>
                                     @foreach ( $categorias as $row )
                                     @if ($row->estado==0)
-                                    @else
-                                        <option value="{{$row->id}}">{{$row->nombre}}</option>
+                                    @continue
                                     @endif
+                                    <option value="{{$row->id}}">{{$row->nombre}}</option>
                                     @endforeach
                                 </select>
                                 @if ($errors->has('Categorías'))
