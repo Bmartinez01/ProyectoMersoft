@@ -37,20 +37,22 @@
                                 <select class="form-control" name="Categorías" id="Categorías">
                                    <option  value="{{old('Categorías',$producto->Categorías)}}">Seleccione solo para modificar</option>
                                     @foreach ( $categorias as $row )
-                                        <option @if ($row['id']==$producto->Categorías)
+                                        @if ($row->estado==0)
+                                            @continue
+                                        @endif
 
+                                        <option @if ($row->id==$producto->Categorías)
                                             selected="true"
+                                        @endif
 
-                                        @endif  value="{{ $row['id']}}">{{$row['nombre']}}</option>
+                                         value="{{$row->id}}">{{$row->nombre}}</option>
                                     @endforeach
                                 </select>
                                 @if ($errors->has('Categorías'))
                                 <span class="error text-danger" for="input-Categorías">{{ $errors->first('Categorías') }}</span>
                                 @endif
                             {{-- <input type="select" class="form-control" name="Categorías" placeholder="Ingrese su Categorías" value="{{old('Categorías',$categorias, $producto-> Categorías)}}"> --}}
-                            @if ($errors->has('Categorías'))
-                            <span class="error text-danger" for="input-Categorías">{{ $errors->first('Categorías') }}</span>
-                            @endif
+
                         </div>
                     </div>
                     <div class="row">

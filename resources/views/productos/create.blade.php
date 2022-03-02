@@ -45,7 +45,10 @@
                                 <select class="form-control" name="Categorías" id="Categorías">
                                     <option value="">Seleccione una categoría</option>
                                     @foreach ( $categorias as $row )
-                                        <option value="{{ $row['id']}}">{{$row['nombre']}}</option>
+                                    @if ($row->estado==0)
+                                    @else
+                                        <option value="{{$row->id}}">{{$row->nombre}}</option>
+                                    @endif
                                     @endforeach
                                 </select>
                                 @if ($errors->has('Categorías'))
