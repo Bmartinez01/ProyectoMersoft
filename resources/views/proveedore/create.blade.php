@@ -52,7 +52,13 @@
                             <div class="row">
                                 <label for="categoria_id" class="col-sm-2 col-form-label control-label asterisco">Categoría</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="categoria_id" placeholder="Ingrese la categoría"  value="{{old('categoria_id')}}" autofocus >
+                                    <select class="form-control" name="categoria_id" id="categoria_id">
+                                        <option value="">Seleccione una categoría</option>
+                                        @foreach ( $categorias as $row )
+                                            <option value="{{ $row['id']}}">{{$row['nombre']}}</option>
+                                        @endforeach
+                                    </select>
+                                    <!-- <input type="text" class="form-control" name="categoria_id" placeholder="Ingrese la categoría"  value="{{old('categoria_id')}}" autofocus > -->
                                     @if ($errors->has('categoria_id'))
                                     <span class="error text-danger" for="input-categoria_id">{{ $errors->first('categoria_id') }}</span>
                                     @endif

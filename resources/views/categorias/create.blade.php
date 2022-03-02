@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer ml-auto mr-auto">
+                        <div class="card-footer ml-auto mr-auto col-md-3">
                             <button type="submit" class="btn btn-facebook">Enviar</button>
                             <div class="card-footer ml-auto mr-auto">
                             <a href="{{route('categorias.index')}}" class="btn btn-danger ">Cancelar</a>

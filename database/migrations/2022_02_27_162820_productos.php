@@ -18,11 +18,15 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('Código')->unique();
             $table->string('Nombre');
-            $table->string('Categorías');
+            $table->bigInteger('Categorías')->unsigned();
             $table->string('Stock');
             $table->string('precio');
             $table->boolean('estado')->nullable()->default(1);
+
             $table->timestamps();
+
+            $table->foreign('Categorías')->references('id')->on('categorias');
+
         });
     }
 
@@ -30,7 +34,7 @@ return new class extends Migration
      * Reverse the migrations.
      *
      * @return void
- 
+
      */
     public function down()
     {

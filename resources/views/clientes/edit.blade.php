@@ -92,7 +92,7 @@
           </div>
         </div>
     <div class="card-footer ml-auto mr-auto col-md-4">
-        <button type="submit" class="btn btn-success">Actualizar</button>
+        <button type="submit" class="btn btn-facebook">Actualizar</button>
         <div class="">
         <a href="{{route('clientes.index')}}" class="btn btn-danger">Cancelar</a>
     </div>

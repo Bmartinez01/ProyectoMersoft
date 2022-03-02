@@ -42,10 +42,17 @@
                         <div class="row">
                             <label for="Categorías" class="col-sm-2 col-form-label control-label asterisco">Categorías</label>
                             <div class="col-sm-7">
-                            <input type="text" class="form-control" name="Categorías" placeholder="Ingrese su Categorías" value="{{old('Categorías')}}">
-                            @if ($errors->has('Categorías'))
-                            <span class="error text-danger" for="input-Categorías">{{ $errors->first('Categorías') }}</span>
-                            @endif
+                                <select class="form-control" name="Categorías" id="Categorías">
+                                    <option value="">Seleccione una categoría</option>
+                                    @foreach ( $categorias as $row )
+                                        <option value="{{ $row['id']}}">{{$row['nombre']}}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('Categorías'))
+                                <span class="error text-danger" for="input-Categorías">{{ $errors->first('Categorías') }}</span>
+                                @endif
+                            {{-- <input type="select" class="form-control" name="Categorías" placeholder="Ingrese su Categorías"
+                             value="{{old('Categorías',$categorias)}}"> --}}
                         </div>
                     </div>
                     <div class="row">
@@ -68,7 +75,7 @@
             </div>
     </div>
     <div class="card-footer ml-auto mr-auto col-md-3">
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" class="btn btn-facebook">Enviar</button>
         <div class="">
             <a href="{{route('productos.index')}}" class="btn btn-danger">Cancelar</a>
         </div>

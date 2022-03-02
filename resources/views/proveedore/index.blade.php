@@ -50,7 +50,12 @@
                                                         <td>{{ $proveedore->nombre }}</td>
                                                         <td>{{ $proveedore->apellido }}</td>
                                                         <td>{{ $proveedore->empresa }}</td>
-                                                        <td>{{ $proveedore->categoria_id }}</td>
+                                                        @foreach ($categorias as $categoria)
+                                                        @if ($proveedore->categoria_id==$categoria->id)
+                                                        <td>{{ $categoria->nombre}}</td>
+                                                        @break
+                                                        @endif
+                                                        @endforeach
                                                         <td>{{ $proveedore->direccion }}</td>
                                                         <td>{{ $proveedore->telefono }}</td>
                                                         <td>{{ $proveedore->email }}</td>

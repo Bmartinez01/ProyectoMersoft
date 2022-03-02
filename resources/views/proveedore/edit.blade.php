@@ -53,7 +53,15 @@
                             <div class="row">
                                 <label for="categoria_id" class="col-sm-2 col-form-label ">Categoría</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="categoria_id" value="{{ old('categoria_id', $proveedore->categoria_id )}}" autofocus >
+                                    <select class="form-control" name="categoria_id" id="categoria_id">
+                                        <option value="{{old('categoria_id', $proveedore->categoria_id )}}">Seleccione la categoría</option>
+                                        @foreach ( $categorias as $row )
+                                            <option @if ($row['id']==$proveedore->categoria_id)
+                                                selected="true"
+                                            @endif value="{{ $row['id']}}">{{$row['nombre']}}</option>
+                                        @endforeach
+                                    </select>
+                                    <!-- <input type="text" class="form-control" name="categoria_id" value="{{ old('categoria_id', $proveedore->categoria_id )}}" autofocus > -->
                                     @if ($errors->has('categoria_id'))
                                     <span class="error text-danger" for="input-categoria_id">{{ $errors->first('categoria_id') }}</span>
                                     @endif

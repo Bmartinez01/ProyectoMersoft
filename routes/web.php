@@ -29,6 +29,3 @@ Route::post('proveedores',  [App\Http\Controllers\ProveedoreController::class,'s
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('productos',  App\Http\Controllers\ProductoController::class)->middleware('auth');
-Route::post('productos',  [App\Http\Controllers\ProductoController::class,'store'])->name('productos.store');
-Route::get('productos',  [App\Http\Controllers\ProductoController::class,'index'])->name('productos.index');
-

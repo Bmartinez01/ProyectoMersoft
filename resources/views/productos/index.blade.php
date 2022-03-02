@@ -46,7 +46,13 @@
 
                                                 <td>{{ $Producto->Código}}</td>
                                                 <td>{{ $Producto->Nombre }}</td>
-                                                <td>{{ $Producto->Categorías }}</td>
+                                                @foreach ($categorias as $categoria)
+                                                @if ($Producto->Categorías==$categoria->id)
+                                                <td>{{ $categoria->nombre}}</td>
+                                                 @break
+                                                @endif
+                                                @endforeach
+
                                                 <td>{{ $Producto->Stock}}</td>
                                                 <td>{{ $Producto->precio}}</td>
                                                 <td class="td-actions text-right">
