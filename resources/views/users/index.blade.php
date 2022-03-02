@@ -11,11 +11,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-<<<<<<< HEAD
                             <div class="card-header card-header-info">
-=======
-                            <div class="card-header card-header-info" >
->>>>>>> bdf76cd247dcd71724a670d4dfde68ea8dfda33f
                                 <h4 class="card-title text-dark"><strong>Usuarios</strong></h4>
                                 <p class="card-category text-dark">Usuarios Registrados</p>
                             </div>
