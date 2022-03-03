@@ -55,6 +55,9 @@
                                     <select class="form-control" name="categoria_id" id="categoria_id">
                                         <option value="">Seleccione una categoría</option>
                                         @foreach ( $categorias as $row )
+                                        @if ($row->estado==0)
+                                        @continue
+                                        @endif
                                             <option value="{{ $row['id']}}">{{$row['nombre']}}</option>
                                         @endforeach
                                     </select>

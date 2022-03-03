@@ -26,14 +26,21 @@
         </a>
         <div class="collapse show" id="configuraciones">
           <ul class="nav">
-            <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
-              <a class="nav-link" href="#">
+            <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}">
+              <a class="nav-link" href="{{route('roles.index')}}">
                 <i class="material-icons">recent_actors</i>
                   <p>{{ __('Roles') }}</p>
               </a>
             </li>
+            <li class="nav-item{{ $activePage == 'permisos' ? ' active' : '' }}">
+              <a class="nav-link" href="{{route('permissions.index')}}">
+                <i class="material-icons">people_outline</i>
+                  <p>{{ __('Permisos') }}</p>
+              </a>
+            </li>
           </ul>
         </div>
+        
       </li>
       <li class="nav-item{{ $activePage == 'users' ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#usuarios" aria-expanded="true">

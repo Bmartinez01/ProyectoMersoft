@@ -54,8 +54,11 @@
                                 <label for="categoria_id" class="col-sm-2 col-form-label ">Categoría</label>
                                 <div class="col-sm-7">
                                     <select class="form-control" name="categoria_id" id="categoria_id">
-                                        <option value="{{old('categoria_id', $proveedore->categoria_id )}}">Seleccione la categoría</option>
+                                        <option value="{{old('categoria_id', $proveedore->categoria_id )}}">Seleccione solo para modificar</option>
                                         @foreach ( $categorias as $row )
+                                            @if ($row->estado==0)
+                                                @continue
+                                            @endif
                                             <option @if ($row['id']==$proveedore->categoria_id)
                                                 selected="true"
                                             @endif value="{{ $row['id']}}">{{$row['nombre']}}</option>

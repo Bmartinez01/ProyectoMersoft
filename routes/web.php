@@ -23,7 +23,8 @@ Route::resource('users',  App\Http\Controllers\UserController::class)->middlewar
 Route::resource('clientes',  App\Http\Controllers\ClienteController::class)->middleware('auth');
 Route::resource('categorias',  App\Http\Controllers\CategoriaController::class)->middleware('auth');
 Route::resource('proveedores',  App\Http\Controllers\ProveedoreController::class)->middleware('auth');
-Route::post('proveedores',  [App\Http\Controllers\ProveedoreController::class,'store'])->name('proveedores.store');
+Route::resource('permissions',  App\Http\Controllers\PermissionController::class)->middleware('auth');
+Route::resource('roles',  App\Http\Controllers\RoleController::class)->middleware('auth');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
