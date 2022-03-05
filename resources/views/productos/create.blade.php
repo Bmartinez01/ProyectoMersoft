@@ -43,7 +43,7 @@
                             <label for="Categorías" class="col-sm-2 col-form-label control-label asterisco">Categorías</label>
                             <div class="col-sm-7">
                                 <select class="form-control" name="Categorías" id="Categorías">
-                                    <option value="">Seleccione una categoría</option>
+                                    <option value="">Seleccione la categoría</option>
                                     @foreach ( $categorias as $row )
                                     @if ($row->estado==0)
                                     @continue
@@ -54,8 +54,6 @@
                                 @if ($errors->has('Categorías'))
                                 <span class="error text-danger" for="input-Categorías">{{ $errors->first('Categorías') }}</span>
                                 @endif
-                            {{-- <input type="select" class="form-control" name="Categorías" placeholder="Ingrese su Categorías"
-                             value="{{old('Categorías',$categorias)}}"> --}}
                         </div>
                     </div>
                     <div class="row">
@@ -70,7 +68,7 @@
                 <div class="row">
                     <label for="Precio" class="col-sm-2 col-form-label control-label asterisco">Precio</label>
                     <div class="col-sm-7">
-                    <input type="money" class="form-control" name="Precio" placeholder=" Ingrese el Precio" value="{{old('Precio')}}">
+                    <input type="money" min="0.00" max="100000000.00" step="0.01" class="form-control" name="Precio" placeholder=" Ingrese el Precio" value="{{old('Precio')}}">
                     @if ($errors->has('Precio'))
                     <span class="error text-danger" for="input-Precio">{{ $errors->first('Precio') }}</span>
                     @endif
