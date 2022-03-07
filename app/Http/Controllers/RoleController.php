@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use App\Http\Requests\RolCreateRequest;
 use App\Http\Requests\RolEditRequest;
 
@@ -20,21 +21,25 @@ class RoleController extends Controller
     public function create()
     {
         //
-        return view('roles.create');
+        $permissions = Permission::all()->pluck('name','id');
+        return view('roles.create', compact('permissions'));
     }
 
 
     public function store(RolCreateRequest $request)
     {
         //
-        Role::create($request->all());
+        $role = Role::create($request->only('name'));
+        $role->syncPermissions($request->input('permissions',[]));
         return redirect()->route('roles.index')->with('success','Rol creado correctamente');
     }
 
         
     public function edit(Role $role)
     {
-        return view('roles.edit',compact('role'));
+        $permissions = Permission::all()->pluck('name','id');
+        $role->load('permissions');
+        return view('roles.edit',compact('role','permissions'));
 
     }
 
@@ -44,6 +49,7 @@ class RoleController extends Controller
         //
         $datos = $request->all();
         $role->update($datos);
+        $role->syncPermissions($request->input('permissions',[]));
         return redirect()->route('roles.index')->with('success','Rol actualizado correctamente');
 
     }

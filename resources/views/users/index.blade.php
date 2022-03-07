@@ -33,6 +33,7 @@
                                             <th>No.</th>
                                             <th>Nombre</th>
                                             <th>Correo</th>
+                                            <th>Roles</th>
                                             <th>Fecha</th>
                                             <th>Estado</th>
                                             <th class="text-right">Función</th>
@@ -44,6 +45,13 @@
                                                 <td>{{$user->id}}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
+                                                <td>
+                                                    @forelse ($user->roles as $role)
+                                                    <span class="badge badge-info">{{ $role->name}}</span>
+                                                    @empty
+                                                    <span class="badge badge-danger">No hay Roles seleccionados</span>
+                                                    @endforelse
+                                                </td>
                                                 <td>{{ $user->created_at }}</td>
 
                                                 <td class="td-actions text-right">
