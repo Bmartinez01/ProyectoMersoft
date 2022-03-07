@@ -17,7 +17,7 @@
                             <div class="row">
                                 <label for="nit_empresa" class="col-sm-2 col-form-label ">Nit Empresa</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="nit_empresa" value="{{ old('nit_empresa', $proveedore->nit_empresa )}}" autofocus >
+                                    <input type="text" class="form-control" name="nit_empresa" readonly value="{{ old('nit_empresa', $proveedore->nit_empresa )}}" autofocus >
                                     @if ($errors->has('nit_empresa'))
                                     <span class="error text-danger" for="input-nit_empresa">{{ $errors->first('nit_empresa') }}</span>
                                     @endif
@@ -82,7 +82,7 @@
                             <div class="row">
                                 <label for="telefono" class="col-sm-2 col-form-label ">Teléfono</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="telefono" value="{{ old('telefono', $proveedore->telefono )}}" autofocus >
+                                    <input type="number" class="form-control" name="telefono" value="{{ old('telefono', $proveedore->telefono )}}" autofocus >
                                     @if ($errors->has('telefono'))
                                     <span class="error text-danger" for="input-telefono">{{ $errors->first('telefono') }}</span>
                                     @endif
