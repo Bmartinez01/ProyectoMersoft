@@ -70,7 +70,7 @@
                             <div class="row">
                                 <label for="direccion" class="col-sm-2 col-form-label control-label asterisco">Dirección</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="direccion" placeholder="Ingrese la dirección" value="{{old('direccion')}} "  autofocus >
+                                    <input type="text" class="form-control" name="direccion" placeholder="Ingrese la dirección" value="{{old('direccion')}} ">
                                     @if ($errors->has('direccion'))
                                     <span class="error text-danger" for="input-direccion">{{ $errors->first('direccion') }}</span>
                                     @endif
@@ -79,7 +79,7 @@
                             <div class="row">
                                 <label for="telefono" class="col-sm-2 col-form-label control-label asterisco">Teléfono</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="telefono" placeholder="Ingrese el teléfono" value="{{old('telefono')}} " autofocus >
+                                    <input type="text" class="form-control" name="telefono" placeholder="Ingrese el teléfono" value="{{old('telefono')}} " >
                                     @if ($errors->has('telefono'))
                                     <span class="error text-danger" for="input-telefono">{{ $errors->first('telefono') }}</span>
                                     @endif

@@ -53,7 +53,6 @@
                                                         @foreach ($categorias as $categoria)
                                                         @if ($proveedore->categoria_id==$categoria->id)
                                                         <td>{{ $categoria->nombre}}</td>
-                                                        @break
                                                         @endif
                                                         @endforeach
                                                         <td>{{ $proveedore->direccion }}</td>

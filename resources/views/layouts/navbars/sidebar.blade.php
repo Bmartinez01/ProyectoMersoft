@@ -5,7 +5,7 @@
       Tip 2: you can also add an image using data-image tag
   -->
   <div class="logo">
-    <a href="#" class="simple-text logo-normal text-info">
+    <a href="{{route('home')}}" class="simple-text logo-normal text-info">
       {{ __('MERSOFT') }}
     </a>
   </div>
@@ -40,7 +40,7 @@
             </li>
           </ul>
         </div>
-        
+
       </li>
       <li class="nav-item{{ $activePage == 'users' ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#usuarios" aria-expanded="true">
@@ -75,8 +75,8 @@
                   <p>{{ __('Proveedores') }}</p>
               </a>
             </li>
-            <li class="nav-item{{ $activePage == 'icons' ? ' active' : '' }}">
-              <a class="nav-link" href="#">
+            <li class="nav-item{{ $activePage == 'compras' ? ' active' : '' }}">
+              <a class="nav-link" href="{{route('compras.index')}}">
                 <i class="material-icons">shopping_basket</i>
                 <p>{{ __('Compras') }}</p>
               </a>
