@@ -23,6 +23,7 @@ Route::resource('users',  App\Http\Controllers\UserController::class)->middlewar
 Route::resource('clientes',  App\Http\Controllers\ClienteController::class)->middleware('auth');
 Route::resource('categorias',  App\Http\Controllers\CategoriaController::class)->middleware('auth');
 Route::resource('compras',  App\Http\Controllers\CompraController::class)->middleware('auth');
+Route::resource('compras_detalle',  App\Http\Controllers\Compra_DetalleController::class)->middleware('auth');
 Route::resource('proveedores',  App\Http\Controllers\ProveedoreController::class)->middleware('auth');
 Route::resource('permissions',  App\Http\Controllers\PermissionController::class)->middleware('auth');
 Route::resource('roles',  App\Http\Controllers\RoleController::class)->middleware('auth');

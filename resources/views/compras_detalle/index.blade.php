@@ -1,3 +1,4 @@
+lo q sea
 @extends('layouts.main', ['activePage' => 'compras', 'titlePage' => 'Compras'])
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
@@ -27,14 +28,18 @@
                                     </div>
                                 </div>
                                 <div class="table-responsive">
-                                    <table  id="compras" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
+                                    <table  id="compras_detalle" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                         <thead class="text-white" id="fondo">
 
                                             <th>No.</th>
                                             <th>Recibo</th>
-                                            <th>Fecha Compra</th>
                                             <th>Proveedor</th>
+                                            <th>Fecha Compra</th>
+                                            <th>Cantidad</th>
+                                            <th>Producto</th>
+                                            <th>Valor c/u</th>
                                             <th>Valor Total</th>
+
                                             <th>Estado</th>
                                             <th class="text-right">Función</th>
                                         </thead>
@@ -46,12 +51,13 @@
 
                                                 <td>{{ $compra->id}}</td>
                                                 <td>{{ $compra->recibo}}</td>
-                                                <td>{{ $compra->created_at}}</td>
                                                 @foreach ($proveedores as $row)
                                                 @if ($compra->proveedor==$row->id)
-                                                <td>{{ $row->nombre}} {{$row->apellido}}</td>
+                                                <td>{{ $row->nombre }}</td>
                                                 @endif
-                                                @endforeach
+                                                @endforeach                                                <td>{{ $compra->created_at}}</td>
+                                                <td>{{ $compra->created_at}}</td>
+                                                
                                                 <td>{{ $compra->valor_total }}</td>
                                                 <td class="td-actions text-right">
                                                 @if ($compra->estado==1)
@@ -69,7 +75,7 @@
                                                <td class="td-actions text-right">
                                                  <a href="{{route('compras_detalle.index', $compra->recibo)}}"
                                                     class="btn btn-info"><i class="material-icons">person</i></a>
-                                                    <form action="{{route('compras.destroy', $compra->id)}}" method="post" style="display: inline-block;" onsubmit="return confirm('¿Está seguro de anular esta compra?')">
+                                                    <form action="{{route('compras.destroy', $compra->id)}}" method="post" style="display: inline-block;" onsubmit="return confirm('¿Está seguro de anular este dato?')">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger" type="submit" rel="tooltip">
@@ -99,7 +105,7 @@
 
     <script>
     $(document).ready(function() {
-        $('#compras').DataTable( {
+        $('#clientes').DataTable( {
             "language": {
                 "lengthMenu": "Mostrar  _MENU_  registros por pagina",
                 "zeroRecords": "No se encontraron datos",
