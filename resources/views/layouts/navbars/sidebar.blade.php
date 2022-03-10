@@ -113,8 +113,8 @@
                   <p>{{ __('Clientes') }}</p>
               </a>
             </li>
-            <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
-              <a class="nav-link" href="#">
+            <li class="nav-item{{ $activePage == 'pedidos' ? ' active' : '' }}">
+              <a class="nav-link" href="{{route('pedidos.index')}}">
                 <i class="material-icons">shopping_cart</i>
                 <p>{{ __('Pedidos') }}</p>
               </a>
