@@ -255,13 +255,14 @@
                 if(cantidad > 0 && precio > 0){
                     $("#tblProductos").append(`
                         <tr id="tr-${producto_id}">
+                            <td>${cantidad}</td>
                             <td>
                                 <input type="hidden" name="producto_id[]" value="${producto_id}" />
                                 <input type="hidden" name="cantidades[]" value="${cantidad}" />
                                 ${producto_text}
 
                             </td>
-                            <td>${cantidad}</td>
+
                             <td>${precio}</td>
                             <td>${parseInt(precio) * parseInt(cantidad)}</td>
                             <td class="td-actions text-right">

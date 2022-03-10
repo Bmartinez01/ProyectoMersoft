@@ -16,14 +16,14 @@ return new class extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('cliente');
-            $table->unsignedBigInteger('producto');
             $table->string('valor_total');
             $table->unsignedBigInteger('estado');
+            $table->unsignedBigInteger('tipo');
             $table->timestamps();
 
             $table->foreign('cliente')->references('id')->on('clientes');
-            $table->foreign('producto')->references('id')->on('productos');
             $table->foreign('estado')->references('id')->on('estados');
+            $table->foreign('tipo')->references('id')->on('estados');
 
         });
     }
