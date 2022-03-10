@@ -22,11 +22,13 @@ return new class extends Migration
             $table->string('valor_unitario');
             $table->string('valor_total');
             $table->unsignedBigInteger('estado');
+            $table->unsignedBigInteger('tipo');
             $table->timestamps();
 
             $table->foreign('cliente')->references('id')->on('clientes');
             $table->foreign('producto')->references('id')->on('productos');
             $table->foreign('estado')->references('id')->on('estados');
+            $table->foreign('tipo')->references('id')->on('estados');
             $table->foreign('pedido')->references('id')->on('pedidos');
         });
     }

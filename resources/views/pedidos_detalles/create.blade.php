@@ -73,7 +73,7 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-12 text-right">
-                                        <a href="{{route('pedidos.create')}}" class="btn btn-sm btn-facebook" data-toggle="modal" data-target="#Form">Agregar Pedido</a>
+                                        <a href="{{route('pedidos.create')}}" class="btn btn-sm btn-facebook" data-toggle="modal" data-target="#Form">Agregar Producto</a>
                                     </div>
                                 </div>
 
@@ -96,7 +96,7 @@
 
                                 </div>
                                 <div class="card-footer ml-auto mr-auto col-md-3">
-                                    <button type="submit" class="btn btn-facebook">Enviar</button>
+                                    <button type="submit" class="btn btn-facebook">Guardar</button>
                                     <div class="">
                                         <a href="{{route('pedidos.index')}}" class="btn btn-danger">Cancelar</a>
                                     </div>
@@ -158,7 +158,7 @@
             </div>
             <div class="modal-footer">
                 <div class="">
-                    <button onclick="agregar_producto()" data-dismiss="modal" type="button" class="btn btn-success ">Agregar datos</button>
+                    <button onclick="agregar_producto()" data-dismiss="modal" type="button" class="btn btn-success ">Agregar Producto</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 
                 </div>

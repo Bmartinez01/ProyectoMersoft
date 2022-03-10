@@ -30,7 +30,7 @@ Route::resource('roles',  App\Http\Controllers\RoleController::class)->middlewar
 Route::resource('pedidos',  App\Http\Controllers\PedidoController::class)->middleware('auth');
 Route::resource('pedidos_detalles',  App\Http\Controllers\Pedido_detalleController::class)->middleware('auth');
 
-
+    
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('productos',  App\Http\Controllers\ProductoController::class)->middleware('auth');
