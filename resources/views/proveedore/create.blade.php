@@ -79,7 +79,7 @@
                             <div class="row">
                                 <label for="telefono" class="col-sm-2 col-form-label control-label asterisco">Teléfono</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="telefono" placeholder="Ingrese el teléfono" value="{{old('telefono')}} " >
+                                    <input type="number" class="form-control" name="telefono" placeholder="Ingrese el teléfono" value="{{old('telefono')}} " >
                                     @if ($errors->has('telefono'))
                                     <span class="error text-danger" for="input-telefono">{{ $errors->first('telefono') }}</span>
                                     @endif

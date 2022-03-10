@@ -32,7 +32,7 @@
 
                                             <th>No.</th>
                                             <th>Nombre</th>
-                                            <th>Guard</th>
+                                            <th>Permisos</th>
                                             <th>Estado</th>
                                             <th>Función</th>
                                         </thead>
@@ -42,7 +42,13 @@
 
                                                 <td>{{$role->id}}</td>
                                                 <td>{{ $role->name }}</td>
-                                                <td>{{ $role->guard_name }}</td>
+                                                <td>
+                                                    @forelse ($role->permissions as $permission)
+                                                    <span class="badge badge-info">{{ $permission->name}}</span>
+                                                    @empty
+                                                    <span class="badge badge-danger">No hay permisos seleccionados</span>
+                                                    @endforelse
+                                                </td>
                                                 <td class="td-actions text-left">
                                                     @if ($role->estado==1)
                                                     <button type="button" class="btn btn-success btn-sm">
