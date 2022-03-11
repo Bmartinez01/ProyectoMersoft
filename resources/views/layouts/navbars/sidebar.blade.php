@@ -120,14 +120,14 @@
           <ul class="nav">
           @can('cliente_index')
             <li class="nav-item{{ $activePage == 'clientes' ? ' active' : '' }}">
-              <a class="nav-link" href={{route('clientes.index')}}>
+              <a class="nav-link" href={{route('clientes.index') }}>
                 <i class="material-icons">supervisor_account</i>
                   <p>{{ __('Clientes') }}</p>
               </a>
             </li>
-            @endcan
-            <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
-              <a class="nav-link" href="#">
+          @endcan  
+            <li class="nav-item{{ $activePage == 'pedidos' ? ' active' : '' }}">
+              <a class="nav-link" href="{{route('pedidos.index')}}">
                 <i class="material-icons">shopping_cart</i>
                 <p>{{ __('Pedidos') }}</p>
               </a>
