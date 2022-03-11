@@ -23,17 +23,18 @@
                                 @endif
                                 <div class="row">
                                     <div class="col-12 text-right">
+                                    @can('permission_create')
                                         <a href="{{route('permissions.create')}}" class="btn btn-sm btn-facebook">Agregar Permiso</a>
+                                    @endcan    
                                     </div>
                                 </div>
                                 <div class="table-responsive">
-                                    <table  id="permissions" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
+                                    <table  id="permissions" class="table table-striped table-bordered shadow-lg mt-4 mx-auto " style="width:85%">
                                         <thead class="text-white " id="fondo">
 
                                             <th>No.</th>
                                             <th>Nombre</th>
-                                            <th>Guard</th>
-                                            <th class="text-right">Función</th>
+                                            <th>Función</th>
                                         </thead>
                                         <tbody>
                                             @foreach ($permissions as $permission)
@@ -41,10 +42,11 @@
 
                                                 <td>{{$permission->id}}</td>
                                                 <td>{{ $permission->name }}</td>
-                                                <td>{{ $permission->guard_name }}</td>
-                                                <td class="td-actions text-right">
+                                                <td class="td-actions">
+                                                @can('permission_edit')    
                                                  <a href="{{route('permissions.edit', $permission->id)}}"
                                                     class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                @endcan    
                                                 </td>
 
                                             </tr>

@@ -17,6 +17,7 @@
             <p>{{ __('Menú') }}</p>
         </a>
       </li>
+      @can('role_index')
       <li class="nav-item {{ ($activePage == 'recent_actors' ) ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#configuraciones" aria-expanded="true">
         <i class="material-icons">settings_suggest</i>
@@ -26,22 +27,26 @@
         </a>
         <div class="collapse show" id="configuraciones">
           <ul class="nav">
+           
             <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('roles.index')}}">
                 <i class="material-icons">recent_actors</i>
                   <p>{{ __('Roles') }}</p>
               </a>
             </li>
+            
+            @can('permission_index')
             <li class="nav-item{{ $activePage == 'permisos' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('permissions.index')}}">
                 <i class="material-icons">people_outline</i>
                   <p>{{ __('Permisos') }}</p>
               </a>
             </li>
+            @endcan
           </ul>
         </div>
-
-      </li>
+      </li>@endcan
+      @can('user_index')
       <li class="nav-item{{ $activePage == 'users' ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#usuarios" aria-expanded="true">
           <i class="material-icons">person</i>
@@ -60,6 +65,7 @@
           </ul>
         </div>
       </li>
+      @endcan
       <li class="nav-item{{ $activePage == 'user' ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#Compras" aria-expanded="true">
           <i class="material-icons">shopping_bag</i>
@@ -67,34 +73,39 @@
               <b class="caret"></b>
             </p>
         </a>
+        
         <div class="collapse show" id="Compras">
           <ul class="nav">
+            @can('proveedore_index')
             <li class="nav-item{{ $activePage == 'proveedores' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('proveedores.index') }}">
                 <i class="material-icons">settings_accessibility</i>
                   <p>{{ __('Proveedores') }}</p>
               </a>
             </li>
+            @endcan
             <li class="nav-item{{ $activePage == 'compras' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('compras.index')}}">
                 <i class="material-icons">shopping_basket</i>
                 <p>{{ __('Compras') }}</p>
               </a>
             </li>
+            @can('categoria_index')
             <li class="nav-item{{ $activePage == 'categorias' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('categorias.index')}}">
                 <i class="material-icons">receipt_long</i>
                   <p>{{ __('Categorias') }}</p>
               </a>
             </li>
-
-
+            @endcan
+            @can('producto_index')
             <li class="nav-item{{ $activePage == 'productos' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('productos.index')}}">
                 <i class="material-icons">view_in_ar</i>
                   <p>{{ __('Productos') }}</p>
               </a>
             </li>
+            @endcan
           </ul>
         </div>
       </li>
@@ -107,12 +118,14 @@
         </a>
         <div class="collapse show" id="Ventas">
           <ul class="nav">
+          @can('cliente_index')
             <li class="nav-item{{ $activePage == 'clientes' ? ' active' : '' }}">
               <a class="nav-link" href={{route('clientes.index')}}>
                 <i class="material-icons">supervisor_account</i>
                   <p>{{ __('Clientes') }}</p>
               </a>
             </li>
+            @endcan
             <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
               <a class="nav-link" href="#">
                 <i class="material-icons">shopping_cart</i>

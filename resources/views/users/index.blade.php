@@ -23,7 +23,9 @@
                                 @endif
                                 <div class="row">
                                     <div class="col-12 text-right">
+                                    @can('user_create')        
                                         <a href="{{route('users.create')}}" class="btn btn-sm btn-facebook">Agregar Usuario</a>
+                                    @endcan
                                     </div>
                                 </div>
                                 <div class="table-responsive">
@@ -68,9 +70,10 @@
                                                 @endif
                                                </td>
                                                <td class="td-actions text-right">
+                                               @can('user_edit')       
                                                  <a href="{{route('users.edit', $user->id)}}"
                                                     class="btn btn-warning"><i class="material-icons">edit</i></a>
-
+                                                @endcan    
                                                </td>
 
                                             </tr>
