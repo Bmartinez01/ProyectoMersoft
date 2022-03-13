@@ -258,10 +258,10 @@
                             <td>
                                 <input type="hidden" name="producto_id[]" value="${producto_id}" />
                                 <input type="hidden" name="cantidades[]" value="${cantidad}" />
-                                ${producto_text}
 
+                                ${cantidad}
                             </td>
-                            <td>${cantidad}</td>
+                            <td>${producto_text}</td>
                             <td>${precio}</td>
                             <td>${parseInt(precio) * parseInt(cantidad)}</td>
                             <td class="td-actions text-right">

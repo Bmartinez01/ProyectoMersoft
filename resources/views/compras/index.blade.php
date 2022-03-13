@@ -29,7 +29,6 @@
                                 <div class="table-responsive">
                                     <table  id="compras" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                         <thead class="text-white" id="fondo">
-
                                             <th>No.</th>
                                             <th>Recibo</th>
                                             <th>Fecha Compra</th>
@@ -39,10 +38,11 @@
                                             <th class="text-right">Función</th>
                                         </thead>
                                         <tbody>
+
+                                            <tr>
                                             @foreach ($compras as $compra)
 
 
-                                            <tr>
 
                                                 <td>{{ $compra->id}}</td>
                                                 <td>{{ $compra->recibo}}</td>
@@ -93,6 +93,7 @@
             </div>
         </div>
     </div>
+
     @section('script')
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>

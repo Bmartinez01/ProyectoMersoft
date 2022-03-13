@@ -8,7 +8,7 @@ use App\Models\Compra_Detalle;
 use App\Models\Proveedore;
 use App\Models\Producto;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class CompraController extends Controller
 {
@@ -34,10 +34,15 @@ class CompraController extends Controller
     public function store(Request $request)
     {
     Compra::create($request->except('cantidad', 'producto', 'valor_unitario'));
+    $maximo = DB::select('select max(id) as Max_id from compras') ;
+        var_dump($maximo[0]->Max_id);
+        // Compra_Detalle::create($request->all());
 
-    Compra_Detalle::create($request->except('proveedor','recibo'));
+    // $maximo = DB::select('select max(id) from compras');
+        // Compra_Detalle::create($request->except('proveedor','recibo'));
 
   return redirect()->route('compras.index')->with('success', 'Compra creada correctamente');
+
 
 }
 

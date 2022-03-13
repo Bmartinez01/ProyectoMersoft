@@ -115,6 +115,7 @@
 
         <script>
 
+
             function colocar_precio(){
 
                 let precio = $("#producto option:selected").attr("precio");
