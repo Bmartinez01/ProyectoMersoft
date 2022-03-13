@@ -7,16 +7,19 @@ use App\Http\Requests\UserEditRequest;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
     public function index(){
+        abort_if(Gate::denies('user_index'),403);
         $users=User::paginate(5);
         return view('users.index', compact('users'));
     }
 
 
     public function create(){
+        abort_if(Gate::denies('user_create'),403);
         $roles = Role::all()->pluck('name','id');
         return view('users.create', compact('roles'));
     }
@@ -38,6 +41,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+        abort_if(Gate::denies('user_edit'),403);
         $roles = Role::all()->pluck('name','id');
         $user->load('roles');
         return view('users.edit', compact('user','roles'));

@@ -21,9 +21,11 @@
                                     {{ session('success') }}
                                 </div>
                                 @endif
-                                <div class="row">
+                                <div class="row">                        
                                     <div class="col-12 text-right">
+                                    @can('cliente_create')
                                         <a href="{{route('clientes.create')}}" class="btn btn-sm btn-facebook">Agregar Cliente</a>
+                                    @endcan
                                     </div>
                                 </div>
                                 <div class="table-responsive">
@@ -67,9 +69,10 @@
                                                 @endif
                                                </td>
                                                <td class="td-actions text-right">
+                                               @can('cliente_edit')       
                                                  <a href="{{ route('clientes.edit', $cliente->id) }}"
                                                     class="btn btn-warning"><i class="material-icons">edit</i></a>
-
+                                                @endcan
                                                </td>
 
                                             </tr>

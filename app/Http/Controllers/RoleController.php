@@ -7,12 +7,13 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Http\Requests\RolCreateRequest;
 use App\Http\Requests\RolEditRequest;
-
+use Illuminate\Support\Facades\Gate;
 
 class RoleController extends Controller
 {
     public function index()
     {
+        abort_if(Gate::denies('role_index'),403);
         $roles = Role::paginate();
         return view('roles.index', compact('roles'));
     }
@@ -21,6 +22,7 @@ class RoleController extends Controller
     public function create()
     {
         //
+        abort_if(Gate::denies('role_create'),403);
         $permissions = Permission::all()->pluck('name','id');
         return view('roles.create', compact('permissions'));
     }
@@ -37,6 +39,7 @@ class RoleController extends Controller
         
     public function edit(Role $role)
     {
+        abort_if(Gate::denies('role_edit'),403);
         $permissions = Permission::all()->pluck('name','id');
         $role->load('permissions');
         return view('roles.edit',compact('role','permissions'));
