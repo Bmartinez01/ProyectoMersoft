@@ -23,9 +23,9 @@
                                 @endif
                                 <div class="row">
                                     <div class="col-12 text-right">
-                                    @can('producto_create')    
+                                    @can('producto_create')
                                         <a href="{{route('productos.create')}}" class="btn btn-sm btn-facebook">Agregar productos</a>
-                                    @endcan                                   
+                                    @endcan
                                     </div>
                                 </div>
                                 <div class="table-responsive">
@@ -70,7 +70,7 @@
                                                 @endif
                                                </td>
                                                <td class="td-actions text-right">
-                                               @can('producto_edit')       
+                                               @can('producto_edit')
                                                  <a href="{{ route('productos.edit', $Producto->id) }}"
                                                     class="btn btn-warning"><i class="material-icons">edit</i></a>
                                                 @endcan
