@@ -257,7 +257,7 @@
                 if(cantidad > 0 && precio > 0){
                     $("#tblProductos").append(`
                         <tr id="tr-${producto_id}">
-                            <td>${cantidad}</td>
+                            
                             <td>
                                 <input type="hidden" name="producto_id[]" value="${producto_id}" />
                                 <input type="hidden" name="cantidades[]" value="${cantidad}" />
@@ -282,7 +282,9 @@
                 else {
                     alert("Se debe ingresar una cantidad o precio valido");
                 }
-
+                $("#producto").val('');
+                $("#cantidad").val('');
+                $("#valor_unitario").val('');
             }
 
             function eliminar_producto(id,subtotal){

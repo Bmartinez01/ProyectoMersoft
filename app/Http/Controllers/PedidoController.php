@@ -31,10 +31,16 @@ class PedidoController extends Controller
     // }
     public function store(Request $request)
     {
+    pedido::create($request->except('cantidad', 'producto', 'valor_unitario'));
+        // Compra_Detalle::create($request->all());
 
-    pedido::create($request->except('producto','tipo'));
-    return redirect()->route('pedidos.index')->with('success', 'Pedido creado correctamente');
-    }
+    // $maximo = DB::select('select max(id) from compras');
+        // Compra_Detalle::create($request->except('proveedor','recibo'));
+
+  return redirect()->route('pedidos.index')->with('success', 'Compra creada correctamente');
+
+
+}
 
 }
 

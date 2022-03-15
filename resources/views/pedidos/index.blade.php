@@ -39,20 +39,22 @@
                                             <th class="text-right">Función</th>
                                         </thead>
                                         <tbody>
-                                            @foreach ($pedidos as $pedido)
-
-
                                             <tr>
+                                                @foreach ($pedidos as $pedido)
 
-                                                <td>{{ $pedido->id}}</td>
-                                                <td>{{ $pedido->created_at}}</td>
-                                                @foreach ($pedidos_detalles as $pedido_detalle )
 
-                                                <td>{{$pedido_detalle->cliente}}</td>
-                                                <td>{{ $pedido_detalle->valor_total }}</td>
-                                                <td>{{$pedido_detalle->tipo}}</td>
-                                                <td>{{ $pedido_detalle->estado}}</td>
-                                                @endforeach
+
+                                                    <td>{{ $pedido->id}}</td>
+                                                    <td>{{ $pedido->created_at}}</td>
+                                                    @foreach ($clientes as $row)
+                                                    @if ($pedido->cliente==$row->id)
+                                                    <td>{{ $row->nombre}} {{$row->apellido}}</td>
+                                                    @endif
+                                                    @endforeach
+                                                    <td>{{ $pedido->valor_total }}</td>
+                                                    <td>{{ $pedido->tipo}}</td>
+                                                    <td>{{ $pedido->estado}}</td>
+                                                    
                                                 {{-- <td class="td-actions text-right">
                                                 @if ($compra->estado==1)
                                                 <button type="button" class="btn btn-success btn-sm">
