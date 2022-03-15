@@ -90,11 +90,18 @@
                                     <tbody id="tblProductos" >
 
                                     </tbody>
+
                                 </table>
-                                </div>
-
 
                                 </div>
+                                <div class="row offset-md-5">
+                                    <label for="valor_total" class="col-3 col-form-label control-label asterisco">Valor final </label>
+                                    <div class="col-sm-5">
+                                    <input type="number" class="form-control" id="valor_total" name="valor_total" readonly>
+                                    </div>
+                                    </div>
+                                </div>
+
                                 <div class="card-footer ml-auto mr-auto col-md-3">
                                     <button type="submit" class="btn btn-facebook">Guardar</button>
                                     <div class="">
@@ -148,12 +155,7 @@
                 @endif
             </div>
             </div>
-            <div class="row">
-            <label for="valor_total" class="col-sm-3 col-form-label control-label asterisco">Valor Total</label>
-            <div class="col-sm-7">
-            <input type="number" class="form-control" id="valor_total" name="valor_total" readonly>
-            </div>
-            </div>
+
 
             </div>
             <div class="modal-footer">

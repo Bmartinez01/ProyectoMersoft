@@ -46,19 +46,13 @@ class UserController extends Controller
 
     public function update(UserEditRequest $request, user $user){
 
-        /* $user=User::findOrfail($id); */
+
         $data= $request->only('name', 'email','estado');
         $password=$request->input('password');
 
         if($password)
             $data['password']=bcrypt($password);
-        /* if(trim($request->password)==''){
-            $data=$request->except('password');
-        }
-        else{
-            $data= $request->all();
-            $data['password']=bcrypt($request->password);
-        } */
+
 
         $user->update($data);
 

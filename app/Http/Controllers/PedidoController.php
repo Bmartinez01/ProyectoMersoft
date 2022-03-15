@@ -17,8 +17,8 @@ class PedidoController extends Controller
         $pedidos = pedido::all();
         $clientes = Cliente::all();
         $estados= Estados::all();
-        $productos = Producto::all();
-        return view('pedidos.index', compact('pedidos','clientes','productos','estados'));
+        // $productos = Producto::all();
+        return view('pedidos.index', compact('pedidos','clientes','estados'));
     }
     // public function create()
     // {

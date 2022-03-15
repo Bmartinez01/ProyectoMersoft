@@ -46,17 +46,12 @@
 
                                                 <td>{{ $pedido->id}}</td>
                                                 <td>{{ $pedido->created_at}}</td>
-                                                @foreach ($clientes as $row)
-                                                @if ($pedido->cliente==$row->id)
-                                                <td>{{ $row->nombre }}</td>
-                                                @endif
-                                                @endforeach
                                                 @foreach ($pedidos_detalles as $pedido_detalle )
 
-
+                                                <td>{{$pedido_detalle->cliente}}</td>
                                                 <td>{{ $pedido_detalle->valor_total }}</td>
-                                                <td>{{$pedido_detalle->Tipo}}</td>
-                                                <td>{{ $pedido_detalle->Estado}}</td>
+                                                <td>{{$pedido_detalle->tipo}}</td>
+                                                <td>{{ $pedido_detalle->estado}}</td>
                                                 @endforeach
                                                 {{-- <td class="td-actions text-right">
                                                 @if ($compra->estado==1)

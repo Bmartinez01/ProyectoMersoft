@@ -11,9 +11,8 @@ class pedido extends Model
     [
     'cliente',
     'cantidad',
-    'producto',
-    'valor_unitario',
     'valor_total',
+    'tipo',
     'estado'
     ];
     use HasFactory;
