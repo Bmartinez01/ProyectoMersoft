@@ -32,7 +32,7 @@ class PedidoController extends Controller
     public function store(Request $request)
     {
 
-    pedido::create($request->except('cantidad', 'producto', 'valor_unitario'));
+    pedido::create($request->except('producto','tipo'));
     return redirect()->route('pedidos.index')->with('success', 'Pedido creado correctamente');
     }
 

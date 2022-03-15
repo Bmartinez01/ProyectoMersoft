@@ -19,15 +19,11 @@ return new class extends Migration
         $table->string('recibo')->unique();
         $table->dateTimeTz('fecha_compra')->nullable();
         $table->unsignedBigInteger('proveedor');
-        $table->string('cantidad');
-        $table->unsignedBigInteger('producto');
-        $table->string('valor_unitario');
         $table->string('valor_total');
         $table->boolean('estado')->nullable()->default(1);
         $table->timestamps();
 
         $table->foreign('proveedor')->references('id')->on('proveedores');
-        $table->foreign('producto')->references('id')->on('productos');
 
 
     });

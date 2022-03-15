@@ -6,19 +6,21 @@ use App\Http\Requests\ClienteCreateRequest;
 use App\Http\Requests\ClienteEditRequest;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ClienteController extends Controller
 {
     //
     public function index()
     {
+        abort_if(Gate::denies('cliente_index'),403);
         $clientes = Cliente::paginate(5);
         return view('clientes.index', compact('clientes'));
     }
 
     public function create()
     {
-
+        abort_if(Gate::denies('cliente_create'),403);
         return view('clientes.create');
     }
 
@@ -30,6 +32,7 @@ class ClienteController extends Controller
 
     public function edit(Cliente $cliente)
     {
+        abort_if(Gate::denies('cliente_edit'),403);
         return view('clientes.edit', compact('cliente'));
 
     }

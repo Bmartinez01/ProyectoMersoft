@@ -23,7 +23,9 @@
                                 @endif
                                 <div class="row">
                                     <div class="col-12 text-right">
+                                    @can('role_create')        
                                         <a href="{{route('roles.create')}}" class="btn btn-sm btn-facebook">Agregar Rol</a>
+                                    @endcan
                                     </div>
                                 </div>
                                 <div class="table-responsive">
@@ -63,8 +65,10 @@
                                                     @endif
                                                 </td>
                                                 <td class="td-actions">
+                                                @can('role_edit')        
                                                  <a href="{{route('roles.edit', $role->id)}}"
                                                     class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                @endcan
                                                 </td>
 
                                             </tr>

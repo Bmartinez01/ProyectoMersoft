@@ -23,13 +23,12 @@
                                 @endif
                                 <div class="row">
                                     <div class="col-12 text-right">
-                                        <a href="{{route('compras.create')}}" class="btn btn-sm btn-facebook">Agregar Compra</a>
+                                        <a href="{{route('compras_detalle.create')}}" class="btn btn-sm btn-facebook">Agregar Compra</a>
                                     </div>
                                 </div>
                                 <div class="table-responsive">
-                                    <table  id="clientes" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
+                                    <table  id="compras" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                         <thead class="text-white" id="fondo">
-
                                             <th>No.</th>
                                             <th>Recibo</th>
                                             <th>Fecha Compra</th>
@@ -39,17 +38,18 @@
                                             <th class="text-right">Función</th>
                                         </thead>
                                         <tbody>
+
+                                            <tr>
                                             @foreach ($compras as $compra)
 
 
-                                            <tr>
 
                                                 <td>{{ $compra->id}}</td>
                                                 <td>{{ $compra->recibo}}</td>
                                                 <td>{{ $compra->created_at}}</td>
                                                 @foreach ($proveedores as $row)
                                                 @if ($compra->proveedor==$row->id)
-                                                <td>{{ $row->nombre }}</td>
+                                                <td>{{ $row->nombre}} {{$row->apellido}}</td>
                                                 @endif
                                                 @endforeach
                                                 <td>{{ $compra->valor_total }}</td>
@@ -67,8 +67,15 @@
                                                 @endif
                                                </td>
                                                <td class="td-actions text-right">
-                                                 <a href="{{route('compras.show', $compra->id)}}"
+                                                 <a href="{{route('compras_detalle.index', $compra->recibo)}}"
                                                     class="btn btn-info"><i class="material-icons">person</i></a>
+                                                    <form action="{{route('compras.destroy', $compra->id)}}" method="post" style="display: inline-block;" onsubmit="return confirm('¿Está seguro de anular esta compra?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-danger" type="submit" rel="tooltip">
+                                                            <i class="material-icons">close</i>
+                                                        </button>
+                                                    </form>
                                                </td>
 
                                             </tr>
@@ -86,13 +93,14 @@
             </div>
         </div>
     </div>
+
     @section('script')
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
 
     <script>
     $(document).ready(function() {
-        $('#clientes').DataTable( {
+        $('#compras').DataTable( {
             "language": {
                 "lengthMenu": "Mostrar  _MENU_  registros por pagina",
                 "zeroRecords": "No se encontraron datos",

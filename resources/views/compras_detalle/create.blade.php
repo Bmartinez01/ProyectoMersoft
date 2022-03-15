@@ -1,4 +1,4 @@
-{{-- @extends('layouts.main', ['activePage' => 'compras', 'titlePage' => 'Agregar Compra'])
+@extends('layouts.main', ['activePage' => 'compras', 'titlePage' => 'Agregar Compra'])
 @section('content')
 <div class="content">
     <div class="container-fluid">
@@ -22,15 +22,6 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="row">
-                                <label for="nombre" class="col-sm-2 col-form-label control-label asterisco">Nombre</label>
-                                <div class="col-sm-7">
-                                <input type="text" class="form-control" name="nombre" placeholder="Ingrese su nombre" value="{{old('nombre')}}">
-                                @if ($errors->has('nombre'))
-                                <span class="error text-danger" for="input-nombre">{{ $errors->first('nombre') }}</span>
-                                @endif
-                            </div>
-                        </div>
                         <div class="row">
                             <label for="proveedor" class="col-sm-2 col-form-label control-label asterisco">Proveedor</label>
                             <div class="col-sm-7">
@@ -124,6 +115,7 @@
 
         <script>
 
+
             function colocar_precio(){
 
                 let precio = $("#producto option:selected").attr("precio");
@@ -140,6 +132,7 @@
                 if(producto_id == producto_id && cantidad > 0 && precio > 0){
                     $("#tblProductos").append(`
                         <tr id="tr-${producto_id}">
+
                             <td>
                                 <input type="hidden" name="producto_id[]" value="${producto_id}" />
                                 <input type="hidden" name="cantidades[]" value="${cantidad}" />
@@ -180,4 +173,4 @@
             }
         </script>
 
-@endsection --}}
+@endsection

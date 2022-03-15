@@ -1,4 +1,5 @@
-@extends('layouts.main', ['activePage' => 'clientes', 'titlePage' => 'Clientes'])
+lo q sea
+@extends('layouts.main', ['activePage' => 'compras', 'titlePage' => 'Compras'])
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" >
@@ -12,8 +13,8 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header card-header-info">
-                                <h4 class="card-title text-dark"><strong>Clientes</strong></h4>
-                                <p class="card-category text-dark">Clientes Registrados</p>
+                                <h4 class="card-title text-dark"><strong>Compras</strong></h4>
+                                <p class="card-category text-dark">Compras Registrados</p>
                             </div>
                             <div class="card-body">
                                 @if (session('success'))
@@ -21,42 +22,45 @@
                                     {{ session('success') }}
                                 </div>
                                 @endif
-                                <div class="row">                        
+                                <div class="row">
                                     <div class="col-12 text-right">
-                                    @can('cliente_create')
-                                        <a href="{{route('clientes.create')}}" class="btn btn-sm btn-facebook">Agregar Cliente</a>
-                                    @endcan
+                                        <a href="{{route('compras_detalle.create')}}" class="btn btn-sm btn-facebook">Agregar Compra</a>
                                     </div>
                                 </div>
                                 <div class="table-responsive">
-                                    <table  id="clientes" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
+                                    <table  id="compras_detalle" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                         <thead class="text-white" id="fondo">
 
                                             <th>No.</th>
-                                            <th>Documento</th>
-                                            <th>Nombre</th>
-                                            <th>Apellido</th>
-                                            <th>Dirección</th>
-                                            <th>Celular</th>
-                                            <th>Email</th>
+                                            <th>Recibo</th>
+                                            <th>Proveedor</th>
+                                            <th>Fecha Compra</th>
+                                            <th>Cantidad</th>
+                                            <th>Producto</th>
+                                            <th>Valor c/u</th>
+                                            <th>Valor Total</th>
+
                                             <th>Estado</th>
                                             <th class="text-right">Función</th>
                                         </thead>
                                         <tbody>
-                                            @foreach ($clientes as $cliente)
+                                            @foreach ($compras as $compra)
 
 
                                             <tr>
 
-                                                <td>{{ $cliente->id}}</td>
-                                                <td>{{ $cliente->documento }}</td>
-                                                <td>{{ $cliente->nombre }}</td>
-                                                <td>{{ $cliente->apellido }}</td>
-                                                <td>{{ $cliente->direccion }}</td>
-                                                <td>{{ $cliente->telefono }}</td>
-                                                <td>{{ $cliente->email }}</td>
+                                                <td>{{ $compra->id}}</td>
+                                                <td>{{ $compra->recibo}}</td>
+                                                @foreach ($proveedores as $row)
+                                                @if ($compra->proveedor==$row->id)
+                                                <td>{{ $row->nombre }}</td>
+                                                @endif
+                                                @endforeach                                                <td>{{ $compra->created_at}}</td>
+                                                <td>{{ $compra->created_at}}</td>
+                                                
+                                                <td>{{ $compra->valor_total }}</td>
                                                 <td class="td-actions text-right">
-                                                @if ($cliente->estado==1)
+                                                @if ($compra->estado==1)
                                                 <button type="button" class="btn btn-success btn-sm">
                                                     Activo
                                                 </button>
@@ -69,10 +73,15 @@
                                                 @endif
                                                </td>
                                                <td class="td-actions text-right">
-                                               @can('cliente_edit')       
-                                                 <a href="{{ route('clientes.edit', $cliente->id) }}"
-                                                    class="btn btn-warning"><i class="material-icons">edit</i></a>
-                                                @endcan
+                                                 <a href="{{route('compras_detalle.index', $compra->recibo)}}"
+                                                    class="btn btn-info"><i class="material-icons">person</i></a>
+                                                    <form action="{{route('compras.destroy', $compra->id)}}" method="post" style="display: inline-block;" onsubmit="return confirm('¿Está seguro de anular este dato?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-danger" type="submit" rel="tooltip">
+                                                            <i class="material-icons">close</i>
+                                                        </button>
+                                                    </form>
                                                </td>
 
                                             </tr>

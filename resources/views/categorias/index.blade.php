@@ -23,7 +23,9 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-12 text-right mb-3">
+                                        @can('categoria_create')        
                                             <a href="{{  route('categorias.create') }}" class="btn btn-sm btn-facebook">Agregar Categoria</a>
+                                        @endcan
                                         </div>
                                     </div>
                                     <div class="table-responsive ">
@@ -53,8 +55,10 @@
                                                         @endif
                                                     </td>
                                                         <td class="td-actions ">
+                                                        @can('categoria_edit')        
                                                             <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn btn-warning">
                                                             <i class="material-icons">edit</i></a>
+                                                        @endcan
                                                         </td>
                                                     </tr>
                                                 @endforeach
