@@ -1,4 +1,8 @@
 @extends('layouts.main', ['activePage' => 'compras', 'titlePage' => 'Agregar Compra'])
+@section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" >
+@endsection
 @section('content')
 <div class="content">
     <div class="container-fluid">
@@ -14,82 +18,55 @@
                         </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <label for="recibo" class="col-sm-2 col-form-label control-label asterisco">Recibo</label>
-                                    <div class="col-sm-7">
-                                    <input type="number" class="form-control" name="recibo" placeholder="Ingrese su recibo" value="{{old('recibo')}}" autofocus>
+                                    <label for="recibo" class="col-sm-1 col-form-label control-label asterisco">Recibo</label>
+                                    <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="recibo" placeholder="Ingrese su recibo" value="{{old('recibo')}}" autofocus>
                                     @if ($errors->has('recibo'))
                                     <span class="error text-danger" for="input-recibo">{{ $errors->first('recibo') }}</span>
                                     @endif
                                 </div>
-                            </div>
-                        <div class="row">
-                            <label for="proveedor" class="col-sm-2 col-form-label control-label asterisco">Proveedor</label>
-                            <div class="col-sm-7">
-                                <select class="form-control" name="proveedor" id="proveedor">
-                                    <option value="">Seleccione el proveedor</option>
-                                    @foreach ( $proveedores as $row )
-                                    @if ($row->estado==0)
-                                    @continue
+                                <label for="cliente"  class="col-sm-2 col-form-label offset-3 text-dark control-label asterisco">Proveedor</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control" name="proveedor" id="proveedor">
+                                        <option value="">Seleccione el proveedor</option>
+                                        @foreach ( $proveedores as $row )
+                                        @if ($row->estado==0)
+                                        @continue
+                                        @endif
+                                        <option value="{{$row->id}}">{{$row->nombre}} {{$row->apellido}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('proveedor'))
+                                    <span class="error text-danger" for="input-proveedor">{{ $errors->first('proveedor') }}</span>
                                     @endif
-                                    <option value="{{$row->id}}">{{$row->nombre}} {{$row->apellido}}, {{$row->empresa}}</option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('proveedor'))
-                                <span class="error text-danger" for="input-proveedor">{{ $errors->first('proveedor') }}</span>
-                                @endif
-                        </div>
+                            </div>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                        <div class="row">
+                            <label for="fecha_compra" class="col-sm-1 col-form-label control-label asterisco">Fecha Compra</label>
+                                    <div class="col-sm-3">
+                                    <input type="date" class="form-control" name="fecha_compra" placeholder="Ingrese la fecha de la compra" value="{{old('fecha_compra')}}" autofocus>
+                                    @if ($errors->has('fecha_compra'))
+                                    <span class="error text-danger" for="input-fecha_compra">{{ $errors->first('fecha_compra') }}</span>
+                                    @endif
+                                </div>
+                                <label for="valor_total" class="col-sm-2 offset-3 col-form-label control-label asterisco">Valor Total</label>
+                                <div class="col-sm-3">
+                                <input type="number" class="form-control" id="valor_total" name="valor_total" step="0.01" readonly>
+                                </div>
                     </div>
-                    <div class="row">
-                        <label for="cantidad" class="col-sm-2 col-form-label control-label asterisco">Cantidad</label>
-                        <div class="col-sm-7">
-                        <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese su cantidad" value="{{old('cantidad')}}">
-                        @if ($errors->has('cantidad'))
-                        <span class="error text-danger" for="input-cantidad">{{ $errors->first('cantidad') }}</span>
-                        @endif
-                    </div>
-                </div>
-                <div class="row">
-                    <label for="producto" class="col-sm-2 col-form-label control-label asterisco">Producto</label>
-                    <div class="col-sm-7">
-                        <select class="form-control" name="producto" id="producto" onchange="colocar_precio()">
-                            <option value="">Seleccione el producto</option>
-                            @foreach ( $productos as $row )
-                            @if ($row->estado==0)
-                            @continue
-                            @endif
-                            <option precio="{{$row->precio}}" value="{{$row->id}}">{{$row->Nombre}}</option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('producto'))
-                        <span class="error text-danger" for="input-producto">{{ $errors->first('producto') }}</span>
-                        @endif
-                </div>
-            </div>
-                <div class="row">
-                    <label for="valor_unitario" class="col-sm-2 col-form-label control-label asterisco">Valor c/u</label>
-                    <div class="col-sm-7">
-                    <input type="number" class="form-control"  id="valor_unitario" name="valor_unitario" readonly>
-                    @if ($errors->has('valor_unitario'))
-                    <span class="error text-danger" for="input-valor_unitario">{{ $errors->first('valor_unitario') }}</span>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <label for="valor_total" class="col-sm-2 col-form-label control-label asterisco">Valor Total</label>
-                <div class="col-sm-7">
-                <input type="number" class="form-control" id="valor_total" name="valor_total" step="0.01" readonly>
-                </div>
+
+    </div>
+    <div class="row">
+        <div class="col-12 text-right">
+            <a href="{{route('compras.create')}}" class="btn btn-sm btn-facebook" data-toggle="modal" data-target="#Form">Agregar producto</a>
         </div>
     </div>
-    <div class="card-footer ml-auto mr-auto col-md-3">
-        <button onclick="agregar_producto()" type="button" class="btn btn-success float-left ">Agregar datos</button>
-        <button type="submit" class="btn btn-facebook">Enviar</button>
-        <div class="">
-            <a href="{{route('compras.index')}}" class="btn btn-danger">Cancelar</a>
-        </div>
-    </div>
-    <table class="table">
-        <thead>
+    <div class="table-responsive">
+        <table  id="Compras" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
+            <thead class="text-white" id="fondo">
             <tr>
                 <th>Producto</th>
                 <th>Cantidad</th>
@@ -103,11 +80,75 @@
 
         </tbody>
     </table>
+</div>
+<div class="card-footer ml-auto mr-auto col-md-3">
+    <button type="submit" class="btn btn-facebook">Enviar</button>
+    <div class="">
+        <a href="{{route('compras.index')}}" class="btn btn-danger">Cancelar</a>
+    </div>
+</div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+</div>
+
+<div class="modal fade " id="Form" tabindex="3" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body ">
+                <div class="row">
+                    <label for="cantidad" class="col-sm-3 col-form-label control-label asterisco">Cantidad</label>
+                    <div class="col-sm-7">
+                    <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese su cantidad" >
+                    @if ($errors->has('cantidad'))
+                    <span class="error text-danger" for="input-cantidad">{{ $errors->first('cantidad') }}</span>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <label for="producto" class="col-sm-3 col-form-label control-label asterisco">Producto</label>
+                <div class="col-sm-7">
+                    <select class="form-control " name="producto" id="producto" onchange="colocar_precio()">
+                        <option value="">Seleccione el producto</option>
+                        @foreach ( $productos as $row )
+                        @if ($row->estado==0)
+                        @continue
+                        @endif
+                        <option precio="{{$row->precio}}" value="{{$row->id}}">{{$row->Nombre}}</option>
+                        @endforeach
+                    </select>
+                    @if ($errors->has('producto'))
+                    <span class="error text-danger" for="input-producto">{{ $errors->first('producto') }}</span>
+                    @endif
+            </div>
+            </div>
+            <div class="row">
+                <label for="valor_unitario" class="col-sm-2 col-form-label control-label asterisco">Valor c/u</label>
+                <div class="col-sm-7">
+                <input type="number" class="form-control"  id="valor_unitario" name="valor_unitario" readonly>
+                @if ($errors->has('valor_unitario'))
+                <span class="error text-danger" for="input-valor_unitario">{{ $errors->first('valor_unitario') }}</span>
+                @endif
+            </div>
+        </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <div class="">
+                    <button onclick="agregar_producto()" data-dismiss="modal" type="button" class="btn btn-success ">Agregar Producto</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
 </div>
 @endsection
 

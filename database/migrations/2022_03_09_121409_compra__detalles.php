@@ -19,13 +19,11 @@ return new class extends Migration
             $table->unsignedBigInteger('compras_id');
             $table->string('cantidad');
             $table->unsignedBigInteger('producto');
-            $table->string('valor_unitario');
-            $table->string('valor_total');
             $table->boolean('estado')->nullable()->default(1);
             $table->timestamps();
 
             $table->foreign('producto')->references('id')->on('productos');
-            $table->foreign('compras_id')->references('id')->on('compras');
+            $table->foreign('compras_id')->references('id')->on('compras')->onDelete("cascade");
 
         });}
 

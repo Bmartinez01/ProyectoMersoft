@@ -9,10 +9,9 @@ class Compra_Detalle extends Model
 {
     protected $fillable =
     [
+    'compras_id',
     'cantidad',
     'producto',
-    'valor_unitario',
-    'valor_total',
     'estado'
     ];
 

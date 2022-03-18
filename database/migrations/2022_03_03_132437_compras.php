@@ -17,7 +17,7 @@ return new class extends Migration
       Schema::create('compras', function (Blueprint $table) {
         $table->bigIncrements('id');
         $table->string('recibo')->unique();
-        $table->dateTimeTz('fecha_compra')->nullable();
+        $table->string('fecha_compra')->nullable();
         $table->unsignedBigInteger('proveedor');
         $table->string('valor_total');
         $table->boolean('estado')->nullable()->default(1);

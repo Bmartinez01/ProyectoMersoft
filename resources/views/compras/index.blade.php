@@ -41,12 +41,9 @@
 
                                             <tr>
                                             @foreach ($compras as $compra)
-
-
-
                                                 <td>{{ $compra->id}}</td>
                                                 <td>{{ $compra->recibo}}</td>
-                                                <td>{{ $compra->created_at}}</td>
+                                                <td>{{ $compra->fecha_compra}}</td>
                                                 @foreach ($proveedores as $row)
                                                 @if ($compra->proveedor==$row->id)
                                                 <td>{{ $row->nombre}} {{$row->apellido}}</td>
@@ -67,8 +64,9 @@
                                                 @endif
                                                </td>
                                                <td class="td-actions text-right">
-                                                 <a href="{{route('compras_detalle.index', $compra->recibo)}}"
-                                                    class="btn btn-info"><i class="material-icons">person</i></a>
+                                                 <a href="{{route('compras.show', $compra->id)}}"
+                                                    class="btn btn-warning"><span class="material-icons">visibility </span></a>
+
                                                     <form action="{{route('compras.destroy', $compra->id)}}" method="post" style="display: inline-block;" onsubmit="return confirm('¿Está seguro de anular esta compra?')">
                                                         @csrf
                                                         @method('DELETE')

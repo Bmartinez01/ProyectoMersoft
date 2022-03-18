@@ -26,6 +26,7 @@ class CompraCreateRequest extends FormRequest
         return [
 
                 'recibo' => 'required|min:3|max:13|unique:compras',
+                'fecha_compra' => 'required|max:10',
                 'proveedor' => 'required',
                 'cantidad' => 'nullable',
                 'producto' => 'nullable',
