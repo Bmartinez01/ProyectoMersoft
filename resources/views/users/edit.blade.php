@@ -63,7 +63,7 @@
                                                             <td>
                                                                 <div class="form-check">
                                                                     <label class="form-check-label">
-                                                                        <input class="form-check-input" type="checkbox" name="roles[]" 
+                                                                        <input class="form-check-input" type="radio" name="roles[]" 
                                                                         value="{{ $id }}" {{ $user->roles->contains($id) ? 'checked' : ''}}>
                                                                         <span class="form-check-sign">
                                                                             <span class="check"></span>

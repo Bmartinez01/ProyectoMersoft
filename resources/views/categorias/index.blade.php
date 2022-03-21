@@ -17,13 +17,16 @@
                                 </div>
                                 <div class="card-body">
                                     @if (session('success'))
-                                    <div class="alert alert-success" role="success">
-                                        {{ session('success')}}
+                                    <div class="alert alert-success alert-dismissible" role="success">
+                                        {{ session('success') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
                                     @endif
                                     <div class="row">
                                         <div class="col-12 text-right mb-3">
-                                        @can('categoria_create')        
+                                        @can('categoria_crear')        
                                             <a href="{{  route('categorias.create') }}" class="btn btn-sm btn-facebook">Agregar Categoria</a>
                                         @endcan
                                         </div>
@@ -55,7 +58,7 @@
                                                         @endif
                                                     </td>
                                                         <td class="td-actions ">
-                                                        @can('categoria_edit')        
+                                                        @can('categoria_editar')        
                                                             <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn btn-warning">
                                                             <i class="material-icons">edit</i></a>
                                                         @endcan

@@ -17,7 +17,7 @@
             <p>{{ __('Menú') }}</p>
         </a>
       </li>
-      @can('role_index')
+      @can('rol_listar')
       <li class="nav-item {{ ($activePage == 'recent_actors' ) ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#configuraciones" aria-expanded="true">
         <i class="material-icons">settings_suggest</i>
@@ -35,7 +35,7 @@
               </a>
             </li>
             
-            @can('permission_index')
+            @can('permiso_listar')
             <li class="nav-item{{ $activePage == 'permisos' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('permissions.index')}}">
                 <i class="material-icons">people_outline</i>
@@ -46,7 +46,7 @@
           </ul>
         </div>
       </li>@endcan
-      @can('user_index')
+      @can('usuario_listar')
       <li class="nav-item{{ $activePage == 'users' ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#usuarios" aria-expanded="true">
           <i class="material-icons">person</i>
@@ -76,7 +76,7 @@
         
         <div class="collapse show" id="Compras">
           <ul class="nav">
-            @can('proveedore_index')
+            @can('proveedor_listar')
             <li class="nav-item{{ $activePage == 'proveedores' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('proveedores.index') }}">
                 <i class="material-icons">settings_accessibility</i>
@@ -90,7 +90,7 @@
                 <p>{{ __('Compras') }}</p>
               </a>
             </li>
-            @can('categoria_index')
+            @can('categoria_listar')
             <li class="nav-item{{ $activePage == 'categorias' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('categorias.index')}}">
                 <i class="material-icons">receipt_long</i>
@@ -98,7 +98,7 @@
               </a>
             </li>
             @endcan
-            @can('producto_index')
+            @can('producto_listar')
             <li class="nav-item{{ $activePage == 'productos' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('productos.index')}}">
                 <i class="material-icons">view_in_ar</i>
@@ -118,7 +118,7 @@
         </a>
         <div class="collapse show" id="Ventas">
           <ul class="nav">
-          @can('cliente_index')
+          @can('cliente_listar')
             <li class="nav-item{{ $activePage == 'clientes' ? ' active' : '' }}">
               <a class="nav-link" href={{route('clientes.index') }}>
                 <i class="material-icons">supervisor_account</i>

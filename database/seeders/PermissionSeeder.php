@@ -16,33 +16,33 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'permission_index',
-            'permission_create',
-            'permission_edit',
+            'permiso_listar',
+            'permiso_crear',
+            'permiso_editar',
 
-            'role_index',
-            'role_create',
-            'role_edit',
+            'rol_listar',
+            'rol_crear',
+            'rol_editar',
 
-            'user_index',
-            'user_create',
-            'user_edit',
+            'usuario_listar',
+            'usuario_crear',
+            'usuario_editar',
 
-            'categoria_index',
-            'categoria_create',
-            'categoria_edit',
+            'categoria_listar',
+            'categoria_crear',
+            'categoria_editar',
 
-            'proveedore_index',
-            'proveedore_create',
-            'proveedore_edit',
+            'proveedor_listar',
+            'proveedor_crear',
+            'proveedor_editar',
 
-            'producto_index',
-            'producto_create',
-            'producto_edit',
+            'producto_listar',
+            'producto_crear',
+            'producto_editar',
 
-            'cliente_index',
-            'cliente_create',
-            'cliente_edit',
+            'cliente_listar',
+            'cliente_crear',
+            'cliente_editar',
 
         ];
 

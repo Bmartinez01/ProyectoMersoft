@@ -13,14 +13,14 @@ class ClienteController extends Controller
     //
     public function index()
     {
-        abort_if(Gate::denies('cliente_index'),403);
+        abort_if(Gate::denies('cliente_listar'),403);
         $clientes = Cliente::paginate(5);
         return view('clientes.index', compact('clientes'));
     }
 
     public function create()
     {
-        abort_if(Gate::denies('cliente_create'),403);
+        abort_if(Gate::denies('cliente_crear'),403);
         return view('clientes.create');
     }
 
@@ -32,7 +32,7 @@ class ClienteController extends Controller
 
     public function edit(Cliente $cliente)
     {
-        abort_if(Gate::denies('cliente_edit'),403);
+        abort_if(Gate::denies('cliente_editar'),403);
         return view('clientes.edit', compact('cliente'));
 
     }

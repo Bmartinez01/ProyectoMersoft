@@ -17,13 +17,16 @@
                             </div>
                             <div class="card-body">
                                 @if (session('success'))
-                               <div class="alert alert-success" role="success">
+                                <div class="alert alert-success alert-dismissible" role="success">
                                     {{ session('success') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
                                 @endif
                                 <div class="row">
                                     <div class="col-12 text-right">
-                                    @can('permission_create')
+                                    @can('permiso_crear')
                                         <a href="{{route('permissions.create')}}" class="btn btn-sm btn-facebook">Agregar Permiso</a>
                                     @endcan    
                                     </div>
@@ -43,7 +46,7 @@
                                                 <td>{{$permission->id}}</td>
                                                 <td>{{ $permission->name }}</td>
                                                 <td class="td-actions">
-                                                @can('permission_edit')    
+                                                @can('permiso_editar')    
                                                  <a href="{{route('permissions.edit', $permission->id)}}"
                                                     class="btn btn-warning"><i class="material-icons">edit</i></a>
                                                 @endcan    

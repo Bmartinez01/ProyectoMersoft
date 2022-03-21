@@ -13,7 +13,7 @@ class PermissionController extends Controller
     
     public function index()
     {
-        abort_if(Gate::denies('permission_index'),403);
+        abort_if(Gate::denies('permiso_listar'),403);
         $permissions = Permission::paginate();
         return view('permissions.index', compact('permissions'));
     }
@@ -22,7 +22,7 @@ class PermissionController extends Controller
     public function create()
     {
         //
-        abort_if(Gate::denies('permission_create'),403);
+        abort_if(Gate::denies('permiso_crear'),403);
         return view('permissions.create');
     }
 
@@ -37,7 +37,7 @@ class PermissionController extends Controller
         
     public function edit(Permission $permission)
     {
-        abort_if(Gate::denies('permission_edit'),403);
+        abort_if(Gate::denies('permiso_editar'),403);
         return view('permissions.edit',compact('permission'));
 
     }
