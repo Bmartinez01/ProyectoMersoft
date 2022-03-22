@@ -17,7 +17,7 @@
                             </div>
                             <div class="card-body">
                                 @if (session('success'))
-                               <div class="alert alert-success alert-dismissible" role="success">
+                               <div id="mensaj" class="alert alert-success alert-dismissible" role="success">
                                     {{ session('success') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="close">
                                         <span aria-hidden="true">&times;</span>
@@ -26,7 +26,7 @@
                                 @endif
                                 <div class="row">
                                     <div class="col-12 text-right">
-                                    @can('usuario_crear')        
+                                    @can('usuario_crear')
                                         <a href="{{route('users.create')}}" class="btn btn-sm btn-facebook">Agregar Usuario</a>
                                     @endcan
                                     </div>
@@ -73,10 +73,10 @@
                                                 @endif
                                                </td>
                                                <td class="td-actions text-right">
-                                               @can('usuario_editar')       
+                                               @can('usuario_editar')
                                                  <a href="{{route('users.edit', $user->id)}}"
                                                     class="btn btn-warning"><i class="material-icons">edit</i></a>
-                                                @endcan    
+                                                @endcan
                                                </td>
 
                                             </tr>

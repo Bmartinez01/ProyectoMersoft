@@ -257,7 +257,7 @@
                 if(cantidad > 0 && precio > 0){
                     $("#tblProductos").append(`
                         <tr id="tr-${producto_id}">
-                            
+
                             <td>
                                 <input type="hidden" name="producto_id[]" value="${producto_id}" />
                                 <input type="hidden" name="cantidades[]" value="${cantidad}" />
@@ -295,22 +295,22 @@
 
 
             }
-            $(document).ready(function() {
-        $('#Pedidos').DataTable( {
-            "language": {
-                "lengthMenu": "Mostrar  _MENU_  registros por pagina",
-                "zeroRecords": "No se encontraron datos",
-                "info": "Mostrando la página _PAGE_ de _PAGES_",
-                "infoEmpty": "No records available",
-                "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                "search": "Buscar: ",
-                "paginate": {
-                    "next":"Siguiente",
-                    "previous":"Anterior"
-                }
-            }
-        } );
-    } );
+    //         $(document).ready(function() {
+    //     $('#Pedidos').DataTable( {
+    //         "language": {
+    //             "lengthMenu": "Mostrar  _MENU_  registros por pagina",
+    //             "zeroRecords": "No se encontraron datos",
+    //             "info": "Mostrando la página _PAGE_ de _PAGES_",
+    //             "infoEmpty": "No records available",
+    //             "infoFiltered": "(filtrado de _MAX_ registros totales)",
+    //             "search": "Buscar: ",
+    //             "paginate": {
+    //                 "next":"Siguiente",
+    //                 "previous":"Anterior"
+    //             }
+    //         }
+    //     } );
+    // } );
     $(document).ready(function(){
                 $("select").select2({
                 })

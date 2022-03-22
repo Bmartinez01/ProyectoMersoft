@@ -50,11 +50,16 @@
         <script src="{{ asset('js/core/bootstrap-material-design.min.js') }}"></script>
         <script src="{{ asset('js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+<script type="text/javascript" src="jquery-3.3.1.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
         @yield('script')
-
+            <script>$(document).ready(function() {
+                setTimeout(function() {
+                    // Declaramos la capa mediante una clase para ocultarlo
+                    $("#mensaj").fadeOut(1500);
+                },3000);
+            });</script>
         <!-- javascript init
             $('.bootstrap-switch').each(function(){
                 $this = $(this);

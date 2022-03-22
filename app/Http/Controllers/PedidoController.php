@@ -41,8 +41,15 @@ class PedidoController extends Controller
 
 
 }
+public function destroy(pedido $pedido)
+{
+    $pedido->delete();
+    return back()->with('success', 'Pedido cancelado correctamente');
+}
 
 }
+
+
 
 
 

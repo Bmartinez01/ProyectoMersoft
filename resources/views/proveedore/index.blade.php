@@ -18,7 +18,7 @@
                                 </div>
                                 <div class="card-body">
                                     @if (session('success'))
-                                    <div class="alert alert-success alert-dismissible" role="success">
+                                    <div id="mensaj" class="alert alert-success alert-dismissible" role="success">
                                         {{ session('success') }}
                                         <button type="button" class="close" data-dismiss="alert" aria-label="close">
                                             <span aria-hidden="true">&times;</span>
@@ -27,7 +27,7 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-12 text-right mb-3">
-                                        @can('proveedor_crear')        
+                                        @can('proveedor_crear')
                                             <a href="{{ route('proveedores.create') }}" class="btn btn-sm btn-facebook">Agregar Proveedor</a>
                                         @endcan
                                         </div>
@@ -77,7 +77,7 @@
                                                             @endif
                                                         </td>
                                                         <td class="td-actions ">
-                                                        @can('proveedor_editar')        
+                                                        @can('proveedor_editar')
                                                             <a href="{{ route('proveedores.edit', $proveedore->id) }}" class="btn btn-warning">
                                                             <i class="material-icons">edit</i></a>
                                                         @endcan

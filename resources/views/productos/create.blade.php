@@ -7,7 +7,7 @@
                 <form action= "{{route('productos.store')}}" method="post" class="form-horizontal">
                     @csrf
                     <div class="card">
-                        <div class="card-header card-header-primary">
+                        <div class="card-header card-header-info">
                             <h4 class="card-title text-dark"><strong>Productos</strong></h4>
                             <p class="card-category text-dark">Ingresar datos</p>
                         </div>

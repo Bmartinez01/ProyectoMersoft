@@ -17,7 +17,7 @@
                             </div>
                             <div class="card-body">
                                 @if (session('success'))
-                               <div class="alert alert-success" role="success">
+                               <div id="mensaj" class="alert alert-success" role="success">
                                     {{ session('success') }}
                                 </div>
                                 @endif
@@ -52,9 +52,20 @@
                                                     @endif
                                                     @endforeach
                                                     <td>{{ $pedido->valor_total }}</td>
-                                                    <td>{{ $pedido->tipo}}</td>
-                                                    <td>{{ $pedido->estado}}</td>
-                                                    
+                                                    @foreach ($estados as $row)
+                                                    @if ($pedido->estado==$row->id)
+                                                    <td>{{$row->Tipo}}</td>
+                                                    <td>{{ $row->Estado}}</td>
+                                                    @endif
+                                                    @endforeach
+
+                                                    <td><form action="{{route('pedidos.destroy', $pedido->id)}}" method="post" style="display: inline-block;" onsubmit="return confirm('¿Está seguro de cancelar este pedido?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-danger" type="submit" rel="tooltip">
+                                                            <i class="material-icons">close</i>
+                                                        </button>
+                                                    </form></td>
                                                 {{-- <td class="td-actions text-right">
                                                 @if ($compra->estado==1)
                                                 <button type="button" class="btn btn-success btn-sm">

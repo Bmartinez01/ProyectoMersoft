@@ -17,7 +17,7 @@
                             </div>
                             <div class="card-body">
                                 @if (session('success'))
-                               <div class="alert alert-success" role="success">
+                               <div id="mensaj" class="alert alert-success" role="success">
                                     {{ session('success') }}
                                 </div>
                                 @endif

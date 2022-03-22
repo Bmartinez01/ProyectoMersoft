@@ -17,7 +17,7 @@
                             </div>
                             <div class="card-body">
                                 @if (session('success'))
-                               <div class="alert alert-success alert-dismissible" role="success">
+                               <div id="mensaj" class="alert alert-success alert-dismissible" role="success">
                                     {{ session('success') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="close">
                                         <span aria-hidden="true">&times;</span>
@@ -26,12 +26,12 @@
                                 @endif
                                 <div class="row">
                                     <div class="col-1 text-left mb-3">
-                                    @can('permiso_listar')        
+                                    @can('permiso_listar')
                                         <a href="#" title="Editar" class="btn btn-sm btn-success" data-toggle="modal" data-target="#Permisos">Permisos</a>
                                     @endcan
                                     </div>
                                     <div class="col-11 text-right">
-                                    @can('rol_crear')        
+                                    @can('rol_crear')
                                         <a href="{{route('roles.create')}}" class="btn btn-sm btn-facebook">Agregar Rol</a>
                                     @endcan
                                     </div>
@@ -73,7 +73,7 @@
                                                     @endif
                                                 </td>
                                                 <td class="td-actions">
-                                                @can('rol_editar')        
+                                                @can('rol_editar')
                                                  <a href="{{route('roles.edit', $role->id)}}"
                                                     class="btn btn-warning"><i class="material-icons">edit</i></a>
                                                 @endcan
@@ -100,7 +100,7 @@
             <div class="modal-content">
 
                 <div class="modal-body">
-                
+
                 <table  id="permissions" class="table table-striped table-bordered shadow-lg mt-6 mx-auto" style="width:93%">
                     <thead class="text-white " id="fondo">
 
@@ -112,7 +112,7 @@
                         <tr>
 
                             <td>{{$permission->id}}</td>
-                            <td>{{ $permission->name }}</td>                           
+                            <td>{{ $permission->name }}</td>
                         </tr>
                         <!-- javascript init -->
 
