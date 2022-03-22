@@ -5,6 +5,9 @@
 @endsection
 @section('content')
 @if (count($productos) > 0)
+@foreach ($compras as $compra )
+@foreach ($proveedores as $proveedor )
+
 
 <div class="content">
     <div class="container-fluid">
@@ -27,14 +30,14 @@
                                 <div class="row">
                                     <label for="recibo" class="col-sm-1 col-form-label control-label asterisco">Recibo</label>
                                     <div class="col-sm-3">
-                                    <input type="text" class="form-control" value="0" autofocus>
+                                    <input type="text" class="form-control" value="{{$compra->recibo}}" autofocus>
                                     @if ($errors->has('recibo'))
                                     <span class="error text-danger" for="input-recibo">{{ $errors->first('recibo') }}</span>
                                     @endif
                                 </div>
                                 <label for="proveedor"  class="col-sm-2 col-form-label offset-3 text-dark control-label asterisco">Proveedor</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" value="proveedor" autofocus>
+                                    <input type="text" class="form-control" value="{{$proveedor->nombre}} {{$proveedor->apellido}}" autofocus>
                                     @if ($errors->has('proveedor'))
                                     <span class="error text-danger" for="input-proveedor">{{ $errors->first('proveedor') }}</span>
                                     @endif
@@ -46,14 +49,14 @@
                         <div class="row">
                             <label for="fecha_compra" class="col-sm-1 col-form-label control-label asterisco">Fecha Compra</label>
                                     <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="fecha_compra" placeholder="Ingrese la fecha de la compra" value="{{$compras}}" autofocus>
+                                    <input type="text" class="form-control" name="fecha_compra" placeholder="Ingrese la fecha de la compra" value="{{$compra->fecha_compra}}" autofocus>
                                     @if ($errors->has('fecha_compra'))
                                     <span class="error text-danger" for="input-fecha_compra">{{ $errors->first('fecha_compra') }}</span>
                                     @endif
                                 </div>
                                 <label for="valor_total" class="col-sm-2 offset-3 col-form-label control-label asterisco">Valor Total</label>
                                 <div class="col-sm-3">
-                                <input type="number" class="form-control" id="valor_total" name="valor_total" step="0.01" readonly>
+                                <input type="number" class="form-control" id="valor_total" value="{{$compra->valor_total}}" name="valor_total" step="0.01" readonly>
                                 </div>
                     </div>
                             <div class="table-responsive">
@@ -72,6 +75,8 @@
                                             <td>{{ $row->precio}}</td>
                                             <td>{{ $row->precio * $row->cantidad_c}}</td>
                                         </tr>
+                                     @endforeach
+                                     @endforeach
                                      @endforeach
                                     </tbody>
                                 </table>

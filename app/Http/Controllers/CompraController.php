@@ -71,7 +71,6 @@ class CompraController extends Controller
 
     public function destroy(Compra $compra)
     {
-        $id = 3;
         $compra_detalle = Compra_Detalle::all();
         $compra->delete();
         foreach($compra_detalle as $row){
@@ -79,8 +78,8 @@ class CompraController extends Controller
             $producto = Producto::find($id);
             $producto->update(["Stock"=>$producto->Stock - $row->cantidad]);
         }
+    }
 
-        }
         return back()->with('success', 'Compra anulada correctamente');
     }
 }
