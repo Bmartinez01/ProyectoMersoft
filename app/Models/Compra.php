@@ -12,9 +12,6 @@ class Compra extends Model
     'recibo',
     'fecha_compra',
     'proveedor',
-    'cantidad',
-    'producto',
-    'valor_unitario',
     'valor_total',
     'estado'
     ];

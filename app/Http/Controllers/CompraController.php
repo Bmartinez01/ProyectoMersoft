@@ -21,16 +21,6 @@ class CompraController extends Controller
         return view('compras.index', compact('compras','proveedores','productos'));
     }
 
-    // public function create()
-    // {
-
-    //     $compras = new Compra;
-    //     $proveedores = Proveedore::all();
-    //     $productos = Producto::all();
-    //     return view('compras.create', compact('compras','proveedores','productos'));
-
-    // }
-
     public function store(CompraCreateRequest $request)
     {
         $input = $request->all();
@@ -54,9 +44,6 @@ class CompraController extends Controller
 
         return redirect()->route('compras.index')->with('success', 'Compra creada correctamente');
 
-    // $maximo = DB::select('select max(id) as Max_id from compras') ;
-    //     var_dump($maximo[0]->Max_id);
-
 }
     public function calcular_precio($productos,$cantidades){
         $precio = 0;
@@ -69,6 +56,8 @@ class CompraController extends Controller
 
     public function show(Request $request, $id){
         $a = Compra::findOrFail($id);
+        $compras = Compra::all();
+        $proveedores = Proveedore::all();
         $productos = [];
         if($id != null){
             $productos = Producto::select("productos.*", "compra__detalles.cantidad as cantidad_c")
@@ -77,12 +66,21 @@ class CompraController extends Controller
             ->get();
         }
 
-        return view('compras.show', compact('productos'));
+        return view('compras.show', compact('productos','proveedores','compras'));
     }
 
     public function destroy(Compra $compra)
     {
+        $id = 3;
+        $compra_detalle = Compra_Detalle::all();
         $compra->delete();
+        foreach($compra_detalle as $row){
+        if($compra){
+            $producto = Producto::find($id);
+            $producto->update(["Stock"=>$producto->Stock - $row->cantidad]);
+        }
+
+        }
         return back()->with('success', 'Compra anulada correctamente');
     }
 }

@@ -156,7 +156,6 @@
 
         <script>
 
-
             function colocar_precio(){
 
                 let precio = $("#producto option:selected").attr("precio");
@@ -170,7 +169,8 @@
                 let cantidad = $("#cantidad").val();
                 let precio = $("#valor_unitario").val();
 
-                if(producto_id == producto_id && cantidad > 0 && precio > 0){
+                if(typeof)
+                if(cantidad > 0 && precio > 0){
                     $("#tblProductos").append(`
                         <tr id="tr-${producto_id}">
 
