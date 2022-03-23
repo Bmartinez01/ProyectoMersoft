@@ -10,7 +10,6 @@ class pedido extends Model
     protected $fillable =
     [
     'cliente',
-    'cantidad',
     'valor_total',
     'tipo',
     'estado'

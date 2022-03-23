@@ -10,12 +10,8 @@ class pedidos_detalles extends Model
     protected $fillable =
     [
     'pedido',
-    'cliente',
     'cantidad',
-    'producto',
-    'valor_unitario',
-    'valor_total',
-    'estado'
+    'producto'
     ];
     use HasFactory;
 }

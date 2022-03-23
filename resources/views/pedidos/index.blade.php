@@ -59,7 +59,12 @@
                                                     @endif
                                                     @endforeach
 
-                                                    <td><form action="{{route('pedidos.destroy', $pedido->id)}}" method="post" style="display: inline-block;" onsubmit="return confirm('¿Está seguro de cancelar este pedido?')">
+                                                    <td>
+
+                                                        <a href="{{ route('pedidos.edit', $pedido->id) }}"
+                                                           class="btn btn-warning"><i class="material-icons">edit</i></a>
+
+                                                        <form action="{{route('pedidos.destroy', $pedido->id)}}" method="post" style="display: inline-block;" onsubmit="return confirm('¿Está seguro de cancelar este pedido?')">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger" type="submit" rel="tooltip">
