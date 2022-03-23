@@ -16,7 +16,7 @@
                                 <div class="row">
                                     <label for="documento" class="col-sm-2 col-form-label">Documento</label>
                                     <div class="col-sm-7">
-                                    <input type="number" class="form-control" name="documento" readonly value="{{ old('documento', $cliente->documento)}}">
+                                    <input type="number" class="form-control" name="documento" readonly value="{{ $cliente->documento}}">
                                     @if ($errors->has('documento'))
                                     <span class="error text-danger" for="input-documento">{{ $errors->first('documento') }}</span>
                                     @endif

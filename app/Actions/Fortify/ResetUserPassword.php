@@ -5,6 +5,7 @@ namespace App\Actions\Fortify;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\ResetsUserPasswords;
+use App\Models\User;
 
 class ResetUserPassword implements ResetsUserPasswords
 {
@@ -26,5 +27,13 @@ class ResetUserPassword implements ResetsUserPasswords
         $user->forceFill([
             'password' => Hash::make($input['password']),
         ])->save();
+    }
+    protected function redirectTo(){
+        if( Auth()->user()->role == 1){
+            return route('admin.dashboard');
+        }
+        elseif( Auth()->user()->role == 1){
+            return route('user.dashboard');
+        }
     }
 }
