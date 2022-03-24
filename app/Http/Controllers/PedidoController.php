@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PedidocrearRequest;
 use App\Models\pedido;
 use App\Models\Cliente;
 use App\Models\Producto;
@@ -29,7 +30,7 @@ class PedidoController extends Controller
     //     return view('pedidos.create', compact('pedidos','clientes','productos'));
 
     // }
-    public function store(Request $request)
+    public function store(PedidocrearRequest $request)
     {
         $input = $request->all();
         $pedido = pedido::create([
@@ -67,6 +68,9 @@ class PedidoController extends Controller
 
     public function edit(Request $request, $id){
         $a = pedido::findOrFail($id);
+        $pedido = pedido::all();
+        $clientes = Cliente::all();
+        $estado= Estados::all();
         $productos = [];
         if($id != null){
             $productos = Producto::select("productos.*", "pedidos_detalles.cantidad as cantidad_c")
@@ -75,7 +79,7 @@ class PedidoController extends Controller
             ->get();
         }
 
-        return view('pedidos.edit', compact('productos'));
+        return view('pedidos.edit', compact('productos','clientes','pedido','estado'));
     }
 
 

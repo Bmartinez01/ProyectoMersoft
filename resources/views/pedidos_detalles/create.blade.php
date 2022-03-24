@@ -56,7 +56,7 @@
 
                                 <br>
                                 <div class="row">
-                                <label for="estado" class="col-1 col-form-label text-dark control-label asterisco">Tipo</label>
+                                <label for="tipo" class="col-1 col-form-label text-dark control-label asterisco">Tipo</label>
                                     <div class="col-sm-3">
                                         <select class="form-control" name="tipo" id="tipo">
                                             <option value="">Seleccione el Tipo</option>
@@ -64,8 +64,8 @@
                                             <option value="{{$row->id}}">{{$row->Tipo}}</option>
                                             @endforeach
                                         </select>
-                                        @if ($errors->has('estado'))
-                                        <span class="error text-danger" for="input-estado">{{ $errors->first('estado') }}</span>
+                                        @if ($errors->has('tipo'))
+                                        <span class="error text-danger" for="input-tipo">{{ $errors->first('tipo') }}</span>
                                         @endif
                                 </div>
                             </div>
@@ -241,6 +241,11 @@
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
 
         <script>
+             function colocar_precio(){
+
+                let precio = $("#producto option:selected").attr("precio");
+                $("#valor_unitario").val(precio);
+            }
 
             function colocar_precio(){
 

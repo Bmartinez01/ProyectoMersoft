@@ -5,6 +5,10 @@
 @endsection
 @section('content')
 @if (count($productos) > 0)
+@foreach ($pedido as $pedido )
+@foreach ($clientes as $cliente)
+
+
 
 <div class="content">
     <div class="container-fluid">
@@ -18,11 +22,54 @@
                             <p class="card-category text-dark">Editar Pedido</p>
                         </div>
                         <div class="card-body">
-                            @if (session('success'))
-                           <div class="alert alert-success" role="success">
-                                {{ session('success') }}
+                            <div class="row">
+                                <label for="cliente" class="col-md-1 col-form-label text-dark control-label asterisco">Cliente</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" value="{{$cliente->nombre}} {{$cliente->apellido}}" readonly autofocus>
+                                    @if ($errors->has('cliente'))
+                                    <span class="error text-danger" for="input-cliente">{{ $errors->first('cliente') }}</span>
+                                    @endif
                             </div>
-                            @endif
+
+                             <label for="estado" class="col-1 offset-1 col-form-label text-dark control-label asterisco">Estado</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control" name="estado" id="estado" >
+                                        <option value="">Seleccione el estado</option>
+
+                                        <option value=""></option>
+
+                                    </select>
+
+                                        <a href="#" title="Editar" class="btn-sm" data-toggle="modal" data-target="#Estados"><i class="fa fa-question-circle fa-2x"></i></a>
+
+                                    @if ($errors->has('estado'))
+                                    <span class="error text-danger" for="input-estado">{{ $errors->first('estado') }}</span>
+                                    @endif
+
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="row">
+                            <label for="estado" class="col-1 col-form-label text-dark control-label asterisco">Tipo</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control" name="tipo" id="tipo">
+                                        <option value="">Seleccione el Tipo</option>
+                                        <option value=""></option>
+                                    </select>
+                                    @if ($errors->has('estado'))
+                                    <span class="error text-danger" for="input-estado">{{ $errors->first('estado') }}</span>
+                                    @endif
+                            </div>
+                        </div>
+                            <br>
+                            <br>
+                             <div class="row">
+                                <div class="col-12 text-right">
+                                    <a href="#" class="btn btn-sm btn-facebook" data-toggle="modal" data-target="#Form">Agregar Producto</a>
+                                 </div>
+                            </div>
+
                             <div class="table-responsive">
                                 <table  id="compras" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                     <thead class="text-white" id="fondo">
@@ -40,20 +87,23 @@
                                             <td>{{ $row->precio}}</td>
                                             <td>{{ $row->precio * $row->cantidad_c}}</td>
                                             <td>
-                                                <button type="button" class="btn btn-outline-danger" onclick="eliminar_producto(${producto_id}, ${parseInt(cantidad) * parseInt(precio)})" ><i class="bi bi-trash" style="font-size: 20px; color: red;"></i></button>
+                                                 <button type="button" class="btn btn-outline-danger" onclick="eliminar_producto(${producto_id}, ${parseInt(cantidad) * parseInt(precio)})" ><i class="bi bi-trash" style="font-size: 20px; color: red;"></i></button>
                                             </td>
                                         </tr>
+                                     @endforeach
+
+                                     @endforeach
                                      @endforeach
                                     </tbody>
                                 </table>
                             </div>
+
                             <div class="row offset-md-5">
                                 <label for="valor_total" class="col-3 col-form-label control-label asterisco">Valor final </label>
                                 <div class="col-sm-5">
-                                <input type="number" class="form-control" id="valor_total" name="valor_total" readonly value="{{ old('valor_total', $pedidos->valor_total )}}">
+                                <input type="number" class="form-control" id="valor_total" value="{{$pedido->valor_total}}" name="valor_total" readonly>
                                 </div>
                                 </div>
-
                         </div>
                         <div class="card-footer ml-auto mr-auto col-md-3">
                             <button type="submit" class="btn btn-facebook">Guardar</button>
@@ -68,9 +118,72 @@
         </div>
     </div>
 </div>
+
 @endif
+<div class="modal fade" id="Estados" tabindex="3" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <table class="table table-striped ">
+                    <thead>
+                      <tr>
+                        <th scope="col">Estado</th>
+                        <th scope="col" colspan="8">Descripcion</th>
+                        <th scope="col">Tipo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+
+                        <td>Venta Directa</td>
+                        <td colspan="8">El cliente compra y se lleva sus articulos</td>
+                        <td>Venta Directa </td>
+                      </tr>
+                      <tr>
+
+                        <td>Solicitado</td>
+                        <td colspan="8">Compra a domicilio y se realiza el pedido</td>
+                        <td>Domicilio</td>
+                      </tr>
+                      <tr>
+
+                        <td>En Proceso</td>
+                        <td colspan="8">El pedido se esta empacando</td>
+                        <td>Domicilio</td>
+                      </tr>
+                      <tr>
+
+                        <td>Por Despachar</td>
+                        <td colspan="8">Esta listo para despachar</td>
+                        <td>Domicilio</td>
+                      </tr>
+                      <tr>
+
+                        <td>Enviado</td>
+                        <td colspan="8">Esta despachado al cliente</td>
+                        <td>Domicilio</td>
+                      </tr>
+                      <tr>
+
+                        <td>Vendido</td>
+                        <td colspan="8">El pedido fue entregado y se reciio el pago</td>
+                        <td>Domicilio/venta directa</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 @endsection
-@section('script')
+{{-- @section('script')
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
 
@@ -151,4 +264,4 @@
         });
         </script>
 
-@endsection
+@endsection --}}
