@@ -56,7 +56,18 @@
                                 <div class="col-sm-3">
                                 <input type="number" class="form-control" id="valor_total" name="valor_total" step="0.01" readonly>
                                 </div>
+                                <br>
+                                <br>
+                                <br>
+                                <label for="iva" class="col-sm-1 offset-3 col-form-label control-label">Iva</label>
+                                <div class="col-sm-3">
+                                <input type="text" class="form-control" name="iva" id="iva"  placeholder="Ingrese el iva de la compra">
+                                <button onclick="limpiar_iva()" class="btn btn-sm btn-facebook" type="button">Corregi Iva</button>
+                                <button onclick="agregar_iva()" class="btn btn-sm btn-facebook" data-dismiss="modal" type="button">Agregar iva</button>
+                            </div>
+
                     </div>
+                    <br>
 
     </div>
     <div class="row">
@@ -64,6 +75,7 @@
             <a href="{{route('compras.create')}}" class="btn btn-sm btn-facebook" data-toggle="modal" data-target="#Form">Agregar producto</a>
         </div>
     </div>
+
     <div class="table-responsive">
         <table  id="Compras" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
             <thead class="text-white" id="fondo">
@@ -94,6 +106,7 @@
     </div>
 </div>
 
+
 <div class="modal fade " id="Form" tabindex="3" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -117,7 +130,7 @@
                         @if ($row->estado==0)
                         @continue
                         @endif
-                        <option precio="{{$row->precio}}" value="{{$row->id}}">{{$row->Nombre}}</option>
+                        <option value="{{$row->id}}">{{$row->Nombre}}</option>
                         @endforeach
                     </select>
                     @if ($errors->has('producto'))
@@ -126,16 +139,16 @@
             </div>
             </div>
             <div class="row">
-                <label for="valor_unitario" class="col-sm-2 col-form-label control-label asterisco">Valor c/u</label>
-                <div class="col-sm-7">
-                <input type="number" class="form-control"  id="valor_unitario" name="valor_unitario" readonly>
-                @if ($errors->has('valor_unitario'))
-                <span class="error text-danger" for="input-valor_unitario">{{ $errors->first('valor_unitario') }}</span>
-                @endif
+                <div class="row">
+                    <label for="precio" class="col-sm-3 col-form-label control-label asterisco">Valor c/u</label>
+                    <div class="col-sm-7">
+                    <input type="number" class="form-control" id="precio" name="precio" placeholder="Ingrese su precio" >
+                    @if ($errors->has('precio'))
+                    <span class="error text-danger" for="input-precio">{{ $errors->first('precio') }}</span>
+                    @endif
+                </div>
             </div>
         </div>
-
-
             </div>
             <div class="modal-footer">
                 <div class="">
@@ -151,30 +164,18 @@
 
 </div>
 @endsection
-
 @section('script')
-
         <script>
-
-            function colocar_precio(){
-
-                let precio = $("#producto option:selected").attr("precio");
-                $("#valor_unitario").val(precio);
-
-            }
-
             function agregar_producto(){
                 let producto_id = $("#producto option:selected").val();
                 let producto_text = $("#producto option:selected").text();
                 let cantidad = $("#cantidad").val();
-                let precio = $("#valor_unitario").val();
-                let cont = producto_id;
-                cont++;
+                let precio = $("#precio").val();
                 if(cantidad > 0 && precio > 0){
                     $("#tblProductos").append(`
                         <tr id="tr-${producto_id}">
-
                             <td>
+                                <input type="hidden" name="precios[]" value="${precio}"/>
                                 <input type="hidden" name="producto_id[]" value="${producto_id}" />
                                 <input type="hidden" name="cantidades[]" value="${cantidad}" />
                                 ${producto_text}
@@ -197,20 +198,42 @@
                 }
                 $("#producto").val('');
                 $("#cantidad").val('');
-                $("#valor_unitario").val('');
+                $("#precio").val('');
 
+            }
+            let cont = 0;
+            function agregar_iva(){
+                if(cont>0)
+                die();
+                else {
+                let iva = $("#iva").val() || 0;
+                let Valor_Total = $("#valor_total").val() || 0;
+                let suma = parseInt(Valor_Total) + parseInt(iva);
+                $("#valor_total").val(suma);
+                document.getElementById("iva").readOnly = true;
+                // alert("Se agregaron "+iva+ " pesos de iva")
+                cont++;
+                }
+            }
 
-
-
+            function limpiar_iva(){
+                let iva = $("#iva").val() || 0;
+                let Valor_Total = $("#valor_total").val() || 0;
+                let resta = parseInt(Valor_Total) - parseInt(iva);
+                if(iva > Valor_Total){
+                    die();
+                }
+                $("#valor_total").val(resta);
+                $("#iva").val("");
+                document.getElementById("iva").readOnly = false;
+                cont--;
             }
 
             function eliminar_producto(id,subtotal){
                 $("#tr-"+id).remove("");
 
                 let valor_total = $("#valor_total").val() || 0;
-             $("#valor_total").val(parseInt(valor_total) - subtotal);
-
-
+             $("#valor_total").val(parseInt(valor_total) - parseInt(subtotal));
             }
         </script>
 

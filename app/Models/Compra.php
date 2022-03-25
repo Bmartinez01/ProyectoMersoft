@@ -13,6 +13,7 @@ class Compra extends Model
     'fecha_compra',
     'proveedor',
     'valor_total',
+    'iva',
     'estado'
     ];
 

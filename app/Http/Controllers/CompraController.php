@@ -26,32 +26,33 @@ class CompraController extends Controller
         $input = $request->all();
         $compra = Compra::create([
             "recibo"=>$input["recibo"],
+            "iva"=>$input["iva"],
             "fecha_compra"=>$input["fecha_compra"],
             "proveedor"=>$input["proveedor"],
-            "valor_total"=>$this->calcular_precio($input["producto_id"], $input["cantidades"]),
-
+            "valor_total"=>$this->calcular_precio($input["producto_id"], $input["cantidades"], $input["precios"],$input["iva"]),
         ]);
 
         foreach($input["producto_id"] as $key => $value){
             Compra_Detalle::create([
                 "compras_id"=> $compra->id,
                 "producto"=>$value,
-                "cantidad"=>  $input["cantidades"][$key],
+                "precio"=>$input["precios"][$key],
+                "cantidad"=>$input["cantidades"][$key],
             ]);
             $producto = Producto::find($value);
             $producto->update(["Stock"=>$producto->Stock + $input["cantidades"][$key]]);
         }
 
         return redirect()->route('compras.index')->with('success', 'Compra creada correctamente');
-
+            // return response()->json($input);
 }
-    public function calcular_precio($productos,$cantidades){
+    public function calcular_precio($productos,$cantidades,$precios,$iva){
         $precio = 0;
         foreach($productos as $key => $value){
             $producto = Producto::find($value);
-            $precio += ($producto->precio * $cantidades[$key]);
+            $precio += ($precios[$key] * $cantidades[$key]);
         }
-        return $precio;
+        return $precio + $iva;
     }
 
     public function show(Request $request, $id){
@@ -60,7 +61,7 @@ class CompraController extends Controller
         $proveedores = Proveedore::all();
         $productos = [];
         if($id != null){
-            $productos = Producto::select("productos.*", "compra__detalles.cantidad as cantidad_c")
+            $productos = Producto::select("productos.*", "compra__detalles.cantidad as cantidad_c","compra__detalles.precio as precios")
             ->join("compra__detalles", "productos.id", "=", "compra__detalles.producto")
             ->where("compra__detalles.compras_id", $id)
             ->get();
@@ -71,15 +72,7 @@ class CompraController extends Controller
 
     public function destroy(Compra $compra)
     {
-        $compra_detalle = Compra_Detalle::all();
         $compra->delete();
-        foreach($compra_detalle as $row){
-        if($compra){
-            $producto = Producto::find($id);
-            $producto->update(["Stock"=>$producto->Stock - $row->cantidad]);
-        }
-    }
-
         return back()->with('success', 'Compra anulada correctamente');
     }
 }

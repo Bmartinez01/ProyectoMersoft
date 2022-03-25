@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('compras_id');
             $table->string('cantidad');
             $table->unsignedBigInteger('producto');
+            $table->string('precio');
             $table->boolean('estado')->nullable()->default(1);
             $table->timestamps();
 

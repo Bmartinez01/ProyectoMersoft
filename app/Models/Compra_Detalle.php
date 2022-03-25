@@ -12,6 +12,7 @@ class Compra_Detalle extends Model
     'compras_id',
     'cantidad',
     'producto',
+    'precio',
     'estado'
     ];
 
