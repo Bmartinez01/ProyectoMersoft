@@ -14,6 +14,7 @@
     <div class="container-fluid">
         <div class="row">
         <div class="col-md-12">
+            <form action="{{route('pedidos.update', $pedido->id)}}" method="post" class="form-horizontal">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -34,9 +35,14 @@
                              <label for="estado" class="col-1 offset-1 col-form-label text-dark control-label asterisco">Estado</label>
                                 <div class="col-sm-3">
                                     <select class="form-control" name="estado" id="estado" >
-                                        <option value="">Seleccione el estado</option>
+                                        <option  value="{{old('Estado',$pedido->Estado)}}">Seleccione solo para modificar</option>
+                                        @foreach ( $estado as $row )
+                                        <option @if ($row->id==$pedido->estado)
+                                            selected="true"
+                                        @endif
 
-                                        <option value=""></option>
+                                         value="{{$row->id}}">{{$row->Estado}}</option>
+                                        @endforeach
 
                                     </select>
 
@@ -54,8 +60,15 @@
                             <label for="estado" class="col-1 col-form-label text-dark control-label asterisco">Tipo</label>
                                 <div class="col-sm-3">
                                     <select class="form-control" name="tipo" id="tipo">
-                                        <option value="">Seleccione el Tipo</option>
-                                        <option value=""></option>
+                                        <option  value="{{old('Tipo',$pedido->Tipo)}}">Seleccione solo para modificar</option>
+                                        @foreach ( $estado as $row )
+                                        <option @if ($row->id==$pedido->tipo)
+                                            selected="true"
+                                        @endif
+
+                                         value="{{$row->id}}">{{$row->Tipo}}</option>
+                                        @endforeach
+
                                     </select>
                                     @if ($errors->has('estado'))
                                     <span class="error text-danger" for="input-estado">{{ $errors->first('estado') }}</span>
@@ -79,7 +92,7 @@
                                         <th>Sub Total</th>
                                         <th>funciones</th>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="tblProductos">
                                         <tr>
                                         @foreach ($productos as $row)
                                             <td>{{ $row->Nombre}}</td>
@@ -90,9 +103,9 @@
                                                  <button type="button" class="btn btn-outline-danger" onclick="eliminar_producto(${producto_id}, ${parseInt(cantidad) * parseInt(precio)})" ><i class="bi bi-trash" style="font-size: 20px; color: red;"></i></button>
                                             </td>
                                         </tr>
-                                     @endforeach
+                                        @endforeach
+                                        @endforeach
 
-                                     @endforeach
                                      @endforeach
                                     </tbody>
                                 </table>
@@ -112,12 +125,12 @@
                             </div>
                         </div>
                     </div>
+                </form>
                 </div>
             </div>
         </div>
-        </div>
-    </div>
-</div>
+     </div>
+
 
 @endif
 <div class="modal fade" id="Estados" tabindex="3" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -182,8 +195,65 @@
     </div>
 
 </div>
+{{-- agregar --}}
+<div class="modal fade " id="Form" tabindex="3" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body ">
+                <div class="row">
+                    <label for="cantidad" class="col-sm-3 col-form-label control-label asterisco">Cantidad</label>
+                    <div class="col-sm-7">
+                    <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese su cantidad" >
+                    @if ($errors->has('cantidad'))
+                    <span class="error text-danger" for="input-cantidad">{{ $errors->first('cantidad') }}</span>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <label for="producto" class="col-sm-3 col-form-label control-label asterisco">Producto</label>
+                <div class="col-sm-7">
+                    <select class="form-control " name="producto" id="producto" onchange="colocar_precio()">
+                        <option value="">Seleccione el producto</option>
+                        @foreach ( $productos as $row )
+                        @if ($row->estado==0)
+                        @continue
+                        @endif
+                        <option precio="{{$row->precio}}" value="{{$row->id}}">{{$row->Nombre}}</option>
+                        @endforeach
+                    </select>
+                    @if ($errors->has('producto'))
+                    <span class="error text-danger" for="input-producto">{{ $errors->first('producto') }}</span>
+                    @endif
+            </div>
+            </div>
+            <div class="row">
+                <label for="valor_unitario" class="col-sm-3 col-form-label control-label asterisco">Valor c/u</label>
+                <div class="col-sm-7">
+                <input type="number" class="form-control"  id="valor_unitario" name="valor_unitario" readonly>
+                @if ($errors->has('valor_unitario'))
+                <span class="error text-danger" for="input-valor_unitario">{{ $errors->first('valor_unitario') }}</span>
+                @endif
+            </div>
+            </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <div class="">
+                    <button onclick="agregar_producto()" data-dismiss="modal" type="button" class="btn btn-success ">Agregar Producto</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
 @endsection
-{{-- @section('script')
+@section('script')
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
 
@@ -204,20 +274,20 @@
                 if(cantidad > 0 && precio > 0){
                     $("#tblProductos").append(`
                         <tr id="tr-${producto_id}">
-
+                            <td>${producto_text}</td>
                             <td>
                                 <input type="hidden" name="producto_id[]" value="${producto_id}" />
                                 <input type="hidden" name="cantidades[]" value="${cantidad}" />
 
                                 ${cantidad}
                             </td>
-                            <td>${producto_text}</td>
+
                             <td>${precio}</td>
                             <td>${parseInt(precio) * parseInt(cantidad)}</td>
-                            <td class="td-actions text-right">
+                            <td class="">
                                 <a href="{{route('pedidos.create')}}" onclick="return confirm('Estás seguro que deseas eliminar el registro?');"></a>
 
-                              <button type="button" class="btn btn-outline-danger" onclick="eliminar_producto(${producto_id}, ${parseInt(cantidad) * parseInt(precio)})" ><i class="bi bi-trash" style="font-size: 20px; color: red;"></i></button>
+                                <button type="button" class="btn btn-outline-danger" onclick="eliminar_producto(${producto_id}, ${parseInt(cantidad) * parseInt(precio)})" ><i class="bi bi-trash" style="font-size: 20px; color: red;"></i></button>
 
                             </td>
 
@@ -264,4 +334,4 @@
         });
         </script>
 
-@endsection --}}
+@endsection

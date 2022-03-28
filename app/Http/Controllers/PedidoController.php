@@ -66,23 +66,7 @@ class PedidoController extends Controller
         return $precio;
     }
 
-    public function edit(Request $request, $id){
-        $a = pedido::findOrFail($id);
-        $pedido = pedido::all();
-        $clientes = Cliente::all();
-        $estado= Estados::all();
-        $productos = [];
-        if($id != null){
-            $productos = Producto::select("productos.*", "pedidos_detalles.cantidad as cantidad_c")
-            ->join("pedidos_detalles", "productos.id", "=", "pedidos_detalles.producto")
-            ->where("pedidos_detalles.pedido", $id)
-            ->get();
-        }
-
-        return view('pedidos.edit', compact('productos','clientes','pedido','estado'));
-    }
-
-
+    
 
 public function destroy(pedido $pedido)
 {

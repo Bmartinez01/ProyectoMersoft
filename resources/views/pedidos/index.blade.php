@@ -61,7 +61,7 @@
 
                                                     <td>
 
-                                                        <a href="{{ route('pedidos.edit', $pedido->id) }}"
+                                                        <a href="{{ route('pedidos_detalles.edit', $pedido->id) }}"
                                                            class="btn btn-warning"><i class="material-icons">edit</i></a>
 
                                                         <form action="{{route('pedidos.destroy', $pedido->id)}}" method="post" style="display: inline-block;" onsubmit="return confirm('¿Está seguro de cancelar este pedido?')">
