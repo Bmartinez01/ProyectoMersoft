@@ -27,7 +27,7 @@
                                 <div class="row">
                                     <div class="col-1 text-left mb-3">
                                     @can('permiso_listar')
-                                        <a href="#" title="Editar" class="btn btn-sm btn-success" data-toggle="modal" data-target="#Permisos">Permisos</a>
+                                        <a href="#" title="Editar" class="btn btn-sm btn-success" data-toggle="modal" data-target="#Permisos">Ver Permisos</a>
                                     @endcan
                                     </div>
                                     <div class="col-11 text-right">

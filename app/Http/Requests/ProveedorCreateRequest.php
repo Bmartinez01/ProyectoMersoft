@@ -37,10 +37,10 @@ class ProveedorCreateRequest extends FormRequest
         ];
     }
 
-    /* public function messages()
+    public function messages()
     {
         return [
-        'nombre.required' => 'El nombre es requerido'
-        ]
-    } */
+        'categoria_id.required' => 'El campo categoria es requerido'
+        ];
+    }
 }

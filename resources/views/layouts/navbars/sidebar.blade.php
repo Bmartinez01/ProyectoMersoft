@@ -35,14 +35,7 @@
               </a>
             </li>
             
-            @can('permiso_listar')
-            <li class="nav-item{{ $activePage == 'permisos' ? ' active' : '' }}">
-              <a class="nav-link" href="{{route('permissions.index')}}">
-                <i class="material-icons">people_outline</i>
-                  <p>{{ __('Permisos') }}</p>
-              </a>
-            </li>
-            @endcan
+            
           </ul>
         </div>
       </li>@endcan

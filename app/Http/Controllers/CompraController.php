@@ -8,6 +8,7 @@ use App\Models\Compra_Detalle;
 use App\Models\Proveedore;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use PDF;
 use Illuminate\Support\Facades\DB;
 
 class CompraController extends Controller
@@ -19,6 +20,23 @@ class CompraController extends Controller
         $proveedores = Proveedore::all();
         $productos = Producto::all();
         return view('compras.index', compact('compras','proveedores','productos'));
+    }
+    public function pdf(Request $request, $id){
+        $a = Compra::findOrFail($id);
+        $compras = Compra::all();
+        $proveedores = Proveedore::all();
+        $productos = [];
+        if($id != null){
+            $productos = Producto::select("productos.*", "compra__detalles.cantidad as cantidad_c","compra__detalles.precio as precios")
+            ->join("compra__detalles", "productos.id", "=", "compra__detalles.producto")
+            ->where("compra__detalles.compras_id", $id)
+            ->get();
+        }
+
+        $pdf = PDF::loadView('compras.pdf',compact('productos','proveedores','compras'));
+        // return $pdf->download('compra.pdf');
+        return $pdf->stream();
+        // return view('compras.pdf', compact('productos','proveedores','compras'));
     }
 
     public function store(CompraCreateRequest $request)

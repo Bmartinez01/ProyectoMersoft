@@ -35,7 +35,13 @@ class ProveedorEditRequest extends FormRequest
         'email'=> ['required','unique:proveedores,email,' . request()->route('proveedore')->id],
         'estado' => ['nullable']   
         ];
-
         
+    }
+
+    public function messages()
+    {
+        return [
+        'categoria_id.required' => 'El campo categoria es requerido'
+        ];
     }
 }

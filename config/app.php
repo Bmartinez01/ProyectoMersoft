@@ -178,7 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
 
-
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*

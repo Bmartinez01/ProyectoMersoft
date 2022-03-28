@@ -64,6 +64,8 @@
                                                 @endif
                                                </td>
                                                <td class="td-actions text-right">
+                                               <a href="{{route('compras.pdf', $compra->id)}}"
+                                                    class="btn btn-outline-danger"><span class="material-icons">picture_as_pdf </span></a>
                                                  <a href="{{route('compras.show', $compra->id)}}"
                                                     class="btn btn-warning"><span class="material-icons">visibility </span></a>
 
