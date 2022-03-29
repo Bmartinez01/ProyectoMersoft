@@ -21,6 +21,11 @@
                                     {{ session('success') }}
                                 </div>
                                 @endif
+                                @if (session('error'))
+                               <div id="mensaj" class="alert alert-danger" role="danger">
+                                    {{ session('error') }}
+                                </div>
+                                @endif
                                 <div class="row">
                                     <div class="col-12 text-right">
                                         <a href="{{route('compras_detalle.create')}}" class="btn btn-sm btn-facebook">Agregar Compra</a>

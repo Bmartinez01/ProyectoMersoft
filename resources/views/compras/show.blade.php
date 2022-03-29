@@ -5,8 +5,6 @@
 @endsection
 @section('content')
 @if (count($productos) > 0)
-@foreach ($compras as $compra )
-@foreach ($proveedores as $proveedor )
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -24,17 +22,20 @@
                                 {{ session('success') }}
                             </div>
                             @endif
+                            @foreach ($compras as $compra)
                             <div class="card-body">
+
                                 <div class="row">
                                     <label for="recibo" class="col-sm-1 col-form-label control-label ">Recibo</label>
                                     <div class="col-sm-3">
+
                                     <input type="text" class="form-control" value="{{$compra->recibo}}" readonly>
+
                                 </div>
 
                                 <label for="proveedor"  class="col-sm-2 col-form-label offset-3 text-dark control-label ">Proveedor</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" value="{{$proveedor->nombre}} {{$proveedor->apellido}}" readonly>
-
+                                    <input type="text" class="form-control" value="{{$compra->nombre}} {{$compra->apellido}}" readonly>
                             </div>
                             </div>
                             <br>
@@ -52,8 +53,11 @@
                                 <label for="" class="col-sm-1 offset-3 col-form-label control-label">Iva</label>
                                 <div class="col-sm-3">
                                 <input type="number" class="form-control" id="iva" value="{{$compra->iva}}" name="valor_total" readonly>
+
                             </div>
+
                     </div>
+                    @endforeach
                             <div class="table-responsive">
                                 <table  id="compras" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                     <thead class="text-white" id="fondo">
@@ -71,8 +75,7 @@
                                             <td>{{ $row->precios * $row->cantidad_c}}</td>
                                         </tr>
                                      @endforeach
-                                     @endforeach
-                                     @endforeach
+
                                     </tbody>
                                 </table>
                                 <div class="card-footer ml-auto mr-auto col-md-3">

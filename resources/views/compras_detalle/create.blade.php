@@ -171,6 +171,8 @@
                 let producto_text = $("#producto option:selected").text();
                 let cantidad = $("#cantidad").val();
                 let precio = $("#precio").val();
+
+
                 if(cantidad > 0 && precio > 0){
                     $("#tblProductos").append(`
                         <tr id="tr-${producto_id}">

@@ -22,20 +22,23 @@ class CompraController extends Controller
         return view('compras.index', compact('compras','proveedores','productos'));
     }
     public function pdf(Request $request, $id){
-        $a = Compra::findOrFail($id);
-        $compras = Compra::all();
-        $proveedores = Proveedore::all();
+        $compras = DB::select('SELECT recibo, fecha_compra, iva, valor_total, p.nombre, p.apellido FROM compras as c JOIN proveedores as p WHERE c.id = ?', [$id]);
         $productos = [];
-        if($id != null){
+        $a = Compra::find($id);
+        if($a != null){
             $productos = Producto::select("productos.*", "compra__detalles.cantidad as cantidad_c","compra__detalles.precio as precios")
             ->join("compra__detalles", "productos.id", "=", "compra__detalles.producto")
             ->where("compra__detalles.compras_id", $id)
             ->get();
-        }
-
-        $pdf = PDF::loadView('compras.pdf',compact('productos','proveedores','compras'));
+           $pdf = PDF::loadView('compras.pdf',compact('productos','compras'));
         // return $pdf->download('compra.pdf');
         return $pdf->stream();
+            // return view('compras.pdf', compact('productos','compras'));
+        }
+
+        // $pdf = PDF::loadView('compras.pdf',compact('productos','proveedores','compras'));
+        // return $pdf->download('compra.pdf');
+        // return $pdf->stream();
         // return view('compras.pdf', compact('productos','proveedores','compras'));
     }
 
@@ -74,18 +77,21 @@ class CompraController extends Controller
     }
 
     public function show(Request $request, $id){
-        $a = Compra::findOrFail($id);
-        $compras = Compra::all();
-        $proveedores = Proveedore::all();
+        $compras = DB::select('SELECT recibo, fecha_compra, iva, valor_total, p.nombre, p.apellido FROM compras as c JOIN proveedores as p WHERE c.id = ?', [$id]);
         $productos = [];
-        if($id != null){
+        $a = Compra::find($id);
+        if($a != null){
             $productos = Producto::select("productos.*", "compra__detalles.cantidad as cantidad_c","compra__detalles.precio as precios")
             ->join("compra__detalles", "productos.id", "=", "compra__detalles.producto")
             ->where("compra__detalles.compras_id", $id)
             ->get();
+            return view('compras.show', compact('productos','compras'));
+        }
+        else {
+            return redirect('compras')->with('error', 'El id de la compra no existe');
         }
 
-        return view('compras.show', compact('productos','proveedores','compras'));
+        return view('compras.index');
     }
 
     public function destroy(Compra $compra)

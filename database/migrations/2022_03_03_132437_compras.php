@@ -19,7 +19,7 @@ return new class extends Migration
         $table->string('recibo')->unique();
         $table->string('fecha_compra')->nullable();
         $table->unsignedBigInteger('proveedor');
-        $table->string('iva');
+        $table->string('iva')->nullable();
         $table->string('valor_total');
         $table->boolean('estado')->nullable()->default(1);
         $table->timestamps();

@@ -30,6 +30,7 @@ class CompraCreateRequest extends FormRequest
                 'proveedor' => 'required',
                 'cantidad' => 'nullable',
                 'producto' => 'nullable',
+                'iva' => 'nullable',
                 'valor_unitario'=> 'nullable',
                 'valor_total'=> 'required',
                 'estado' => 'nullable'
