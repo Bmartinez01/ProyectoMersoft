@@ -60,7 +60,8 @@
                                                     @endforeach
 
                                                     <td>
-
+                                                        <a href="{{ route('pedidos_detalles.pdf', $pedido->id) }}"
+                                                        class="btn btn-outline-danger"><span class="material-icons">picture_as_pdf </span></a>
                                                         <a href="{{ route('pedidos_detalles.edit', $pedido->id) }}"
                                                            class="btn btn-warning"><i class="material-icons">edit</i></a>
 

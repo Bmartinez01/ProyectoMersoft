@@ -2,6 +2,7 @@
 
 
 @section('content')
+<br><br><br><br><br><br>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -21,7 +22,7 @@
 
                         <div class="row mb-4">
                             
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Correo Electronico') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end"><strong>{{ __('Correo Electronico') }}</strong></label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email')  is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Ingrese su correo electronico" autofocus>

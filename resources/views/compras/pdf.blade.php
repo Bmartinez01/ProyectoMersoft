@@ -16,23 +16,23 @@
         }
         th,td{
             border:solid 1px black;
-            padding:15px;
+            padding:8px;
         }
         thead{
-            background-color: #5e5e5e
+            background-color: rgb(182, 189, 188);
         }
         tr:nth-child(even){
-            background-color: #000000;
+            background-color: rgba(211, 211, 203, 0.4);
         }
         #provee{
-            margin-left: 280px;
+            margin-left: 301px;
         }
         #prove{
-            margin-left: 120px;
+            margin-left: 151px;
             margin-top: 8px;
         }
         #valor{
-            margin-left: 225px;
+            margin-left: 252px;
         }
     </style>
 
@@ -46,13 +46,14 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-info ">
-                            <h2><strong>Detalle de la Compra</strong></h2>
+                            <h3 align="center"><strong>Detalle de la Compra</strong></h3>
                         </div>
+                        <br>
                         @foreach ($compras as $compra)
                         <div class="row">
 
-                            <label for="recibo"  class="col-sm-1 col-form-label control-label ">Recibo</label>
-                            <label for="proveedor" id="provee" class="col-sm-2 col-form-label offset-3 text-dark control-label ">Proveedor</label>
+                            <label for="recibo"  class="col-sm-1  ">Recibo:</label>
+                            <label for="proveedor" id="provee" class="col-sm-2 ">Proveedor:</label>
 
                             <div class="col-sm-3">
                                 <input type="text" class="form-control" value="{{$compra->recibo}}">
@@ -61,15 +62,15 @@
                             </div>
 
 
-                            <label for="fecha_compra" class="col-sm-1 col-form-label control-label">Fecha Compra</label>
-                            <label for="valor_total" id="valor" class="col-sm-2 offset-3 col-form-label control-label">Valor Total</label>
+                            <label for="fecha_compra" class="col-sm-1 ">Fecha Compra:</label>
+                            <label for="valor_total" id="valor" class="col-sm-2 ">Valor Total:</label>
                             <div class="col-sm-3">
                                 <input type="text" class="form-control" name="fecha_compra"  value="{{$compra->fecha_compra}}">
                                 <input type="text" id="prove" class="form-control" id="valor_total" value="{{$compra->valor_total}}" name="valor_total" step="0.01" >
 
                             </div>
 
-                            <label for="" class="col-sm-1 offset-3 col-form-label control-label">Iva</label>
+                            <label for="" class="col-sm-1 ">Iva:</label>
                             <div class="col-sm-3">
                                 <input type="text" class="form-control" id="iva" value="{{$compra->iva}}" name="valor_total" >
                             <br><br><br>
@@ -84,14 +85,14 @@
                                         <th>Sub Total</th>
                                     </thead>
                                     <tbody>
+                                    @foreach ($productos as $row)
                                         <tr>
-                                            @foreach ($productos as $row)
                                             <td>{{ $row->Nombre}}</td>
                                             <td>{{ $row->cantidad_c}}</td>
                                             <td>{{ $row->precios}}</td>
                                             <td>{{ $row->precios * $row->cantidad_c}}</td>
                                         </tr>
-                                     @endforeach
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
