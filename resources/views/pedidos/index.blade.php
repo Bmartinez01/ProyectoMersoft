@@ -22,7 +22,10 @@
                                 </div>
                                 @endif
                                 <div class="row">
-                                    <div class="col-12 text-right">
+                                <div class="col-1 text-left mb-3">
+                                        <a href="{{route('pedidos.excel')}}" title="Descargar Excel" class="btn btn-sm btn-success" ><i class="material-icons">downloading</i>  Excel</a>
+                                    </div>
+                                    <div class="col-11 text-right">
                                         <a href="{{route('pedidos_detalles.create')}}" class="btn btn-sm btn-facebook">Agregar Pedido</a>
                                     </div>
                                 </div>

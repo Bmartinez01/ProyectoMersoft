@@ -179,6 +179,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
 
         Barryvdh\DomPDF\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -194,6 +195,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // ...
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];

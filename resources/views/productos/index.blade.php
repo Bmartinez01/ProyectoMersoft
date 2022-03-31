@@ -25,7 +25,10 @@
                                 </div>
                                 @endif
                                 <div class="row">
-                                    <div class="col-12 text-right">
+                                    <div class="col-1 text-left mb-3">
+                                        <a href="{{route('productos.excel')}}" title="Descargar Excel" class="btn btn-sm btn-success" ><i class="material-icons">downloading</i>  Excel</a>
+                                    </div>
+                                    <div class="col-11 text-right">
                                     @can('producto_crear')
                                         <a href="{{route('productos.create')}}" class="btn btn-sm btn-facebook">Agregar productos</a>
                                     @endcan

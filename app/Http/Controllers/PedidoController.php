@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PedidosExport;
 use App\Http\Requests\PedidocrearRequest;
 use App\Models\pedido;
 use App\Models\Cliente;
@@ -10,6 +11,7 @@ use App\Models\Estados;
 use App\Models\pedidos_detalles;
 use Illuminate\Http\Request;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PedidoController extends Controller
 {
@@ -30,6 +32,12 @@ class PedidoController extends Controller
     //     return view('pedidos.create', compact('pedidos','clientes','productos'));
 
     // }
+
+    public function excel()
+    {
+        return Excel::download(new PedidosExport, 'Pedidos.xlsx');
+    }
+    
     public function store(PedidocrearRequest $request)
     {
         $input = $request->all();
