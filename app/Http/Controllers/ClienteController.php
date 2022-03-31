@@ -39,9 +39,9 @@ class ClienteController extends Controller
     public function update(ClienteEditRequest $request,Cliente $cliente)
     {
          $datos = $request->all();
-        // $cliente->update($datos);
-        // return redirect()->route('clientes.index')->with('success', 'Cliente actualizado correctamente');
-        return response()->json($cliente);
+        $cliente->update($datos);
+        return redirect()->route('clientes.index')->with('success', 'Cliente actualizado correctamente');
+        // return response()->json($cliente);
 
     }
 }

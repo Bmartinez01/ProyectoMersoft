@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use App\Models\Producto;
 use App\Models\Estados;
 use PDF;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class Pedido_detalleController extends Controller
@@ -39,7 +40,7 @@ class Pedido_detalleController extends Controller
     }
 
     public function edit(Request $request, $id){
-        $pedidos = DB::select('SELECT estado, tipo, valor_total, c.nombre, c.apellido FROM pedidos as p JOIN clientes as c WHERE p.id = ?', [$id]);
+        $pedidos = DB::select('SELECT p.estado, tipo, valor_total, c.nombre, c.apellido FROM pedidos as p JOIN clientes as c WHERE p.id = ?', [$id]);
         $a = pedido::find($id);
         $productos = [];
         if($a != null){
