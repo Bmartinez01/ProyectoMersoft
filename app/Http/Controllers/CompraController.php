@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ComprasExport;
 use App\Http\Requests\CompraCreateRequest;
 use App\Models\Compra;
 use App\Models\Compra_Detalle;
@@ -10,6 +11,7 @@ use App\Models\Producto;
 use Illuminate\Http\Request;
 use PDF;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CompraController extends Controller
 {
@@ -32,7 +34,7 @@ class CompraController extends Controller
             ->get();
            $pdf = PDF::loadView('compras.pdf',compact('productos','compras'));
         // return $pdf->download('compra.pdf');
-        return $pdf->stream();
+            return $pdf->stream();
             // return view('compras.pdf', compact('productos','compras'));
         }
 
@@ -99,5 +101,8 @@ class CompraController extends Controller
         $compra->delete();
         return back()->with('success', 'Compra anulada correctamente');
     }
-
+    public function excel()
+    {
+        return Excel::download(new ComprasExport, 'Compras.xlsx');
+    }
 }

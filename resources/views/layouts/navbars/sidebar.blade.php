@@ -19,35 +19,34 @@
       </li>
       @can('rol_listar')
       <li class="nav-item {{ ($activePage == 'recent_actors' ) ? ' active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#configuraciones" aria-expanded="true">
+        <a class="nav-link" data-bs-toggle="collapse" href="#configuracion" aria-expanded="false" aria-controls="configuracion">
         <i class="material-icons">settings_suggest</i>
           <p>{{ __('Configuraciones') }}
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse show" id="configuraciones">
+        <div class="collapse" id="configuracion">
           <ul class="nav">
-           
+
             <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('roles.index')}}">
                 <i class="material-icons">recent_actors</i>
                   <p>{{ __('Roles') }}</p>
               </a>
             </li>
-            
-            
+
           </ul>
         </div>
       </li>@endcan
       @can('usuario_listar')
       <li class="nav-item{{ $activePage == 'users' ? ' active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#usuarios" aria-expanded="true">
+        <a class="nav-link" data-bs-toggle="collapse" href="#usuarios" aria-expanded="false" aria-controls="usuarios">
           <i class="material-icons">person</i>
             <p>{{ __('Usuarios') }}
               <b class="caret"></b>
             </p>
         </a>
-        <div class="collapse show" id="usuarios">
+        <div class="collapse" id="usuarios">
           <ul class="nav">
             <li class="nav-item{{ $activePage == 'users' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('users.index')}}">
@@ -60,14 +59,14 @@
       </li>
       @endcan
       <li class="nav-item{{ $activePage == 'user' ? ' active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#Compras" aria-expanded="true">
+        <a class="nav-link" data-bs-toggle="collapse" href="#Compras" aria-expanded="false" aria-controls="Compras">
           <i class="material-icons">shopping_bag</i>
             <p>{{ __('Compras') }}
               <b class="caret"></b>
             </p>
         </a>
-        
-        <div class="collapse show" id="Compras">
+
+        <div class="collapse" id="Compras">
           <ul class="nav">
             @can('proveedor_listar')
             <li class="nav-item{{ $activePage == 'proveedores' ? ' active' : '' }}">
@@ -103,13 +102,13 @@
         </div>
       </li>
       <li class="nav-item{{ $activePage == 'user' ? ' active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#Ventas" aria-expanded="true">
+        <a class="nav-link" data-bs-toggle="collapse" href="#Ventas" aria-expanded="false" aria-controls="Ventas">
           <i class="material-icons">person</i>
             <p>{{ __('Ventas') }}
               <b class="caret"></b>
             </p>
         </a>
-        <div class="collapse show" id="Ventas">
+        <div class="collapse" id="Ventas">
           <ul class="nav">
           @can('cliente_listar')
             <li class="nav-item{{ $activePage == 'clientes' ? ' active' : '' }}">
@@ -118,7 +117,7 @@
                   <p>{{ __('Clientes') }}</p>
               </a>
             </li>
-          @endcan  
+          @endcan
             <li class="nav-item{{ $activePage == 'pedidos' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('pedidos.index')}}">
                 <i class="material-icons">shopping_cart</i>
@@ -131,13 +130,9 @@
                 <p>{{ __('Ventas') }}</p>
               </a>
             </li>
-
           </ul>
         </div>
       </li>
-
-
-
     </ul>
   </div>
 </div>

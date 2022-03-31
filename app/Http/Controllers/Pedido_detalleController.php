@@ -53,5 +53,5 @@ class Pedido_detalleController extends Controller
 
         return view('pedidos_detalles.edit', compact('productos','clientes','pedido','estado'));
     }
-
+    
 }
