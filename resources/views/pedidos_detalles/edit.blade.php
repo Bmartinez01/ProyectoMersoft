@@ -5,11 +5,6 @@
 @endsection
 @section('content')
 @if (count($productos) > 0)
-@foreach ($pedido as $pedido )
-@foreach ($clientes as $cliente)
-
-
-
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -22,27 +17,28 @@
                             <h4 class="card-title text-dark"><strong>Pedidos</strong></h4>
                             <p class="card-category text-dark">Editar Pedido</p>
                         </div>
+                        @foreach ($pedidos as $pedido)
                         <div class="card-body">
                             <div class="row">
                                 <label for="cliente" class="col-md-1 col-form-label text-dark control-label asterisco">Cliente</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" value="{{$cliente->nombre}} {{$cliente->apellido}}" readonly autofocus>
+                                    <input type="text" class="form-control" value="{{$pedido->nombre}} {{$pedido->apellido}}" readonly autofocus>
                                     @if ($errors->has('cliente'))
                                     <span class="error text-danger" for="input-cliente">{{ $errors->first('cliente') }}</span>
                                     @endif
                             </div>
-
+                            @endforeach
                              <label for="estado" class="col-1 offset-1 col-form-label text-dark control-label asterisco">Estado</label>
                                 <div class="col-sm-3">
                                     <select class="form-control" name="estado" id="estado" >
-                                        <option  value="{{old('Estado',$pedido->Estado)}}">Seleccione solo para modificar</option>
-                                        @foreach ( $estado as $row )
+                                        {{-- <option  value="{{old('Estado',$pedido->Estado)}}">Seleccione solo para modificar</option> --}}
+                                        {{-- @foreach ( $estado as $row )
                                         <option @if ($row->id==$pedido->estado)
                                             selected="true"
                                         @endif
 
                                          value="{{$row->id}}">{{$row->Estado}}</option>
-                                        @endforeach
+                                        @endforeach --}}
 
                                     </select>
 
@@ -56,25 +52,6 @@
                             </div>
 
                             <br>
-                            <div class="row">
-                            <label for="estado" class="col-1 col-form-label text-dark control-label asterisco">Tipo</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" name="tipo" id="tipo">
-                                        <option  value="{{old('Tipo',$pedido->Tipo)}}">Seleccione solo para modificar</option>
-                                        @foreach ( $estado as $row )
-                                        <option @if ($row->id==$pedido->tipo)
-                                            selected="true"
-                                        @endif
-
-                                         value="{{$row->id}}">{{$row->Tipo}}</option>
-                                        @endforeach
-
-                                    </select>
-                                    @if ($errors->has('estado'))
-                                    <span class="error text-danger" for="input-estado">{{ $errors->first('estado') }}</span>
-                                    @endif
-                            </div>
-                        </div>
                             <br>
                             <br>
                              <div class="row">
@@ -103,9 +80,6 @@
                                                  <button type="button" class="btn btn-outline-danger" onclick="eliminar_producto(${producto_id}, ${parseInt(cantidad) * parseInt(precio)})" ><i class="bi bi-trash" style="font-size: 20px; color: red;"></i></button>
                                             </td>
                                         </tr>
-                                        @endforeach
-                                        @endforeach
-
                                      @endforeach
                                     </tbody>
                                 </table>
