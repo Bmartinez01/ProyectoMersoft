@@ -39,19 +39,17 @@ class Pedido_detalleController extends Controller
     }
 
     public function edit(Request $request, $id){
-        $a = pedido::findOrFail($id);
-        $pedido = pedido::all();
-        $clientes = Cliente::all();
-        $estado= Estados::all();
+        $pedidos = DB::select('SELECT estado, tipo, valor_total, c.nombre, c.apellido FROM pedidos as p JOIN clientes as c WHERE p.id = ?', [$id]);
+        $a = pedido::find($id);
         $productos = [];
-        if($id != null){
+        if($a != null){
             $productos = Producto::select("productos.*", "pedidos_detalles.cantidad as cantidad_c")
             ->join("pedidos_detalles", "productos.id", "=", "pedidos_detalles.producto")
             ->where("pedidos_detalles.pedido", $id)
             ->get();
         }
 
-        return view('pedidos_detalles.edit', compact('productos','clientes','pedido','estado'));
+        return view('pedidos_detalles.edit', compact('productos','pedidos'));
     }
-    
+
 }
