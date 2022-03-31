@@ -22,7 +22,7 @@ return new class extends Migration
 
 
             $table->foreign('producto')->references('id')->on('productos');
-            $table->foreign('pedido')->references('id')->on('pedidos');
+            $table->foreign('pedido')->references('id')->on('pedidos')->onDelete("cascade");;
         });
     }
 

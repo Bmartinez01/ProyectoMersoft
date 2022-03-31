@@ -37,7 +37,7 @@ class PedidoController extends Controller
     {
         return Excel::download(new PedidosExport, 'Pedidos.xlsx');
     }
-    
+
     public function store(PedidocrearRequest $request)
     {
         $input = $request->all();
@@ -74,13 +74,19 @@ class PedidoController extends Controller
         return $precio;
     }
 
-    
+    public function update(Request $request,pedido $pedidos)
+    {
+        $datos = $request->except('cantidad','producto','valor_total');
+        // $pedidos->update($datos);
+        // return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado correctamente');
+        return response()->json($datos);
+    }
 
-public function destroy(pedido $pedido)
-{
-    $pedido->delete();
-    return back()->with('success', 'Pedido cancelado correctamente');
-}
+    public function destroy(pedido $pedido)
+    {
+        $pedido->delete();
+        return back()->with('success', 'Pedido cancelado correctamente');
+    }
 
 }
 
