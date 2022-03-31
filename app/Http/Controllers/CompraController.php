@@ -99,4 +99,5 @@ class CompraController extends Controller
         $compra->delete();
         return back()->with('success', 'Compra anulada correctamente');
     }
+
 }

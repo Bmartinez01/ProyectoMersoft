@@ -173,7 +173,7 @@
                 let precio = $("#precio").val();
 
 
-                if(cantidad > 0 && precio > 0){
+                if(producto_id > 0 && cantidad > 0 && precio > 0){
                     $("#tblProductos").append(`
                         <tr id="tr-${producto_id}">
                             <td>
@@ -196,7 +196,11 @@
                         $("#valor_total").val(parseInt(valor_total) + parseInt(cantidad) * parseInt(precio));
                 }
                 else {
-                    alert("Se debe ingresar una cantidad y/o precio valido");
+                    alert("Se debe ingresar un producto valido,  cantidad y/o precio valido");
+                    // $("#producto").val('');
+                    // $("#cantidad").val('');
+                    // $("#precio").val('');
+                    die();
                 }
                 $("#producto").val('');
                 $("#cantidad").val('');
