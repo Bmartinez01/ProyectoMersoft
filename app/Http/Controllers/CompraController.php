@@ -43,7 +43,7 @@ class CompraController extends Controller
         // return $pdf->stream();
         // return view('compras.pdf', compact('productos','proveedores','compras'));
     }
-    
+
     public function store(CompraCreateRequest $request)
     {
         $input = $request->all();

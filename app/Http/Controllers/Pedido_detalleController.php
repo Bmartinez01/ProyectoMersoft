@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use App\Models\Producto;
 use App\Models\Estados;
 use PDF;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class Pedido_detalleController extends Controller
