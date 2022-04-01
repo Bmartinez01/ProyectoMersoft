@@ -74,12 +74,12 @@ class PedidoController extends Controller
         return $precio;
     }
 
-    public function update(Request $request,pedido $pedidos)
+    public function update(Request $request,pedido $pedido)
     {
         $datos = $request->except('cantidad','producto','valor_total');
-        $pedidos->update($datos);
+        $pedido->update($datos);
         return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado correctamente');
-        
+
     }
 
     public function destroy(pedido $pedido)

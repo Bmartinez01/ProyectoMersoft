@@ -32,7 +32,7 @@ class PedidocrearRequest extends FormRequest
             'valor_unitario'=> 'nullable',
             'valor_total'=> 'required',
             'estado' => 'required',
-            'tipo' => 'required'
+            // 'tipo' => 'required'
 
 
     ];

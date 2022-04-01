@@ -241,11 +241,7 @@
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
 
         <script>
-             function colocar_precio(){
 
-                let precio = $("#producto option:selected").attr("precio");
-                $("#valor_unitario").val(precio);
-            }
 
             function colocar_precio(){
 
