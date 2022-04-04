@@ -55,7 +55,7 @@
                                 </div>
 
                                 <br>
-                                <div class="row">
+                                {{-- <div class="row">
                                 <label for="tipo" class="col-1 col-form-label text-dark control-label asterisco">Tipo</label>
                                     <div class="col-sm-3">
                                         <select class="form-control" name="tipo" id="tipo">
@@ -68,7 +68,7 @@
                                         <span class="error text-danger" for="input-tipo">{{ $errors->first('tipo') }}</span>
                                         @endif
                                 </div>
-                            </div>
+                            </div> --}}
                                 <br>
                                 <br>
                                 <div class="row">

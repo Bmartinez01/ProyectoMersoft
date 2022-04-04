@@ -68,6 +68,9 @@
                                                         <a href="{{ route('pedidos_detalles.edit', $pedido->id) }}"
                                                            class="btn btn-warning"><i class="material-icons">edit</i></a>
 
+                                                           <a href="{{route('pedidos_detalles.show', $pedido->id)}}"
+                                                            class="btn btn-warning"><span class="material-icons">visibility </span></a>
+
                                                         <form action="{{route('pedidos.destroy', $pedido->id)}}" method="post" style="display: inline-block;" onsubmit="return confirm('¿Está seguro de cancelar este pedido?')">
                                                         @csrf
                                                         @method('DELETE')

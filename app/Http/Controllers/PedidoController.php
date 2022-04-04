@@ -44,7 +44,7 @@ class PedidoController extends Controller
         $input = $request->all();
         $pedido = pedido::create([
             "cliente"=>$input["cliente"],
-            "tipo"=>$input["tipo"],
+            // "tipo"=>$input["tipo"],
             "estado"=>$input["estado"],
             "valor_total"=>$this->calcular_precio($input["producto_id"], $input["cantidades"]),
 
@@ -82,7 +82,7 @@ class PedidoController extends Controller
         return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado correctamente');
 
     }
-
+    
     public function destroy(pedido $pedido)
     {
         $pedido->delete();

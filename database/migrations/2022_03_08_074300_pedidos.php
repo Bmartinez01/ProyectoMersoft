@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('cliente');
             $table->string('valor_total');
             $table->unsignedBigInteger('estado');
-            $table->unsignedBigInteger('tipo');
+            $table->unsignedBigInteger('tipo')->nullable();
             $table->timestamps();
 
             $table->foreign('cliente')->references('id')->on('clientes');
