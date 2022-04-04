@@ -5,6 +5,7 @@ namespace App\Exports;
 use App\Models\Pedido;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Illuminate\Support\Facades\DB;
 
 class PedidosExport implements FromCollection,WithHeadings
 {
@@ -22,6 +23,11 @@ class PedidosExport implements FromCollection,WithHeadings
     */
     public function collection()
     {
-        return Pedido::select("id","cliente","valor_total","estado")->get();
+        $productos = DB::table('pedidos')
+        ->join('clientes', 'pedidos.cliente', '=', 'clientes.id')
+        ->select('pedidos.id', 'clientes.nombre', 'pedidos.valor_total', 'pedidos.estado')
+        ->get();
+        return $productos;
+        // return Pedido::select("id","cliente","valor_total","estado")->get();
     }
 }

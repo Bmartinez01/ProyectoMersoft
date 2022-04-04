@@ -35,7 +35,8 @@ class PedidoController extends Controller
 
     public function excel()
     {
-        return Excel::download(new PedidosExport, 'Pedidos.xlsx');
+        $fecha = date("d").date("m").date("Y") ;
+        return Excel::download(new PedidosExport, "Pedidos-$fecha.xlsx");
     }
 
     public function store(PedidocrearRequest $request)

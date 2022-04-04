@@ -24,7 +24,9 @@ class ProductoController extends Controller
 
     public function excel()
     {
-        return Excel::download(new ProductosExport, 'Productos.xlsx');
+
+        $fecha = date("d").date("m").date("Y") ;
+        return Excel::download(new ProductosExport, "Productos-$fecha.xlsx");
     }
     public function create()
     {
