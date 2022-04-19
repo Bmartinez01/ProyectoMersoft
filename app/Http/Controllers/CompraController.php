@@ -79,7 +79,6 @@ class CompraController extends Controller
     }
 
     public function show(Request $request, $id){
-        // $proveedores = DB::select('SELECT nombre, apellido FROM proveedores as p JOIN compras as c WHERE c.id = ? AND p.id = c.proveedor', [$id]);
         $compras = DB::select('SELECT c.recibo, c.fecha_compra, c.iva, c.valor_total, p.nombre, p.apellido FROM compras as c JOIN proveedores as p WHERE c.id = ? AND p.id = c.proveedor', [$id]);
         $productos = [];
         $a = Compra::find($id);

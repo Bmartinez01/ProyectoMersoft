@@ -65,7 +65,6 @@
                                 <button onclick="limpiar_iva()" class="btn btn-sm btn-facebook" type="button">Corregi Iva</button>
                                 <button onclick="agregar_iva()" class="btn btn-sm btn-facebook" data-dismiss="modal" type="button">Agregar iva</button>
                             </div>
-
                     </div>
                     <br>
 
