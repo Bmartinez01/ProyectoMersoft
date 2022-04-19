@@ -26,13 +26,23 @@
         }
         #provee{
             margin-left: 301px;
+            border:0;
         }
         #prove{
             margin-left: 151px;
             margin-top: 8px;
+            border:0;
+
         }
         #valor{
             margin-left: 252px;
+        }
+        #iva{
+            margin-left: 2px;
+            border:0;
+        }
+        #reci{
+            border:0;
         }
     </style>
 
@@ -56,7 +66,7 @@
                             <label for="proveedor" id="provee" class="col-sm-2 ">Proveedor:</label>
 
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" value="{{$compra->recibo}}">
+                                <input type="text" id="reci" class="form-control" value="{{$compra->recibo}}">
                                 <input type="text" id="prove" class="form-control" value="{{$compra->nombre}} {{$compra->apellido}}" >
 
                             </div>
@@ -65,7 +75,7 @@
                             <label for="fecha_compra" class="col-sm-1 ">Fecha Compra:</label>
                             <label for="valor_total" id="valor" class="col-sm-2 ">Valor Total:</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" name="fecha_compra"  value="{{$compra->fecha_compra}}">
+                                <input type="text" id="reci" class="form-control" name="fecha_compra"  value="{{$compra->fecha_compra}}">
                                 <input type="text" id="prove" class="form-control" id="valor_total" value="{{$compra->valor_total}}" name="valor_total" step="0.01" >
 
                             </div>
