@@ -24,7 +24,7 @@ class CompraController extends Controller
         return view('compras.index', compact('compras','proveedores','productos'));
     }
     public function pdf(Request $request, $id){
-        $compras = DB::select('SELECT recibo, fecha_compra, iva, valor_total, p.nombre, p.apellido FROM compras as c JOIN proveedores as p WHERE c.id = ?', [$id]);
+        $compras = DB::select('SELECT recibo, fecha_compra, iva, valor_total, p.nombre, p.apellido FROM compras as c JOIN proveedores as p WHERE c.id = ? AND p.id = c.proveedor', [$id]);
         $productos = [];
         $a = Compra::find($id);
         if($a != null){

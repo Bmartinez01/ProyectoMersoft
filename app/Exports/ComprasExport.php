@@ -18,7 +18,6 @@ class ComprasExport implements FromCollection,WithHeadings
             'Proveedor',
             'Iva',
             'Valor_total',
-            'Cantidad',
         ];
     }
     /**
@@ -28,8 +27,7 @@ class ComprasExport implements FromCollection,WithHeadings
     {
         $compras = DB::table('compras')
         ->join('proveedores', 'compras.proveedor', '=', 'proveedores.id')
-        // ->join('compra__detalles', 'compras.id', '=', 'compra__detalles.compras_id ')
-        ->select('compras.id', 'compras.recibo', 'compras.fecha_compra', 'proveedores.nombre', 'compras.iva', 'compras.valor_total')
+        ->select('compras.id', 'compras.recibo', 'compras.fecha_compra', 'proveedores.nombre', 'compras.iva', 'compras.valor_total',)
         ->get();
         return $compras;
     }
