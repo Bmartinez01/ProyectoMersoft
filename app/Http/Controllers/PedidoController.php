@@ -35,7 +35,7 @@ class PedidoController extends Controller
 
     public function excel()
     {
-        $fecha = date("d").date("m").date("Y") ;
+        $fecha = date("d")."-".date("m").date("Y") ;
         return Excel::download(new PedidosExport, "Pedidos-$fecha.xlsx");
     }
 
@@ -82,7 +82,7 @@ class PedidoController extends Controller
         return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado correctamente');
 
     }
-    
+
     public function destroy(pedido $pedido)
     {
         $pedido->delete();

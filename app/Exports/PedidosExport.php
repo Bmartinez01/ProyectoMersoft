@@ -14,8 +14,11 @@ class PedidosExport implements FromCollection,WithHeadings
         return [
             'Id',
             'Cliente ',
-            'Valor total',
+            'Valor Total',
             'Estado ',
+            'Fecha de registro',
+            'Producto ',
+            'Cantidad ',
         ];
     }
     /**
@@ -23,12 +26,21 @@ class PedidosExport implements FromCollection,WithHeadings
     */
     public function collection()
     {
-        $productos = DB::table('pedidos')     
+       /*  $productos = DB::table('pedidos')
         ->join('estados', 'pedidos.estado', '=', 'estados.id')
         ->join('clientes', 'pedidos.cliente', '=', 'clientes.id')
         ->select('pedidos.id', 'clientes.nombre', 'pedidos.valor_total',  'estados.Estado')
         ->get();
-        return $productos;
+        return $productos; */
         // return Pedido::select("id","cliente","valor_total","estado")->get();
+        $productos = DB::table('pedidos_detalles')
+        ->join('pedidos', 'pedidos_detalles.pedido', '=', 'pedidos.id')
+        ->join('productos', 'pedidos_detalles.producto', '=', 'productos.id')
+        ->join('estados', 'pedidos.estado', '=', 'estados.id')
+        ->join('clientes', 'pedidos.cliente', '=', 'clientes.id')
+
+        ->select('pedidos_detalles.pedido','clientes.nombre','pedidos.valor_total','estados.Estado','pedidos.created_at', 'productos.Nombre',  'pedidos_detalles.cantidad', )
+        ->get();
+        return $productos;
     }
 }

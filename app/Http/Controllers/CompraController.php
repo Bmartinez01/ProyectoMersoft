@@ -32,9 +32,10 @@ class CompraController extends Controller
             ->join("compra__detalles", "productos.id", "=", "compra__detalles.producto")
             ->where("compra__detalles.compras_id", $id)
             ->get();
-           $pdf = PDF::loadView('compras.pdf',compact('productos','compras'));
-        // return $pdf->download('compra.pdf');
-            return $pdf->stream();
+            $fecha = date("d")."-".date("m")."-".date("Y") ;
+            $pdf = PDF::loadView('compras.pdf',compact('productos','compras'));
+            return $pdf->download("compra-$fecha.pdf");
+            // return $pdf->stream();
             // return view('compras.pdf', compact('productos','compras'));
         }
 
@@ -105,7 +106,7 @@ class CompraController extends Controller
     }
     public function excel()
     {
-        $fecha = date("d").date("m").date("Y") ;
+        $fecha = date("d")."-".date("m")."-".date("Y") ;
         return Excel::download(new ComprasExport, "Compras-$fecha.xlsx");
     }
 }

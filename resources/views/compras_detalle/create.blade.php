@@ -27,7 +27,7 @@
                                 </div>
                                 <label for="cliente"  class="col-sm-2 col-form-label offset-3 text-dark control-label asterisco">Proveedor</label>
                                 <div class="col-sm-3">
-                                    <select class="form-control" name="proveedor" id="proveedor">
+                                    <select class="form-control js-example-basic-single" name="proveedor" id="proveedor">
                                         <option value="">Seleccione el proveedor</option>
                                         @foreach ( $proveedores as $row )
                                         @if ($row->estado==0)
@@ -47,7 +47,7 @@
                         <div class="row">
                             <label for="fecha_compra" class="col-sm-1 col-form-label control-label asterisco">Fecha Compra</label>
                                     <div class="col-sm-3">
-                                    <input type="date" class="form-control" name="fecha_compra" placeholder="Ingrese la fecha de la compra" value="{{old('fecha_compra')}}" autofocus>
+                                    <input type="date" class="form-control" name="fecha_compra" placeholder="Ingrese la fecha de la compra" value="{{old('fecha_compra')}}" autofocus max="<?= date('Y-m-d'); ?>">
                                     @if ($errors->has('fecha_compra'))
                                     <span class="error text-danger" for="input-fecha_compra">{{ $errors->first('fecha_compra') }}</span>
                                     @endif
@@ -124,7 +124,7 @@
             <div class="row">
                 <label for="producto" class="col-sm-3 col-form-label control-label asterisco">Producto</label>
                 <div class="col-sm-7">
-                    <select class="form-control " name="producto" id="producto" onchange="colocar_precio()">
+                    <select class="form-control" name="producto" id="producto" onchange="colocar_precio()">
                         <option value="">Seleccione el producto</option>
                         @foreach ( $productos as $row )
                         @if ($row->estado==0)
@@ -241,6 +241,10 @@
                 let valor_total = $("#valor_total").val() || 0;
              $("#valor_total").val(parseInt(valor_total) - parseInt(subtotal));
             }
+
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2();
+            });
         </script>
 
 @endsection
