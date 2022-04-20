@@ -59,7 +59,7 @@
                     // Declaramos la capa mediante una clase para ocultarlo
                     $("#mensaj").fadeOut(1500);
                 },3000);
-            });</script>
+            }); </script>
         <!-- javascript init
             $('.bootstrap-switch').each(function(){
                 $this = $(this);

@@ -59,7 +59,7 @@ class Pedido_detalleController extends Controller
 
 
     public function show(Request $request, $id){
-        $pedido = DB::select('SELECT p.estado, p.tipo, valor_total, c.nombre, c.apellido FROM pedidos as p JOIN clientes as c WHERE p.id = ?', [$id]);
+        $pedido = DB::select('SELECT e.estado, valor_total, c.nombre, c.apellido FROM pedidos as p JOIN estados as e ON e.id = p.estado JOIN clientes as c WHERE p.id = ? AND c.id = p.cliente', [$id] );
         $a = pedido::find($id);
         $estado= Estados::all();
         $productos = [];

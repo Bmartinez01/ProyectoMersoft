@@ -81,7 +81,7 @@ class PedidoController extends Controller
         return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado correctamente');
 
     }
-    
+
     public function destroy(pedido $pedido)
     {
         $pedido->delete();
