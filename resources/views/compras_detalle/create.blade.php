@@ -241,9 +241,7 @@
              $("#valor_total").val(parseInt(valor_total) - parseInt(subtotal));
             }
 
-            $(document).ready(function() {
-                $('.js-example-basic-single').select2();
-            });
+            
         </script>
 
 @endsection

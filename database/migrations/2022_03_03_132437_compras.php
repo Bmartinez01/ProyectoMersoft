@@ -21,7 +21,6 @@ return new class extends Migration
         $table->unsignedBigInteger('proveedor');
         $table->string('iva')->nullable();
         $table->string('valor_total');
-        $table->boolean('estado')->nullable()->default(1);
         $table->timestamps();
 
         $table->foreign('proveedor')->references('id')->on('proveedores');

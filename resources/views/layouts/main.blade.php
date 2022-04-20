@@ -30,9 +30,8 @@
         #header{
             background-color:#ff6600
         }
-        .select2.selection{
-
-            height: calc(1.5em + .75rem + 2px) !important;
+        .qborder{
+            border-radius: 0px important!;
         }
     </style>
     </head>
@@ -57,12 +56,17 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         @yield('script')
-            <script>$(document).ready(function() {
+            <script>
+            $(document).ready(function() {
                 setTimeout(function() {
                     // Declaramos la capa mediante una clase para ocultarlo
                     $("#mensaj").fadeOut(1500);
                 },3000);
-            });</script>
+            });
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2();
+            });
+            </script>
         <!-- javascript init
             $('.bootstrap-switch').each(function(){
                 $this = $(this);

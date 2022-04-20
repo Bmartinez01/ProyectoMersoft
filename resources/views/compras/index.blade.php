@@ -42,7 +42,6 @@
                                             <th>Fecha Compra</th>
                                             <th>Proveedor</th>
                                             <th>Valor Total</th>
-                                            <th>Estado</th>
                                             <th class="text-right">Función</th>
                                         </thead>
                                         <tbody>
@@ -58,19 +57,6 @@
                                                 @endif
                                                 @endforeach
                                                 <td>{{ $compra->valor_total }}</td>
-                                                <td class="td-actions text-right">
-                                                @if ($compra->estado==1)
-                                                <button type="button" class="btn btn-success btn-sm">
-                                                    Activo
-                                                </button>
-
-                                                @else
-                                                <button type="button" class="btn btn-danger btn-sm">
-                                                    Inactivo
-                                                </button>
-
-                                                @endif
-                                               </td>
                                                <td class="td-actions text-right">
                                                <a href="{{route('compras.pdf', $compra->id)}}"
                                                     class="btn btn-outline-danger"><span class="material-icons">picture_as_pdf </span></a>
