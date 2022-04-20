@@ -24,7 +24,7 @@ class CompraController extends Controller
         return view('compras.index', compact('compras','proveedores','productos'));
     }
     public function pdf(Request $request, $id){
-        $compras = DB::select('SELECT recibo, fecha_compra, iva, valor_total, p.nombre, p.apellido FROM compras as c JOIN proveedores as p WHERE c.id = ?', [$id]);
+        $compras = DB::select('SELECT recibo, fecha_compra, iva, valor_total, p.nombre, p.apellido FROM compras as c JOIN proveedores as p WHERE c.id = ? AND p.id = c.proveedor', [$id]);
         $productos = [];
         $a = Compra::find($id);
         if($a != null){
@@ -79,7 +79,8 @@ class CompraController extends Controller
     }
 
     public function show(Request $request, $id){
-        $compras = DB::select('SELECT recibo, fecha_compra, iva, valor_total, p.nombre, p.apellido FROM compras as c JOIN proveedores as p WHERE c.id = ?', [$id]);
+        // $proveedores = DB::select('SELECT nombre, apellido FROM proveedores as p JOIN compras as c WHERE c.id = ? AND p.id = c.proveedor', [$id]);
+        $compras = DB::select('SELECT c.recibo, c.fecha_compra, c.iva, c.valor_total, p.nombre, p.apellido FROM compras as c JOIN proveedores as p WHERE c.id = ? AND p.id = c.proveedor', [$id]);
         $productos = [];
         $a = Compra::find($id);
         if($a != null){
@@ -94,6 +95,7 @@ class CompraController extends Controller
         }
 
         return view('compras.index');
+        // return response()->json($compras);
     }
 
     public function destroy(Compra $compra)
@@ -103,6 +105,7 @@ class CompraController extends Controller
     }
     public function excel()
     {
-        return Excel::download(new ComprasExport, 'Compras.xlsx');
+        $fecha = date("d").date("m").date("Y") ;
+        return Excel::download(new ComprasExport, "Compras-$fecha.xlsx");
     }
 }

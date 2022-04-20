@@ -5,6 +5,7 @@ namespace App\Exports;
 use App\Models\Compra;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Illuminate\Support\Facades\DB;
 
 class ComprasExport implements FromCollection,WithHeadings
 {
@@ -24,6 +25,10 @@ class ComprasExport implements FromCollection,WithHeadings
     */
     public function collection()
     {
-        return Compra::select("id","recibo","fecha_compra","proveedor","iva","valor_total")->get();
+        $compras = DB::table('compras')
+        ->join('proveedores', 'compras.proveedor', '=', 'proveedores.id')
+        ->select('compras.id', 'compras.recibo', 'compras.fecha_compra', 'proveedores.nombre', 'compras.iva', 'compras.valor_total',)
+        ->get();
+        return $compras;
     }
 }

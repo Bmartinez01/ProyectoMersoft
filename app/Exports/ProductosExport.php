@@ -26,12 +26,15 @@ class ProductosExport implements FromCollection,WithHeadings
     */
     public function collection()
     {
-        return Producto::select("id","Código","Nombre","Categorías","Stock","precio")
-        // ->join("categorias")
-        // ->on ("productos.Categorías","=","categorias.id") 
-        ->get();
-        //$return = DB::select('SELECT p.id, p.Código, p.Nombre,c.nombre, p.Stock, p.precio, p.estado FROM productos as p JOIN categorias as c') ->get();
-
         
+        $productos = DB::table('productos')
+        ->join('categorias', 'productos.Categorías', '=', 'categorias.id')
+        ->select('productos.id', 'productos.Código', 'productos.Nombre', 'categorias.nombre', 'productos.Stock', 'productos.precio')
+        ->get();
+        return $productos;
+
+        /* return DB::select('SELECT p.id, p.Código, p.Nombre,c.nombre, p.Stock, p.precio, p.estado FROM productos as p JOIN categorias as c where p.Categorías = c.id '); */
+
+
     }
 }
