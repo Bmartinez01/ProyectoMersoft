@@ -66,9 +66,22 @@ class CompraController extends Controller
             $producto = Producto::find($value);
             $producto->update(["Stock"=>$producto->Stock + $input["cantidades"][$key]]);
         }
-
+        // return response()->json($producto);
         return redirect()->route('compras.index')->with('success', 'Compra creada correctamente');
-            // return response()->json($input);
+}
+public function destroy(Compra $compra)
+{
+
+    $compra_p = DB::select('SELECT * FROM compra__detalles WHERE compras_id = ? ', [$compra->id]);
+
+    foreach ($compra_p as $key) {
+      $product_upd = DB::update("UPDATE productos SET Stock = Stock - $key->cantidad WHERE id = ?", [$key->producto]);
+    }
+    $compra->delete();
+    return back()->with('success', 'Compra anulada correctamente');
+
+
+
 }
     public function calcular_precio($productos,$cantidades,$precios,$iva){
         $precio = 0;
@@ -80,7 +93,6 @@ class CompraController extends Controller
     }
 
     public function show(Request $request, $id){
-        // $proveedores = DB::select('SELECT nombre, apellido FROM proveedores as p JOIN compras as c WHERE c.id = ? AND p.id = c.proveedor', [$id]);
         $compras = DB::select('SELECT c.recibo, c.fecha_compra, c.iva, c.valor_total, p.nombre, p.apellido FROM compras as c JOIN proveedores as p WHERE c.id = ? AND p.id = c.proveedor', [$id]);
         $productos = [];
         $a = Compra::find($id);
@@ -99,11 +111,7 @@ class CompraController extends Controller
         // return response()->json($compras);
     }
 
-    public function destroy(Compra $compra)
-    {
-        $compra->delete();
-        return back()->with('success', 'Compra anulada correctamente');
-    }
+
     public function excel()
     {
         $fecha = date("d")."-".date("m")."-".date("Y") ;
