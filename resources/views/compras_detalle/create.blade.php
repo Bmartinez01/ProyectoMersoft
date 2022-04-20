@@ -62,7 +62,7 @@
                                 <label for="iva" class="col-sm-1 offset-3 col-form-label control-label">Iva</label>
                                 <div class="col-sm-3">
                                 <input type="text" class="form-control" name="iva" id="iva"  placeholder="Ingrese el iva de la compra">
-                                <button onclick="limpiar_iva()" class="btn btn-sm btn-facebook" type="button">Corregi Iva</button>
+                                <button onclick="limpiar_iva()" class="btn btn-sm btn-facebook" type="button">Corregir Iva</button>
                                 <button onclick="agregar_iva()" class="btn btn-sm btn-facebook" data-dismiss="modal" type="button">Agregar iva</button>
                             </div>
                     </div>
