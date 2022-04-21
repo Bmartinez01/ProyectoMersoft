@@ -46,13 +46,14 @@
                                     <div class="col-sm-3">
                                     <input type="text" class="form-control" name="fecha_compra" readonly value="{{$compra->fecha_compra}}">
                                 </div>
-                                <label for="valor_total" class="col-sm-2 offset-3 col-form-label control-label">Valor Total</label>
-                                <div class="col-sm-3">
-                                <input type="number" class="form-control" id="valor_total" value="{{$compra->valor_total}}" name="valor_total" step="0.01" readonly>
-                                </div>
-                                <label for="" class="col-sm-1 offset-3 col-form-label control-label">Iva</label>
+                                <label for="" class="col-sm-1 offset-4 col-form-label control-label">Iva</label>
                                 <div class="col-sm-3">
                                 <input type="number" class="form-control" id="iva" value="{{$compra->iva}}" name="valor_total" readonly>
+                              </div>
+                                <label for="valor_total" class="col-sm-1 offset-4 col-form-label control-label">Valor Total</label>
+                                <div class="col-sm-3">
+                                <input type="number" class="form-control" id="valor_total" value="{{$compra->valor_total}}" name="valor_total" step="0.01" readonly>
+
 
                             </div>
 
