@@ -40,7 +40,7 @@ class Pedido_detalleController extends Controller
     }
 
     public function edit(Request $request, $id){
-        $a = pedido::find($id);
+        $a = pedido::findOrFail($id);
         $pedido = pedido::all();
         $clientes = Cliente::all();
         $estado= Estados::all();
@@ -60,7 +60,7 @@ class Pedido_detalleController extends Controller
 
     public function show(Request $request, $id){
         $pedido = DB::select('SELECT p.estado, p.tipo, valor_total, c.nombre, c.apellido FROM pedidos as p JOIN clientes as c WHERE p.id = ?', [$id]);
-        $a = pedido::find($id);
+        $a = pedido::findOrFail($id);
         $estado= Estados::all();
         $productos = [];
         if($a != null){

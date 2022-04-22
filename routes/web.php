@@ -16,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 });
-
+// Route::get('/users/{users}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
 Route::resource('users',  App\Http\Controllers\UserController::class)->middleware('auth');
-/* Route::get('/users/{users}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('users.edit'); */
 
 Route::resource('clientes',  App\Http\Controllers\ClienteController::class)->middleware('auth');
 Route::resource('categorias',  App\Http\Controllers\CategoriaController::class)->middleware('auth');
@@ -35,7 +34,7 @@ Route::resource('pedidos',  App\Http\Controllers\PedidoController::class)->middl
 Route::get('excelpedido', [App\Http\Controllers\PedidoController::class, 'excel'])->name('pedidos.excel');
 Route::resource('pedidos_detalles',  App\Http\Controllers\Pedido_detalleController::class)->middleware('auth');
 Route::get('/pedidos_detalles/{pedidos_detalle}/pdf', [App\Http\Controllers\Pedido_detalleController::class, 'pdf'])->name('pedidos_detalles.pdf');
-    
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('productos',  App\Http\Controllers\ProductoController::class)->middleware('auth');
