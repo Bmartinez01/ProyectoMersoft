@@ -41,7 +41,7 @@ class Pedido_detalleController extends Controller
     }
 
     public function edit(Request $request, $id){
-        $a = pedido::find($id);
+        $a = pedido::findOrFail($id);
         $pedido = pedido::all();
         $clientes = Cliente::all();
         $estado= Estados::all();

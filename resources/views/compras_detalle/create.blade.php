@@ -62,16 +62,16 @@
                                 <label for="iva" class="col-sm-1 offset-3 col-form-label control-label">Iva</label>
                                 <div class="col-sm-3">
                                 <input type="text" class="form-control" name="iva" id="iva"  placeholder="Ingrese el iva de la compra">
+                                <button onclick="agregar_iva()" class="btn btn-sm btn-facebook" id="mostrar" name="mostrar" data-dismiss="modal" type="button">Agregar iva</button>
                                 <button onclick="limpiar_iva()" class="btn btn-sm btn-facebook" type="button">Corregir Iva</button>
-                                <button onclick="agregar_iva()" class="btn btn-sm btn-facebook" data-dismiss="modal" type="button">Agregar iva</button>
                             </div>
                     </div>
                     <br>
 
     </div>
     <div class="row">
-        <div class="col-12 text-right">
-            <a href="{{route('compras.create')}}" class="btn btn-sm btn-facebook" data-toggle="modal" data-target="#Form">Agregar producto</a>
+        <div class="col-2 text-right">
+            <a href="{{route('compras.create')}}" class="btn btn-sm btn-success" data-toggle="modal" data-target="#Form">Agregar producto</a>
         </div>
     </div>
 
@@ -141,7 +141,7 @@
                 <div class="row">
                     <label for="precio" class="col-sm-3 col-form-label control-label asterisco">Valor c/u</label>
                     <div class="col-sm-7">
-                    <input type="number" class="form-control" id="precio" name="precio" placeholder="Ingrese su precio" >
+                    <input type="number" class="form-control" id="precio"  name="precio" placeholder="Ingrese su precio" >
                     @if ($errors->has('precio'))
                     <span class="error text-danger" for="input-precio">{{ $errors->first('precio') }}</span>
                     @endif
@@ -216,7 +216,7 @@
                 let suma = parseInt(Valor_Total) + parseInt(iva);
                 $("#valor_total").val(suma);
                 document.getElementById("iva").readOnly = true;
-                // alert("Se agregaron "+iva+ " pesos de iva")
+                // document.getElementById("mostrar").style.opacity = "0";
                 cont++;
                 }
             }
