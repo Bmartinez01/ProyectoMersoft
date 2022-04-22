@@ -27,9 +27,15 @@
         #header{
             background-color:#ff6600
         }
-        .select2.selection{
+        #ling{margin-top: 80px;
 
-            height: calc(1.5em + .75rem + 2px) !important;
+        }
+        #left{
+            margin-left:50px;
+            
+        }
+        div.left{
+            margin-left:50px;
         }
     </style>
     </head>
@@ -59,7 +65,7 @@
                     // Declaramos la capa mediante una clase para ocultarlo
                     $("#mensaj").fadeOut(1500);
                 },3000);
-            });</script>
+            }); </script>
         <!-- javascript init
             $('.bootstrap-switch').each(function(){
                 $this = $(this);
