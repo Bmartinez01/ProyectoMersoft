@@ -25,9 +25,10 @@ class ProductoController extends Controller
     public function excel()
     {
 
-        $fecha = date("d").date("m").date("Y") ;
+        $fecha = date("d")."-".date("m")."-".date("Y") ;
         return Excel::download(new ProductosExport, "Productos-$fecha.xlsx");
     }
+
     public function create()
     {
         abort_if(Gate::denies('producto_crear'),403);

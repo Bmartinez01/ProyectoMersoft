@@ -30,8 +30,15 @@
         #header{
             background-color:#ff6600
         }
-        .qborder{
-            border-radius: 0px important!;
+        #ling{margin-top: 80px;
+
+        }
+        #left{
+            margin-left:50px;
+
+        }
+        div.left{
+            margin-left:50px;
         }
     </style>
     </head>

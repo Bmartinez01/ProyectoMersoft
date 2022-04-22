@@ -46,7 +46,7 @@
                             <br>
                         <div class="row">
                             <label for="fecha_compra" class="col-sm-1 col-form-label control-label asterisco">Fecha Compra</label>
-                                    <div class="col-sm-3">
+                                <div class="col-sm-3">
                                     <input type="date" class="form-control" name="fecha_compra" placeholder="Ingrese la fecha de la compra" value="{{old('fecha_compra')}}" autofocus max="<?= date('Y-m-d'); ?>">
                                     @if ($errors->has('fecha_compra'))
                                     <span class="error text-danger" for="input-fecha_compra">{{ $errors->first('fecha_compra') }}</span>
@@ -241,7 +241,7 @@
              $("#valor_total").val(parseInt(valor_total) - parseInt(subtotal));
             }
 
-            
+
         </script>
 
 @endsection

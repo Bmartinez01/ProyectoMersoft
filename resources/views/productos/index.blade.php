@@ -25,10 +25,25 @@
                                 </div>
                                 @endif
                                 <div class="row">
-                                    <div class="col-1 text-left mb-3">
+                                    <div class="col-11 text-left mb-3">
                                         <a href="{{route('productos.excel')}}" title="Descargar Excel" class="btn btn-sm btn-success" ><i class="material-icons">downloading</i>  Excel</a>
+                                        <label for="fecha_compra" class="col-sm-1 col-form-label control-label asterisco">Fecha inicial</label>
+                                <div class="col-sm-2">
+                                    <input type="date" class="form-control" name="fecha_compra" placeholder="Ingrese la fecha de la compra" value="{{old('fecha_compra')}}" autofocus max="<?= date('Y-m-d'); ?>">
+                                    @if ($errors->has('fecha_compra'))
+                                    <span class="error text-danger" for="input-fecha_compra">{{ $errors->first('fecha_compra') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-11 text-left mb-3">
+                                        <label for="fecha_compra" class="col-sm-1 col-form-label control-label asterisco">Fecha final</label>
+                                <div class="col-sm-2">
+                                    <input type="date" class="form-control" name="fecha_compra" placeholder="Ingrese la fecha de la compra" value="{{old('fecha_compra')}}" autofocus max="<?= date('Y-m-d'); ?>">
+                                    @if ($errors->has('fecha_compra'))
+                                    <span class="error text-danger" for="input-fecha_compra">{{ $errors->first('fecha_compra') }}</span>
+                                    @endif
+                                </div>
                                     </div>
-                                    <div class="col-11 text-right">
+                                    <div class="col-3 text-right">
                                     @can('producto_crear')
                                         <a href="{{route('productos.create')}}" class="btn btn-sm btn-facebook">Agregar productos</a>
                                     @endcan

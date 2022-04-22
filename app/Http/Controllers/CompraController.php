@@ -32,7 +32,7 @@ class CompraController extends Controller
             ->join("compra__detalles", "productos.id", "=", "compra__detalles.producto")
             ->where("compra__detalles.compras_id", $id)
             ->get();
-            $fecha = date("d")."-".date("m")."-".date("Y") ;
+            $fecha = date("d")."-".date("m")."-".date("Y");
             $pdf = PDF::loadView('compras.pdf',compact('productos','compras'));
             return $pdf->download("compra-$fecha.pdf");
             // return $pdf->stream();

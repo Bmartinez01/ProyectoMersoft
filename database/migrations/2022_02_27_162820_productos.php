@@ -21,6 +21,8 @@ return new class extends Migration
             $table->bigInteger('Categorías')->unsigned();
             $table->string('Stock');
             $table->string('precio');
+            $table->string('fecha_inicio')->nullable();
+            $table->string('fecha_final')->nullable();
             $table->boolean('estado')->nullable()->default(1);
 
             $table->timestamps();
