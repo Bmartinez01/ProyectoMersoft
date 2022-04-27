@@ -14,10 +14,6 @@
       <form class="navbar-form">
         <div class="input-group no-border">
         <input type="hidden" value="" class="form-control" placeholder="Search...">
-        {{-- <button type="submit" class="btn btn-white btn-round btn-just-icon">
-          <i class="material-icons">search</i>
-          <div class="ripple-container"></div>
-        </button> --}}
         </div>
       </form>
       <ul class="navbar-nav">
@@ -25,44 +21,52 @@
           <a class="nav-link" href="{{ route('home') }}">
             <i class="material-icons">dashboard</i>
             <p class="d-lg-none d-md-block">
-              {{ __('Stats') }}
+              {{ __('Stats')}}
             </p>
           </a>
         </li>
-        {{-- <li class="nav-item dropdown">
-          <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="material-icons">notifications</i>
-            <span class="notification">5</span>
-            <p class="d-lg-none d-md-block">
-              {{ __('Some Actions') }}
-            </p>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">{{ __('Mike John responded to your email') }}</a>
-            <a class="dropdown-item" href="#">{{ __('You have 5 new tasks') }}</a>
-            <a class="dropdown-item" href="#">{{ __('You\'re now friend with Andrew') }}</a>
-            <a class="dropdown-item" href="#">{{ __('Another Notification') }}</a>
-            <a class="dropdown-item" href="#">{{ __('Another One') }}</a>
-          </div>
-        </li> --}}
         <li class="nav-item dropdown">
           <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="material-icons">person</i>
             <p class="d-lg-none d-md-block">
-              {{ __('Account') }}
+              {{ __('Account')}}
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
             <a style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" class="dropdown-item">{{Auth::user()->name}}</a>
-
-
-
-            <a class="dropdown-item" href="#">{{ __('Settings') }}</a>
+            <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#f">Ajustes</button>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Cerrar sesión') }}</a>
+            <a class="dropdown-item" href="{{ route('logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Cerrar sesión') }}</a>
           </div>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+<div class="modal fade" id="f" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ver información del usuario: {{Auth::user()->name}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+                <label for="message-text" class="col-form-label">Nombre:</label>
+                <input class="form-control" id="message-text" readonly value="{{Auth::user()->name}}">
+              </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Email:</label>
+              <input class="form-control" id="message-text" readonly value="{{Auth::user()->email}}">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+            <div class="col-12 text-center">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
