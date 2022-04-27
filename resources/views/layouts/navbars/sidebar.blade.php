@@ -76,12 +76,14 @@
               </a>
             </li>
             @endcan
+            @can('compra_listar')
             <li class="nav-item{{ $activePage == 'compras' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('compras.index')}}">
                 <i class="material-icons">shopping_basket</i>
                 <p>{{ __('Compras') }}</p>
               </a>
             </li>
+            @endcan
             @can('categoria_listar')
             <li class="nav-item{{ $activePage == 'categorias' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('categorias.index')}}">
@@ -118,12 +120,14 @@
               </a>
             </li>
           @endcan
+          @can('pedido_listar')
             <li class="nav-item{{ $activePage == 'pedidos' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('pedidos.index')}}">
                 <i class="material-icons">shopping_cart</i>
                 <p>{{ __('Pedidos') }}</p>
               </a>
             </li>
+          @endcan  
             <li class="nav-item{{ $activePage == 'language' ? ' active' : '' }}">
               <a class="nav-link" href="#">
                 <i class="material-icons">currency_exchange</i>

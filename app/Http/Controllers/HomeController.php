@@ -7,6 +7,7 @@ use App\Models\Proveedore;
 use App\Models\Categoria;
 use App\Models\Producto;
 use App\Models\Cliente;
+use App\Models\Role;
 use DB;
 use Illuminate\Http\Request;
 
@@ -36,8 +37,8 @@ class HomeController extends Controller
         $categorias=DB::select('SELECT count(*) as c FROM categorias ');
         $productos=DB::select('SELECT count(*) as c FROM productos ');
         $clientes=DB::select('SELECT count(*) as c FROM clientes ');
-
-        return view('home', compact('usuarios','compras','proveedores','categorias','productos','clientes'));
+        $roles = Role::all();
+        return view('home', compact('usuarios','compras','proveedores','categorias','productos','clientes', 'roles'));
 
 
     }

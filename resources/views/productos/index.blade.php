@@ -27,7 +27,9 @@
                                 @endif
                                 <div class="row">
                                     <div class="col-11 text-left mb-3">
+                                    @can('producto_descargar excel')
                                         <a href="{{route('productos.excel')}}" title="Descargar Excel" class="btn btn-sm btn-success" ><i class="material-icons">downloading</i>  Excel</a>
+                                    @endcan
                                     </div>
                                     <form action="{{route('productos.excel2')}}" method="POST">
                                         @csrf
@@ -112,7 +114,7 @@
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
 
-    
+
 
     <script>
     $(document).ready(function() {
