@@ -2,6 +2,7 @@
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" >
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" >
 @endsection
 @section('content')
 <div class="content">
@@ -27,22 +28,25 @@
                                 <div class="row">
                                     <div class="col-11 text-left mb-3">
                                         <a href="{{route('productos.excel')}}" title="Descargar Excel" class="btn btn-sm btn-success" ><i class="material-icons">downloading</i>  Excel</a>
-                                        <label for="fecha_compra" class="col-sm-1 col-form-label control-label asterisco">Fecha inicial</label>
-                                <div class="col-sm-2">
-                                    <input type="date" class="form-control" name="fecha_compra" placeholder="Ingrese la fecha de la compra" value="{{old('fecha_compra')}}" autofocus max="<?= date('Y-m-d'); ?>">
-                                    @if ($errors->has('fecha_compra'))
-                                    <span class="error text-danger" for="input-fecha_compra">{{ $errors->first('fecha_compra') }}</span>
-                                    @endif
-                                </div>
-                                <div class="col-11 text-left mb-3">
-                                        <label for="fecha_compra" class="col-sm-1 col-form-label control-label asterisco">Fecha final</label>
-                                <div class="col-sm-2">
-                                    <input type="date" class="form-control" name="fecha_compra" placeholder="Ingrese la fecha de la compra" value="{{old('fecha_compra')}}" autofocus max="<?= date('Y-m-d'); ?>">
-                                    @if ($errors->has('fecha_compra'))
-                                    <span class="error text-danger" for="input-fecha_compra">{{ $errors->first('fecha_compra') }}</span>
-                                    @endif
-                                </div>
                                     </div>
+                                    <form action="{{route('productos.excel2')}}" method="POST">
+                                        @csrf
+                                        <div class="container">
+                                            <div class="row">
+                                                <label for="from" class="col-form-label">From</label>
+                                                <div class="col-md-2">
+                                                    <input type="date" class="form-control input-sm" id="from" name="from">
+                                                </div>
+                                                <label for="from" class="col-form-label">To</label>
+                                                <div class="col-md-2">
+                                                    <input type="date" class="form-control input-sm" id="to" name="to">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="submit" class="btn btn-primary btn-sm" name="search" >Search</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                     <div class="col-3 text-right">
                                     @can('producto_crear')
                                         <a href="{{route('productos.create')}}" class="btn btn-sm btn-facebook">Agregar productos</a>
@@ -63,18 +67,10 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($productos as $Producto)
-
-
                                             <tr>
-
                                                 <td>{{ $Producto->Código}}</td>
                                                 <td>{{ $Producto->Nombre }}</td>
-                                                @foreach ($categorias as $categoria)
-                                                @if ($Producto->Categorías==$categoria->id)
-                                                <td>{{ $categoria->nombre}}</td>
-                                                @endif
-                                                @endforeach
-
+                                                <td>{{ $Producto->nombrecat}}</td>
                                                 <td>{{ $Producto->Stock}}</td>
                                                 <td>{{ $Producto->precio}}</td>
                                                 <td class="td-actions text-right">
@@ -116,6 +112,8 @@
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
 
+    
+
     <script>
     $(document).ready(function() {
         $('#productos').DataTable( {
@@ -130,9 +128,15 @@
                     "next":"Siguiente",
                     "previous":"Anterior"
                 }
-            }
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+
         } );
     } );
+
     </script>
     @endsection
 

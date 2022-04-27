@@ -38,4 +38,7 @@ Route::get('/pedidos_detalles/{pedidos_detalle}/pdf', [App\Http\Controllers\Pedi
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('productos',  App\Http\Controllers\ProductoController::class)->middleware('auth');
+
 Route::get('excel', [App\Http\Controllers\ProductoController::class, 'excel'])->name('productos.excel');
+
+Route::post('excel2', [App\Http\Controllers\ProductoController::class, 'excel2'])->name('productos.excel2');
