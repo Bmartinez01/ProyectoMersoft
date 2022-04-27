@@ -23,10 +23,14 @@
                                 @endif
                                 <div class="row">
                                 <div class="col-1 text-left mb-3">
+                                    @can('pedido_descargar excel')
                                         <a href="{{route('pedidos.excel')}}" title="Descargar Excel" class="btn btn-sm btn-success" ><i class="material-icons">downloading</i>  Excel</a>
+                                    @endcan
                                     </div>
                                     <div class="col-11 text-right">
+                                    @can('pedido_crear')
                                         <a href="{{route('pedidos_detalles.create')}}" class="btn btn-sm btn-facebook">Agregar Pedido</a>
+                                    @endcan                                   
                                     </div>
                                 </div>
                                 <div class="table-responsive">
@@ -63,21 +67,28 @@
                                                     @endforeach
 
                                                     <td>
+                                                        @can('pedido_descargar pdf')
                                                         <a href="{{ route('pedidos_detalles.pdf', $pedido->id) }}"
                                                         class="btn btn-outline-danger"><span class="material-icons">picture_as_pdf </span></a>
+                                                        @endcan
+                                                        @can('pedido_editar')
                                                         <a href="{{ route('pedidos_detalles.edit', $pedido->id) }}"
                                                            class="btn btn-warning"><i class="material-icons">edit</i></a>
-
+                                                        @endcan   
+                                                        @can('pedido_ver detalle')
                                                            <a href="{{route('pedidos_detalles.show', $pedido->id)}}"
                                                             class="btn btn-warning"><span class="material-icons">visibility </span></a>
-
+                                                        @endcan    
+                                                        @can('pedido_cancelar')
                                                         <form action="{{route('pedidos.destroy', $pedido->id)}}" method="post" style="display: inline-block;" onsubmit="return confirm('¿Está seguro de cancelar este pedido?')">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger" type="submit" rel="tooltip">
                                                             <i class="material-icons">close</i>
                                                         </button>
-                                                    </form></td>
+                                                        </form>
+                                                        @endcan        
+                                                    </td>
                                                 {{-- <td class="td-actions text-right">
                                                 @if ($compra->estado==1)
                                                 <button type="button" class="btn btn-success btn-sm">

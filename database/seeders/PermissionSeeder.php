@@ -17,8 +17,6 @@ class PermissionSeeder extends Seeder
     {
         $permissions = [
             'permiso_listar',
-            'permiso_crear',
-            'permiso_editar',
 
             'rol_listar',
             'rol_crear',
@@ -39,10 +37,26 @@ class PermissionSeeder extends Seeder
             'producto_listar',
             'producto_crear',
             'producto_editar',
+            'producto_descargar excel',
 
             'cliente_listar',
             'cliente_crear',
             'cliente_editar',
+
+            'compra_listar',
+            'compra_crear',
+            'compra_ver detalle',
+            'compra_cancelar',
+            'compra_descargar pdf',
+            'compra_descargar excel',
+
+            'pedido_listar',
+            'pedido_crear',
+            'pedido_editar',
+            'pedido_ver detalle',
+            'pedido_cancelar',
+            'pedido_descargar pdf',
+            'pedido_descargar excel',
 
         ];
 

@@ -26,22 +26,30 @@
                                 @endif
                                 <div class="row">
                                     <div class="col-11 text-left mb-3">
+                                    @can('producto_descargar excel')
                                         <a href="{{route('productos.excel')}}" title="Descargar Excel" class="btn btn-sm btn-success" ><i class="material-icons">downloading</i>  Excel</a>
-                                        <label for="fecha_compra" class="col-sm-1 col-form-label control-label asterisco">Fecha inicial</label>
-                                <div class="col-sm-2">
-                                    <input type="date" class="form-control" name="fecha_compra" placeholder="Ingrese la fecha de la compra" value="{{old('fecha_compra')}}" autofocus max="<?= date('Y-m-d'); ?>">
-                                    @if ($errors->has('fecha_compra'))
-                                    <span class="error text-danger" for="input-fecha_compra">{{ $errors->first('fecha_compra') }}</span>
-                                    @endif
+                                    @endcan   
+                                        <form action="{{route('productos.index')}}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="container">
+                                    <div class="row">
+                                    <label for="from" class="col-form-label">From</label>
+                                        <div class="col-md-2">
+                                        <input type="date" class="form-control input-sm" id="from" name="from"  max="<?= date('Y-m-d'); ?>">
+                                        </div>
+                                        <label for="from" class="col-form-label">To</label>
+                                        <div class="col-md-2">
+                                            <input type="date" class="form-control input-sm" id="to" name="to"  max="<?= date('Y-m-d'); ?>">
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-primary btn-sm" name="search" >Search</button>
+
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-11 text-left mb-3">
-                                        <label for="fecha_compra" class="col-sm-1 col-form-label control-label asterisco">Fecha final</label>
-                                <div class="col-sm-2">
-                                    <input type="date" class="form-control" name="fecha_compra" placeholder="Ingrese la fecha de la compra" value="{{old('fecha_compra')}}" autofocus max="<?= date('Y-m-d'); ?>">
-                                    @if ($errors->has('fecha_compra'))
-                                    <span class="error text-danger" for="input-fecha_compra">{{ $errors->first('fecha_compra') }}</span>
-                                    @endif
-                                </div>
+                                </form>
+
                                     </div>
                                     <div class="col-3 text-right">
                                     @can('producto_crear')
