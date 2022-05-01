@@ -52,7 +52,7 @@
 
                                             <tr>
 
-                                                <td>{{ $Producto->Código}}</td>
+                                                <td>{{ $Producto->id}}</td>
                                                 <td>{{ $Producto->Nombre }}</td>
                                                 @foreach ($categorias as $categoria)
                                                 @if ($Producto->Categorías==$categoria->id)

@@ -25,7 +25,7 @@ class ProductoEditRequest extends FormRequest
     {
         return [
             //
-            'Código' => ['required','unique:productos,Código,' . request()->route('producto')->id],
+            
             'Nombre' => 'required|min:4|max:20',
             'Categorías' => 'required|min:1|max:20',
             'Stock' => 'required|min:1|max:20',

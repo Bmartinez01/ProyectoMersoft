@@ -10,7 +10,7 @@ class Producto extends Model
 {
     protected $fillable =
     [
-    'Código',
+    
     'Nombre',
     'Categorías',
     'Stock',

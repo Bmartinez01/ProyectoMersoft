@@ -84,7 +84,7 @@
                             </div>
 
                             <div class="table-responsive">
-                                <table  id="compras" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
+                                <table  id="Pedido" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                     <thead class="text-white" id="fondo">
                                         <th>Producto</th>
                                         <th>Cantidad</th>
@@ -100,7 +100,7 @@
                                             <td>{{ $row->precio}}</td>
                                             <td>{{ $row->precio * $row->cantidad_c}}</td>
                                             <td>
-                                                 <button type="button" class="btn btn-outline-danger" onclick="eliminar_producto(${producto_id}, ${parseInt(cantidad) * parseInt(precio)})" ><i class="bi bi-trash" style="font-size: 20px; color: red;"></i></button>
+                                                 <button type="button" class="delete btn btn-outline-danger" name="delete" id=""><i class="bi bi-trash" style="font-size: 20px; color: red;"></i></button>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -133,6 +133,26 @@
 
 
 @endif
+
+
+  <!-- Modal Eliminar -->
+  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Desea eliminar el producto?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" id="btnEliminar" name="btnEliminar" class="btn btn-danger">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 <div class="modal fade" id="Estados" tabindex="3" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -312,26 +332,35 @@
 
 
             }
-    //         $(document).ready(function() {
-    //     $('#Pedidos').DataTable( {
-    //         "language": {
-    //             "lengthMenu": "Mostrar  _MENU_  registros por pagina",
-    //             "zeroRecords": "No se encontraron datos",
-    //             "info": "Mostrando la página _PAGE_ de _PAGES_",
-    //             "infoEmpty": "No records available",
-    //             "infoFiltered": "(filtrado de _MAX_ registros totales)",
-    //             "search": "Buscar: ",
-    //             "paginate": {
-    //                 "next":"Siguiente",
-    //                 "previous":"Anterior"
-    //             }
-    //         }
-    //     } );
-    // } );
-    $(document).ready(function(){
-                $("select").select2({
+
+
+            var pro_id;
+            $(document).on('click', '.delete', function(){
+                pro_id=$(this).attr('producto_id')
+
+                $('#confirmModal').modal('show');
+            })
+
+            $('#btnEliminar').click(function(){
+                $.ajax({
+                    url: "pedidos_detalles/eliminar/"+pro_id,
+                    beforeSend:function(){
+                        $('#btnEliminar').text('Eliminando...');
+                    },
+                    success:function(data){
+                        setTimeout(function(){
+                            $('#confirmModal').modal('hide');
+                            $('#Pedido').DataTable().ajax.reload();
+                        }, 2000);
+
+                    }
+
                 })
-        });
+            })
+
+
+
+
         </script>
 
 @endsection

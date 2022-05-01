@@ -13,7 +13,7 @@
                             <p class="card-category text-dark">Editar datos</p>
                         </div>
                             <div class="card-body">
-                                <div class="row">
+                                {{-- <div class="row">
                                 <label for="Código" class="col-sm-2 col-form-label control-label asterisco">Código</label>
                                     <div class="col-sm-7">
                                     <input type="number" class="form-control" name="Código" placeholder="Ingrese su Código" value="{{old('Código',$producto-> Código)}}" autofocus>
@@ -21,7 +21,7 @@
                                     <span class="error text-danger" for="input-Código">{{ $errors->first('Código') }}</span>
                                     @endif
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="row">
                                 <label for="Nombre" class="col-sm-2 col-form-label control-label asterisco">Nombre</label>
                                 <div class="col-sm-7">

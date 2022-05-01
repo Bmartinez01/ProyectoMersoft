@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link href="{{ asset('css/material-dashboard.css?v=2.1.1') }}" rel="stylesheet" />
      @yield('css')
@@ -32,7 +33,7 @@
         }
         #left{
             margin-left:50px;
-            
+
         }
         div.left{
             margin-left:50px;
@@ -65,7 +66,11 @@
                     // Declaramos la capa mediante una clase para ocultarlo
                     $("#mensaj").fadeOut(1500);
                 },3000);
-            }); </script>
+            });
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2();
+            });
+            </script>
         <!-- javascript init
             $('.bootstrap-switch').each(function(){
                 $this = $(this);
