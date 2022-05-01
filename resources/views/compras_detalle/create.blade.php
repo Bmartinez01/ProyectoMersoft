@@ -114,7 +114,7 @@
                 <div class="row">
                     <label for="cantidad" class="col-sm-3 col-form-label control-label asterisco">Cantidad</label>
                     <div class="col-sm-7">
-                    <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese su cantidad" >
+                    <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese su cantidad">
                     @if ($errors->has('cantidad'))
                     <span class="error text-danger" for="input-cantidad">{{ $errors->first('cantidad') }}</span>
                     @endif
@@ -123,7 +123,7 @@
             <div class="row">
                 <label for="producto" class="col-sm-3 col-form-label control-label asterisco">Producto</label>
                 <div class="col-sm-7">
-                    <select class="form-control" name="producto" id="producto" onchange="colocar_precio()">
+                    <select class="form-control" name="producto" id="producto">
                         <option value="">Seleccione el producto</option>
                         @foreach ( $productos as $row )
                         @if ($row->estado==0)
@@ -165,14 +165,24 @@
 @endsection
 @section('script')
         <script>
-            function agregar_producto(){
+                let array = [];
+                function agregar_producto(){
                 let producto_id = $("#producto option:selected").val();
                 let producto_text = $("#producto option:selected").text();
                 let cantidad = $("#cantidad").val();
                 let precio = $("#precio").val();
-
-
                 if(producto_id > 0 && cantidad > 0 && precio > 0){
+                array.push(producto_id);
+                console.log(array);
+                for(var j = 0; j < array.length; j++){
+                for(var i = j+1; i < array.length; i++){
+                    if(array[j] == array[i] && producto_id == array[i]){
+                        alert("El producto "+producto_text+" ya esta registrado en la compra");
+                        die();
+                    }
+                }
+                }
+
                     $("#tblProductos").append(`
                         <tr id="tr-${producto_id}">
                             <td>
@@ -239,6 +249,7 @@
 
                 let valor_total = $("#valor_total").val() || 0;
              $("#valor_total").val(parseInt(valor_total) - parseInt(subtotal));
+
             }
 
 
