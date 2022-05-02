@@ -18,6 +18,9 @@ class ComprasExport implements FromCollection,WithHeadings
             'Proveedor',
             'Iva',
             'Valor_total',
+            'Cantidad',
+            'Producto',
+            'Precio',
         ];
     }
     /**
@@ -25,9 +28,16 @@ class ComprasExport implements FromCollection,WithHeadings
     */
     public function collection()
     {
-        $compras = DB::table('compras')
+        /* $compras = DB::table('compras')
         ->join('proveedores', 'compras.proveedor', '=', 'proveedores.id')
         ->select('compras.id', 'compras.recibo', 'compras.fecha_compra', 'proveedores.nombre', 'compras.iva', 'compras.valor_total',)
+        ->get();
+        return $compras; */
+        $compras = DB::table('compra__detalles')
+        ->join('compras', 'compra__detalles.compras_id', '=', 'compras.id')
+        ->join('productos', 'compra__detalles.producto', '=', 'productos.id')
+        ->join('proveedores', 'compras.proveedor', '=', 'proveedores.id')
+        ->select('compras.id', 'compras.recibo', 'compras.fecha_compra', 'proveedores.nombre', 'compras.iva', 'compras.valor_total','compra__detalles.cantidad','productos.Nombre','compra__detalles.precio')
         ->get();
         return $compras;
     }

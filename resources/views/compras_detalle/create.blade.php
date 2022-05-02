@@ -46,7 +46,7 @@
                             <br>
                         <div class="row">
                             <label for="fecha_compra" class="col-sm-1 col-form-label control-label asterisco">Fecha Compra</label>
-                                    <div class="col-sm-3">
+                                <div class="col-sm-3">
                                     <input type="date" class="form-control" name="fecha_compra" placeholder="Ingrese la fecha de la compra" value="{{old('fecha_compra')}}" autofocus max="<?= date('Y-m-d'); ?>">
                                     @if ($errors->has('fecha_compra'))
                                     <span class="error text-danger" for="input-fecha_compra">{{ $errors->first('fecha_compra') }}</span>
@@ -62,16 +62,16 @@
                                 <label for="iva" class="col-sm-1 offset-3 col-form-label control-label">Iva</label>
                                 <div class="col-sm-3">
                                 <input type="text" class="form-control" name="iva" id="iva"  placeholder="Ingrese el iva de la compra">
+                                <button onclick="agregar_iva()" class="btn btn-sm btn-facebook" id="mostrar" name="mostrar" data-dismiss="modal" type="button">Agregar iva</button>
                                 <button onclick="limpiar_iva()" class="btn btn-sm btn-facebook" type="button">Corregir Iva</button>
-                                <button onclick="agregar_iva()" class="btn btn-sm btn-facebook" data-dismiss="modal" type="button">Agregar iva</button>
                             </div>
                     </div>
                     <br>
 
     </div>
     <div class="row">
-        <div class="col-12 text-right">
-            <a href="{{route('compras.create')}}" class="btn btn-sm btn-facebook" data-toggle="modal" data-target="#Form">Agregar producto</a>
+        <div class="col-2 text-right">
+            <a href="{{route('compras.create')}}" class="btn btn-sm btn-success" data-toggle="modal" data-target="#Form">Agregar producto</a>
         </div>
     </div>
 
@@ -114,7 +114,7 @@
                 <div class="row">
                     <label for="cantidad" class="col-sm-3 col-form-label control-label asterisco">Cantidad</label>
                     <div class="col-sm-7">
-                    <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese su cantidad" >
+                    <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese su cantidad">
                     @if ($errors->has('cantidad'))
                     <span class="error text-danger" for="input-cantidad">{{ $errors->first('cantidad') }}</span>
                     @endif
@@ -123,7 +123,7 @@
             <div class="row">
                 <label for="producto" class="col-sm-3 col-form-label control-label asterisco">Producto</label>
                 <div class="col-sm-7">
-                    <select class="form-control" name="producto" id="producto" onchange="colocar_precio()">
+                    <select class="form-control" name="producto" id="producto">
                         <option value="">Seleccione el producto</option>
                         @foreach ( $productos as $row )
                         @if ($row->estado==0)
@@ -141,7 +141,7 @@
                 <div class="row">
                     <label for="precio" class="col-sm-3 col-form-label control-label asterisco">Valor c/u</label>
                     <div class="col-sm-7">
-                    <input type="number" class="form-control" id="precio" name="precio" placeholder="Ingrese su precio" >
+                    <input type="number" class="form-control" id="precio"  name="precio" placeholder="Ingrese su precio" >
                     @if ($errors->has('precio'))
                     <span class="error text-danger" for="input-precio">{{ $errors->first('precio') }}</span>
                     @endif
@@ -165,14 +165,24 @@
 @endsection
 @section('script')
         <script>
-            function agregar_producto(){
+                let array = [];
+                function agregar_producto(){
                 let producto_id = $("#producto option:selected").val();
                 let producto_text = $("#producto option:selected").text();
                 let cantidad = $("#cantidad").val();
                 let precio = $("#precio").val();
-
-
                 if(producto_id > 0 && cantidad > 0 && precio > 0){
+                array.push(producto_id);
+                console.log(array);
+                for(var j = 0; j < array.length; j++){
+                for(var i = j+1; i < array.length; i++){
+                    if(array[j] == array[i] && producto_id == array[i]){
+                        alert("El producto "+producto_text+" ya esta registrado en la compra");
+                        die();
+                    }
+                }
+                }
+
                     $("#tblProductos").append(`
                         <tr id="tr-${producto_id}">
                             <td>
@@ -216,7 +226,7 @@
                 let suma = parseInt(Valor_Total) + parseInt(iva);
                 $("#valor_total").val(suma);
                 document.getElementById("iva").readOnly = true;
-                // alert("Se agregaron "+iva+ " pesos de iva")
+                // document.getElementById("mostrar").style.opacity = "0";
                 cont++;
                 }
             }
@@ -239,9 +249,9 @@
 
                 let valor_total = $("#valor_total").val() || 0;
              $("#valor_total").val(parseInt(valor_total) - parseInt(subtotal));
+
             }
 
-            
         </script>
 
 @endsection

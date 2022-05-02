@@ -33,14 +33,15 @@ class Pedido_detalleController extends Controller
             ->where("pedidos_detalles.pedido", $id)
             ->get();
         }
+        $fecha = date("d")."-".date("m")."-".date("Y");
         $pdf = PDF::loadView('pedidos_detalles.pdf',compact('productos','clientes','pedido','estado'));
-        // // return $pdf->download('pedido.pdf');
+        // // return $pdf->download("pedido-$fecha.pdf");
         return $pdf->stream();
         // return view('pedidos_detalles.pdf', compact('productos','clientes','pedido','estado'));
     }
 
     public function edit(Request $request, $id){
-        $a = pedido::find($id);
+        $a = pedido::findOrFail($id);
         $pedido = pedido::all();
         $clientes = Cliente::all();
         $estado= Estados::all();

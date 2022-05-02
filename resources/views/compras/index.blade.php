@@ -28,10 +28,14 @@
                                 @endif
                                 <div class="row">
                                     <div class="col-1 text-left mb-3">
+                                    @can('compra_descargar excel')
                                         <a href="{{route('compras.excel')}}" title="Descargar Excel" class="btn btn-sm btn-success" ><i class="material-icons">downloading</i>  Excel</a>
+                                    @endcan
                                     </div>
                                     <div class="col-11 text-right">
+                                    @can('compra_crear')
                                         <a href="{{route('compras_detalle.create')}}" class="btn btn-sm btn-facebook">Agregar Compra</a>
+                                    @endcan
                                     </div>
                                 </div>
                                 <div class="table-responsive">
@@ -42,7 +46,6 @@
                                             <th>Fecha Compra</th>
                                             <th>Proveedor</th>
                                             <th>Valor Total</th>
-                                            <th>Estado</th>
                                             <th class="text-right">Función</th>
                                         </thead>
                                         <tbody>
@@ -58,25 +61,16 @@
                                                 @endif
                                                 @endforeach
                                                 <td>{{ $compra->valor_total }}</td>
-                                                <td class="td-actions text-right">
-                                                @if ($compra->estado==1)
-                                                <button type="button" class="btn btn-success btn-sm">
-                                                    Activo
-                                                </button>
-
-                                                @else
-                                                <button type="button" class="btn btn-danger btn-sm">
-                                                    Inactivo
-                                                </button>
-
-                                                @endif
-                                               </td>
                                                <td class="td-actions text-right">
-                                               <a href="{{route('compras.pdf', $compra->id)}}"
+                                                @can('compra_descargar pdf')   
+                                                <a href="{{route('compras.pdf', $compra->id)}}"
                                                     class="btn btn-outline-danger"><span class="material-icons">picture_as_pdf </span></a>
-                                                 <a href="{{route('compras.show', $compra->id)}}"
+                                                @endcan
+                                                @can('compra_ver detalle')
+                                                <a href="{{route('compras.show', $compra->id)}}"
                                                     class="btn btn-warning"><span class="material-icons">visibility </span></a>
-
+                                                @endcan
+                                                @can('compra_cancelar')
                                                     <form action="{{route('compras.destroy', $compra->id)}}" method="post" style="display: inline-block;" onsubmit="return confirm('¿Está seguro de anular esta compra?')">
                                                         @csrf
                                                         @method('DELETE')
@@ -84,6 +78,7 @@
                                                             <i class="material-icons">close</i>
                                                         </button>
                                                     </form>
+                                                @endcan    
                                                </td>
 
                                             </tr>

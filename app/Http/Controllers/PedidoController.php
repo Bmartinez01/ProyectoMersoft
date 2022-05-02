@@ -35,7 +35,7 @@ class PedidoController extends Controller
 
     public function excel()
     {
-        $fecha = date("d").date("m").date("Y") ;
+        $fecha = date("d")."-".date("m").date("Y") ;
         return Excel::download(new PedidosExport, "Pedidos-$fecha.xlsx");
     }
 
@@ -85,6 +85,11 @@ class PedidoController extends Controller
 
     public function destroy(pedido $pedido)
     {
+        $pedido_p = DB::select('SELECT * FROM pedidos_detalles WHERE pedido = ? ', [$pedido->id]);
+
+    foreach ($pedido_p as $key) {
+      $product_upd = DB::update("UPDATE productos SET Stock = Stock + $key->cantidad WHERE id = ?", [$key->producto]);
+    }
         $pedido->delete();
         return back()->with('success', 'Pedido cancelado correctamente');
     }

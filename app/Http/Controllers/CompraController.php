@@ -26,15 +26,16 @@ class CompraController extends Controller
     public function pdf(Request $request, $id){
         $compras = DB::select('SELECT recibo, fecha_compra, iva, valor_total, p.nombre, p.apellido FROM compras as c JOIN proveedores as p WHERE c.id = ? AND p.id = c.proveedor', [$id]);
         $productos = [];
-        $a = Compra::find($id);
-        if($a != null){
+        $a = Compra::findOrFail($id);
+        if($a > null){
             $productos = Producto::select("productos.*", "compra__detalles.cantidad as cantidad_c","compra__detalles.precio as precios")
             ->join("compra__detalles", "productos.id", "=", "compra__detalles.producto")
             ->where("compra__detalles.compras_id", $id)
             ->get();
-           $pdf = PDF::loadView('compras.pdf',compact('productos','compras'));
-        // return $pdf->download('compra.pdf');
-            return $pdf->stream();
+            $fecha = date("d")."-".date("m")."-".date("Y");
+            $pdf = PDF::loadView('compras.pdf',compact('productos','compras'));
+            return $pdf->download("compra-$fecha.pdf");
+            // return $pdf->stream();
             // return view('compras.pdf', compact('productos','compras'));
         }
 
@@ -94,7 +95,7 @@ public function destroy(Compra $compra)
     public function show(Request $request, $id){
         $compras = DB::select('SELECT c.recibo, c.fecha_compra, c.iva, c.valor_total, p.nombre, p.apellido FROM compras as c JOIN proveedores as p WHERE c.id = ? AND p.id = c.proveedor', [$id]);
         $productos = [];
-        $a = Compra::find($id);
+        $a = Compra::findOrFail($id);
         if($a != null){
             $productos = Producto::select("productos.*", "compra__detalles.cantidad as cantidad_c","compra__detalles.precio as precios")
             ->join("compra__detalles", "productos.id", "=", "compra__detalles.producto")
@@ -113,7 +114,7 @@ public function destroy(Compra $compra)
 
     public function excel()
     {
-        $fecha = date("d").date("m").date("Y") ;
+        $fecha = date("d")."-".date("m")."-".date("Y") ;
         return Excel::download(new ComprasExport, "Compras-$fecha.xlsx");
     }
 }
