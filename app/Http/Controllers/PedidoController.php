@@ -59,7 +59,6 @@ class PedidoController extends Controller
             $producto = Producto::find($value);
             $producto->update(["Stock"=>$producto->Stock - $input["cantidades"][$key]]);
         }
-
         return redirect()->route('pedidos.index')->with('success', 'Pedido creado correctamente');
 
     // $maximo = DB::select('select max(id) as Max_id from compras') ;
