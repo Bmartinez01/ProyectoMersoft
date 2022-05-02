@@ -37,9 +37,6 @@ class HomeController extends Controller
         $categorias=DB::select('SELECT count(*) as c FROM categorias ');
         $productos=DB::select('SELECT count(*) as c FROM productos ');
         $clientes=DB::select('SELECT count(*) as c FROM clientes ');
-        $roles = Role::all();
-        return view('home', compact('usuarios','compras','proveedores','categorias','productos','clientes', 'roles'));
-
-
+        return view('home', compact('usuarios','compras','proveedores','categorias','productos','clientes'));
     }
 }
