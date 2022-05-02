@@ -38,7 +38,5 @@ class HomeController extends Controller
         $productos=DB::select('SELECT count(*) as c FROM productos ');
         $clientes=DB::select('SELECT count(*) as c FROM clientes ');
         return view('home', compact('usuarios','compras','proveedores','categorias','productos','clientes'));
-
-
     }
 }
