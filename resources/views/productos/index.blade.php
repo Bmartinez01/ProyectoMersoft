@@ -49,7 +49,7 @@
                                                     <a href="{{route('productos.index')}}" class="btn btn-sm btn-warning">Regresar</a>
 
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                     </form>
@@ -155,12 +155,13 @@
                 titleAttr: 'Descargar Excel Por Filtro',
                 className: 'btn btn-outline-success',
             }
-            
-            
+
+
             // /* 'copy', 'csv', */ 'excel'/* , 'pdf', 'print' */
         ]
     } );
-} );</script>
+    } );
+    </script>
     @endsection
 
 @endsection

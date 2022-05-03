@@ -17,11 +17,10 @@ class PedidoController extends Controller
 {
     public function index()
     {
-        $pedidos = pedido::all();
-        $clientes = Cliente::all();
-        $estados= Estados::all();
+
+        $pedidos = DB::select("SELECT pedidos.id,pedidos.created_at,clientes.nombre as nombclient,clientes.apellido as apellclient ,valor_total,estados.Estado as estadoEst,estados.Tipo as tipoEst FROM pedidos INNER JOIN clientes ON cliente = clientes.id   INNER JOIN estados ON pedidos.estado = estados.id ");
         // $productos = Producto::all();
-        return view('pedidos.index', compact('pedidos','clientes','estados'));
+        return view('pedidos.index', compact('pedidos'));
     }
     // public function create()
     // {
@@ -37,6 +36,16 @@ class PedidoController extends Controller
     {
         $fecha = date("d")."-".date("m").date("Y") ;
         return Excel::download(new PedidosExport, "Pedidos-$fecha.xlsx");
+    }
+    public function excel2(Request $request)
+    {
+        $method = $request->all();
+        $from = $request->input('from');
+        $to   = $request->input('to');
+        $pedidos = DB::select("SELECT pedidos.id,pedidos.created_at,clientes.nombre as nombclient,clientes.apellido as apellclient ,valor_total,estados.Estado as estadoEst,estados.Tipo as tipoEst FROM pedidos INNER JOIN clientes ON cliente = clientes.id   INNER JOIN estados ON pedidos.estado = estados.id where pedidos.created_at  BETWEEN '$from 00:00:00' and '$to 23:00:00'");
+
+        return view('pedidos.index', compact('pedidos'));
+
     }
 
     public function store(PedidocrearRequest $request)
