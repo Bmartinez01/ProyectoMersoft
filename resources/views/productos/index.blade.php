@@ -160,7 +160,8 @@
             // /* 'copy', 'csv', */ 'excel'/* , 'pdf', 'print' */
         ]
     } );
-} );</script>
+    } );
+    </script>
     @endsection
 
 @endsection
