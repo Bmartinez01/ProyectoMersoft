@@ -33,8 +33,8 @@
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-            <a style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" class="dropdown-item">{{Auth::user()->name}}</a>
-            <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#f">Ajustes</button>
+            <label style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px" class="dropdown-item">{{Auth::user()->name}}</label>
+            <a type="button" href="#"class="dropdown-item" data-bs-toggle="modal" data-bs-target="#f">Ver Perfil</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{{ route('logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Cerrar sesión') }}</a>
           </div>
@@ -64,7 +64,7 @@
         </div>
         <div class="modal-footer">
             <div class="col-12 text-center">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
       </div>
