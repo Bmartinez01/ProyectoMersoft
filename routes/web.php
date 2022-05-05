@@ -25,7 +25,7 @@ Route::resource('compras',  App\Http\Controllers\CompraController::class)->middl
 Route::get('/compras/{compra}/pdf', [App\Http\Controllers\CompraController::class, 'pdf'])->name('compras.pdf');
 Route::get('excelcompra', [App\Http\Controllers\CompraController::class, 'excel'])->name('compras.excel');
 Route::post('excel2compra', [App\Http\Controllers\CompraController::class, 'excel2'])->name('compras.excel2');
-
+Route::get('compras.graficas', ['as' => 'compras.charts', 'uses' => 'App\Http\Controllers\CompraController@charts'])->middleware('auth');
 Route::resource('compras_detalle',  App\Http\Controllers\Compra_DetalleController::class)->middleware('auth');
 Route::resource('proveedores',  App\Http\Controllers\ProveedoreController::class)->middleware('auth');
 Route::resource('roles',  App\Http\Controllers\RoleController::class)->middleware('auth');
