@@ -74,10 +74,12 @@ class Pedido_detalleController extends Controller
         return view('pedidos_detalles.show', compact('productos','pedido','estado'));
     }
 
+
+
     public function eliminar($id){
         $producto=DB::select('DELETE FROM pedidos_detalles as p WHERE id=?', [$id]);
-        // return back;
-       
 
+        // return back;
+       return view('pedidos_detalles.eliminar',compact('producto'));
     }
 }

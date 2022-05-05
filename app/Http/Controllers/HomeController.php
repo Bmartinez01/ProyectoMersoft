@@ -31,7 +31,6 @@ class HomeController extends Controller
     public function index()
     {
         $usuarios=DB::select('SELECT count(*) as c FROM users ');
-
         $compras=DB::select('SELECT count(*) as c FROM compras ');
         $proveedores=DB::select('SELECT count(*) as c FROM proveedores ');
         $categorias=DB::select('SELECT count(*) as c FROM categorias ');

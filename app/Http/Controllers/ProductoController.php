@@ -19,7 +19,7 @@ class ProductoController extends Controller
     public function index(Request $request)
     {
         abort_if(Gate::denies('producto_listar'),403);
-        $productos = DB::select("SELECT productos.id, Código, productos.Nombre, categorias.nombre as nombrecat, Stock, precio, productos.estado FROM productos INNER JOIN categorias ON Categorías = categorias.id");
+        $productos = DB::select("SELECT productos.id, productos.Nombre, categorias.nombre as nombrecat, Stock, precio, productos.estado FROM productos INNER JOIN categorias ON Categorías = categorias.id");
 
         return view('productos.index', compact('productos'));
     }
@@ -59,7 +59,7 @@ class ProductoController extends Controller
 
 
       Producto::create($request->all());
-      return redirect()->route('productos.index')->with('success', 'Categoria creada correctamente');
+      return redirect()->route('productos.index')->with('success', 'Poducto creada correctamente');
     }
 
 

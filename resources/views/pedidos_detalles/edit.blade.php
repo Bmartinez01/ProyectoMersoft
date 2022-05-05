@@ -100,7 +100,7 @@
                                             <td>{{ $row->precio}}</td>
                                             <td>{{ $row->precio * $row->cantidad_c}}</td>
                                             <td>
-                                                 <button type="button" class="delete btn btn-outline-danger" name="delete" id=""><i class="bi bi-trash" style="font-size: 20px; color: red;"></i></button>
+                                                <button type="button" class="delete btn btn-outline-danger" name="delete" id=""><i class="bi bi-trash" style="font-size: 20px; color: red;"></i></button>
                                             </td>
                                         </tr>
                                         @endforeach
