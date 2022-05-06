@@ -49,7 +49,7 @@
                                         </div>
                                     </form>
                                     </div>
-                                    <div class="col-11 text-right">
+                                    <div class="col-12 text-right">
                                     @can('pedido_crear')
                                         <a href="{{route('pedidos_detalles.create')}}" class="btn btn-sm btn-facebook">Agregar Pedido</a>
                                     @endcan
