@@ -21,7 +21,7 @@
                                 <div id="mensaj" class="alert alert-success alert-dismissible" role="success">
                                     {{ session('success') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                                        <span aria-hidden="true">&times;</span>
+                                        <span aria-hiddzen="true">&times;</span>
                                     </button>
                                 </div>
                                 @endif

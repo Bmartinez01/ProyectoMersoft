@@ -80,9 +80,6 @@ public function destroy(Compra $compra)
     }
     $compra->delete();
     return back()->with('success', 'Compra anulada correctamente');
-
-
-
 }
     public function calcular_precio($productos,$cantidades,$precios,$iva){
         $precio = 0;
@@ -109,10 +106,7 @@ public function destroy(Compra $compra)
         }
 
         return view('compras.index');
-        // return response()->json($compras);
     }
-
-
     public function excel()
     {
         $fecha = date("d")."-".date("m")."-".date("Y") ;
@@ -127,5 +121,16 @@ public function destroy(Compra $compra)
 
         return view('compras.index', compact('compras'));
 
+    }
+    public function charts(){
+        DB::statement("SET lc_time_names = 'es_MX'");
+        $compras = DB::select("SELECT DISTINCT MonthName(fecha_compra) AS meses, SUM(valor_total) AS numero_compras FROM compras WHERE MonthName(fecha_compra) IS NOT NULL GROUP BY MonthName(fecha_compra) ORDER BY SUM(valor_total) ASC");
+        $data = [];
+        foreach ($compras as $compra){
+            $data['label'][] = $compra->meses;
+            $data['data'][] = $compra->numero_compras;
+        }
+        $data['data'] = json_encode($data);
+        return view('compras.charts', $data);
     }
 }
