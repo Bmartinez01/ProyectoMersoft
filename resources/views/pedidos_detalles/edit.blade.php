@@ -93,14 +93,15 @@
                                         <th>funciones</th>
                                     </thead>
                                     <tbody id="tblProductos">
-                                        <tr>
+
                                         @foreach ($productos as $row)
+                                        <tr id=tr-{{$row->id}}>
                                             <td>{{ $row->Nombre}}</td>
                                             <td>{{ $row->cantidad_c}}</td>
                                             <td>{{ $row->precio}}</td>
                                             <td>{{ $row->precio * $row->cantidad_c}}</td>
                                             <td>
-                                                <button type="button" class="delete btn btn-outline-danger" name="delete" id=""><i class="bi bi-trash" style="font-size: 20px; color: red;"></i></button>
+                                                <button type="button" class="btn btn-outline-danger" onclick="eliminar_producto({{$row->id}}, {{$row->cantidad_c * $row->precio}})" ><i class="bi bi-trash" style="font-size: 20px; color: red;"></i></button>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -325,6 +326,7 @@
             }
 
             function eliminar_producto(id,subtotal){
+                alert("funciòn")
                 $("#tr-"+id).remove();
 
                 let valor_total = $("#valor_total").val() || 0;

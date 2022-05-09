@@ -166,6 +166,7 @@
 @section('script')
         <script>
                 let array = [];
+
                 function agregar_producto(){
                 let producto_id = $("#producto option:selected").val();
                 let producto_text = $("#producto option:selected").text();
@@ -173,11 +174,11 @@
                 let precio = $("#precio").val();
                 if(producto_id > 0 && cantidad > 0 && precio > 0){
                 array.push(producto_id);
-                console.log(array);
                 for(var j = 0; j < array.length; j++){
                 for(var i = j+1; i < array.length; i++){
                     if(array[j] == array[i] && producto_id == array[i]){
                         alert("El producto "+producto_text+" ya esta registrado en la compra");
+                        array.pop();
                         die();
                     }
                 }
@@ -196,7 +197,9 @@
                             <td>${precio}</td>
                             <td>${parseInt(precio) * parseInt(cantidad)}</td>
                             <td>
-                 <button type="button" class="btn btn-danger" onclick="eliminar_producto(${producto_id}, ${parseInt(cantidad) * parseInt(precio)})" >X</button>
+                 <button type="button" class="btn btn-outline-danger" onclick="eliminar_producto(${producto_id}, ${parseInt(cantidad) * parseInt(precio)})"><i class="bi bi-trash" style="font-size: 20px;"></i></button>
+
+
                             </td>
 
                         </tr>
@@ -218,9 +221,7 @@
             }
             let cont = 0;
             function agregar_iva(){
-                if(cont>0)
-                die();
-                else {
+                if(cont == 0){
                 let iva = $("#iva").val() || 0;
                 let Valor_Total = $("#valor_total").val() || 0;
                 let suma = parseInt(Valor_Total) + parseInt(iva);
@@ -232,19 +233,25 @@
             }
 
             function limpiar_iva(){
+                if(cont > 0){
                 let iva = $("#iva").val() || 0;
                 let Valor_Total = $("#valor_total").val() || 0;
                 let resta = parseInt(Valor_Total) - parseInt(iva);
-                if(iva > Valor_Total){
-                    die();
-                }
+                if(iva <= Valor_Total){
                 $("#valor_total").val(resta);
                 $("#iva").val("");
                 document.getElementById("iva").readOnly = false;
                 cont--;
+                }
+            }
             }
 
             function eliminar_producto(id,subtotal){
+                id = id.toString();
+                var index = array.indexOf(id);
+                if (index !== -1){
+                    array.splice(index, 1);
+                }
                 $("#tr-"+id).remove("");
 
                 let valor_total = $("#valor_total").val() || 0;

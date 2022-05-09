@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        // 
         Schema::create('compra__detalles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('compras_id');

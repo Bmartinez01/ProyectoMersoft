@@ -21,7 +21,7 @@
                                 <div id="mensaj" class="alert alert-success alert-dismissible" role="success">
                                     {{ session('success') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                                        <span aria-hidden="true">&times;</span>
+                                        <span aria-hiddzen="true">&times;</span>
                                     </button>
                                 </div>
                                 @endif
@@ -49,7 +49,7 @@
                                                     <a href="{{route('productos.index')}}" class="btn btn-sm btn-warning">Regresar</a>
 
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                     </form>
@@ -157,12 +157,13 @@
                 titleAttr: 'Descargar Excel Por Filtro',
                 className: 'btn btn-outline-success',
             }
-            
-            
+
+
             // /* 'copy', 'csv', */ 'excel'/* , 'pdf', 'print' */
         ]
     } );
-} );</script>
+    } );
+    </script>
     @endsection
 
 @endsection

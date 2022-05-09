@@ -18,10 +18,11 @@ class CompraController extends Controller
     //
     public function index()
     {
-        $compras = Compra::all();
-        $proveedores = Proveedore::all();
+        $compras = DB::select("SELECT compras.id, recibo,fecha_compra,proveedores.nombre as nombreprov ,proveedores.apellido as apelliprov, valor_total FROM compras INNER JOIN proveedores ON proveedor = proveedores.id");
         $productos = Producto::all();
-        return view('compras.index', compact('compras','proveedores','productos'));
+        return view('compras.index', compact('compras','productos'));
+
+
     }
     public function pdf(Request $request, $id){
         $compras = DB::select('SELECT recibo, fecha_compra, iva, valor_total, p.nombre, p.apellido FROM compras as c JOIN proveedores as p WHERE c.id = ? AND p.id = c.proveedor', [$id]);
@@ -79,9 +80,6 @@ public function destroy(Compra $compra)
     }
     $compra->delete();
     return back()->with('success', 'Compra anulada correctamente');
-
-
-
 }
     public function calcular_precio($productos,$cantidades,$precios,$iva){
         $precio = 0;
@@ -108,13 +106,31 @@ public function destroy(Compra $compra)
         }
 
         return view('compras.index');
-        // return response()->json($compras);
     }
-
-
     public function excel()
     {
         $fecha = date("d")."-".date("m")."-".date("Y") ;
         return Excel::download(new ComprasExport, "Compras-$fecha.xlsx");
+    }
+    public function excel2(Request $request)
+    {
+        $method = $request->all();
+        $from = $request->input('from');
+        $to   = $request->input('to');
+        $compras = DB::select("SELECT compras.id, recibo,fecha_compra,proveedores.nombre as nombreprov ,proveedores.apellido as apelliprov, valor_total FROM compras INNER JOIN proveedores ON proveedor = compras.fecha_compra  BETWEEN '$from' and '$to'");
+
+        return view('compras.index', compact('compras'));
+
+    }
+    public function charts(){
+        DB::statement("SET lc_time_names = 'es_MX'");
+        $compras = DB::select("SELECT DISTINCT MonthName(fecha_compra) AS meses, SUM(valor_total) AS numero_compras FROM compras WHERE MonthName(fecha_compra) IS NOT NULL GROUP BY MonthName(fecha_compra) ORDER BY SUM(valor_total) ASC");
+        $data = [];
+        foreach ($compras as $compra){
+            $data['label'][] = $compra->meses;
+            $data['data'][] = $compra->numero_compras;
+        }
+        $data['data'] = json_encode($data);
+        return view('compras.charts', $data);
     }
 }

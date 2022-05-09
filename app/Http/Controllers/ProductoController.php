@@ -19,7 +19,7 @@ class ProductoController extends Controller
     public function index(Request $request)
     {
         abort_if(Gate::denies('producto_listar'),403);
-        $productos = DB::select("SELECT productos.id, productos.Nombre, categorias.nombre as nombrecat, Stock, precio, productos.estado FROM productos INNER JOIN categorias ON Categorías = categorias.id");
+        $productos = DB::select("SELECT productos.id, productos.Nombre, categoriaSELECT cliente FROM pedidos join estados as e WHERE e.Estado = 'Venta Directa's.nombre as nombrecat, Stock, precio, productos.estado FROM productos INNER JOIN categorias ON Categorías = categorias.id");
 
         return view('productos.index', compact('productos'));
     }
@@ -35,7 +35,7 @@ class ProductoController extends Controller
         $method = $request->all();
         $from = $request->input('from');
         $to   = $request->input('to');
-        $productos = DB::select("SELECT productos.id, Código, productos.Nombre, categorias.nombre as nombrecat, Stock, precio, productos.estado FROM productos INNER JOIN categorias ON Categorías = categorias.id WHERE productos.created_at BETWEEN '$from 00:00:00' AND '$to 23:00:00'");
+        $productos = DB::select("SELECT productos.id, productos.Nombre, categorias.nombre as nombrecat, Stock, precio, productos.estado FROM productos INNER JOIN categorias ON Categorías = categorias.id where productos.created_at BETWEEN '$from 00:00:00' and '$to 23:00:'");
 
         return view('productos.index', compact('productos'));
 
@@ -59,7 +59,7 @@ class ProductoController extends Controller
 
 
       Producto::create($request->all());
-      return redirect()->route('productos.index')->with('success', 'Poducto creada correctamente');
+      return redirect()->route('productos.index')->with('success', 'Producto creado correctamente');
     }
 
 
