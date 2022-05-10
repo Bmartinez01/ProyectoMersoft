@@ -17,8 +17,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-info">
-                            <h4 class="card-title text-dark"><strong>Pedidos</strong></h4>
-                            <p class="card-category text-dark">Ver Detalle Pedido</p>
+                            <h4 class="card-title text-dark" style="font-weight: 900; font-size:24px">Pedidos</h4>
+                            <p class="card-category text-dark" style="font-size:17px">Ver Detalle Pedido</p>
                         </div>
                         <div class="card-body">
                         @foreach ($pedido as $pedido)
@@ -55,7 +55,7 @@
                             <br>
                             <br>
                             @endforeach
-                           
+
                             <div class="table-responsive">
                                 <table  id="compras" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                     <thead class="text-white" id="fondo">

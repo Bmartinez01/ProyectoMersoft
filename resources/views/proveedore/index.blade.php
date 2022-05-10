@@ -13,8 +13,8 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-info">
-                                    <h4 class="card-title text-dark text-dark"><strong>Proveedores</strong></h4>
-                                    <p class="card-category text-dark text-dark">Proveedores Registrados</p>
+                                    <h4 class="card-title text-dark text-dark" style="font-weight: 900; font-size:24px">Proveedores</h4>
+                                    <p class="card-category text-dark text-dark" style="font-size:17px">Proveedores Registrados</p>
                                 </div>
                                 <div class="card-body">
                                     @if (session('success'))

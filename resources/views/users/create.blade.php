@@ -8,8 +8,8 @@
                     @csrf
                     <div class="card">
                         <div class="card-header card-header-info">
-                            <h4 class="card-title text-dark"><strong>Usuarios</strong></h4>
-                            <p class="card-category text-dark">Ingresar datos</p>
+                            <h4 class="card-title text-dark" style="font-weight: 900; font-size:24px">Usuarios</h4>
+                            <p class="card-category text-dark" style="font-size:17px">Ingresar datos</p>
                         </div>
                         <div class="card-body">
                             {{--    @if ($errors->any())
@@ -48,7 +48,7 @@
                                     <span class="error text-danger" for="input-password">{{ $errors->first('password') }}</span>
                                     @endif
                                 </div>
-                            </div>    
+                            </div>
                             <div class="row">
                                 <label for="password" class="col-sm-2 col-form-label control-label asterisco">Contraseña</label>
                                 <div class="col-sm-7">
@@ -58,7 +58,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="row">   
+                            <div class="row">
                                 <label for="name" class="col-sm-2 col-form-label ">Roles</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
@@ -71,7 +71,7 @@
                                                             <td>
                                                                 <div class="form-check">
                                                                     <label class="form-check-label">
-                                                                        <input class="form-check-input" type="radio" name="roles[]" 
+                                                                        <input class="form-check-input" type="radio" name="roles[]"
                                                                         value="{{ $id }}">
                                                                         <span class="form-check-sign">
                                                                             <span class="check"></span>
@@ -90,7 +90,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                  
+                            </div>
                             <div class="card-footer ml-auto mr-auto col-md-3">
                                 <button type="submit" class="btn btn-facebook">Enviar</button>
                                 <div class="">
@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>        
+                    </div>
                 </form>
             </div>
         </div>

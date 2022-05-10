@@ -9,8 +9,8 @@
                     @method('PUT')
                     <div class="card">
                         <div class="card-header card-header-info">
-                            <h4 class="card-title text-dark"><strong>Usuarios</strong></h4>
-                            <p class="card-category text-dark">Actualizar datos</p>
+                            <h4 class="card-title text-dark" style="font-weight: 900; font-size:24px">Usuarios</h4>
+                            <p class="card-category text-dark" style="font-size:17px">Actualizar datos</p>
                         </div>
                         <div class="card-body">
                             {{-- @if ($errors->any())
@@ -50,7 +50,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="row">   
+                            <div class="row">
                                 <label for="name" class="col-sm-2 col-form-label ">Roles</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
@@ -63,7 +63,7 @@
                                                             <td>
                                                                 <div class="form-check">
                                                                     <label class="form-check-label">
-                                                                        <input class="form-check-input" type="radio" name="roles[]" 
+                                                                        <input class="form-check-input" type="radio" name="roles[]"
                                                                         value="{{ $id }}" {{ $user->roles->contains($id) ? 'checked' : ''}}>
                                                                         <span class="form-check-sign">
                                                                             <span class="check"></span>

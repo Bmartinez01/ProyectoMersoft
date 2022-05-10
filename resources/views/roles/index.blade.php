@@ -12,8 +12,8 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header card-header-info">
-                                <h4 class="card-title text-dark"><strong>Roles</strong></h4>
-                                <p class="card-category text-dark">Roles Registrados</p>
+                                <h4 class="card-title text-dark" style="font-weight: 900; font-size:24px">Roles</h4>
+                                <p class="card-category text-dark" style="font-size:17px">Roles Registrados</p>
                             </div>
                             <div class="card-body">
                                 @if (session('success'))

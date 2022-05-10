@@ -1,10 +1,14 @@
-@extends('layouts.main', ['activePage' => 'productos', 'titlePage' => 'productos'])
+@extends('layouts.main', ['activePage' => 'productos', 'titlePage' => 'Productos'])
 @section('css')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" >
 
 @endsection
 @section('content')
+<style>
+
+
+</style>
 <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -13,8 +17,8 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header card-header-info">
-                                <h4 class="card-title text-dark"><strong>productos</strong></h4>
-                                <p class="card-category text-dark">productos Registrados</p>
+                                <h4 class="card-title text-dark" style="font-weight: 900; font-size:24px">Productos</h4>
+                                <p class="card-category text-dark" style="font-size:17px">Productos Registrados</p>
                             </div>
                             <div class="card-body">
                                 @if (session('success'))
@@ -127,6 +131,14 @@
 
     <script>
     $(document).ready(function() {
+    function gettime()
+    {
+        var date = new Date();
+        // var newdate = (date.getHours() % 12 || 12) + "_" + date.getDay() + "_" + date.getSeconds();
+        var newdate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+        //setInterval(gettime, 1000);
+        return newdate;
+    }
     $('#productos').DataTable( {
         "language": {
             "lengthMenu": "Mostrar "+
@@ -138,6 +150,7 @@
                     <option value='-1'>Todos</option>
                 </select>`+
                 " registros por pagina",
+
             "zeroRecords": "No se encontraron datos",
             "info": "Mostrando la página _PAGE_ de _PAGES_",
             "infoEmpty": "No records available",
@@ -149,18 +162,24 @@
             }
         },
         dom: 'Bfrtip',
-        buttons: [
+        //  "dom": '<"top"lB>rt<"bottom"ip>',
+        buttons:[
             {
                 extend:'excelHtml5',
                 titleAttr: 'Descargar Excel Por Filtro',
-                className: 'btn btn-outline-success',
+                className: 'btn btn-outline-success ',
+                title: 'Productos',
+                filename: 'Productos ' + gettime(),
+                exportOptions: {
+                    columns: ':not(:last-child)'
+                }
             }
-
-
             // /* 'copy', 'csv', */ 'excel'/* , 'pdf', 'print' */
         ]
+
+    } )
     } );
-    } );
+
     </script>
     @endsection
 

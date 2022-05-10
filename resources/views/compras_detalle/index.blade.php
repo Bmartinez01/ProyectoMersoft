@@ -13,8 +13,8 @@ lo q sea
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header card-header-info">
-                                <h4 class="card-title text-dark"><strong>Compras</strong></h4>
-                                <p class="card-category text-dark">Compras Registrados</p>
+                                <h4 class="card-title text-dark" style="font-weight: 900; font-size:24px">Compras</h4>
+                                <p class="card-category text-dark" style="font-size:17px">Compras Registrados</p>
                             </div>
                             <div class="card-body">
                                 @if (session('success'))
@@ -57,7 +57,7 @@ lo q sea
                                                 @endif
                                                 @endforeach                                                <td>{{ $compra->created_at}}</td>
                                                 <td>{{ $compra->created_at}}</td>
-                                                
+
                                                 <td>{{ $compra->valor_total }}</td>
                                                 <td class="td-actions text-right">
                                                 @if ($compra->estado==1)

@@ -13,8 +13,8 @@
                     @csrf
                     <div class="card">
                         <div class="card-header card-header-info">
-                            <h4 class="card-title text-dark "><strong>Pedido</strong></h4>
-                            <p class="card-category text-dark">Ingresar datos</p>
+                            <h4 class="card-title text-dark" style="font-weight: 900; font-size:24px">Pedido</h4>
+                            <p class="card-category text-dark" style="font-size:17px">Ingresar datos</p>
 
                         </div>
 
@@ -312,7 +312,7 @@
     //         }
     //     } );
     // } );
-    
+
         </script>
 
 @endsection
