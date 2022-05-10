@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\PedidosExport;
 use App\Http\Requests\PedidocrearRequest;
 use App\Models\pedido;
+use App\Models\venta;
 use App\Models\Cliente;
 use App\Models\Producto;
 use App\Models\Estados;
@@ -17,7 +18,7 @@ class PedidoController extends Controller
 {
     public function index()
     {
-
+        
         $pedidos = DB::select("SELECT pedidos.id,pedidos.created_at,clientes.nombre as nombclient,clientes.apellido as apellclient ,valor_total,estados.Estado as estadoEst,estados.Tipo as tipoEst FROM pedidos INNER JOIN clientes ON cliente = clientes.id   INNER JOIN estados ON pedidos.estado = estados.id ");
         // $productos = Producto::all();
         return view('pedidos.index', compact('pedidos'));
@@ -50,6 +51,7 @@ class PedidoController extends Controller
 
     public function store(PedidocrearRequest $request)
     {
+
         $input = $request->all();
         $pedido = pedido::create([
             "cliente"=>$input["cliente"],
@@ -68,10 +70,16 @@ class PedidoController extends Controller
             $producto = Producto::find($value);
             $producto->update(["Stock"=>$producto->Stock - $input["cantidades"][$key]]);
         }
-        return redirect()->route('pedidos.index')->with('success', 'Pedido creado correctamente');
-
+        
     // $maximo = DB::select('select max(id) as Max_id from compras') ;
     //     var_dump($maximo[0]->Max_id);
+    // if($input=='vendido'|| $input=='venta directa'){
+    //     $ventas=DB::select('INSERT INTO ventas (pedido_id, cliente, valor_total) select id, cliente, valor_total from  pedidos ');
+    //     return redirect()->route('ventas.index',compact('ventas'))->with('success', 'Venta creado correctamente');
+    // }
+        return redirect()->route('pedidos.index')->with('success', 'Pedido creado correctamente');
+       
+
 
 }
     public function calcular_precio($productos,$cantidades){
