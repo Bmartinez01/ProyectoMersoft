@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\ProductosExport;
 use App\Http\Requests\ProductoCreateRequest;
 use App\Http\Requests\ProductoEditRequest;
 use App\Models\Producto;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Maatwebsite\Excel\Facades\Excel;
 use DB;
-use phpDocumentor\Reflection\PseudoTypes\True_;
 
 class ProductoController extends Controller
 
@@ -24,11 +21,11 @@ class ProductoController extends Controller
         return view('productos.index', compact('productos'));
     }
 
-    public function excel()
+    /* public function excel()
     {
         $fecha = date("d")."-".date("m")."-".date("Y") ;
         return Excel::download(new ProductosExport, "Productos-$fecha.xlsx");
-    }
+    } */
 
     public function excel2(Request $request)
     {

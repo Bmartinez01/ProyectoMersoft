@@ -30,12 +30,9 @@
                                 </div>
                                 @endif
                                 <div class="row">
-                                    <div class="col-2 text-left mb-3">
-                                    @can('producto_descargar excel')
-                                        <a href="{{route('productos.excel')}}" title="Descargar Excel Completo" class="btn btn-sm btn-success" ><i class="material-icons">downloading</i>  Excel</a>
-                                    @endcan
+                                    <div class="col-4 text-left mb-3">
                                     </div>
-                                    <div class="col-10 text-left mb-3">
+                                    <div class="col-6 text-left mb-3">
                                     <form action="{{route('productos.excel2')}}" method="POST">
                                         @csrf
                                         <div class="container">
@@ -151,7 +148,7 @@
                     <option value='20'>20</option>
                     <option value='-1'>Todos</option>
                 </select>`+
-                " registros por pagina",
+                `<span class= "mr-5">registros por pagina</span>`,
 
             "zeroRecords": "No se encontraron datos",
             "info": "Mostrando la página _PAGE_ de _PAGES_",
@@ -163,8 +160,8 @@
                 "previous":"Anterior"
             }
         },
-        dom: 'Bfrtip',
-        //  "dom": '<"top"lB>rt<"bottom"ip>',
+       /*  dom: 'Bfrtip', */
+        dom: '<"top"lBf>rt<"bottom"ip>',
         buttons:[
             {
                 extend:'excelHtml5',

@@ -46,7 +46,7 @@
             margin-top: 80px;
         }
         #board{
-            font-size: 35px;
+            font-size: 30px;
 
         }
 
