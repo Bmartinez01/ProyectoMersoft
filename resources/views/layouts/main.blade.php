@@ -45,11 +45,8 @@
             margin-left:50px;
         }
         #board{
-            font-size: 35px;
-            border:3px solid;
-            width: 50px;
-            border-radius: 300px;
-            margin-left: 110px;
+            font-size: 30px;
+
         }
 
     </style>
