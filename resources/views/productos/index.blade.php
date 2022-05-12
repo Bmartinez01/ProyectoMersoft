@@ -30,8 +30,9 @@
                                 </div>
                                 @endif
                                 <div class="row">
-                                
-                                    <div class="col-12 text-left mb-3">
+                                    <div class="col-4 text-left mb-3">
+                                    </div>
+                                    <div class="col-6 text-left mb-3">
                                     <form action="{{route('productos.excel2')}}" method="POST">
                                         @csrf
                                         <div class="container">

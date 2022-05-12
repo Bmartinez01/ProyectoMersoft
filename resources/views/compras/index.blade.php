@@ -27,12 +27,12 @@
                                 </div>
                                 @endif
                                 <div class="row">
-                                    <div class="col-1 text-left mb-3">
-                                    @can('compra_descargar excel')
+                                    <div class="col-4 text-left mb-3">
+                                    {{-- @can('compra_descargar excel')
                                         <a href="{{route('compras.excel')}}" title="Descargar Excel" class="btn btn-sm btn-success" ><i class="material-icons">downloading</i>  Excel</a>
-                                    @endcan
+                                    @endcan --}}
                                     </div>
-                                    <div class="col-10 text-left mb-3">
+                                    <div class="col-6 text-left mb-3">
                                     <form action="{{route('compras.excel2')}}" method="POST">
                                         @csrf
                                         <div class="container">
@@ -148,7 +148,7 @@
                     <option value='20'>20</option>
                     <option value='-1'>Todos</option>
                 </select>`+
-                " registros por pagina",
+                `<span class= "mr-5">registros por pagina</span>`,
             "zeroRecords": "No se encontraron datos",
             "info": "Mostrando la página _PAGE_ de _PAGES_",
             "infoEmpty": "No records available",
@@ -161,6 +161,7 @@
         },
         @can('compra_descargar excel')
         dom: 'Bfrtip',
+        dom: '<"top"lBf>rt<"bottom"ip>',
         buttons: [
             {
 
