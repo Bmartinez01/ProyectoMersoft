@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'categorias', 'titlePage' => 'Categorias'])
+@extends('layouts.main', ['activePage' => 'categorias', 'titlePage' => 'Categorías'])
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" >
@@ -12,8 +12,8 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-info">
-                                    <h4 class="card-title text-dark"><strong>Categorias</strong></h4>
-                                    <p class="card-category text-dark">Categorias Registradas</p>
+                                    <h4 class="card-title text-dark" style="font-weight: 900; font-size:24px">Categorías</h4>
+                                    <p class="card-category text-dark" style="font-size:17px">Categorias Registradas</p>
                                 </div>
                                 <div class="card-body">
                                     @if (session('success'))
@@ -27,7 +27,7 @@
                                     <div class="row">
                                         <div class="col-12 text-right mb-3">
                                         @can('categoria_crear')
-                                            <a href="{{  route('categorias.create') }}" class="btn btn-sm btn-facebook">Agregar Categoria</a>
+                                            <a href="{{  route('categorias.create') }}" class="btn btn-sm btn-facebook">Agregar Categoría</a>
                                         @endcan
                                         </div>
                                     </div>

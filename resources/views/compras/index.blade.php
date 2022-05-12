@@ -12,8 +12,8 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header card-header-info">
-                                <h4 class="card-title text-dark"><strong>Compras</strong></h4>
-                                <p class="card-category text-dark">Compras Registrados</p>
+                                <h4 class="card-title text-dark" style="font-weight: 900; font-size:24px">Compras</h4>
+                                <p class="card-category text-dark" style="font-size:17px">Compras Registrados</p>
                             </div>
                             <div class="card-body">
                                 @if (session('success'))
@@ -130,6 +130,14 @@
 
     <script>
     $(document).ready(function() {
+    function gettime()
+    {
+        var date = new Date();
+        // var newdate = (date.getHours() % 12 || 12) + "_" + date.getDay() + "_" + date.getSeconds();
+        var newdate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+        //setInterval(gettime, 1000);
+        return newdate;
+    }
     $('#compras').DataTable( {
         "language": {
             "lengthMenu": "Mostrar "+
@@ -151,17 +159,25 @@
                 "previous":"Anterior"
             }
         },
+        @can('compra_descargar excel')
         dom: 'Bfrtip',
         buttons: [
             {
+
                 extend:'excelHtml5',
                 titleAttr: 'Descargar Excel Por Filtro',
                 className: 'btn btn-outline-success',
+                title: 'Compras',
+                filename: 'Compras ' + gettime(),
+                exportOptions: {
+                    columns: ':not(:last-child)'
+                }
             }
 
 
             // /* 'copy', 'csv', */ 'excel'/* , 'pdf', 'print' */
         ]
+        @endcan
     } );
     } );
     </script>
