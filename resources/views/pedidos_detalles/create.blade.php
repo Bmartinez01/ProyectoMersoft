@@ -219,7 +219,7 @@
                       <tr>
 
                         <td>Vendido</td>
-                        <td colspan="8">El pedido fue entregado y se reciio el pago</td>
+                        <td colspan="8">El pedido fue entregado y se recibio el pago</td>
                         <td>Domicilio/venta directa</td>
                       </tr>
                     </tbody>
@@ -257,15 +257,20 @@
 
                 if(cantidad > 0 && precio > 0){
                     array.push(producto_id);
+
                     for(var j = 0; j < array.length; j++){
-                    for(var i = j+1; i < array.length; i++){
-                    if(array[j] == array[i] && producto_id == array[i]){
-                        alert("El producto "+producto_text+" ya esta registrado en la compra");
-                        array.pop();
-                        die();
+
+                        for(var i = j+1; i < array.length; i++){
+
+                            if(array[j] == array[i] && producto_id == array[i]){
+                                alert("El producto "+producto_text+" ya esta registrado en el pedido");
+                                 array.pop();
+                                die();
+                             }
+                         }
                     }
-                }
-                }
+
+
                     $("#tblProductos").append(`
                         <tr id="tr-${producto_id}">
 
@@ -311,22 +316,7 @@
 
 
             }
-    //         $(document).ready(function() {
-    //     $('#Pedidos').DataTable( {
-    //         "language": {
-    //             "lengthMenu": "Mostrar  _MENU_  registros por pagina",
-    //             "zeroRecords": "No se encontraron datos",
-    //             "info": "Mostrando la página _PAGE_ de _PAGES_",
-    //             "infoEmpty": "No records available",
-    //             "infoFiltered": "(filtrado de _MAX_ registros totales)",
-    //             "search": "Buscar: ",
-    //             "paginate": {
-    //                 "next":"Siguiente",
-    //                 "previous":"Anterior"
-    //             }
-    //         }
-    //     } );
-    // } );
+
 
         </script>
 

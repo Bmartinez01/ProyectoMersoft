@@ -19,7 +19,7 @@ class ProductoController extends Controller
     public function index(Request $request)
     {
         abort_if(Gate::denies('producto_listar'),403);
-        $productos = DB::select("SELECT productos.id, productos.Nombre, categoriaSELECT cliente FROM pedidos join estados as e WHERE e.Estado = 'Venta Directa's.nombre as nombrecat, Stock, precio, productos.estado FROM productos INNER JOIN categorias ON Categorías = categorias.id");
+        $productos = DB::select("SELECT productos.id, productos.Nombre, categorias.nombre  as nombrecat, Stock, precio, productos.estado FROM productos INNER JOIN categorias ON Categorías = categorias.id");
 
         return view('productos.index', compact('productos'));
     }

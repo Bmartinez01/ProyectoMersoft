@@ -26,7 +26,7 @@
                             <div class="row">
                                 <label for="cliente" class="col-md-1 col-form-label text-dark control-label asterisco">Cliente</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" value="{{$pedido->nombre}} {{$pedido->apellido}}" readonly autofocus>
+                                    <input type="text" class="form-control" value="{{$pedido->nombre}} {{$pedido->apellido}}" readonly>
                                     @if ($errors->has('cliente'))
                                     <span class="error text-danger" for="input-cliente">{{ $errors->first('cliente') }}</span>
                                     @endif
@@ -34,7 +34,7 @@
 
                              <label for="estado" class="col-1 offset-1 col-form-label text-dark control-label asterisco">Estado</label>
                                 <div class="col-sm-3">
-                                        <input type="text" class="form-control" value="{{($pedido->estado)}}" readonly autofocus>
+                                        <input type="text" class="form-control" value="{{($pedido->estado)}}" readonly >
 
                                         <a href="#" title="Editar" class="btn-sm" data-toggle="modal" data-target="#Estados"><i class="fa fa-question-circle fa-2x"></i></a>
                                     @if ($errors->has('estado'))
@@ -55,7 +55,7 @@
                             <br>
                             <br>
                             @endforeach
-                           
+
                             <div class="table-responsive">
                                 <table  id="compras" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                     <thead class="text-white" id="fondo">

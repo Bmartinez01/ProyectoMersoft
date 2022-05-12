@@ -49,7 +49,7 @@
                                         </div>
                                     </form>
                                     </div>
-                                    <div class="col-11 text-right">
+                                    <div class="col-12 text-right">
                                     @can('pedido_crear')
                                         <a href="{{route('pedidos_detalles.create')}}" class="btn btn-sm btn-facebook">Agregar Pedido</a>
                                     @endcan
@@ -83,11 +83,11 @@
                                                         class="btn btn-outline-danger"><span class="material-icons">picture_as_pdf </span></a>
                                                         @endcan
                                                         @can('pedido_editar')
-                                                        <a href="{{ route('pedidos_detalles.edit', $pedido->id) }}"
+                                                        <a href="{{ route('pedidos.edit', $pedido->id) }}"
                                                            class="btn btn-warning"><i class="material-icons">edit</i></a>
                                                         @endcan
                                                         @can('pedido_ver detalle')
-                                                           <a href="{{route('pedidos_detalles.show', $pedido->id)}}"
+                                                           <a href="{{route('pedidos.show', $pedido->id)}}"
                                                             class="btn btn-warning"><span class="material-icons">visibility </span></a>
                                                         @endcan
                                                         @can('pedido_cancelar')
@@ -100,19 +100,6 @@
                                                         </form>
                                                         @endcan
                                                     </td>
-                                                {{-- <td class="td-actions text-right">
-                                                @if ($compra->estado==1)
-                                                <button type="button" class="btn btn-success btn-sm">
-                                                    Activo
-                                                </button>
-
-                                                @else
-                                                <button type="button" class="btn btn-danger btn-sm">
-                                                    Inactivo
-                                                </button>
-
-                                                @endif
-                                               </td> --}}
 
                                             </tr>
                                             <!-- javascript init -->

@@ -53,7 +53,7 @@
                             <div class="row">
                                 <label for="categoria_id" class="col-sm-2 col-form-label ">Categoría</label>
                                 <div class="col-sm-7">
-                                    <select class="form-control" name="categoria_id" id="categoria_id">
+                                    <select class="form-control js-example-basic-single" name="categoria_id" id="categoria_id">
                                         <option value="{{old('categoria_id', $proveedore->categoria_id )}}">Seleccione solo para modificar</option>
                                         @foreach ( $categorias as $row )
                                             @if ($row->estado==0)

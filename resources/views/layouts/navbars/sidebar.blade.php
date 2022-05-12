@@ -128,8 +128,8 @@
               </a>
             </li>
           @endcan  
-            <li class="nav-item{{ $activePage == 'language' ? ' active' : '' }}">
-              <a class="nav-link" href="#">
+            <li class="nav-item{{ $activePage == 'ventas' ?' active' : '' }}">
+              <a class="nav-link" href="{{route('ventas.index')}}">
                 <i class="material-icons">currency_exchange</i>
                 <p>{{ __('Ventas') }}</p>
               </a>

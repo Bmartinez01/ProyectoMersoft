@@ -48,18 +48,18 @@
                                     <span class="error text-danger" for="input-password">{{ $errors->first('password') }}</span>
                                     @endif
                                 </div>
-                            </div>    
+                            </div>
                             <div class="row">
-                                <label for="password" class="col-sm-2 col-form-label control-label asterisco">Contraseña</label>
+                                <label for="password" class="col-sm-2 col-form-label control-label asterisco">Confirmar Contraseña</label>
                                 <div class="col-sm-7">
-                                    <input type="password" class="form-control" name="password" placeholder="Ingrese su Contraseña" value="" >
+                                    <input type="password" class="form-control" name="password" placeholder="Confirme su Contraseña" value="" >
                                     @if ($errors->has('password'))
                                     <span class="error text-danger" for="input-password">{{ $errors->first('password') }}</span>
                                     @endif
                                 </div>
                             </div>
-                            <div class="row">   
-                                <label for="name" class="col-sm-2 col-form-label ">Roles</label>
+                            <div class="row">
+                                <label for="name" class="col-sm-2 col-form-label control-label asterisco ">Roles</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <div class="tab-content">
@@ -71,7 +71,7 @@
                                                             <td>
                                                                 <div class="form-check">
                                                                     <label class="form-check-label">
-                                                                        <input class="form-check-input" type="radio" name="roles[]" 
+                                                                        <input class="form-check-input" type="radio" name="roles[]"
                                                                         value="{{ $id }}">
                                                                         <span class="form-check-sign">
                                                                             <span class="check"></span>
@@ -90,7 +90,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                  
+                            </div>
                             <div class="card-footer ml-auto mr-auto col-md-3">
                                 <button type="submit" class="btn btn-facebook">Enviar</button>
                                 <div class="">
@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>        
+                    </div>
                 </form>
             </div>
         </div>

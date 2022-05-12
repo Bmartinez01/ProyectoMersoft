@@ -33,7 +33,8 @@
         #header{
             background-color:#ff6600
         }
-        #ling{margin-top: 80px;
+        #ling{
+            margin-top: 80px;
 
         }
         #left{
@@ -43,6 +44,14 @@
         div.left{
             margin-left:50px;
         }
+        #board{
+            font-size: 35px;
+            border:3px solid;
+            width: 50px;
+            border-radius: 300px;
+            margin-left: 110px;
+        }
+
     </style>
     </head>
     <body class="{{ $class ?? '' }}">
@@ -73,21 +82,9 @@
                     $("#mensaj").fadeOut(1500);
                 },3000);
             });
-            $(document).ready(function() {
-                $('.js-example-basic-single').select2();
-            });
-            </script>
-        <!-- javascript init
-            $('.bootstrap-switch').each(function(){
-                $this = $(this);
-                data_on_label = $this.data('on-label') || '';
-                data_off_label = $this.data('off-label') || '';
 
-                $this.bootstrapSwitch({
-                    onText: data_on_label,
-                    offText: data_off_label
-                });
-            }); -->
+            </script>
+
 
 
 

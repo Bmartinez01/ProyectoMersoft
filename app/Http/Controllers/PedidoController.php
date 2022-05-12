@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\PedidosExport;
 use App\Http\Requests\PedidocrearRequest;
 use App\Models\pedido;
+use App\Models\venta;
 use App\Models\Cliente;
 use App\Models\Producto;
 use App\Models\Estados;
@@ -44,6 +45,8 @@ class PedidoController extends Controller
 
     public function store(PedidocrearRequest $request)
     {
+        /* return response()->json($request); */
+
         $input = $request->all();
         $pedido = pedido::create([
             "cliente"=>$input["cliente"],
@@ -62,10 +65,18 @@ class PedidoController extends Controller
             $producto = Producto::find($value);
             $producto->update(["Stock"=>$producto->Stock - $input["cantidades"][$key]]);
         }
-        return redirect()->route('pedidos.index')->with('success', 'Pedido creado correctamente');
+        if($input["estado"]==6 || $input["estado"]==1 ){
 
-    // $maximo = DB::select('select max(id) as Max_id from compras') ;
-    //     var_dump($maximo[0]->Max_id);
+            $ventas=DB::insert("INSERT INTO ventas (cliente, valor_inicial, pedido_id, created_at) select cliente, valor_total, id, created_at  from pedidos where pedidos.id= $pedido->id");
+            return redirect()->route('ventas.index',compact('ventas'))->with('success', 'Venta creada correctamente');
+        }
+            else{
+                // return response()->json($input);
+                return redirect()->route('pedidos.index')->with('success', 'Pedido creado correctamente');
+            }
+
+
+
 
 }
     public function calcular_precio($productos,$cantidades){
@@ -77,6 +88,22 @@ class PedidoController extends Controller
         return $precio;
     }
 
+    public function edit(Request $request, $id){
+        $a = pedido::findOrFail($id);
+        $pedido = pedido::all();
+        $clientes = Cliente::all();
+        $estado= Estados::all();
+        $productos = [];
+        if($id != null){
+            $productos = Producto::select("productos.*", "pedidos_detalles.cantidad as cantidad_c")
+            ->join("pedidos_detalles", "productos.id", "=", "pedidos_detalles.producto")
+            ->where("pedidos_detalles.pedido", $id)
+            ->get();
+        }
+
+        return view('pedidos_detalles.edit', compact('productos','clientes','pedido','estado'));
+    }
+
     public function update(Request $request,pedido $pedido)
     {
         $datos = $request->except('cantidad','producto');
@@ -84,6 +111,22 @@ class PedidoController extends Controller
         return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado correctamente');
 
     }
+
+    public function show(Request $request, $id){
+        $pedido = DB::select('SELECT e.estado, valor_total, c.nombre, c.apellido FROM pedidos as p JOIN estados as e ON e.id = p.estado JOIN clientes as c WHERE p.id = ? AND c.id = p.cliente', [$id] );
+        $a = pedido::find($id);
+        $estado= Estados::all();
+        $productos = [];
+        if($a != null){
+            $productos = Producto::select("productos.*", "pedidos_detalles.cantidad as cantidad_c")
+            ->join("pedidos_detalles", "productos.id", "=", "pedidos_detalles.producto")
+            ->where("pedidos_detalles.pedido", $id)
+            ->get();
+        }
+
+        return view('pedidos_detalles.show', compact('productos','pedido','estado'));
+    }
+
 
     public function destroy(pedido $pedido)
     {

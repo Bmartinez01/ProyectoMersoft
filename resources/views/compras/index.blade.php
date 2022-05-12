@@ -32,12 +32,6 @@
                                         <a href="{{route('compras.excel')}}" title="Descargar Excel" class="btn btn-sm btn-success" ><i class="material-icons">downloading</i>  Excel</a>
                                     @endcan
                                     </div>
-                                    <div class="col-11 text-right">
-                                    @can('compra_crear')
-                                        <a href="{{route('compras_detalle.create')}}" class="btn btn-sm btn-facebook">Agregar Compra</a>
-                                    @endcan
-                                    </div>
-                                    </div>
                                     <div class="col-10 text-left mb-3">
                                     <form action="{{route('compras.excel2')}}" method="POST">
                                         @csrf
@@ -62,6 +56,12 @@
                                         </div>
                                     </form>
                                     </div>
+                                    <div class="col-12 text-right">
+                                    @can('compra_crear')
+                                        <a href="{{route('compras_detalle.create')}}" class="btn btn-sm btn-facebook">Agregar Compra</a>
+                                    @endcan
+                                    </div>
+                                </div>
                                 </div>
                                 <div class="table-responsive">
                                     <table  id="compras" class="table table-striped table-bordered shadow-lg mt-4" style="width:95%">

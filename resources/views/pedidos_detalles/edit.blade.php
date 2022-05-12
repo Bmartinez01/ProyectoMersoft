@@ -26,7 +26,7 @@
                             <div class="row">
                                 <label for="cliente" class="col-md-1 col-form-label text-dark control-label asterisco">Cliente</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" value="{{$cliente->nombre}} {{$cliente->apellido}}" readonly autofocus>
+                                    <input type="text" class="form-control" value="{{$cliente->nombre}} {{$cliente->apellido}}" readonly >
                                     @if ($errors->has('cliente'))
                                     <span class="error text-danger" for="input-cliente">{{ $errors->first('cliente') }}</span>
                                     @endif
@@ -56,25 +56,7 @@
                             </div>
 
                             <br>
-                            {{-- <div class="row">
-                            <label for="estado" class="col-1 col-form-label text-dark control-label asterisco">Tipo</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" name="tipo" id="tipo">
-                                        <option  value="{{old('Tipo',$pedido->Tipo)}}">Seleccione solo para modificar</option>
-                                        @foreach ( $estado as $row )
-                                        <option @if ($row->id==$pedido->tipo)
-                                            selected="true"
-                                        @endif
 
-                                         value="{{$row->id}}">{{$row->Tipo}}</option>
-                                        @endforeach
-
-                                    </select>
-                                    @if ($errors->has('estado'))
-                                    <span class="error text-danger" for="input-estado">{{ $errors->first('estado') }}</span>
-                                    @endif
-                            </div>
-                        </div> --}}
                             <br>
                             <br>
                              <div class="row">
@@ -201,7 +183,7 @@
                       <tr>
 
                         <td>Vendido</td>
-                        <td colspan="8">El pedido fue entregado y se reciio el pago</td>
+                        <td colspan="8">El pedido fue entregado y se recibio el pago</td>
                         <td>Domicilio/venta directa</td>
                       </tr>
                     </tbody>
@@ -336,29 +318,7 @@
             }
 
 
-            var pro_id;
-            $(document).on('click', '.delete', function(){
-                pro_id=$(this).attr('producto_id')
 
-                $('#confirmModal').modal('show');
-            })
-
-            $('#btnEliminar').click(function(){
-                $.ajax({
-                    url: "pedidos_detalles/eliminar/"+pro_id,
-                    beforeSend:function(){
-                        $('#btnEliminar').text('Eliminando...');
-                    },
-                    success:function(data){
-                        setTimeout(function(){
-                            $('#confirmModal').modal('hide');
-                            $('#Pedido').DataTable().ajax.reload();
-                        }, 2000);
-
-                    }
-
-                })
-            })
 
 
 

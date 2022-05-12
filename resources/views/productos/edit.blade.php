@@ -34,7 +34,7 @@
                         <div class="row">
                             <label for="Categorías" class="col-sm-2 col-form-label control-label asterisco">Categorías</label>
                             <div class="col-sm-7">
-                                <select class="form-control" name="Categorías" id="Categorías">
+                                <select class="form-control js-example-basic-single" name="Categorías" id="Categorías">
                                    <option  value="{{old('Categorías',$producto->Categorías)}}">Seleccione solo para modificar</option>
                                     @foreach ( $categorias as $row )
                                         @if ($row->estado==0)
