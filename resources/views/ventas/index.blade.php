@@ -50,10 +50,7 @@
                                                     <td>{{ $venta->valor_total}}</td>
                                                     <td class="td-actions text-right">
 
-                                                        @can('pedido_editar')
-                                                        <a href="#"
-                                                           class="btn btn-warning"><i class="material-icons">edit</i></a>
-                                                        @endcan
+                                                       
                                                         @can('pedido_ver detalle')
                                                            <a href="#"
                                                             class="btn btn-warning"><span class="material-icons">visibility </span></a>

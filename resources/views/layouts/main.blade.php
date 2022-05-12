@@ -34,7 +34,7 @@
             background-color:#ff6600
         }
         #ling{
-            margin-top: 80px;
+
 
         }
         #left{
@@ -43,13 +43,11 @@
         }
         div.left{
             margin-left:50px;
+            margin-top: 80px;
         }
         #board{
             font-size: 35px;
-            border:3px solid;
-            width: 50px;
-            border-radius: 300px;
-            margin-left: 110px;
+
         }
 
     </style>
