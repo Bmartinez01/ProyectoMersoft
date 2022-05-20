@@ -23,120 +23,98 @@
             background-color: rgb(182, 189, 188);
         }
         
-        #cliente{
-            margin-left: 271px;
+        #estado{
+            margin-left: 294px;
+            border:0;
         }
-        #client{
-            margin-left: 181px;
-            margin-top: 8px;
+        #estad{
+            margin-left: 145px;
+            margin-top:9px;
+            border:0;
         }
-        #tipo{
-            margin-left: 336px;
+        #clien{
+            border:0;
+        }
+        #valor{
+            border:0;
         }
         
     </style>
 
-
-    @if (count($productos) > 0)
-@foreach ($pedido as $pedido )
-@foreach ($clientes as $cliente)
-
+@if (count($productos) > 0)
 
 <div class="content">
     <div class="container-fluid">
         <div class="row">
         <div class="col-md-12">
-            <form action="{{route('pedidos.update', $pedido->id)}}" method="post" class="form-horizontal">
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header card-header-info">
-                            <h3 class="card-title text-dark" align="center"><strong>Pedido</strong></h3>
+                        <div class="card-header card-header-info ">
+                            <h3 align="center"><strong>Detalle del Pedido</strong></h3>
                         </div>
                         <div class="card-body">
+                        @foreach ($pedido as $pedido)
+
                             <div class="row">
-                                <label for="fecha" class="col-md-1 col-form-label text-dark ">Fecha del Pedido:</label>
-                                <label for="cliente" id="cliente" class="col-md-1 col-form-label text-dark control-label asterisco">Cliente:</label>
+                                <label for="cliente"  class="col-md-1 col-form-label text-dark control-label asterisco">Cliente:</label>
+                                <label for="estado" id="estado" class="col-1 offset-1 col-form-label text-dark control-label asterisco">Estado: </label>
+
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" value="{{$pedido->created_at}} " autofocus>
-                                    <input type="text" id="client" class="form-control" value="{{$cliente->nombre}} {{$cliente->apellido}}" readonly autofocus>
-                                    
-                                </div>
-                            </div>    
-                                    
-                            <div class="row">
-                                <label for="estado" id="estado" class="col-1 offset-1 col-form-label text-dark control-label asterisco">Estado:</label>
-                                <label for="estado" id="tipo" class="col-1 col-form-label text-dark control-label asterisco">Tipo:</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" name="estado" id="estado" >
-                                        @foreach ( $estado as $row )
-                                        <option @if ($row->id==$pedido->estado)
-                                            selected="true"
-                                        @endif
-
-                                         value="{{$row->id}}">{{$row->Estado}}</option>
-                                        @endforeach
-
-                                    </select>
-                                    <select id="client" class="form-control" name="tipo" id="tipo">
-                                        @foreach ( $estado as $row )
-                                        <option @if ($row->id==$pedido->tipo)
-                                            selected="true"
-                                        @endif
-
-                                         value="{{$row->id}}">{{$row->Tipo}}</option>
-                                        @endforeach
-
-                                    </select>
+                                    <input type="text" id="clien" class="form-control" value="{{$pedido->nombre}} {{$pedido->apellido}}" readonly>
+                                    <input type="text" id="estad" class="form-control" value="{{($pedido->estado)}}" readonly >
 
                                 </div>
-                            </div>                              
-                            <div class="row">
-                            <label for="valor_total" class="col-3 col-form-label control-label asterisco">Valor total: </label>
-
-                                <div class="col-sm-3">
-                                    
-                                    <input type="text" class="form-control" id="valor_total" value="{{$pedido->valor_total}}" name="valor_total" readonly>
-
-                                    
+                                
+                            </div>
+                            <div class="row offset-md-5">
+                                <label for="valor_total" class="col-3 col-form-label control-label asterisco">Valor final: </label>
+                                <div class="col-sm-5">
+                                <input type="text" id="valor" class="form-control" id="valor_total" value="{{$pedido->valor_total}}" name="valor_total" readonly>
                                 </div>
                             </div>
+                            <br>
                             
-                            <br><br>                           
+                            <br>
+                            <br>
+                            @endforeach
+
                             <div class="table-responsive">
-                                <table  id="compras">
+                                <table  id="compras" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                     <thead class="text-white" id="fondo">
                                         <th>Producto</th>
                                         <th>Cantidad</th>
                                         <th>Valor c/u</th>
                                         <th>Sub Total</th>
+
                                     </thead>
-                                    <tbody id="tblProductos">
-                                        @foreach ($productos as $row)
+                                    <tbody >
                                         <tr>
+                                        @foreach ($productos as $row)
                                             <td>{{ $row->Nombre}}</td>
                                             <td>{{ $row->cantidad_c}}</td>
                                             <td>{{ $row->precio}}</td>
                                             <td>{{ $row->precio * $row->cantidad_c}}</td>
-                                            
-                                        </tr>
-                                        @endforeach
-                                        @endforeach
 
+                                        </tr>
                                      @endforeach
                                     </tbody>
                                 </table>
                             </div>
+
+                           
                         </div>
+                        
                     </div>
-                </form>
+
                 </div>
             </div>
         </div>
      </div>
 
 
-@endif
+@endif    
 </body>
 
 </html>

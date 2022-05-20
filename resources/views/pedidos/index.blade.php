@@ -80,7 +80,7 @@
                                                     <td>{{ $pedido->estadoEst}}</td>
                                                     <td class="td-actions text-right">
                                                         @can('pedido_descargar pdf')
-                                                        <a href="{{ route('pedidos_detalles.pdf', $pedido->id) }}"
+                                                        <a href="{{ route('pedidos.pdf', $pedido->id) }}"
                                                         class="btn btn-outline-danger"><span class="material-icons">picture_as_pdf </span></a>
                                                         @endcan
                                                         @can('pedido_editar')

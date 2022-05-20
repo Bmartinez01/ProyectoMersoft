@@ -31,13 +31,11 @@ Route::resource('roles',  App\Http\Controllers\RoleController::class)->middlewar
 Route::resource('pedidos',  App\Http\Controllers\PedidoController::class)->middleware('auth');
 Route::get('excelpedido', [App\Http\Controllers\PedidoController::class, 'excel'])->name('pedidos.excel');
 Route::resource('pedidos_detalles',  App\Http\Controllers\Pedido_detalleController::class)->middleware('auth');
-Route::get('/pedidos_detalles/{pedidos_detalle}/pdf', [App\Http\Controllers\Pedido_detalleController::class, 'pdf'])->name('pedidos_detalles.pdf');
+Route::get('/pedidos/{pedido}/pdf', [App\Http\Controllers\PedidoController::class, 'pdf'])->name('pedidos.pdf');
 Route::post('excel2pedido', [App\Http\Controllers\PedidoController::class, 'excel2'])->name('pedidos.excel2');
 
-Route::get('pedidos_detalles/eliminar/{id}', [Pedido_detalleController::class,'eliminar'])->name('producto.eliminar');
 
 
-Route::get('/pedidos_detalles/{pedidos_detalle}/pdf', [App\Http\Controllers\Pedido_detalleController::class, 'pdf'])->name('pedidos_detalles.pdf');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('productos',  App\Http\Controllers\ProductoController::class)->middleware('auth');
 

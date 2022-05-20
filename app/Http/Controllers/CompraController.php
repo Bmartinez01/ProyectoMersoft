@@ -35,8 +35,8 @@ class CompraController extends Controller
             ->get();
             $fecha = date("d")."-".date("m")."-".date("Y");
             $pdf = PDF::loadView('compras.pdf',compact('productos','compras'));
-            return $pdf->download("compra-$fecha.pdf");
-            // return $pdf->stream();
+            // return $pdf->download("compra-$fecha.pdf");
+            return $pdf->stream();
             // return view('compras.pdf', compact('productos','compras'));
         }
 

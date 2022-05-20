@@ -13,6 +13,8 @@ use App\Models\pedidos_detalles;
 use Illuminate\Http\Request;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
+
 
 class PedidoController extends Controller
 {
@@ -134,7 +136,24 @@ class PedidoController extends Controller
 
         return view('pedidos_detalles.show', compact('productos','pedido','estado'));
     }
-
+    public function pdf(Request $request, $id){
+        $pedido = DB::select('SELECT e.estado, valor_total, c.nombre, c.apellido FROM pedidos as p JOIN estados as e ON e.id = p.estado JOIN clientes as c WHERE p.id = ? AND c.id = p.cliente', [$id] );
+        $a = pedido::find($id);
+        $estado= Estados::all();
+        $productos = [];
+        if($a != null){
+            $productos = Producto::select("productos.*", "pedidos_detalles.cantidad as cantidad_c")
+            ->join("pedidos_detalles", "productos.id", "=", "pedidos_detalles.producto")
+            ->where("pedidos_detalles.pedido", $id)
+            ->get();
+        }
+        $fecha = date("d")."-".date("m")."-".date("Y");
+        $pdf = PDF::loadView('pedidos_detalles.pdf',compact('productos','pedido','estado'));
+        // // return $pdf->download("pedido-$fecha.pdf");
+        return $pdf->stream();
+        // return view('pedidos_detalles.pdf', compact('productos','clientes','pedido','estado'));
+    
+    }
 
     public function destroy(pedido $pedido)
     {

@@ -5,6 +5,7 @@
     <div class="container-fluid  text-center">
       <div class="row">
         @foreach ($usuarios as $usuario)
+        @can('usuario_listar')
         <div class="col-md-3" id="left">
             <div class="card">
                 <div class="card-header card-header-icon card-header-danger">
@@ -17,6 +18,7 @@
                 <span class="h2 " id="board"> {{$usuario->c}} </span>
             </div>
         </div>
+        @endcan
         @endforeach
 
 

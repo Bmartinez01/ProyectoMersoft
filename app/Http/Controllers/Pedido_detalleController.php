@@ -21,25 +21,7 @@ class Pedido_detalleController extends Controller
         return view('pedidos_detalles.create', compact('pedidos','clientes','productos','estados'));
 
     }
-    public function pdf(Request $request, $id){
-        $a = pedido::findOrFail($id);
-        $pedido = pedido::all();
-        $clientes = Cliente::all();
-        $estado= Estados::all();
-        $productos = [];
-        if($id != null){
-            $productos = Producto::select("productos.*", "pedidos_detalles.cantidad as cantidad_c")
-            ->join("pedidos_detalles", "productos.id", "=", "pedidos_detalles.producto")
-            ->where("pedidos_detalles.pedido", $id)
-            ->get();
-        }
-        $fecha = date("d")."-".date("m")."-".date("Y");
-        $pdf = PDF::loadView('pedidos_detalles.pdf',compact('productos','clientes','pedido','estado'));
-        // // return $pdf->download("pedido-$fecha.pdf");
-        return $pdf->stream();
-        // return view('pedidos_detalles.pdf', compact('productos','clientes','pedido','estado'));
-    }
-
+    
 
 
 

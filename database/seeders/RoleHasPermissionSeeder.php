@@ -28,7 +28,8 @@ class RoleHasPermissionSeeder extends Seeder
                 substr($permission->name,0,20) != 'compra_descargar pdf' &&
                 substr($permission->name,0,22) != 'compra_descargar excel' &&
                 substr($permission->name,0,20) != 'pedido_descargar pdf' &&
-                substr($permission->name,0,22) != 'pedido_descargar excel';
+                substr($permission->name,0,22) != 'pedido_descargar excel' &&
+                substr($permission->name,0,14) != 'usuario_listar';
 
 
         });
