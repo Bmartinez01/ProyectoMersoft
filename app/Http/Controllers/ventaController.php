@@ -29,18 +29,9 @@ class ventaController extends Controller
 
     }
     public function show(Request $request, $id){
-        $venta = venta::all();
-        $clientes = Cliente::all();
-        $productos = [];
-        $a = pedido::findOrFail($id);
-        if($id != null){
-            $productos = Producto::select("productos.*", "venta_detalles.cantidad as cantidad_c")
-            ->join("venta_detalles", "productos.id", "=", "venta_detalles.producto")
-            ->where("venta_detalles.ventas", $id)
-            ->get();
-        }
-
-        return view('ventas.show', compact('productos','clientes','venta'));
+        
+        $venta_De=DB::select("SELECT id, venta_id, producto, cantidad from ventas_detalles ");
+        return view('ventas.show', compact('venta_De'));
       
     }
 }
