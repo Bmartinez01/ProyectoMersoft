@@ -28,6 +28,8 @@
                                 <div class="table-responsive">
                                     <table  id="Venta" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                         <thead class="text-white" id="fondo">
+                                        <th>#id</th>
+
                                             <th>#pedido</th>
                                             <th>fecha_venta</th>
                                             <th>Cliente</th>
@@ -38,6 +40,7 @@
                                         <tbody>
                                             <tr>
                                                 @foreach ($ventas as $venta)
+                                                <td>{{ $venta->id}}</td>
 
                                                     <td>{{ $venta->pedido_id}}</td>
                                                     <td>{{ $venta->created_at}}</td>
@@ -48,10 +51,8 @@
                                                     <td class="td-actions text-right">
 
 
-                                                        @can('pedido_ver detalle')
-                                                           <a href="#"
+                                                    <a href="{{route('ventas.show', $venta->pedido_id)}}"
                                                             class="btn btn-warning"><span class="material-icons">visibility </span></a>
-                                                        @endcan
 
                                                     </td>
 
