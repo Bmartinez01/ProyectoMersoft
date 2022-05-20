@@ -18,10 +18,12 @@ class ventaController extends Controller
 
     public function index()
     {
-        // $ventas = DB::select("SELECT ventas.id,ventas.pedido_id,ventas.created_at clientes.nombre as nombclient,clientes.apellido as apellclient ,valor_total,estados.Estado as estadoEst,estados.Tipo as tipoEst FROM pedidos INNER JOIN clientes ON cliente = clientes.id   INNER JOIN estados ON pedidos.estado = estados.id ");
-        $productos = Producto::all();
-        $ventas = venta::paginate();
-        return view('ventas.index',compact('productos','ventas'));
+        // $pedidos = DB::select("SELECT pedidos.id,pedidos.created_at,clientes.nombre as nombclient,clientes.apellido as apellclient ,valor_total,estados.Estado as estadoEst,estados.Tipo as tipoEst FROM pedidos INNER JOIN clientes ON cliente = clientes.id   INNER JOIN estados ON pedidos.estado = estados.id ");
+
+        $ventas = DB::select("SELECT pedido_id,ventas.created_at,clientes.nombre, clientes.apellido, valor_total FROM ventas INNER JOIN clientes ON cliente = clientes.id");
+        // $productos = Producto::all();
+        // $ventas = venta::paginate();
+        return view('ventas.index',compact('ventas'));
     }
 
 }

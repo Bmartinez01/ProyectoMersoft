@@ -67,7 +67,7 @@ class PedidoController extends Controller
         }
         if($input["estado"]==6 || $input["estado"]==1 ){
 
-            $ventas=DB::insert("INSERT INTO ventas (cliente, valor_inicial, pedido_id, created_at) select cliente, valor_total, id, created_at  from pedidos where pedidos.id= $pedido->id");
+            $ventas=DB::insert("INSERT INTO ventas (cliente, valor_total, pedido_id, created_at) select cliente, valor_total, id, created_at  from pedidos where pedidos.id= $pedido->id");
             return redirect()->route('ventas.index',compact('ventas'))->with('success', 'Venta creada correctamente');
         }
             else{
@@ -105,6 +105,10 @@ class PedidoController extends Controller
         return view('pedidos_detalles.edit', compact('productos','clientes','pedido','estado'));
     }
 
+
+
+    
+
     public function update(Request $request,pedido $pedido)
     {
         $datos = $request->except('cantidad','producto');
@@ -112,6 +116,9 @@ class PedidoController extends Controller
         return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado correctamente');
 
     }
+
+
+
 
     public function show(Request $request, $id){
         $pedido = DB::select('SELECT e.estado, valor_total, c.nombre, c.apellido FROM pedidos as p JOIN estados as e ON e.id = p.estado JOIN clientes as c WHERE p.id = ? AND c.id = p.cliente', [$id] );

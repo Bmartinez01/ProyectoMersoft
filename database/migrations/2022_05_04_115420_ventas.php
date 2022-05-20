@@ -17,9 +17,8 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('pedido_id');
             $table->unsignedBigInteger('cliente');
-            $table->string('valor_inicial')->nullable();
-            $table->string('valor_dev')->nullable();
             $table->string('valor_total')->nullable();
+         
             $table->timestamps();
 
             $table->foreign('cliente')->references('id')->on('clientes');

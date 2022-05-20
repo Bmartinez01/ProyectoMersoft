@@ -28,13 +28,11 @@
                                 <div class="table-responsive">
                                     <table  id="Venta" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                         <thead class="text-white" id="fondo">
-                                            <th>pedido_id</th>
+                                            <th>#pedido</th>
                                             <th>fecha_venta</th>
-                                            <th>fecha_dev</th>
                                             <th>Cliente</th>
-                                            <th>valor_inicial</th>
-                                            <th>valor_dev</th>
-                                            <th>Valor Total</th>
+                                            <th>valor total</th>
+
                                             <th class="text-right">Función</th>
                                         </thead>
                                         <tbody>
@@ -43,14 +41,13 @@
 
                                                     <td>{{ $venta->pedido_id}}</td>
                                                     <td>{{ $venta->created_at}}</td>
-                                                    <td>{{$venta->updated_at}}</td>
-                                                    <td>{{ $venta->cliente }}</td>
-                                                    <td>{{ $venta->valor_inicial}}</td>
-                                                    <td>{{ $venta->valor_dev}}</td>
+                                                    <td>{{ $venta->nombre}} {{$venta->apellido}}</td>
                                                     <td>{{ $venta->valor_total}}</td>
+
+
                                                     <td class="td-actions text-right">
 
-                                                       
+
                                                         @can('pedido_ver detalle')
                                                            <a href="#"
                                                             class="btn btn-warning"><span class="material-icons">visibility </span></a>
