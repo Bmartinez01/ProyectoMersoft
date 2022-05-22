@@ -7,12 +7,18 @@
       <h3>{{ __('¡Es hora de loguearte!') }} </h3>
     </div>
     <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto ">
+
       <form class="form" method="POST" action="{{ route('login') }}">
         @csrf
 
         <div class="card card-login card-hidden mb-3  ">
           <div class="card-header card-header-info text-center">
             <h4 class="card-title"><strong>{{ __('Inicia Sesión') }}</strong></h4>
+            @if (session('error'))
+            <div class="text-red-600">
+            {{session('error')}}
+            </div>
+            @endif
             {{-- <div class="social-line">
               <a href="#" class="btn btn-just-icon btn-link btn-white">
                 <i class="fa fa-facebook-square"></i>

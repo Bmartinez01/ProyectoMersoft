@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-
-
+use App\Exports\ventasExport;
+use App\Http\Requests\PedidocrearRequest;
+use App\Models\pedido;
 use App\Models\venta;
 use App\Models\Cliente;
 use App\Models\Producto;
@@ -18,12 +19,19 @@ class ventaController extends Controller
 
     public function index()
     {
-        // $pedidos = DB::select("SELECT pedidos.id,pedidos.created_at,clientes.nombre as nombclient,clientes.apellido as apellclient ,valor_total,estados.Estado as estadoEst,estados.Tipo as tipoEst FROM pedidos INNER JOIN clientes ON cliente = clientes.id   INNER JOIN estados ON pedidos.estado = estados.id ");
-
-        $ventas = DB::select("SELECT pedido_id,ventas.created_at,clientes.nombre, clientes.apellido, valor_total FROM ventas INNER JOIN clientes ON cliente = clientes.id");
+      
+        $ventas = DB::select("SELECT v.id,pedido_id,v.created_at,clientes.nombre, clientes.apellido, valor_total FROM ventas  as v INNER JOIN clientes ON cliente = clientes.id");
         // $productos = Producto::all();
         // $ventas = venta::paginate();
+       
         return view('ventas.index',compact('ventas'));
-    }
 
+
+    }
+    public function show(Request $request, $id){
+        
+        $venta_De=DB::select("SELECT id, venta_id, producto, cantidad from ventas_detalles ");
+        return view('ventas.show', compact('venta_De'));
+      
+    }
 }
