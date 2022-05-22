@@ -109,12 +109,78 @@ class PedidoController extends Controller
 
 
 
-    
 
-    public function update(Request $request,pedido $pedido)
+
+    public function update(Request $request,pedido $pedido, )
     {
-        $datos = $request->except('cantidad','producto');
-        $pedido->update($datos);
+       $pedido=Pedido::all();
+
+
+       $pedido_detalle=pedidos_detalles::all();
+       $productos=[];
+       $productos=$request->productos;
+       $data=$request->all();
+
+       $array = [];
+       $array2 = [];
+       $p = 0;
+
+       if ($productos != null) {
+        for ($i=0; $i < strien($productos) ; $i++) {
+
+            if ($porductos[$i] != ",") {
+                $array2[$p]= $productos[$i];
+                $p++;
+                continue;
+            }
+        }
+
+        for ($i=0; $i < count($array2) ; $i++) {
+            $array[$i] = intval($array2[$i]);
+        }
+
+
+        $pedido_p = DB::select('SELECT*FROM pedidos_detalles WHERE pedido =?', [$pedido->$id]);
+        $p=0;
+
+        foreach ($pedido_p as $key) {
+            for ($i=0; $i < count($array) ; $i++) {
+                if ($key->producto == $array[$i]) {
+                    $consulta=DB::select('SELECT Stock FROM productos WHERE id=?', [$array[$i]]);
+                    $pe=$consulta[0]->Stock;
+                    if ($pe >=$key->Stock) {
+                        $producto_borrar=DB::DELETE("DELETE FROM pedidos_detalles WHERE producto= $array[$i] and pedido = $id");
+                        $producto_edit=DB::UPDATE("UPDATE productos SET Stock = Stock + $key->Stock WHERE id=?", [$array[$i]]);
+                    }
+                }
+            }
+        }
+
+       }
+
+       if ($request->producto != null) {
+           $productos=[];
+           $producto2=$request->producto;
+
+           $Stock=[];
+           $Stock2=$request->Stock;
+
+           $precio=[];
+           $precio2=$request->precio;
+
+           for ($i=0; $i < count($producto2); $i++) {
+               $productos[$i]=intval($producto2[$i]);
+               $Stock[$i]=intval($Stock2[$i]);
+               $precio[$i]=intval($precio2[$i]);
+           }
+
+           for ($i=0; $i < count($producto) ; $i++) {
+               $producto_insert=DB::insert("INSERT INTO pedidos_detalles(pedido, producto, cantidad) values(?, ?, ?)", $id, [$productos[$i]], [$Stock[$i]]);
+               $producto_upd= DB::update("UPDATE productos SET Stock = Stock + $Stock[$i] WHERE id=?", [$productos[$i]]);
+           }
+
+       }
+
         return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado correctamente');
 
     }
@@ -152,7 +218,7 @@ class PedidoController extends Controller
         // // return $pdf->download("pedido-$fecha.pdf");
         return $pdf->stream();
         // return view('pedidos_detalles.pdf', compact('productos','clientes','pedido','estado'));
-    
+
     }
 
     public function destroy(pedido $pedido)

@@ -267,14 +267,28 @@
                 let precio = $("#producto option:selected").attr("precio");
                 $("#valor_unitario").val(precio);
             }
-
+            let array = [];
             function agregar_producto(){
                 let producto_id = $("#producto option:selected").val();
                 let producto_text = $("#producto option:selected").text();
                 let cantidad = $("#cantidad").val();
                 let precio = $("#valor_unitario").val();
-
                 if(cantidad > 0 && precio > 0){
+                    array.push(producto_id);
+
+                    for(var j = 0; j < array.length; j++){
+
+                        for(var i = j+1; i < array.length; i++){
+
+                            if(array[j] == array[i] && producto_id == array[i]){
+                                alert("El producto "+producto_text+" ya esta registrado en el pedido");
+                                 array.pop();
+                                die();
+                             }
+                         }
+                    }
+
+
                     $("#tblProductos").append(`
                         <tr id="tr-${producto_id}">
                             <td>${producto_text}</td>
@@ -307,8 +321,23 @@
                 $("#valor_unitario").val('');
             }
 
+            let producto=[];
             function eliminar_producto(id,subtotal){
-                alert("funciòn")
+
+                id= id.toStrin();
+                    var index =array.indexOf(id);
+                    if (index !== -1) {
+                        array.splice(index, 1);
+                    }
+
+                    if (producto.includes(id, 0)) {
+
+                    }
+                    else{
+                        let nuevoproducto = producto.push(id);
+                    }
+
+
                 $("#tr-"+id).remove();
 
                 let valor_total = $("#valor_total").val() || 0;
