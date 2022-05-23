@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('ventas_detalles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('venta_id');
-            $table->string('producto');
+            $table->unsignedBigInteger('producto');
             $table->string('cantidad');
             $table->string('valor_total')->nullable();
             $table->string('producto_dev')->nullable();
@@ -27,7 +27,8 @@ return new class extends Migration
 
 
         
-            $table->foreign('venta_id')->references('id')->on('ventas')->onDelete("cascade");;
+            $table->foreign('venta_id')->references('id')->on('ventas')->onDelete("cascade");
+            $table->foreign('producto')->references('id')->on('productos');
         });
     }
 

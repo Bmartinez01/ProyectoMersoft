@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'pedidos', 'titlePage' => 'Pedidos'])
+@extends('layouts.main', ['activePage' => 'ventas', 'titlePage' => 'Ventas'])
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" >
@@ -21,10 +21,17 @@
                             <p class="card-category text-dark" style="font-size:17px">Ver Detalle ventas</p>
                         </div>
                         <div class="card-body">
-                        @foreach ($venta_De as $venta)
+                        @foreach ($Venta as $venta)
 
                             <div class="row">
-                                <label for="cliente" class="col-md-1 col-form-label text-dark control-label asterisco">Cliente</label>
+                            <label for="id" class=" col-md-1 col-form-label text-dark control-label asterisco">#Pedido</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" value="{{$venta->pedido_id}} " readonly>
+                                    @if ($errors->has('Pedido'))
+                                    <span class="error text-danger" for="input-Pedido">{{ $errors->first('Pedido') }}</span>
+                                    @endif
+                                    </div>
+                                <label for="cliente" class="offset-md-3 col-md-1 col-form-label text-dark control-label asterisco">Cliente</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" value="{{$venta->nombre}} {{$venta->apellido}}" readonly>
                                     @if ($errors->has('cliente'))
@@ -59,9 +66,9 @@
                                 </table>
                             </div>
 
-                            <div class="row offset-md-5">
-                                <label for="valor_total" class="col-3 col-form-label control-label asterisco">Valor final </label>
-                                <div class="col-sm-5">
+                            <div class="row offset-md-7">
+                                <label for="valor_total" class="col-1 col-form-label control-label asterisco">Valor final </label>
+                                <div class="col-sm-3">
                                 <input type="number" class="form-control" id="valor_total" value="{{$venta->valor_total}}" name="valor_total" readonly>
                                 </div>
                                 </div>
