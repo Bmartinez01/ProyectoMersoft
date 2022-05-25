@@ -1,13 +1,9 @@
 @extends('layouts.main', ['activePage' => 'ventas', 'titlePage' => 'Ventas'])
-@section('css')
+@section('css')         
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" >
 @endsection
 @section('content')
-
-
-
-
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -24,9 +20,9 @@
                         @foreach ($Venta as $venta)
 
                             <div class="row">
-                            <label for="id" class=" col-md-1 col-form-label text-dark control-label asterisco">#Pedido</label>
+                            <label for="pedido" class=" col-md-1 col-form-label text-dark control-label asterisco">#Pedido</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" value="{{$venta->pedido_id}} " readonly>
+                                    <input type="text" class="form-control" value="" readonly>
                                     @if ($errors->has('Pedido'))
                                     <span class="error text-danger" for="input-Pedido">{{ $errors->first('Pedido') }}</span>
                                     @endif
@@ -41,7 +37,6 @@
 
                             <br>
                             <br>
-                            @endforeach
 
                             <div class="table-responsive">
                                 <table  id="compras" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
@@ -66,13 +61,15 @@
                                 </table>
                             </div>
 
-                            <div class="row offset-md-7">
+                            <div class="row offset-md-5">
                                 <label for="valor_total" class="col-1 col-form-label control-label asterisco">Valor final </label>
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                 <input type="number" class="form-control" id="valor_total" value="{{$venta->valor_total}}" name="valor_total" readonly>
                                 </div>
                                 </div>
                         </div>
+                        @endforeach
+
                         <div class="card-footer ml-auto mr-auto col-md-1">
 
                                 <a href="{{route('ventas.index')}}" class="btn btn-facebook">Volver</a>
@@ -84,72 +81,7 @@
             </div>
         </div>
      </div>
-
-
-
-<div class="modal fade" id="Estados" tabindex="3" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-
-            <div class="modal-body">
-                <table class="table table-striped ">
-                    <thead>
-                      <tr>
-                        <th scope="col">Estado</th>
-                        <th scope="col" colspan="8">Descripcion</th>
-                        <th scope="col">Tipo</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-
-                        <td>Venta Directa</td>
-                        <td colspan="8">El cliente compra y se lleva sus articulos</td>
-                        <td>Venta Directa </td>
-                      </tr>
-                      <tr>
-
-                        <td>Solicitado</td>
-                        <td colspan="8">Compra a domicilio y se realiza el pedido</td>
-                        <td>Domicilio</td>
-                      </tr>
-                      <tr>
-
-                        <td>En Proceso</td>
-                        <td colspan="8">El pedido se esta empacando</td>
-                        <td>Domicilio</td>
-                      </tr>
-                      <tr>
-
-                        <td>Por Despachar</td>
-                        <td colspan="8">Esta listo para despachar</td>
-                        <td>Domicilio</td>
-                      </tr>
-                      <tr>
-
-                        <td>Enviado</td>
-                        <td colspan="8">Esta despachado al cliente</td>
-                        <td>Domicilio</td>
-                      </tr>
-                      <tr>
-
-                        <td>Vendido</td>
-                        <td colspan="8">El pedido fue entregado y se reciio el pago</td>
-                        <td>Domicilio/venta directa</td>
-                      </tr>
-                    </tbody>
-                  </table>
-            </div>
-            <div class="modal-footer">
-
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-
-    </div>
-
 </div>
-
 @endsection
 @section('script')
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>

@@ -43,3 +43,4 @@ Route::get('excel', [App\Http\Controllers\ProductoController::class, 'excel'])->
 
 Route::post('excel2', [App\Http\Controllers\ProductoController::class, 'excel2'])->name('productos.excel2');
 Route::resource('ventas',  App\Http\Controllers\ventaController::class)->middleware('auth');
+Route::get('/ventas/{venta}/pdf', [App\Http\Controllers\ventaController::class, 'pdf'])->name('ventas.pdf');

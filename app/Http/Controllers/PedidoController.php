@@ -70,7 +70,7 @@ class PedidoController extends Controller
         if($input["estado"]==6 || $input["estado"]==1 ){
 
             $ventas=DB::insert("INSERT INTO ventas ( cliente, valor_total, pedido_id, created_at) select cliente, valor_total, id, created_at  from pedidos where pedidos.id= $pedido->id");
-            $ventas_de=DB::insert("INSERT INTO ventas_detalles (venta_id, producto, cantidad) select pedido, producto, cantidad from pedidos_detalles where pedido = $pedido->id ");
+            $ventas_de=DB::insert("INSERT INTO ventas_detalles (venta_id, producto, cantidad) select v.id, producto, cantidad from pedidos_detalles inner join ventas as v where pedido = $pedido->id");
             return redirect()->route('ventas.index',compact('ventas', 'ventas_de'))->with('success', 'Venta creada correctamente');
         }
             else{

@@ -79,19 +79,24 @@
                                                     <td>{{ $pedido->tipoEst}}</td>
                                                     <td>{{ $pedido->estadoEst}}</td>
                                                     <td class="td-actions text-right">
+
                                                         @can('pedido_descargar pdf')
                                                         <a href="{{ route('pedidos.pdf', $pedido->id) }}"
                                                         class="btn btn-outline-danger"><span class="material-icons">picture_as_pdf </span></a>
                                                         @endcan
                                                         @can('pedido_editar')
+                                                        @if($pedido->estadoEst != 'Vendido' && $pedido->estadoEst != 'Venta Directa' )
                                                         <a href="{{ route('pedidos.edit', $pedido->id) }}"
-                                                           class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                        class='btn btn-warning'><i class='material-icons'>edit</i></a>
+                                                        @endif
                                                         @endcan
                                                         @can('pedido_ver detalle')
                                                            <a href="{{route('pedidos.show', $pedido->id)}}"
                                                             class="btn btn-warning"><span class="material-icons">visibility </span></a>
                                                         @endcan
+
                                                         @can('pedido_cancelar')
+                                                        @if($pedido->estadoEst != 'Vendido' && $pedido->estadoEst != 'Venta Directa' && $pedido->estadoEst != 'Enviado' )
                                                         <form action="{{route('pedidos.destroy', $pedido->id)}}" method="post" style="display: inline-block;" onsubmit="return confirm('¿Está seguro de cancelar este pedido?')">
                                                         @csrf
                                                         @method('DELETE')
@@ -99,7 +104,9 @@
                                                             <i class="material-icons">close</i>
                                                         </button>
                                                         </form>
+                                                        @endif
                                                         @endcan
+
                                                     </td>
 
                                             </tr>
