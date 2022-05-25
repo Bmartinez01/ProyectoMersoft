@@ -30,9 +30,34 @@ class ventaController extends Controller
     }
     public function show(Request $request, $id){
 
-        $venta_De=DB::select("SELECT id, venta_id, producto, cantidad from ventas_detalles ");
-        $venta=DB::select("SELECT v.id, pedido_id, clientes.nombre, clientes.apellido, valor_total from ventas as v INNER JOIN clientes ON cliente = clientes.id ");
-        return view('ventas.show', compact('venta_De', 'venta'));
+        // $venta_De=DB::select("SELECT id, venta_id, producto, cantidad from ventas_detalles ");
+
+        $Venta = DB::select('SELECT v.id, v.valor_total, c.nombre, c.apellido FROM ventas as v  JOIN clientes as c WHERE v.id = ? AND c.id = v.cliente', [$id] );
+        $a = venta::find($id);
+        $productos = [];
+        if($a != null){
+            $productos = Producto::select("productos.*", "ventas_detalles.cantidad as cantidad_c")
+            ->join("ventas_detalles", "productos.id", "=", "ventas_detalles.producto")
+            ->where("ventas_detalles.id", $id)
+            ->get();
+        }
+        return view('ventas.show', compact('Venta','productos'));
 
     }
+
+    // public function pdf(Request $request, $id){
+
+    //     // $venta_De=DB::select("SELECT id, venta_id, producto, cantidad from ventas_detalles ");
+    //     $Venta = DB::select('SELECT v.pedido_id, v.valor_total, c.nombre, c.apellido FROM ventas as v  JOIN clientes as c WHERE v.id = ? AND c.id = v.cliente', [$id] );
+    //     $a = venta::find($id);
+    //     $productos = [];
+    //     if($a != null){
+    //         $productos = Producto::select("productos.*", "ventas_detalles.cantidad as cantidad_c")
+    //         ->join("ventas_detalles", "productos.id", "=", "ventas_detalles.producto")
+    //         ->where("ventas_detalles.id", $id)
+    //         ->get();
+    //     }
+    //     return view('ventas.pdf', compact('Venta','productos'));
+
+    // }
 }

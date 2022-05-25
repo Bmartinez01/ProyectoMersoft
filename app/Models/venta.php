@@ -9,6 +9,7 @@ class venta extends Model
 {
     protected $fillable =
     [
+    'id',
     'pedido_id',
     'cliente',
     'valor_inicial',
