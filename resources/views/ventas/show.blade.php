@@ -22,7 +22,7 @@
                             <div class="row">
                             <label for="pedido" class=" col-md-1 col-form-label text-dark control-label asterisco">#Pedido</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" value="{{$venta->pedido_id}} " readonly>
+                                    <input type="text" class="form-control" value="" readonly>
                                     @if ($errors->has('Pedido'))
                                     <span class="error text-danger" for="input-Pedido">{{ $errors->first('Pedido') }}</span>
                                     @endif
@@ -37,7 +37,6 @@
 
                             <br>
                             <br>
-                            @endforeach
 
                             <div class="table-responsive">
                                 <table  id="compras" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
@@ -69,6 +68,8 @@
                                 </div>
                                 </div>
                         </div>
+                        @endforeach
+
                         <div class="card-footer ml-auto mr-auto col-md-1">
 
                                 <a href="{{route('ventas.index')}}" class="btn btn-facebook">Volver</a>

@@ -25,7 +25,7 @@ class RolCreateRequest extends FormRequest
     {
         return [
             
-            'name' => 'required|min:4|max:20|unique:roles'
+            'name' => 'required|min:4|max:20|unique:roles|alpha'
         ];
     }
 
