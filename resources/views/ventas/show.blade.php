@@ -22,11 +22,11 @@
                         </div>
                         <div class="card-body">
                         @foreach ($venta_De as $venta)
-
+                        @foreach ($venta as $ventas)
                             <div class="row">
                                 <label for="cliente" class="col-md-1 col-form-label text-dark control-label asterisco">Cliente</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" value="{{$venta->nombre}} {{$venta->apellido}}" readonly>
+                                    <input type="text" class="form-control" value="{{$ventas->nombre}} {{$ventas->apellido}}" readonly>
                                     @if ($errors->has('cliente'))
                                     <span class="error text-danger" for="input-cliente">{{ $errors->first('cliente') }}</span>
                                     @endif
@@ -54,7 +54,7 @@
                                             <td>{{ $row->precio * $row->cantidad_c}}</td>
 
                                         </tr>
-                                     @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
@@ -66,6 +66,8 @@
                                 </div>
                                 </div>
                         </div>
+                        @endforeach
+                        @endforeach
                         <div class="card-footer ml-auto mr-auto col-md-1">
 
                                 <a href="{{route('ventas.index')}}" class="btn btn-facebook">Volver</a>

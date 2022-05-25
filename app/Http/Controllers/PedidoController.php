@@ -112,46 +112,48 @@ class PedidoController extends Controller
 
 
 
-    public function update(Request $request,pedido $pedido, )
+    public function update(Request $request, $id )
     {
-       $pedido=Pedido::all();
-
+       $pedido=Pedido::findOrFail($id);
 
        $pedido_detalle=pedidos_detalles::all();
-       $productos=[];
-       $productos=$request->productos;
+       $productox=[];
+       $productox=$request->productox;
        $data=$request->all();
-
+       $pedido->update($data);
        $array = [];
        $array2 = [];
        $p = 0;
+    /* return response()->json($data); */
+       if ($productox != null) {
+         /* return response()->json($data); */
+        for ($i=0; $i < strlen($productox) ; $i++) {
 
-       if ($productos != null) {
-        for ($i=0; $i < strien($productos) ; $i++) {
-
-            if ($porductos[$i] != ",") {
-                $array2[$p]= $productos[$i];
+            if ($productox[$i] != ",") {
+                $array2[$p]= $productox[$i];
                 $p++;
                 continue;
             }
         }
-
         for ($i=0; $i < count($array2) ; $i++) {
             $array[$i] = intval($array2[$i]);
         }
 
 
-        $pedido_p = DB::select('SELECT*FROM pedidos_detalles WHERE pedido =?', [$pedido->$id]);
+        $pedido_p = DB::select('SELECT * FROM pedidos_detalles WHERE pedido = 1');
+        /* return response()->json($pedido_p); */
         $p=0;
 
         foreach ($pedido_p as $key) {
+            return response()->json($key->producto);
             for ($i=0; $i < count($array) ; $i++) {
                 if ($key->producto == $array[$i]) {
                     $consulta=DB::select('SELECT Stock FROM productos WHERE id=?', [$array[$i]]);
+
                     $pe=$consulta[0]->Stock;
-                    if ($pe >=$key->Stock) {
+                    if ($pe >=$key->cantidad) {
                         $producto_borrar=DB::DELETE("DELETE FROM pedidos_detalles WHERE producto= $array[$i] and pedido = $id");
-                        $producto_edit=DB::UPDATE("UPDATE productos SET Stock = Stock + $key->Stock WHERE id=?", [$array[$i]]);
+                        $producto_edit=DB::UPDATE("UPDATE productos SET Stock = Stock + $key->cantidad WHERE id=?", [$array[$i]]);
                     }
                 }
             }
@@ -159,10 +161,9 @@ class PedidoController extends Controller
 
        }
 
-       if ($request->producto != null) {
+       /* if ($request->producto != null) {
            $productos=[];
            $producto2=$request->producto;
-
            $Stock=[];
            $Stock2=$request->Stock;
 
@@ -180,7 +181,8 @@ class PedidoController extends Controller
                $producto_upd= DB::update("UPDATE productos SET Stock = Stock + $Stock[$i] WHERE id=?", [$productos[$i]]);
            }
 
-       }
+       } */
+
 
         return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado correctamente');
 

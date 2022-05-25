@@ -27,6 +27,7 @@
                                 <label for="cliente" class="col-md-1 col-form-label text-dark control-label asterisco">Cliente</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" value="{{$cliente->nombre}} {{$cliente->apellido}}" readonly >
+                                    <input type="hidden" class="form-control" id="productox" name="productox">
                                     @if ($errors->has('cliente'))
                                     <span class="error text-danger" for="input-cliente">{{ $errors->first('cliente') }}</span>
                                     @endif
@@ -77,7 +78,7 @@
                                     <tbody id="tblProductos">
 
                                         @foreach ($productos as $row)
-                                        <tr id=tr-{{$row->id}}>
+                                        <tr id="tr-{{$row->id}}">
                                             <td>{{ $row->Nombre}}</td>
                                             <td>{{ $row->cantidad_c}}</td>
                                             <td>{{ $row->precio}}</td>
@@ -321,27 +322,29 @@
                 $("#valor_unitario").val('');
             }
 
-            let producto=[];
+            let productox=[];
             function eliminar_producto(id,subtotal){
 
-                id= id.toStrin();
+                    id= id.toString();
                     var index =array.indexOf(id);
                     if (index !== -1) {
                         array.splice(index, 1);
                     }
 
-                    if (producto.includes(id, 0)) {
+                    if (productox.includes(id, 0)) {
 
                     }
                     else{
-                        let nuevoproducto = producto.push(id);
+                        let nuevoproducto = productox.push(id);
                     }
+                    console.log(productox);
 
 
                 $("#tr-"+id).remove();
 
                 let valor_total = $("#valor_total").val() || 0;
              $("#valor_total").val(parseInt(valor_total) - subtotal);
+             $("#productox").val(productox);
 
 
             }

@@ -23,7 +23,7 @@
                             @endif --}}
 
                             <div class="row">
-                                <label for="name" class="col-sm-2 col-form-label control-label asterisco">Nombre</label>
+                                <label for="name" class="col-sm-3 col-form-label control-label asterisco">Nombre</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="name" placeholder="Ingrese su nombre" value="{{old('name')}}">
                                     @if ($errors->has('name'))
@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="email" class="col-sm-2 col-form-label control-label asterisco">Email</label>
+                                <label for="email" class="col-sm-3 col-form-label control-label asterisco">Email</label>
                                 <div class="col-sm-7">
                                     <input type="email" class="form-control" name="email" placeholder="Ingrese su email" value="{{old('email')}}">
                                     @if ($errors->has('email'))
@@ -41,25 +41,23 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="password" class="col-sm-2 col-form-label control-label asterisco">Contraseña</label>
+                                <label for="password" class="col-sm-3 col-form-label control-label asterisco">Contraseña</label>
                                 <div class="col-sm-7">
-                                    <input type="password" class="form-control" name="password" placeholder="Ingrese su Contraseña" value="" >
+                                    <input type="password" class="form-control" name="password" placeholder="Ingrese su Contraseña" >
                                     @if ($errors->has('password'))
                                     <span class="error text-danger" for="input-password">{{ $errors->first('password') }}</span>
                                     @endif
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="password" class="col-sm-2 col-form-label control-label asterisco">Confirmar Contraseña</label>
-                                <div class="col-sm-7">
-                                    <input type="password" class="form-control" name="password" placeholder="Confirme su Contraseña" value="" >
-                                    @if ($errors->has('password'))
-                                    <span class="error text-danger" for="input-password">{{ $errors->first('password') }}</span>
-                                    @endif
+                                <label for="password" class="col-sm-3 col-form-label control-label asterisco">Confirmar Contraseña</label>
+                                <div class="col-sm-7 ">
+                                    <input type="password" class="form-control" name="password_confirmation" placeholder="Confirme su Contraseña" value="" >
+
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="name" class="col-sm-2 col-form-label control-label asterisco ">Roles</label>
+                                <label for="name" class="col-sm-3 col-form-label control-label asterisco ">Roles</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <div class="tab-content">
