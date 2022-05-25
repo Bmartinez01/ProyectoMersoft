@@ -122,15 +122,45 @@ public function destroy(Compra $compra)
         return view('compras.index', compact('compras'));
 
     }
-    public function charts(){
+    public function charts(Request $request){
         DB::statement("SET lc_time_names = 'es_MX'");
-        $compras = DB::select("SELECT DISTINCT MonthName(fecha_compra) AS meses, SUM(valor_total) AS numero_compras FROM compras WHERE MonthName(fecha_compra) IS NOT NULL GROUP BY MonthName(fecha_compra) ORDER BY SUM(valor_total) ASC");
+        $year = $request->selaño;
+        if ($year == ""){
+            $year = date("Y");
+        }
+        $compras = DB::select("SELECT MonthName(fecha_compra) AS meses, SUM(valor_total) AS suma_compras FROM compras WHERE Year(fecha_compra) = $year GROUP BY MonthName(fecha_compra)  ORDER BY MonthName(fecha_compra)");
+        $compras_años = DB::select("SELECT year(fecha_compra) AS años, SUM(valor_total) AS suma_compras FROM compras WHERE Year(fecha_compra) = $year GROUP BY year(fecha_compra)  ORDER BY year(fecha_compra)");
+
         $data = [];
         foreach ($compras as $compra){
-            $data['label'][] = $compra->meses;
-            $data['data'][] = $compra->numero_compras;
+            $data['label1'][] = $compra->meses;
+            $data['data1'][] = $compra->suma_compras;
         }
+        foreach($compras_años as $compra_año){
+            $data['label2'][] = $compra_año->años;
+            $data['data2'][] = $compra_año->suma_compras;
+        }
+
         $data['data'] = json_encode($data);
-        return view('compras.charts', $data);
+
+          /* return response()->json($dataAno); */
+          return view('compras.charts', $data);
     }
+    // public function charts(Request $request){
+    //     $year = $request->selaño;
+    //     if ($year == ""){
+    //          $year = date("Y");
+    //         }
+    //     DB::statement("SET lc_time_names = 'es_MX'");
+    //     $compras = DB::select("SELECT SUM(valor_total) as 'ct' from compras WHERE Year(fecha_compra) = $year UNION SELECT SUM(valor_total) as 'vt' FROM ventas WHERE Year(created_at) = $year");
+    //     $data = $compras;
+    //     foreach ($compras as $compra){
+    //          $data['label'][0] = "Compras Total";
+    //          $data['label'][1] = "Ventas Total";
+    //          $data['data'][] = $compra->ct;
+    //     }
+    //       $data['data'] = json_encode($data);
+    //       return view('compras.charts', $data);
+    //    // return response()->json($compras);
+    // }
 }
