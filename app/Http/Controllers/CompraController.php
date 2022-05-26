@@ -125,12 +125,18 @@ public function destroy(Compra $compra)
     public function charts(Request $request){
         DB::statement("SET lc_time_names = 'es_MX'");
         $year = $request->selaño;
-        if ($year == ""){
-            $year = date("Y");
-        }
-        $compras = DB::select("SELECT MonthName(fecha_compra) AS meses, SUM(valor_total) AS suma_compras FROM compras WHERE Year(fecha_compra) = $year GROUP BY MonthName(fecha_compra)  ORDER BY MonthName(fecha_compra)");
-        $compras_años = DB::select("SELECT year(fecha_compra) AS años, SUM(valor_total) AS suma_compras FROM compras WHERE Year(fecha_compra) = $year GROUP BY year(fecha_compra)  ORDER BY year(fecha_compra)");
+        $año = $request->año;
+        $año_pro = date("Y");
 
+        if ($year == "" || $año == "" ){
+            $year = date("Y");
+            $año = date("Y");
+
+        }
+
+        $compras = DB::select("SELECT MonthName(fecha_compra) AS meses, SUM(valor_total) AS suma_compras FROM compras WHERE Year(fecha_compra) = $year GROUP BY MonthName(fecha_compra)  ORDER BY 1");
+        $compras_años = DB::select("SELECT year(fecha_compra) AS años, SUM(valor_total) AS suma_compras FROM compras WHERE Year(fecha_compra) = $año GROUP BY year(fecha_compra)  ORDER BY year(fecha_compra)");
+        $productos_c = DB::select("SELECT p.Nombre AS nombre, SUM(cantidad) AS cantidades FROM  compra__detalles  as c JOIN productos as p WHERE p.id = producto AND Year(c.created_at) = $año_pro GROUP BY p.Nombre,producto ORDER BY cantidades DESC LIMIT 5");
         $data = [];
         foreach ($compras as $compra){
             $data['label1'][] = $compra->meses;
@@ -140,11 +146,16 @@ public function destroy(Compra $compra)
             $data['label2'][] = $compra_año->años;
             $data['data2'][] = $compra_año->suma_compras;
         }
+        foreach($productos_c as $producto){
+            $data['label3'][] = $producto->nombre;
+            $data['data3'][] = $producto->cantidades;
 
-        $data['data'] = json_encode($data);
+        }
 
-          /* return response()->json($dataAno); */
-          return view('compras.charts', $data);
+
+        //  return response()->json($productos_c);
+          $data['data'] = json_encode($data);
+          return view('compras.charts', $data, compact('year','año','año_pro'));
     }
     // public function charts(Request $request){
     //     $year = $request->selaño;

@@ -8,50 +8,83 @@
         <div class="conteiner-fluid">
             <div class="row">
 
-                <div class="col-12 text-center mb-5">
+                <div class="col-12 text-center mb-1">
                     <form action="{{ route('compras.charts') }}" method="POST">
+                        <div class="col-12 text-left">
+                            <a href="{{ route('compras.index') }}"><span class="material-icons">
+                                arrow_back
+                                </span></a>
+                        </div>
                         @csrf
                         @method('GET')
                         <?php
                         $cont = date('Y');
                         ?>
-
+                        <h3 style="font-family: cursive"><strong>Tabla por meses</strong></h3>
                         <select style="border-radius: 5px; width: 70px; text-align: center" id="selaño" name="selaño">
-                            <?php while ($cont >= 2000) { ?>
-                            <option value="<?php echo $cont; ?>"><?php echo $cont; ?></option>
-                            <?php $cont = ($cont-1); } ?>
+                        @while ($cont >=2000)
+                         <option @if ($year == $cont)
+                         selected="true"  value={{$cont}}>{{$cont}}</option>
+                         @else
+                         <option value="{{$cont}}">{{$cont}}
+                        </option>
+                        @endif
+                        {{$cont--}}
+                        @endwhile
                         </select>
                         <button type="submit" class="btn btn-outline-dark btn-sm" name="search"><i
                                 class="material-icons">search</i></button>
-
-                    </form>
-                </div>
-
-                <div class="col-12 text-center">
-                    <a href="{{ route('compras.index') }}">Regresar</a>
-                </div>
-
-                <div id="tabla1" class="col-12 text-center">
-                    <h3 style="font-family: cursive"><strong>Tabla por meses</strong></h3>
-                    <a href="javascript:imprSelec('myChart')">Imprimir</a>
-                    <button type="button" onclick="javascript:imprim1(myChart);">Imprimir</button>
                 </div>
                 <div class="col-md-12">
-                    <canvas id="myChart" width="100" height="50"></canvas>
-
+                    <canvas id="myChart" width="150" height="50"></canvas>
                 </div>
-
             </div>
         </div>
     </div>
-    <div class="content">
+                                {{-- Inicia la 2 grafica  --}}
         <div class="conteiner-fluid">
             <div class="text-center">
-                <canvas id="myChart_año" width="100" height="50"></canvas>
+                <div id="tabla2" class="col-12 text-center">
+                    <?php
+                        $cont = date('Y');
+                        ?>
+                        <h3 style="font-family: cursive"><strong>Tabla por año</strong></h3>
+                        <select style="border-radius: 5px; width: 70px; text-align: center" id="año" name="año">
+                            @while ($cont >=2000)
+                            <option @if ($año == $cont)
+                            selected="true"  value={{$cont}}>{{$cont}}</option>
+                            @else
+                            <option value="{{$cont}}">{{$cont}}
+                           </option>
+                           @endif
+                           {{$cont--}}
+                           @endwhile
+                        </select>
+                        <button type="submit" class="btn btn-outline-dark btn-sm" name="search"><i
+                                class="material-icons">search</i></button>
+                     </div>
+                <canvas id="myChart_año" width="150" height="50"></canvas>
             </div>
 
         </div>
-    </div>
+                            {{-- Inicia la 3 grafica  --}}
+                                <div class="conteiner-fluid">
+                                    <div class="text-center">
+                                        <div id="tabla3" class="col-12 text-center">
+                                            <?php
+                                                $cont = date('Y');
+                                                ?>
+                                                <h3 style="font-family: cursive"><strong>Productos más comprados</strong></h3>
+                                        </form>
+
+                                            </div>
+                                        <canvas id="myChart_producto" width="150" height="50"></canvas>
+                                    </div>
+
+                                </div>
+
+
+
 @endsection
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -88,7 +121,7 @@
                 }
             }
         });
-
+                            //  Inicia la 2 grafica
         const ctxa = document.getElementById('myChart_año').getContext('2d');
         const myCharta = new Chart(ctxa, {
             type: 'bar',
@@ -97,6 +130,37 @@
                 datasets: [{
                     label: 'Total de compras',
                     data: cData.data2,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        // Inicia la 3 grafica
+        const ctxaa = document.getElementById('myChart_producto').getContext('2d');
+        const myChartaa = new Chart(ctxaa, {
+            type: 'bar',
+            data: {
+                labels: cData.label3,
+                datasets: [{
+                    label: 'Total de compras',
+                    data: cData.data3,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
