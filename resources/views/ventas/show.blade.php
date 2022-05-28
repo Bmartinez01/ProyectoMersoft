@@ -20,16 +20,16 @@
                         @foreach ($Venta as $venta)
 
                             <div class="row">
-                            <label for="pedido" class=" col-md-1 col-form-label text-dark control-label asterisco">#Pedido</label>
+                            <label for="pedido" class=" col-md-1 col-form-label text-dark ">#Pedido :</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" value="" readonly>
+                                    <input type="text" class="form-control" value="{{$venta->pedido_id}}" readonly>
                                     @if ($errors->has('Pedido'))
                                     <span class="error text-danger" for="input-Pedido">{{ $errors->first('Pedido') }}</span>
                                     @endif
                                     </div>
-                                <label for="cliente" class="offset-md-3 col-md-1 col-form-label text-dark control-label asterisco">Cliente</label>
+                                <label for="cliente" class="offset-md-3 col-md-1 col-form-label text-dark ">Cliente :</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" value="{{$ventas->nombre}} {{$ventas->apellido}}" readonly>
+                                    <input type="text" class="form-control" value="{{$venta->nombre}} {{$venta->apellido}}" readonly>
                                     @if ($errors->has('cliente'))
                                     <span class="error text-danger" for="input-cliente">{{ $errors->first('cliente') }}</span>
                                     @endif
@@ -61,19 +61,15 @@
                                 </table>
                             </div>
 
-                            <div class="row offset-md-5">
-                                <label for="valor_total" class="col-1 col-form-label control-label asterisco">Valor final </label>
-                                <div class="col-sm-2">
+                            <div class="row offset-md-6">
+                                <label for="valor_total" class="col-2 text-dark col-form-label ">Valor final :</label>
+                                <div class="col-sm-3">
                                 <input type="number" class="form-control" id="valor_total" value="{{$venta->valor_total}}" name="valor_total" readonly>
                                 </div>
                                 </div>
                         </div>
                         @endforeach
-<<<<<<< HEAD
                         @endforeach
-=======
-
->>>>>>> a337123a738ebf7c6b0b4d2c5e27171c77c70f26
                         <div class="card-footer ml-auto mr-auto col-md-1">
 
                                 <a href="{{route('ventas.index')}}" class="btn btn-facebook">Volver</a>
