@@ -15,7 +15,7 @@
           <div class="card-header card-header-info text-center">
             <h4 class="card-title"><strong>{{ __('Inicia Sesión') }}</strong></h4>
             @if (session('error'))
-            <div class="text-red-600">
+            <div class="text-danger">
             {{session('error')}}
             </div>
             @endif
@@ -32,6 +32,14 @@
             </div> --}}
           </div>
           <div class="card-body ">
+            @if (session('error'))
+            <div id="mensaj" class="alert alert-success alert-dismissible" role="success">
+                {{ session('error') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
           <h5 class="card-description text-center">{{ __('Ingresa tus Datos') }}</h5>
             <div class="bmd-form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
               <div class="input-group">

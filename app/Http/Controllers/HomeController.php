@@ -1,13 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User;
-use App\Models\Compra;
-use App\Models\Proveedore;
-use App\Models\Categoria;
-use App\Models\Producto;
-use App\Models\Cliente;
-use App\Models\Role;
+
 use DB;
 use Illuminate\Http\Request;
 

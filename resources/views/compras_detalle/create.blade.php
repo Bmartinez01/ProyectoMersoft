@@ -27,7 +27,7 @@
                                 </div>
                                 <label for="cliente"  class="col-sm-2 col-form-label offset-3 text-dark control-label asterisco">Proveedor</label>
                                 <div class="col-sm-3">
-                                    <select class="form-control js-example-basic-single" name="proveedor" id="proveedor">
+                                    <select class="form-control js-example-basic-single" name="proveedor" id="proveedor" value="{{old('proveedor')}}">
                                         <option value="">Seleccione el proveedor</option>
                                         @foreach ( $proveedores as $row )
                                         @if ($row->estado==0)
@@ -55,6 +55,9 @@
                                 <label for="valor_total" class="col-sm-2 offset-3 col-form-label control-label asterisco">Valor Total</label>
                                 <div class="col-sm-3">
                                 <input type="number" class="form-control" id="valor_total" name="valor_total" step="0.01" readonly>
+                                @if ($errors->has('valor_total'))
+                                <span class="error text-danger" for="input-valor_total">{{ $errors->first('valor_total') }}</span>
+                                @endif
                                 </div>
                                 <br>
                                 <br>
@@ -264,7 +267,7 @@
             $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });
-        
+
         </script>
 
 @endsection
