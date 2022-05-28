@@ -27,7 +27,8 @@ class UserEditRequest extends FormRequest
             'name' =>'required',
             'email' =>['required','unique:users,email,' . request()->route('user')->id],
             'password' =>'sometimes',
-            'estado' => ['nullable']
+            'estado' => ['nullable'],
+            'rol' => 'required'
         ];
     }
 }

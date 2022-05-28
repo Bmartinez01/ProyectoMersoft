@@ -94,18 +94,20 @@ class PedidoController extends Controller
     public function edit(Request $request, $id){
 
         $pedido = pedido::all();
+        $productos = Producto::all();
         $clientes = Cliente::all();
         $estado= Estados::all();
-        $productos = [];
+        $productos2 = [];
+
         $a = pedido::findOrFail($id);
         if($id != null){
-            $productos = Producto::select("productos.*", "pedidos_detalles.cantidad as cantidad_c")
+            $productos2 = Producto::select("productos.*", "pedidos_detalles.cantidad as cantidad_c")
             ->join("pedidos_detalles", "productos.id", "=", "pedidos_detalles.producto")
             ->where("pedidos_detalles.pedido", $id)
             ->get();
         }
 
-        return view('pedidos_detalles.edit', compact('productos','clientes','pedido','estado'));
+        return view('pedidos_detalles.edit', compact('productos','productos2','clientes','pedido','estado'));
     }
 
 
@@ -120,11 +122,11 @@ class PedidoController extends Controller
        $productox=[];
        $productox=$request->productox;
        $data=$request->all();
-       $pedido->update($data);
+
        $array = [];
        $array2 = [];
        $p = 0;
-    /* return response()->json($data); */
+
        if ($productox != null) {
          /* return response()->json($data); */
         for ($i=0; $i < strlen($productox) ; $i++) {
@@ -138,52 +140,54 @@ class PedidoController extends Controller
         for ($i=0; $i < count($array2) ; $i++) {
             $array[$i] = intval($array2[$i]);
         }
-
-
-        $pedido_p = DB::select('SELECT * FROM pedidos_detalles WHERE pedido = 1');
-        /* return response()->json($pedido_p); */
+        $pedido_p = DB::select("SELECT * FROM pedidos_detalles WHERE pedido = $pedido->id");
+        
         $p=0;
+            foreach ($pedido_p as $key) {
 
-        foreach ($pedido_p as $key) {
-            return response()->json($key->producto);
-            for ($i=0; $i < count($array) ; $i++) {
-                if ($key->producto == $array[$i]) {
-                    $consulta=DB::select('SELECT Stock FROM productos WHERE id=?', [$array[$i]]);
 
-                    $pe=$consulta[0]->Stock;
-                    if ($pe >=$key->cantidad) {
-                        $producto_borrar=DB::DELETE("DELETE FROM pedidos_detalles WHERE producto= $array[$i] and pedido = $id");
-                        $producto_edit=DB::UPDATE("UPDATE productos SET Stock = Stock + $key->cantidad WHERE id=?", [$array[$i]]);
+                for ($i=0; $i < count($array) ; $i++) {
+
+                    if ($key->producto == $array[$i]) {
+                        $consulta=DB::select('SELECT Stock FROM productos WHERE id=?', [$array[$i]]);
+
+
+                        $pe=$consulta[0]->Stock;
+                        if ($pe >=$key->cantidad) {
+
+                            $producto_borrar=DB::DELETE("DELETE FROM pedidos_detalles WHERE producto= $array[$i] and pedido = $id");
+                            $producto_edit=DB::UPDATE("UPDATE productos SET Stock = Stock + $key->cantidad WHERE id=?", [$array[$i]]);
+                        }
                     }
                 }
             }
-        }
+       }
+
+       if ($request->producto_id != null) {
+
+           $productos=[];
+           $producto2=$request->producto_id;
+           $cantidades=[];
+           $cantidad2=$request->cantidades;
+           /* $precios=[];
+           $precio2=$request->precio; */
+
+           for ($i=0; $i < count($producto2); $i++) {
+
+               $productos[$i]=intval($producto2[$i]);
+               $cantidades[$i]=intval($cantidad2[$i]);
+               /* $precio[$i]=intval($precio2[$i]); */
+           }
+
+           for ($i=0; $i < count($productos) ; $i++) {
+
+               $producto_insert=DB::insert('insert into pedidos_detalles(pedido, producto, cantidad) values(?, ?, ?)', [$id, $productos[$i], $cantidades[$i]]);
+               $producto_upd= DB::update("UPDATE productos SET Stock = Stock - $cantidades[$i] WHERE id=?", [$productos[$i]]);
+           }
 
        }
 
-       /* if ($request->producto != null) {
-           $productos=[];
-           $producto2=$request->producto;
-           $Stock=[];
-           $Stock2=$request->Stock;
-
-           $precio=[];
-           $precio2=$request->precio;
-
-           for ($i=0; $i < count($producto2); $i++) {
-               $productos[$i]=intval($producto2[$i]);
-               $Stock[$i]=intval($Stock2[$i]);
-               $precio[$i]=intval($precio2[$i]);
-           }
-
-           for ($i=0; $i < count($producto) ; $i++) {
-               $producto_insert=DB::insert("INSERT INTO pedidos_detalles(pedido, producto, cantidad) values(?, ?, ?)", $id, [$productos[$i]], [$Stock[$i]]);
-               $producto_upd= DB::update("UPDATE productos SET Stock = Stock + $Stock[$i] WHERE id=?", [$productos[$i]]);
-           }
-
-       } */
-
-
+       $pedido->update($data);
         return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado correctamente');
 
     }
