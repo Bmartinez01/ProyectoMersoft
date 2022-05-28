@@ -48,7 +48,11 @@
                                 </div>
                                 <label for="" class="col-sm-1 offset-4 col-form-label control-label">Iva</label>
                                 <div class="col-sm-3">
-                                <input type="number" class="form-control" id="iva" value="{{$compra->iva}}" name="valor_total" readonly>
+                                    @if ($compra->iva == 0)
+                                    <input type="number" class="form-control" id="iva" value="0" name="valor_total" readonly>
+                                    @else
+                                    <input type="number" class="form-control" id="iva" value="{{$compra->iva}}" name="valor_total" readonly>
+                                    @endif
                               </div>
                                 <label for="valor_total" class="col-sm-1 offset-4 col-form-label control-label">Valor Total</label>
                                 <div class="col-sm-3">

@@ -134,7 +134,7 @@ public function destroy(Compra $compra)
 
         }
 
-        $compras = DB::select("SELECT MonthName(fecha_compra) AS meses, SUM(valor_total) AS suma_compras FROM compras WHERE Year(fecha_compra) = $year GROUP BY MonthName(fecha_compra)  ORDER BY 1");
+        $compras = DB::select("SELECT MonthName(fecha_compra) AS meses, SUM(valor_total) AS suma_compras, Month(fecha_compra) AS mes FROM compras WHERE Year(fecha_compra) = $year GROUP BY mes,MonthName(fecha_compra) ORDER BY mes");
         $compras_años = DB::select("SELECT year(fecha_compra) AS años, SUM(valor_total) AS suma_compras FROM compras WHERE Year(fecha_compra) = $año GROUP BY year(fecha_compra)  ORDER BY year(fecha_compra)");
         $productos_c = DB::select("SELECT p.Nombre AS nombre, SUM(cantidad) AS cantidades FROM  compra__detalles  as c JOIN productos as p WHERE p.id = producto AND Year(c.created_at) = $año_pro GROUP BY p.Nombre,producto ORDER BY cantidades DESC LIMIT 5");
         $data = [];
@@ -153,8 +153,8 @@ public function destroy(Compra $compra)
         }
 
 
-        //  return response()->json($productos_c);
-          $data['data'] = json_encode($data);
+        $data['data'] = json_encode($data);
+        // return response()->json($data);
           return view('compras.charts', $data, compact('year','año','año_pro'));
     }
     // public function charts(Request $request){

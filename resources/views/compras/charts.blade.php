@@ -20,7 +20,7 @@
                         <?php
                         $cont = date('Y');
                         ?>
-                        <h3 style="font-family: cursive"><strong>Tabla por meses</strong></h3>
+                        <h3 style="font-family: cursive"><strong>Total compras por mes</strong></h3>
                         <select style="border-radius: 5px; width: 70px; text-align: center" id="selaño" name="selaño">
                         @while ($cont >=2000)
                          <option @if ($year == $cont)
@@ -48,7 +48,7 @@
                     <?php
                         $cont = date('Y');
                         ?>
-                        <h3 style="font-family: cursive"><strong>Tabla por año</strong></h3>
+                        <h3 style="font-family: cursive"><strong>Total compras por año</strong></h3>
                         <select style="border-radius: 5px; width: 70px; text-align: center" id="año" name="año">
                             @while ($cont >=2000)
                             <option @if ($año == $cont)
