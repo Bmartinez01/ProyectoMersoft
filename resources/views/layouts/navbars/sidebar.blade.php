@@ -141,6 +141,12 @@
                 <p>{{ __('Ventas') }}</p>
               </a>
             </li>
+            <li class="nav-item{{ $activePage == 'informes' ? ' active' : '' }}">
+              <a class="nav-link" href="{{route('ventas.charts')}}">
+                <i class="material-icons">bar_chart</i>
+                <p>{{ __('Informes') }}</p>
+              </a>
+            </li>
           </ul>
         </div>
       </li>

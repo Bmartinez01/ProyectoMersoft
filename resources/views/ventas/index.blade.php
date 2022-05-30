@@ -84,6 +84,15 @@
 
     <script>
     $(document).ready(function() {
+    function gettime()
+    {
+        var date = new Date();
+        // var newdate = (date.getHours() % 12 || 12) + "_" + date.getDay() + "_" + date.getSeconds();
+        var newdate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+        //setInterval(gettime, 1000);
+        return newdate;
+    }
+    $(document).ready(function() {
         $('#Venta').DataTable( {
         "language": {
             "lengthMenu": "Mostrar "+
