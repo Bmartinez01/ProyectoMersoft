@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'informes', 'titlePage' => 'Grafica de compras'])
+@extends('layouts.main', ['activePage' => 'informesv', 'titlePage' => 'Grafica de ventas'])
 @section('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
@@ -9,9 +9,9 @@
             <div class="row">
 
                 <div class="col-12 text-center mb-1">
-                    <form action="{{ route('compras.charts') }}" method="POST">
+                    <form action="{{ route('ventas.charts') }}" method="POST">
                         <div class="col-12 text-left">
-                            <a href="{{ route('compras.index') }}"><span class="material-icons">
+                            <a href="{{ route('ventas.index') }}"><span class="material-icons">
                                 arrow_back
                                 </span></a>
                         </div>
@@ -20,7 +20,7 @@
                         <?php
                         $cont = date('Y');
                         ?>
-                        <h3 style="font-family: cursive"><strong>Total compras por mes</strong></h3>
+                        <h3 style="font-family: cursive"><strong>Total de ventas por mes</strong></h3>
                         <select style="border-radius: 5px; width: 70px; text-align: center" id="selaño" name="selaño">
                         @while ($cont >=2000)
                          <option @if ($year == $cont)
@@ -48,7 +48,7 @@
                     <?php
                         $cont = date('Y');
                         ?>
-                        <h3 style="font-family: cursive"><strong>Total compras por año</strong></h3>
+                        <h3 style="font-family: cursive"><strong>Total ventas por año</strong></h3>
                         <select style="border-radius: 5px; width: 70px; text-align: center" id="año" name="año">
                             @while ($cont >=2000)
                             <option @if ($año == $cont)
@@ -90,7 +90,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-        // Inicia la grafica de compras por mes
+        // Inicia la grafica de ventas por mes
         var cData = JSON.parse(`<?php echo $data; ?>`)
         const ctx = document.getElementById('myChart').getContext('2d');
         const myChart = new Chart(ctx, {
@@ -98,7 +98,7 @@
             data: {
                 labels: cData.label1,
                 datasets: [{
-                    label: 'Total de compras',
+                    label: 'Total de ventas',
                     data: cData.data1,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -128,7 +128,7 @@
             data: {
                 labels: cData.label2,
                 datasets: [{
-                    label: 'Total de compras',
+                    label: 'Total de ventas',
                     data: cData.data2,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -159,7 +159,7 @@
             data: {
                 labels: cData.label3,
                 datasets: [{
-                    label: 'Total de compras',
+                    label: 'Total de ventas',
                     data: cData.data3,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',

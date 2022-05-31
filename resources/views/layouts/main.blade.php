@@ -77,7 +77,7 @@
             $(document).ready(function() {
                 setTimeout(function() {
                     // Declaramos la capa mediante una clase para ocultarlo
-                    $("#mensaj").fadeOut(1500);
+                    $("#mensaj").fadeOut(5000);
                 },3000);
             });
 

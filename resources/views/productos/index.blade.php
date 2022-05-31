@@ -71,7 +71,7 @@
                                             <th>Stock</th>
                                             <th>precio</th>
                                             <th>Estado</th>
-                                            <th class="text-right">Funciones</th>
+                                            <th class="text-right">Función</th>
                                         </thead>
                                         <tbody>
                                             @foreach ($productos as $Producto)

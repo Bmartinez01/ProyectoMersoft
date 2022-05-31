@@ -83,6 +83,14 @@
               </a>
             </li>
             @endcan
+            @can('compra_listar')
+            <li class="nav-item{{ $activePage == 'informes' ? ' active' : '' }}">
+              <a class="nav-link" href="{{route('compras.charts')}}">
+                <i class="material-icons">bar_chart</i>
+                <p>{{ __('Informes') }}</p>
+              </a>
+            </li>
+            @endcan
             @can('categoria_listar')
             <li class="nav-item{{ $activePage == 'categorias' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('categorias.index')}}">
@@ -126,11 +134,17 @@
                 <p>{{ __('Pedidos') }}</p>
               </a>
             </li>
-          @endcan  
+          @endcan
             <li class="nav-item{{ $activePage == 'ventas' ?' active' : '' }}">
               <a class="nav-link" href="{{route('ventas.index')}}">
                 <i class="material-icons">currency_exchange</i>
                 <p>{{ __('Ventas') }}</p>
+              </a>
+            </li>
+            <li class="nav-item{{ $activePage == 'informesv' ? ' active' : '' }}">
+              <a class="nav-link" href="{{route('ventas.charts')}}">
+                <i class="material-icons">bar_chart</i>
+                <p>{{ __('Informes') }}</p>
               </a>
             </li>
           </ul>

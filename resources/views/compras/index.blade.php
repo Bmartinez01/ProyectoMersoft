@@ -48,8 +48,6 @@
                                                 <div class="col-md-6">
                                                     <button type="submit" class="btn btn-outline-dark btn-sm" name="search" ><i class="material-icons">search</i></button>
                                                     <a href="{{route('compras.index')}}" class="btn btn-sm btn-warning">Regresar</a>
-                                                    <a href="{{route('compras.charts')}}" class="btn btn-sm btn-warning">Grafica</a>
-
                                                 </div>
 
                                             </div>

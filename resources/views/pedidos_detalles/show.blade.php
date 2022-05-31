@@ -23,7 +23,7 @@
                         @foreach ($pedido as $pedido)
 
                             <div class="row">
-                                <label for="cliente" class="col-md-1 col-form-label text-dark control-label asterisco">Cliente</label>
+                                <label for="cliente" class="col-md-1 col-form-label text-dark">Cliente :</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" value="{{$pedido->nombre}} {{$pedido->apellido}}" readonly>
                                     @if ($errors->has('cliente'))
@@ -31,7 +31,7 @@
                                     @endif
                             </div>
 
-                             <label for="estado" class="col-1 offset-1 col-form-label text-dark control-label asterisco">Estado</label>
+                             <label for="estado" class="col-1 offset-1 col-form-label text-dark ">Estado :</label>
                                 <div class="col-sm-3">
                                         <input type="text" class="form-control" value="{{($pedido->estado)}}" readonly >
 
@@ -42,15 +42,6 @@
                                 </div>
                             </div>
                             <br>
-                            {{-- <div class="row">
-                            <label for="estado" class="col-1 col-form-label text-dark control-label asterisco">Tipo</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control" value="{{($pedido->tipo)}}" readonly autofocus>
-                                    @if ($errors->has('estado'))
-                                    <span class="error text-danger" for="input-estado">{{ $errors->first('estado') }}</span>
-                                    @endif
-                            </div>
-                        </div> --}}
                             <br>
                             <br>
                             @endforeach
@@ -78,9 +69,9 @@
                                 </table>
                             </div>
 
-                            <div class="row offset-md-5">
-                                <label for="valor_total" class="col-3 col-form-label control-label asterisco">Valor final </label>
-                                <div class="col-sm-5">
+                            <div class="row offset-md-7">
+                                <label for="valor_total" class="col-3 col-form-label text-dark">Valor final :</label>
+                                <div class="col-sm-6">
                                 <input type="number" class="form-control" id="valor_total" value="{{$pedido->valor_total}}" name="valor_total" readonly>
                                 </div>
                                 </div>

@@ -14,7 +14,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <label for="documento" class="col-sm-2 col-form-label">Nombre</label>
+                                <label for="documento" class="col-sm-2 col-form-label control-label asterisco">Nombre</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="nombre" value="{{ old('nombre',$categoria->nombre) }}"  autofocus>
                                     @if ($errors->has('nombre'))
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="card-footer ml-auto mr-auto col-md-3">
-                            <button type="submit" class="btn btn-facebook">Actualizar</button>
+                            <button type="submit" class="btn btn-facebook">Enviar</button>
                             <div class="card-footer ml-auto mr-auto">
                             <a href="{{route('categorias.index')}}" class="btn btn-danger ">Cancelar</a>
                         </div>

@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('pedido_id');
             $table->unsignedBigInteger('cliente');
             $table->string('valor_total')->nullable();
-         
             $table->timestamps();
 
             $table->foreign('cliente')->references('id')->on('clientes');

@@ -122,15 +122,56 @@ public function destroy(Compra $compra)
         return view('compras.index', compact('compras'));
 
     }
-    public function charts(){
+    public function charts(Request $request){
         DB::statement("SET lc_time_names = 'es_MX'");
-        $compras = DB::select("SELECT DISTINCT MonthName(fecha_compra) AS meses, SUM(valor_total) AS numero_compras FROM compras WHERE MonthName(fecha_compra) IS NOT NULL GROUP BY MonthName(fecha_compra) ORDER BY SUM(valor_total) ASC");
+        $year = $request->selaño;
+        $año = $request->año;
+        $año_pro = date("Y");
+
+        if ($year == "" || $año == "" ){
+            $year = date("Y");
+            $año = date("Y");
+
+        }
+
+        $compras = DB::select("SELECT MonthName(fecha_compra) AS meses, SUM(valor_total) AS suma_compras, Month(fecha_compra) AS mes FROM compras WHERE Year(fecha_compra) = $year GROUP BY mes,MonthName(fecha_compra) ORDER BY mes");
+        $compras_años = DB::select("SELECT year(fecha_compra) AS años, SUM(valor_total) AS suma_compras FROM compras WHERE Year(fecha_compra) = $año GROUP BY year(fecha_compra)  ORDER BY year(fecha_compra)");
+        $productos_c = DB::select("SELECT p.Nombre AS nombre, SUM(cantidad) AS cantidades FROM  compra__detalles  as c JOIN productos as p WHERE p.id = producto AND Year(c.created_at) = $año_pro GROUP BY p.Nombre,producto ORDER BY cantidades DESC LIMIT 5");
         $data = [];
         foreach ($compras as $compra){
-            $data['label'][] = $compra->meses;
-            $data['data'][] = $compra->numero_compras;
+            $data['label1'][] = $compra->meses;
+            $data['data1'][] = $compra->suma_compras;
         }
+        foreach($compras_años as $compra_año){
+            $data['label2'][] = $compra_año->años;
+            $data['data2'][] = $compra_año->suma_compras;
+        }
+        foreach($productos_c as $producto){
+            $data['label3'][] = $producto->nombre;
+            $data['data3'][] = $producto->cantidades;
+
+        }
+
+
         $data['data'] = json_encode($data);
-        return view('compras.charts', $data);
+        // return response()->json($data);
+          return view('compras.charts', $data, compact('year','año','año_pro'));
     }
+    // public function charts(Request $request){
+    //     $year = $request->selaño;
+    //     if ($year == ""){
+    //          $year = date("Y");
+    //         }
+    //     DB::statement("SET lc_time_names = 'es_MX'");
+    //     $compras = DB::select("SELECT SUM(valor_total) as 'ct' from compras WHERE Year(fecha_compra) = $year UNION SELECT SUM(valor_total) as 'vt' FROM ventas WHERE Year(created_at) = $year");
+    //     $data = $compras;
+    //     foreach ($compras as $compra){
+    //          $data['label'][0] = "Compras Total";
+    //          $data['label'][1] = "Ventas Total";
+    //          $data['data'][] = $compra->ct;
+    //     }
+    //       $data['data'] = json_encode($data);
+    //       return view('compras.charts', $data);
+    //    // return response()->json($compras);
+    // }
 }

@@ -5,14 +5,11 @@
 @endsection
 @section('content')
 @if (count($productos) > 0)
-@foreach ($pedido as $pedido )
-@foreach ($clientes as $cliente)
-
 <div class="content">
     <div class="container-fluid">
         <div class="row">
         <div class="col-md-12">
-            <form action="{{route('pedidos.update', $pedido->id)}}" method="post" class="form-horizontal">
+            <form action="{{route('pedidos.update', $pedidos->id)}}" method="post" class="form-horizontal">
                 @csrf
                 @method('PUT')
             <div class="row">
@@ -24,20 +21,22 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
+                            @foreach ($clientes as $cliente)
                                 <label for="cliente" class="col-md-1 col-form-label text-dark control-label asterisco">Cliente</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" value="{{$cliente->nombre}} {{$cliente->apellido}}" readonly >
+                                    <input type="hidden" class="form-control" id="productox" name="productox">
                                     @if ($errors->has('cliente'))
                                     <span class="error text-danger" for="input-cliente">{{ $errors->first('cliente') }}</span>
                                     @endif
+                                    @endforeach
                             </div>
-
                              <label for="estado" class="col-1 offset-1 col-form-label text-dark control-label asterisco">Estado</label>
                                 <div class="col-sm-3">
                                     <select class="form-control" name="estado" id="estado" >
-                                        <option  value="{{old('Estado',$pedido->Estado)}}">Seleccione solo para modificar</option>
+                                        <option  value="">Seleccione solo para modificar</option>
                                         @foreach ( $estado as $row )
-                                        <option @if ($row->id==$pedido->estado)
+                                        <option @if ($row->id==$pedidos->estado)
                                             selected="true"
                                         @endif
 
@@ -76,8 +75,8 @@
                                     </thead>
                                     <tbody id="tblProductos">
 
-                                        @foreach ($productos as $row)
-                                        <tr id=tr-{{$row->id}}>
+                                        @foreach ($productos2 as $row)
+                                        <tr id="tr-{{$row->id}}">
                                             <td>{{ $row->Nombre}}</td>
                                             <td>{{ $row->cantidad_c}}</td>
                                             <td>{{ $row->precio}}</td>
@@ -87,9 +86,7 @@
                                             </td>
                                         </tr>
                                         @endforeach
-                                        @endforeach
 
-                                     @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -97,7 +94,7 @@
                             <div class="row offset-md-5">
                                 <label for="valor_total" class="col-3 col-form-label control-label asterisco">Valor final </label>
                                 <div class="col-sm-5">
-                                <input type="number" class="form-control" id="valor_total" value="{{$pedido->valor_total}}" name="valor_total" readonly>
+                                <input type="number" class="form-control" id="valor_total" value="{{$pedidos->valor_total}}" name="valor_total" readonly>
                                 </div>
                                 </div>
                         </div>
@@ -118,24 +115,7 @@
 @endif
 
 
-  <!-- Modal Eliminar -->
-  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ¿Desea eliminar el producto?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-info" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" id="btnEliminar" name="btnEliminar" class="btn btn-danger">Eliminar</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
 <div class="modal fade" id="Estados" tabindex="3" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -267,14 +247,28 @@
                 let precio = $("#producto option:selected").attr("precio");
                 $("#valor_unitario").val(precio);
             }
-
+            let array = [];
             function agregar_producto(){
                 let producto_id = $("#producto option:selected").val();
                 let producto_text = $("#producto option:selected").text();
                 let cantidad = $("#cantidad").val();
                 let precio = $("#valor_unitario").val();
-
                 if(cantidad > 0 && precio > 0){
+                    array.push(producto_id);
+
+                    for(var j = 0; j < array.length; j++){
+
+                        for(var i = j+1; i < array.length; i++){
+
+                            if(array[j] == array[i] && producto_id == array[i]){
+                                alert("El producto "+producto_text+" ya esta registrado en el pedido");
+                                 array.pop();
+                                die();
+                             }
+                         }
+                    }
+
+
                     $("#tblProductos").append(`
                         <tr id="tr-${producto_id}">
                             <td>${producto_text}</td>
@@ -307,12 +301,29 @@
                 $("#valor_unitario").val('');
             }
 
+            let productox=[];
             function eliminar_producto(id,subtotal){
-                alert("funciòn")
+
+                    id= id.toString();
+                    var index =array.indexOf(id);
+                    if (index !== -1) {
+                        array.splice(index, 1);
+                    }
+
+                    if (productox.includes(id, 0)) {
+
+                    }
+                    else{
+                        let nuevoproducto = productox.push(id);
+                    }
+                    console.log(productox);
+
+
                 $("#tr-"+id).remove();
 
                 let valor_total = $("#valor_total").val() || 0;
              $("#valor_total").val(parseInt(valor_total) - subtotal);
+             $("#productox").val(productox);
 
 
             }

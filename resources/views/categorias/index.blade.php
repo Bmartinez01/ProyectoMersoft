@@ -37,7 +37,7 @@
                                                 <th>ID</th>
                                                 <th>Nombre</th>
                                                 <th>Estado</th>
-                                                <th >Funciones</th>
+                                                <th >Función</th>
                                             </thead>
                                             <tbody>
                                                 @foreach ($categorias as $categoria)

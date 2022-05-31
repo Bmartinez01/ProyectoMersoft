@@ -28,20 +28,20 @@
                                 <div class="table-responsive">
                                     <table  id="Venta" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                         <thead class="text-white" id="fondo">
-                                        <th>#id</th>
 
-                                            <th>#pedido</th>
-                                            <th>fecha_venta</th>
+                                            <th>#id</th>
+                                            <th>#Pedido</th>
+                                            <th>Fecha Venta</th>
                                             <th>Cliente</th>
-                                            <th>valor total</th>
+                                            <th>Valor Total</th>
 
                                             <th class="text-right">Función</th>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 @foreach ($ventas as $venta)
-                                                <td>{{ $venta->id}}</td>
 
+                                                    <td>{{ $venta->id}}</td>
                                                     <td>{{ $venta->pedido_id}}</td>
                                                     <td>{{ $venta->created_at}}</td>
                                                     <td>{{ $venta->nombre}} {{$venta->apellido}}</td>
@@ -83,6 +83,15 @@
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
 
     <script>
+    $(document).ready(function() {
+    function gettime()
+    {
+        var date = new Date();
+        // var newdate = (date.getHours() % 12 || 12) + "_" + date.getDay() + "_" + date.getSeconds();
+        var newdate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+        //setInterval(gettime, 1000);
+        return newdate;
+    }
     $(document).ready(function() {
         $('#Venta').DataTable( {
         "language": {
