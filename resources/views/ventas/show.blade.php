@@ -22,7 +22,7 @@
                             <div class="row">
                             <label for="pedido" class=" col-md-1 col-form-label text-dark control-label asterisco">#Pedido</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" value="" readonly>
+                                    <input type="text" class="form-control" value="{{$venta->pedido_id}}" readonly>
                                     @if ($errors->has('Pedido'))
                                     <span class="error text-danger" for="input-Pedido">{{ $errors->first('Pedido') }}</span>
                                     @endif
@@ -48,8 +48,9 @@
 
                                     </thead>
                                     <tbody >
+                                    @foreach ($productos as $row)
                                         <tr>
-                                        @foreach ($productos as $row)
+
                                             <td>{{ $row->Nombre}}</td>
                                             <td>{{ $row->cantidad_c}}</td>
                                             <td>{{ $row->precio}}</td>

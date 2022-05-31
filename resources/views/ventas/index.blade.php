@@ -51,7 +51,7 @@
                                                     <td class="td-actions text-right">
 
 
-                                                    <a href="{{route('ventas.show', $venta->pedido_id)}}"
+                                                    <a href="{{route('ventas.show', $venta->id)}}"
                                                             class="btn btn-warning"><span class="material-icons">visibility </span></a>
 
                                                     </td>
