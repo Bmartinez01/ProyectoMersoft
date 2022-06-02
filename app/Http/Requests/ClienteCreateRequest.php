@@ -25,8 +25,8 @@ class ClienteCreateRequest extends FormRequest
     {
         return [
         'documento' => 'required|min:6|max:13|unique:clientes',
-        'nombre' => 'required|min:3|max:20|alpha',
-        'apellido' => 'required|min:4|max:50|alpha',
+        'nombre' => 'required|min:3|max:20',
+        'apellido' => 'required|min:4|max:50',
         'direccion' => 'required|min:7|max:50',
         'telefono' => 'required|min:4|max:50|',
         'email'=> 'required|email|unique:clientes',

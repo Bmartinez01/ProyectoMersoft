@@ -25,9 +25,9 @@ class ClienteEditRequest extends FormRequest
     {
         $cliente = $this->route('cliente');
         return [
-            'nombre' => ['required','min:3','alpha','max:20'],
+            'nombre' => ['required','min:3','max:20'],
             'documento' => ['required','min:6','max:13','unique:clientes,documento,' . request()->route('cliente')->id],
-            'apellido' => ['required','min:4','alpha','max:50'],
+            'apellido' => ['required','min:4','max:50'],
             'direccion' => ['required','min:7','max:50'],
             'telefono' => ['required','min:4','max:20'],
             'email'=> ['required','unique:clientes,email,' . request()->route('cliente')->id],

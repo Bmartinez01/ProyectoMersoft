@@ -25,7 +25,7 @@ class UserController extends Controller
     }
 
     public function store(UserCreateRequest $request){
-        $user = User::create($request->Only('name','email')
+        $user = User::create($request->Only('name','email','telefono','direccion')
     +[
         'password'=> bcrypt($request->input('password')),
     ]);
@@ -51,7 +51,7 @@ class UserController extends Controller
     public function update(UserEditRequest $request, user $user){
 
 
-        $data= $request->only('name', 'email','estado');
+        $data= $request->only('name', 'email','telefono','direccion','estado');
         $password=$request->input('password');
 
         if($password)

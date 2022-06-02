@@ -24,11 +24,13 @@ class UserEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' =>'required',
+            'name' =>'required|min:5|max:40|regex:/^[\pL\s\-]+$/u',
             'email' =>['required','unique:users,email,' . request()->route('user')->id],
             'password' =>'sometimes',
+            'telefono'=>'required|min:10|max:10',
+            'direccion'=>'required|min:7|max:50',
             'estado' => ['nullable'],
-            'rol' => 'required'
+
         ];
     }
 }

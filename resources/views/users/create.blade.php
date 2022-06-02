@@ -41,6 +41,24 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <label for="telefono" class="col-sm-3 col-form-label control-label asterisco">Teléfono</label>
+                                <div class="col-sm-7">
+                                    <input type="number" class="form-control" name="telefono" placeholder="Ingrese el teléfono" value="{{old('telefono')}} " >
+                                    @if ($errors->has('telefono'))
+                                    <span class="error text-danger" for="input-telefono">{{ $errors->first('telefono') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="direccion" class="col-sm-3 col-form-label control-label asterisco">Dirección</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="direccion" placeholder="Ingrese su dirección" value="{{old('direccion')}}">
+                                    @if ($errors->has('direccion'))
+                                    <span class="error text-danger" for="input-direccion">{{ $errors->first('direccion') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
                                 <label for="password" class="col-sm-3 col-form-label control-label asterisco">Contraseña</label>
                                 <div class="col-sm-7">
                                     <input type="password" class="form-control" name="password" placeholder="Ingrese su Contraseña" >

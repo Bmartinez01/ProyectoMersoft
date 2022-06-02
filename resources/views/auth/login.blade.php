@@ -14,11 +14,7 @@
         <div class="card card-login card-hidden mb-3  ">
           <div class="card-header card-header-info text-center">
             <h4 class="card-title"><strong>{{ __('Inicia Sesión') }}</strong></h4>
-            @if (session('error'))
-            <div class="text-danger">
-            {{session('error')}}
-            </div>
-            @endif
+
             {{-- <div class="social-line">
               <a href="#" class="btn btn-just-icon btn-link btn-white">
                 <i class="fa fa-facebook-square"></i>
@@ -33,7 +29,7 @@
           </div>
           <div class="card-body ">
             @if (session('error'))
-            <div id="mensaj" class="alert alert-success alert-dismissible" role="success">
+            <div id="mensaj" class="alert alert-danger alert-dismissible" role="success">
                 {{ session('error') }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="close">
                     <span aria-hidden="true">&times;</span>

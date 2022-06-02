@@ -38,10 +38,12 @@
                                             <th>No.</th>
                                             <th>Nombre</th>
                                             <th>Correo</th>
+                                            <th>Teléfono</th>
+                                            <th>Dirección</th>
                                             <th>Roles</th>
-                                            <th>Fecha</th>
+                                            {{-- <th>Fecha</th> --}}
                                             <th>Estado</th>
-                                            <th class="text-right">Función</th>
+                                            <th class="text-left">Función</th>
                                         </thead>
                                         <tbody>
                                             @foreach ($users as $user)
@@ -50,6 +52,8 @@
                                                 <td>{{$user->id}}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
+                                                <td>{{ $user->telefono }}</td>
+                                                <td>{{ $user->direccion }}</td>
                                                 <td>
                                                     @forelse ($user->roles as $role)
                                                     <span class="badge badge-info">{{ $role->name}}</span>
@@ -57,7 +61,7 @@
                                                     <span class="badge badge-danger">No hay Roles seleccionados</span>
                                                     @endforelse
                                                 </td>
-                                                <td>{{ $user->created_at }}</td>
+                                                {{-- <td>{{ $user->created_at }}</td> --}}
 
                                                 <td class="td-actions text-right">
                                                 @if ($user->estado==1)
@@ -66,7 +70,7 @@
                                                 </button>
 
                                                 @else
-                                                 <button type="button" class="btn btn-danger btn-sm">
+                                                <button type="button" class="btn btn-danger btn-sm">
                                                     Inactivo
                                                 </button>
 

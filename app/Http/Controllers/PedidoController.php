@@ -21,7 +21,7 @@ class PedidoController extends Controller
     public function index()
     {
 
-    $pedidos = DB::select("SELECT pedidos.id,pedidos.created_at,clientes.nombre as nombclient,clientes.apellido as apellclient ,valor_total,estados.Estado as estadoEst,estados.Tipo as tipoEst FROM pedidos INNER JOIN clientes ON cliente = clientes.id   INNER JOIN estados ON pedidos.estado = estados.id ");
+    $pedidos = DB::select("SELECT pedidos.id,pedidos.created_at,clientes.nombre as nombclient,clientes.apellido as apellclient ,valor_total,estados.Estado as estadoEst,estados.Tipo as tipoEst FROM pedidos INNER JOIN clientes ON cliente = clientes.id   INNER JOIN estados ON pedidos.estado = estados.id");
     // $productos = Producto::all();
 
 
@@ -141,7 +141,7 @@ class PedidoController extends Controller
             $array[$i] = intval($array2[$i]);
         }
         $pedido_p = DB::select("SELECT * FROM pedidos_detalles WHERE pedido = $pedido->id");
-        
+
         $p=0;
             foreach ($pedido_p as $key) {
 
