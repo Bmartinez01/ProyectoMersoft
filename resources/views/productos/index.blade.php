@@ -68,8 +68,8 @@
                                             <th>Código</th>
                                             <th>Nombre</th>
                                             <th>Categorías</th>
-                                            <th>Stock</th>
-                                            <th>precio</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
                                             <th>Estado</th>
                                             <th class="text-right">Función</th>
                                         </thead>

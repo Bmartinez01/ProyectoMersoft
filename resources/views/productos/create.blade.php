@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label for="Stock" class="col-sm-2 col-form-label control-label asterisco">Stock</label>
+                        <label for="Stock" class="col-sm-2 col-form-label control-label asterisco">Cantidad</label>
                         <div class="col-sm-7">
                         <input type="number" class="form-control" name="Stock" placeholder="Ingrese su Stock" value="{{old('Stock')}}">
                         @if ($errors->has('Stock'))

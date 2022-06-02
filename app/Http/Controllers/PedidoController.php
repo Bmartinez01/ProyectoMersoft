@@ -92,10 +92,10 @@ class PedidoController extends Controller
     }
 
     public function edit(Request $request, $id){
-      
+
         $pedidos = pedido::findOrfail($id);
+        $clientes=DB::select("SELECT nombre,apellido FROM clientes WHERE id = $pedidos->cliente");
         $productos = Producto::all();
-        $clientes = Cliente::all();
         $estado= Estados::all();
         $productos2 = [];
         // return response()->json($pedido);
@@ -141,7 +141,7 @@ class PedidoController extends Controller
             $array[$i] = intval($array2[$i]);
         }
         $pedido_p = DB::select("SELECT * FROM pedidos_detalles WHERE pedido = $pedidos->id");
-        
+
         $p=0;
             foreach ($pedido_p as $key) {
 
@@ -156,7 +156,7 @@ class PedidoController extends Controller
                         if ($pe >=$key->cantidad) {
 
                             $producto_borrar=DB::DELETE("DELETE FROM pedidos_detalles WHERE producto= $array[$i] and pedido = $id");
-                            
+
                             $producto_edit=DB::UPDATE("UPDATE productos SET Stock = Stock + $key->cantidad WHERE id=?", [$array[$i]]);
                         }
                         else{
@@ -194,7 +194,7 @@ class PedidoController extends Controller
 
        }
        $pedidos->update($data);
-    //    return response()->json($pedidos); 
+    //    return response()->json($pedidos);
        if($pedidos["estado"]==6 || $pedidos["estado"]==1 ){
 
         $ventas=DB::insert("INSERT INTO ventas ( cliente, valor_total, pedido_id, created_at) select cliente, valor_total, id, created_at  from pedidos where pedidos.id= $pedidos->id");

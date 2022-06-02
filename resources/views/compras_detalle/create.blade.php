@@ -140,15 +140,15 @@
                     @endif
             </div>
             </div>
-            
-            <div class="row">               
+
+            <div class="row">
                 <label for="precio" class="col-sm-3 col-form-label control-label asterisco">Valor c/u</label>
                 <div class="col-sm-7">
                 <input type="number" class="form-control" id="precio"  name="precio" placeholder="Ingrese su precio" >
                 @if ($errors->has('precio'))
                 <span class="error text-danger" for="input-precio">{{ $errors->first('precio') }}</span>
                 @endif
-            </div>           
+            </div>
         </div>
             </div>
             <div class="modal-footer">

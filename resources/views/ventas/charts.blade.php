@@ -74,7 +74,7 @@
                                             <?php
                                                 $cont = date('Y');
                                                 ?>
-                                                <h3 style="font-family: cursive"><strong>Productos más comprados</strong></h3>
+                                                <h3 style="font-family: cursive"><strong>Productos más vendidos</strong></h3>
                                         </form>
 
                                             </div>

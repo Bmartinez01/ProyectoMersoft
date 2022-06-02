@@ -21,16 +21,20 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                            @foreach ($clientes as $cliente)
+
                                 <label for="cliente" class="col-md-1 col-form-label text-dark control-label asterisco">Cliente</label>
                                 <div class="col-sm-3">
+                                    @foreach ( $clientes as $cliente )
+
                                     <input type="text" class="form-control" value="{{$cliente->nombre}} {{$cliente->apellido}}" readonly >
+                                    @endforeach
+
                                     <input type="hidden" class="form-control" id="productox" name="productox">
                                     @if ($errors->has('cliente'))
                                     <span class="error text-danger" for="input-cliente">{{ $errors->first('cliente') }}</span>
                                     @endif
-                                    @endforeach
-                            </div>
+                                </div>
+
                              <label for="estado" class="col-1 offset-1 col-form-label text-dark control-label asterisco">Estado</label>
                                 <div class="col-sm-3">
                                     <select class="form-control" name="estado" id="estado" >

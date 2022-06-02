@@ -95,7 +95,7 @@
             <li class="nav-item{{ $activePage == 'categorias' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('categorias.index')}}">
                 <i class="material-icons">receipt_long</i>
-                  <p>{{ __('Categorias') }}</p>
+                  <p>{{ __('Categorías') }}</p>
               </a>
             </li>
             @endcan

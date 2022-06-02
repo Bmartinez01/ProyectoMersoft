@@ -40,10 +40,10 @@
                                                 <th>Nombre</th>
                                                 <th>Apellido</th>
                                                 <th>Empresa</th>
-                                                <th>Categoria</th>
-                                                <th>Direccion</th>
-                                                <th>Telefono</th>
-                                                <th>Email</th>
+                                                <th>Categoría</th>
+                                                <th>Dirección</th>
+                                                <th>Teléfono</th>
+                                                <th>Correo</th>
                                                 <th>Estado</th>
                                                 <th >Función</th>
                                             </thead>

@@ -117,8 +117,7 @@ public function destroy(Compra $compra)
         $method = $request->all();
         $from = $request->input('from');
         $to   = $request->input('to');
-        $compras = DB::select("SELECT compras.id, recibo,fecha_compra,proveedores.nombre as nombreprov ,proveedores.apellido as apelliprov, valor_total FROM compras INNER JOIN proveedores ON proveedor = compras.fecha_compra  BETWEEN '$from' and '$to'");
-
+        $compras = DB::select("SELECT compras.id, recibo,fecha_compra,proveedores.nombre as nombreprov ,proveedores.apellido as apelliprov, valor_total FROM compras JOIN proveedores ON compras.proveedor = proveedores.id WHERE compras.fecha_compra  BETWEEN '$from' and '$to'");
         return view('compras.index', compact('compras'));
 
     }
