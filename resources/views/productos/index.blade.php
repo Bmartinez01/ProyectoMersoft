@@ -79,7 +79,7 @@
 
 
                                                 <td>{{ $Producto->id}}</td>
-                                                <td>{{ $Producto->Nombre }}</td>
+                                                <td>{{ $Producto->Nombre}} {{$Producto->unidad}}</td>
                                                 <td>{{ $Producto->nombrecat}}</td>
                                                 <td>{{ $Producto->Stock}}</td>
                                                 <td>{{ $Producto->precio}}</td>

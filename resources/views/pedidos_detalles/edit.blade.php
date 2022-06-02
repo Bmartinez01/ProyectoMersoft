@@ -81,7 +81,7 @@
 
                                         @foreach ($productos2 as $row)
                                         <tr id="tr-{{$row->id}}">
-                                            <td>{{ $row->Nombre}}</td>
+                                            <td>{{ $row->Nombre}} {{$row->unidad}}</td>
                                             <td>{{ $row->cantidad_c}}</td>
                                             <td>{{ $row->precio}}</td>
                                             <td>{{ $row->precio * $row->cantidad_c}}</td>
@@ -206,7 +206,7 @@
                         @if ($row->estado==0)
                         @continue
                         @endif
-                        <option precio="{{$row->precio}}" value="{{$row->id}}">{{$row->Nombre}}</option>
+                        <option precio="{{$row->precio}}" value="{{$row->id}}">{{$row->Nombre}} {{$row->unidad}}</option>
                         @endforeach
                     </select>
                     @if ($errors->has('producto'))

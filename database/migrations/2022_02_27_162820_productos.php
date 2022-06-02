@@ -18,7 +18,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('Nombre');
             $table->bigInteger('Categorías')->unsigned();
-            $table->string('Stock');
+            $table->string('Stock')->default(0);
             $table->string('precio');
             $table->boolean('estado')->nullable()->default(1);
             $table->timestamps();

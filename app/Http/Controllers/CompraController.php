@@ -135,7 +135,7 @@ public function destroy(Compra $compra)
 
         $compras = DB::select("SELECT MonthName(fecha_compra) AS meses, SUM(valor_total) AS suma_compras, Month(fecha_compra) AS mes FROM compras WHERE Year(fecha_compra) = $year GROUP BY mes,MonthName(fecha_compra) ORDER BY mes");
         $compras_años = DB::select("SELECT year(fecha_compra) AS años, SUM(valor_total) AS suma_compras FROM compras WHERE Year(fecha_compra) = $año GROUP BY year(fecha_compra)  ORDER BY year(fecha_compra)");
-        $productos_c = DB::select("SELECT p.Nombre AS nombre, SUM(cantidad) AS cantidades FROM  compra__detalles  as c JOIN productos as p WHERE p.id = producto AND Year(c.created_at) = $año_pro GROUP BY p.Nombre,producto ORDER BY cantidades DESC LIMIT 5");
+        $productos_c = DB::select("SELECT  p.Nombre AS nombre,  p.unidad as unidad, SUM(cantidad) AS cantidades FROM  compra__detalles  as c JOIN productos as p WHERE p.id = producto AND Year(c.created_at) = $año_pro GROUP BY p.unidad,p.Nombre,producto ORDER BY cantidades DESC LIMIT 5");
         $data = [];
         foreach ($compras as $compra){
             $data['label1'][] = $compra->meses;
@@ -146,7 +146,7 @@ public function destroy(Compra $compra)
             $data['data2'][] = $compra_año->suma_compras;
         }
         foreach($productos_c as $producto){
-            $data['label3'][] = $producto->nombre;
+            $data['label3'][] = $producto->nombre." ".$producto->unidad;
             $data['data3'][] = $producto->cantidades;
 
         }

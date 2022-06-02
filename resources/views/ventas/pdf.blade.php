@@ -22,7 +22,7 @@
         thead{
             background-color: rgb(182, 189, 188);
         }
-        
+
         #estado{
             margin-left: 294px;
             border:0;
@@ -38,7 +38,7 @@
         #valor{
             border:0;
         }
-        
+
     </style>
 
 @if (count($productos) > 0)
@@ -66,7 +66,7 @@
                                     <input type="text" id="estad" class="form-control" value="{{($pedido->estado)}}" readonly >
 
                                 </div>
-                                
+
                             </div>
                             <div class="row offset-md-5">
                                 <label for="valor_total" class="col-3 col-form-label control-label asterisco">Valor final: </label>
@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                             <br>
-                            
+
                             <br>
                             <br>
                             @endforeach
@@ -92,7 +92,7 @@
                                     <tbody >
                                     <tr>
                                         @foreach ($productos as $row)
-                                            <td>{{ $row->Nombre}}</td>
+                                            <td>{{ $row->Nombre}} {{$row->unidad}}</td>
                                             <td>{{ $row->cantidad_c}}</td>
                                             <td>{{ $row->precio}}</td>
                                             <td>{{ $row->precio * $row->cantidad_c}}</td>
@@ -103,9 +103,9 @@
                                 </table>
                             </div>
 
-                           
+
                         </div>
-                        
+
                     </div>
 
                 </div>
@@ -114,7 +114,7 @@
      </div>
 
 
-@endif    
+@endif
 </body>
 
 </html>

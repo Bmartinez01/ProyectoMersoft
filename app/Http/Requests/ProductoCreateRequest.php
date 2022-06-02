@@ -24,10 +24,10 @@ class ProductoCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            
-            'Nombre' => 'required|min:4|max:20',
+
+            'Nombre' => 'required|min:4|max:20|unique:productos',
             'Categorías' => 'required|min:1|max:20',
-            'Stock' => 'required|min:1|max:20',
+            'unidad' => 'required',
             'Precio' => 'required|min:1|max:20',
             'estado' => 'nullable'
 

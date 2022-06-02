@@ -138,7 +138,7 @@
                         @if ($row->estado==0)
                         @continue
                         @endif
-                        <option precio="{{$row->precio}}" value="{{$row->id}}">{{$row->Nombre}}</option>
+                        <option precio="{{$row->precio}}" value="{{$row->id}}">{{$row->Nombre}} {{$row->unidad}}</option>
                         @endforeach
                     </select>
                     @if ($errors->has('producto'))

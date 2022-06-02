@@ -74,7 +74,7 @@
                                     <tbody>
                                         <tr>
                                             @foreach ($productos as $row)
-                                            <td>{{ $row->Nombre}}</td>
+                                            <td>{{ $row->Nombre}} {{$row->unidad}}</td>
                                             <td>{{ $row->cantidad_c}}</td>
                                             <td>{{ $row->precios}}</td>
                                             <td>{{ $row->precios * $row->cantidad_c}}</td>

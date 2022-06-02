@@ -132,7 +132,7 @@
                         @if ($row->estado==0)
                         @continue
                         @endif
-                        <option value="{{$row->id}}">{{$row->Nombre}}</option>
+                        <option value="{{$row->id}}">{{$row->Nombre}} {{$row->unidad}}</option>
                         @endforeach
                     </select>
                     @if ($errors->has('producto'))
@@ -195,7 +195,7 @@
                                 ${producto_text}
 
                             </td>
-                            <td contenteditable='true'>${cantidad}</td>
+                            <td>${cantidad}</td>
                             <td>${precio}</td>
                             <td>${parseInt(precio) * parseInt(cantidad)}</td>
                             <td>
