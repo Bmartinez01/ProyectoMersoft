@@ -29,7 +29,7 @@ class ClienteCreateRequest extends FormRequest
         'apellido' => 'required|min:4|max:50|regex:/^[\pL\s\-]+$/u',
         'direccion' => 'required|min:7|max:50',
         'telefono' => 'required|min:10|max:10|',
-        'email'=> 'required|email|unique:clientes',
+        'email'=> 'required|email|unique:clientes|not_regex:/^.+$/i',
         'estado' => 'nullable'
         ];
     }

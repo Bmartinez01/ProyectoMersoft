@@ -26,13 +26,13 @@ class ProveedorCreateRequest extends FormRequest
         return [
             
         'nit_empresa' => 'required|min:3|max:13|unique:proveedores',
-        'nombre' => 'required|min:3|max:20',
-        'apellido' => 'required|min:4|max:50',
-        'empresa' => 'required|min:4|max:50',
+        'nombre' => 'required|min:3|max:20|regex:/^[\pL\s\-]+$/u',
+        'apellido' => 'required|min:4|max:50|regex:/^[\pL\s\-]+$/u',
+        'empresa' => 'required|min:3|max:50',
         'categoria_id' => 'required',
         'direccion' => 'required|min:7|max:50',
-        'telefono' => 'required|min:4|max:50',
-        'email'=> 'required|email|unique:proveedores',
+        'telefono' => 'required|min:10|max:10',
+        'email'=> 'required|email|unique:proveedores|not_regex:/^.+$/i',
         'estado' => 'nullable'
         ];
     }

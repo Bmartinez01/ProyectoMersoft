@@ -53,7 +53,8 @@
 
                                                     <a href="{{route('ventas.show', $venta->id)}}"
                                                             class="btn btn-warning"><span class="material-icons">visibility </span></a>
-
+                                                            <a href="{{route('ventas.pdf', $venta->id)}}"
+                                                            class="btn btn-outline-danger"><span class="material-icons">picture_as_pdf </span></a>
                                                     </td>
 
 

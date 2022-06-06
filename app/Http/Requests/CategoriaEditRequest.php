@@ -26,7 +26,7 @@ class CategoriaEditRequest extends FormRequest
         $categoria = $this->route('categoria');
         return [
             //
-            'nombre' => ['required','min:4','max:20','unique:categorias,nombre,' . request()->route('categoria')->id]
+            'nombre' => ['required','min:4','max:20','regex:/^[\pL\s\-]+$/u','unique:categorias,nombre,' . request()->route('categoria')->id]
 
 
 

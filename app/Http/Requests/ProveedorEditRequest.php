@@ -26,13 +26,13 @@ class ProveedorEditRequest extends FormRequest
         
         return [
         'nit_empresa' => ['required','min:3','max:13','unique:proveedores,nit_empresa,'. request()->route('proveedore')->id],    
-        'nombre' => ['required','min:3','max:20'],
-        'apellido' => ['required','min:4','max:50'],
-        'empresa' => ['required','min:4','max:50'],
+        'nombre' => ['required','min:3','max:20','regex:/^[\pL\s\-]+$/u'],
+        'apellido' => ['required','min:4','max:50','regex:/^[\pL\s\-]+$/u'],
+        'empresa' => ['required','min:3','max:50'],
         'categoria_id' => ['required'],
         'direccion' => ['required','min:7','max:50'],
-        'telefono' => ['required','min:4','max:20'],
-        'email'=> ['required','unique:proveedores,email,' . request()->route('proveedore')->id],
+        'telefono' => ['required','min:1','max:1'],
+        'email'=> ['required','not_regex:/^.+$/i','unique:proveedores,email,' . request()->route('proveedore')->id],
         'estado' => ['nullable']   
         ];
         

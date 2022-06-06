@@ -25,7 +25,7 @@ class UserEditRequest extends FormRequest
     {
         return [
             'name' =>'required',
-            'email' =>['required','unique:users,email,' . request()->route('user')->id],
+            'email' =>['required','not_regex:/^.+$/i','unique:users,email,' . request()->route('user')->id],
             'password' =>'sometimes',
             'estado' => ['nullable'],
             'rol' => 'required'

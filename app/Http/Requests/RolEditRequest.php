@@ -26,7 +26,7 @@ class RolEditRequest extends FormRequest
        
         return [
             //
-            'name' => ['required','min:4','max:20','unique:roles,name,' . request()->route('role')->id]
+            'name' => ['required','min:4','max:20','regex:/^[\pL\s\-]+$/u','unique:roles,name,' . request()->route('role')->id]
         ];
     }
     public function messages()
