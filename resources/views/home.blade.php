@@ -61,7 +61,7 @@
                 </div>
                 @foreach ($categorias as $categoria)
                 <br>
-                <h4>Categorìas registradas</h4>
+                <h4>Categorías registradas</h4>
                 <span class="h2"  id="board"> {{$categoria->c}} </span>
                 @endforeach
             </div>

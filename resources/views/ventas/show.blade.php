@@ -48,15 +48,16 @@
 
                                     </thead>
                                     <tbody >
+                                    @foreach ($productos as $row)
                                         <tr>
-                                        @foreach ($productos as $row)
-                                            <td>{{ $row->Nombre}}</td>
+
+                                            <td>{{ $row->Nombre}} {{$row->unidad}}</td>
                                             <td>{{ $row->cantidad_c}}</td>
                                             <td>{{ $row->precio}}</td>
                                             <td>{{ $row->precio * $row->cantidad_c}}</td>
 
                                         </tr>
-
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -68,7 +69,7 @@
                                 </div>
                                 </div>
                         </div>
-                        @endforeach
+
                         @endforeach
                         <div class="card-footer ml-auto mr-auto col-md-1">
 

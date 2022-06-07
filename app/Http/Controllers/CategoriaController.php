@@ -30,10 +30,10 @@ class CategoriaController extends Controller
 
            'nombre' => 'required|min:4|max:20|unique:categorias'
          ]); */
-    
-        
+
+
       Categoria::create($request->all());
-      return redirect()->route('categorias.index')->with('success', 'Categoria creada correctamente');
+      return redirect()->route('categorias.index')->with('success', 'Categoría creada correctamente');
     }
 
     public function edit(Categoria $categoria)
@@ -46,7 +46,7 @@ class CategoriaController extends Controller
     {
         $datos = $request->all();
         $categoria->update($datos);
-        return redirect()->route('categorias.index')->with('success', 'Categoria actualizada correctamente');
+        return redirect()->route('categorias.index')->with('success', 'Categoría actualizada correctamente');
 
     }
 }

@@ -57,12 +57,21 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label for="Stock" class="col-sm-2 col-form-label control-label asterisco">Stock</label>
+                        <label for="unidad" class="col-sm-2 col-form-label control-label asterisco">Unidad</label>
                         <div class="col-sm-7">
-                        <input type="number" class="form-control" name="Stock" placeholder="Ingrese su Stock" value="{{old('Stock')}}">
-                        @if ($errors->has('Stock'))
-                        <span class="error text-danger" for="input-Stock">{{ $errors->first('Stock') }}</span>
-                        @endif
+                            <select class="form-control" name="unidad" id="unidad">
+                                <option value="">Seleccione la unidad</option>
+                                <option value="unidad(es)">Unidad(es)</option>
+                                <option value="gramos">Gramos</option>
+                                <option value="libra(s)">Libra(s)</option>
+                                <option value="kilo(s)">Kilo(s)</option>
+                                <option value="litro(s)">Litro(s)</option>
+                                <option value="mililitros">Mililitros</option>
+
+                            </select>
+                            @if ($errors->has('Categorías'))
+                            <span class="error text-danger" for="input-Categorías">{{ $errors->first('Categorías') }}</span>
+                            @endif
                     </div>
                 </div>
                 <div class="row">

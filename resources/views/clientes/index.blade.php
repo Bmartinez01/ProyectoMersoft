@@ -41,7 +41,7 @@
                                             <th>Apellido</th>
                                             <th>Dirección</th>
                                             <th>Celular</th>
-                                            <th>Email</th>
+                                            <th>Correo</th>
                                             <th>Estado</th>
                                             <th class="text-right">Función</th>
                                         </thead>

@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'ventas', 'titlePage' => 'ventas'])
+@extends('layouts.main', ['activePage' => 'ventas', 'titlePage' => 'Ventas'])
 @section('css')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" >
@@ -83,6 +83,15 @@
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
 
     <script>
+    $(document).ready(function() {
+    function gettime()
+    {
+        var date = new Date();
+        // var newdate = (date.getHours() % 12 || 12) + "_" + date.getDay() + "_" + date.getSeconds();
+        var newdate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+        //setInterval(gettime, 1000);
+        return newdate;
+    }
     $(document).ready(function() {
         $('#Venta').DataTable( {
         "language": {

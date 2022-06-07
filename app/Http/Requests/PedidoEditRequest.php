@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductoEditRequest extends FormRequest
+class PedidoEditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,18 @@ class ProductoEditRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-
-            'Nombre' => 'required|min:4|max:20|unique:productos',
-            'Categorías' => 'required|min:1|max:20',
-            'unidad' => 'required',
-            'Precio' => 'required',
-            'estado' => 'nullable'
-
+            // 'cliente' => 'required',
+            'cantidad' => 'nullable',
+            'producto' => 'nullable',
+            'valor_unitario'=> 'nullable',
+            'valor_total'=> 'required|min:3',
+            'estado' => 'required',
+        ];
+    }
+    public function messages()
+    {
+        return [
+        'valor_total.min' => 'Este campo debe contener un valor mayor a 0'
         ];
     }
 }

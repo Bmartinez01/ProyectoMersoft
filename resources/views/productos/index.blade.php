@@ -68,10 +68,10 @@
                                             <th>Código</th>
                                             <th>Nombre</th>
                                             <th>Categorías</th>
-                                            <th>Stock</th>
-                                            <th>precio</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
                                             <th>Estado</th>
-                                            <th class="text-right">Funciones</th>
+                                            <th class="text-right">Función</th>
                                         </thead>
                                         <tbody>
                                             @foreach ($productos as $Producto)
@@ -79,7 +79,7 @@
 
 
                                                 <td>{{ $Producto->id}}</td>
-                                                <td>{{ $Producto->Nombre }}</td>
+                                                <td>{{ $Producto->Nombre}} {{$Producto->unidad}}</td>
                                                 <td>{{ $Producto->nombrecat}}</td>
                                                 <td>{{ $Producto->Stock}}</td>
                                                 <td>{{ $Producto->precio}}</td>

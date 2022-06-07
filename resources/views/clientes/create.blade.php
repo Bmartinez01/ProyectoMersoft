@@ -52,7 +52,7 @@
                     <div class="row">
                         <label for="direccion" class="col-sm-2 col-form-label control-label asterisco">Dirección</label>
                         <div class="col-sm-7">
-                        <input type="text" class="form-control" name="direccion" placeholder="Ingrese su direccion" value="{{old('direccion')}}">
+                        <input type="text" class="form-control" name="direccion" placeholder="Ingrese su dirección" value="{{old('direccion')}}">
                         @if ($errors->has('direccion'))
                         <span class="error text-danger" for="input-direccion">{{ $errors->first('direccion') }}</span>
                         @endif
@@ -68,9 +68,9 @@
                 </div>
             </div>
             <div class="row">
-                <label for="email" class="col-sm-2 col-form-label control-label asterisco">Email</label>
+                <label for="email" class="col-sm-2 col-form-label control-label asterisco">Correo</label>
                 <div class="col-sm-7">
-                <input type="email" class="form-control" name="email" placeholder="Ingrese su email" value="{{old('email')}}">
+                <input type="email" class="form-control" name="email" placeholder="Ingrese su correo" value="{{old('email')}}">
                 @if ($errors->has('email'))
                 <span class="error text-danger" for="input-email">{{ $errors->first('email') }}</span>
                 @endif

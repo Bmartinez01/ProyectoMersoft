@@ -5,14 +5,11 @@
 @endsection
 @section('content')
 @if (count($productos) > 0)
-@foreach ($pedido as $pedido )
-@foreach ($clientes as $cliente)
-
 <div class="content">
     <div class="container-fluid">
         <div class="row">
         <div class="col-md-12">
-            <form action="{{route('pedidos.update', $pedido->id)}}" method="post" class="form-horizontal">
+            <form action="{{route('pedidos.update', $pedidos->id)}}" method="post" class="form-horizontal">
                 @csrf
                 @method('PUT')
             <div class="row">
@@ -24,21 +21,26 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
+
                                 <label for="cliente" class="col-md-1 col-form-label text-dark control-label asterisco">Cliente</label>
                                 <div class="col-sm-3">
+                                    @foreach ( $clientes as $cliente )
+
                                     <input type="text" class="form-control" value="{{$cliente->nombre}} {{$cliente->apellido}}" readonly >
+                                    @endforeach
+
                                     <input type="hidden" class="form-control" id="productox" name="productox">
                                     @if ($errors->has('cliente'))
                                     <span class="error text-danger" for="input-cliente">{{ $errors->first('cliente') }}</span>
                                     @endif
-                            </div>
+                                </div>
 
                              <label for="estado" class="col-1 offset-1 col-form-label text-dark control-label asterisco">Estado</label>
                                 <div class="col-sm-3">
                                     <select class="form-control" name="estado" id="estado" >
-                                        <option  value="{{old('Estado',$pedido->Estado)}}">Seleccione solo para modificar</option>
+                                        <option  value="">Seleccione solo para modificar</option>
                                         @foreach ( $estado as $row )
-                                        <option @if ($row->id==$pedido->estado)
+                                        <option @if ($row->id==$pedidos->estado)
                                             selected="true"
                                         @endif
 
@@ -79,7 +81,7 @@
 
                                         @foreach ($productos2 as $row)
                                         <tr id="tr-{{$row->id}}">
-                                            <td>{{ $row->Nombre}}</td>
+                                            <td>{{ $row->Nombre}} {{$row->unidad}}</td>
                                             <td>{{ $row->cantidad_c}}</td>
                                             <td>{{ $row->precio}}</td>
                                             <td>{{ $row->precio * $row->cantidad_c}}</td>
@@ -88,9 +90,7 @@
                                             </td>
                                         </tr>
                                         @endforeach
-                                        @endforeach
 
-                                     @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -98,7 +98,10 @@
                             <div class="row offset-md-5">
                                 <label for="valor_total" class="col-3 col-form-label control-label asterisco">Valor final </label>
                                 <div class="col-sm-5">
-                                <input type="number" class="form-control" id="valor_total" value="{{$pedido->valor_total}}" name="valor_total" readonly>
+                                <input type="number" class="form-control" id="valor_total" value="{{$pedidos->valor_total}}" name="valor_total" readonly>
+                                @if ($errors->has('valor_total'))
+                                    <span class="error text-danger" for="input-valor_total">{{ $errors->first('valor_total') }}</span>
+                                    @endif
                                 </div>
                                 </div>
                         </div>
@@ -206,7 +209,7 @@
                         @if ($row->estado==0)
                         @continue
                         @endif
-                        <option precio="{{$row->precio}}" value="{{$row->id}}">{{$row->Nombre}}</option>
+                        <option precio="{{$row->precio}}" value="{{$row->id}}">{{$row->Nombre}} {{$row->unidad}}</option>
                         @endforeach
                     </select>
                     @if ($errors->has('producto'))

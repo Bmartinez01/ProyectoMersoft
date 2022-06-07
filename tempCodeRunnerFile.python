@@ -1,1 +1,6 @@
-print("Que Bendicion")
+Num1=int(input("Digite el primer numero"))
+Num2=int(input("Digite el segundo numero"))
+Num3=int(input("Digite el tercer numero"))
+if Num1 < Num2 and Num3 
+Print(f"El numero (Num1") Es menor que el numero (Num2) y (Num3)")
+Elif Num2< Num1 and Num3

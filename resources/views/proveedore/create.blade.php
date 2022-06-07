@@ -86,9 +86,9 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="email" class="col-sm-2 col-form-label control-label asterisco">Email</label>
+                                <label for="email" class="col-sm-2 col-form-label control-label asterisco">Correo</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="email" placeholder="Ingrese el email" value="{{old('email')}}"  autofocus >
+                                    <input type="text" class="form-control" name="email" placeholder="Ingrese el correo" value="{{old('email')}}"  autofocus >
                                     @if ($errors->has('email'))
                                     <span class="error text-danger" for="input-email">{{ $errors->first('email') }}</span>
                                     @endif

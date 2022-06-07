@@ -40,28 +40,32 @@
                                         @if ($row->estado==0)
                                             @continue
                                         @endif
-
                                         <option @if ($row->id==$producto->Categorías)
                                             selected="true"
                                         @endif
-
                                          value="{{$row->id}}">{{$row->nombre}}</option>
                                     @endforeach
                                 </select>
                                 @if ($errors->has('Categorías'))
                                 <span class="error text-danger" for="input-Categorías">{{ $errors->first('Categorías') }}</span>
                                 @endif
-                            {{-- <input type="select" class="form-control" name="Categorías" placeholder="Ingrese su Categorías" value="{{old('Categorías',$categorias, $producto-> Categorías)}}"> --}}
-
                         </div>
                     </div>
                     <div class="row">
-                        <label for="Stock" class="col-sm-2 col-form-label control-label asterisco">Stock</label>
+                        <label for="unidad" class="col-sm-2 col-form-label control-label asterisco">Unidad</label>
                         <div class="col-sm-7">
-                        <input type="number" class="form-control" name="Stock" placeholder="Ingrese su Stock" value="{{old('Stock' ,$producto-> Stock)}}">
-                        @if ($errors->has('Stock'))
-                        <span class="error text-danger" for="input-Stock">{{ $errors->first('Stock') }}</span>
-                        @endif
+                            <select class="form-control" name="unidad" id="unidad">
+                                <option value="{{old('productos',$producto->unidad)}}">{{$producto->unidad}}</option>
+                                <option value="unidad(es)">Unidad(es)</option>
+                                <option value="gramos">Gramos</option>
+                                <option value="libra(s)">Libra(s)</option>
+                                <option value="kilo(s)">Kilo(s)</option>
+                                <option value="litro(s)">Litro(s)</option>
+                                <option value="mililitros">Mililitros</option>
+                            </select>
+                            @if ($errors->has('unidad'))
+                            <span class="error text-danger" for="input-unidad">{{ $errors->first('unidad') }}</span>
+                            @endif
                     </div>
                 </div>
                 <div class="row">

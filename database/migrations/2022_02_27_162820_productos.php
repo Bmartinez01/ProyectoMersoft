@@ -16,18 +16,15 @@ return new class extends Migration
         //
         Schema::create('productos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            
             $table->string('Nombre');
             $table->bigInteger('Categorías')->unsigned();
-            $table->string('Stock');
+            $table->string('Stock')->default(0);
             $table->string('precio');
             $table->boolean('estado')->nullable()->default(1);
-
             $table->timestamps();
-
             $table->foreign('Categorías')->references('id')->on('categorias')->onDelete("cascade");
-
         });
+
     }
 
     /**
@@ -39,5 +36,8 @@ return new class extends Migration
     public function down()
     {
             Schema::dropIfExists('users');
+            Schema::table('productos', function (Blueprint $table) {
+                $table->string('unidad')->after('Nombre');
+            });
     }
 };

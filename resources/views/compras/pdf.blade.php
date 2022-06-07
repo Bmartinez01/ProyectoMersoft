@@ -82,11 +82,11 @@
 
                             <label for="" class="col-sm-1 ">Iva:</label>
                             <div class="col-sm-3"> @if($compra->iva==null)
-                                
-                                <input type="text" class="form-control" id="iva" value="0" name="valor_total" > 
-                            
+
+                                <input type="text" class="form-control" id="iva" value="0" name="valor_total" >
+
                             @else
-                                <input type="text" class="form-control" id="iva" value="{{$compra->iva}}" name="valor_total" > 
+                                <input type="text" class="form-control" id="iva" value="{{$compra->iva}}" name="valor_total" >
                               @endif
 
                             <br><br><br>
@@ -103,7 +103,7 @@
                                     <tbody>
                                     @foreach ($productos as $row)
                                         <tr>
-                                            <td>{{ $row->Nombre}}</td>
+                                            <td>{{ $row->Nombre}} {{$row->unidad}}</td>
                                             <td>{{ $row->cantidad_c}}</td>
                                             <td>{{ $row->precios}}</td>
                                             <td>{{ $row->precios * $row->cantidad_c}}</td>

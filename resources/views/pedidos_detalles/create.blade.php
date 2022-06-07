@@ -17,7 +17,6 @@
                             <p class="card-category text-dark" style="font-size:17px">Ingresar datos</p>
 
                         </div>
-
                             <div class="card-body">
                                 <div class="row">
                                     <label for="cliente" class="col-md-1 col-form-label text-dark control-label asterisco">Cliente</label>
@@ -138,7 +137,7 @@
                         @if ($row->estado==0)
                         @continue
                         @endif
-                        <option precio="{{$row->precio}}" value="{{$row->id}}">{{$row->Nombre}}</option>
+                        <option precio="{{$row->precio}}" value="{{$row->id}}">{{$row->Nombre}} {{$row->unidad}}</option>
                         @endforeach
                     </select>
                     @if ($errors->has('producto'))

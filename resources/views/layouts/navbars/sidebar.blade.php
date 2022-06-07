@@ -95,7 +95,7 @@
             <li class="nav-item{{ $activePage == 'categorias' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('categorias.index')}}">
                 <i class="material-icons">receipt_long</i>
-                  <p>{{ __('Categorias') }}</p>
+                  <p>{{ __('Categorías') }}</p>
               </a>
             </li>
             @endcan
@@ -139,6 +139,12 @@
               <a class="nav-link" href="{{route('ventas.index')}}">
                 <i class="material-icons">currency_exchange</i>
                 <p>{{ __('Ventas') }}</p>
+              </a>
+            </li>
+            <li class="nav-item{{ $activePage == 'informesv' ? ' active' : '' }}">
+              <a class="nav-link" href="{{route('ventas.charts')}}">
+                <i class="material-icons">bar_chart</i>
+                <p>{{ __('Informes') }}</p>
               </a>
             </li>
           </ul>

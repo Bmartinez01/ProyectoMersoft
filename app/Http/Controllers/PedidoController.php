@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\PedidosExport;
 use App\Http\Requests\PedidocrearRequest;
+use App\Http\Requests\PedidoEditRequest;
 use App\Models\pedido;
 use App\Models\venta;
 use App\Models\Cliente;
@@ -11,7 +12,7 @@ use App\Models\Producto;
 use App\Models\Estados;
 use App\Models\pedidos_detalles;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 
@@ -70,7 +71,7 @@ class PedidoController extends Controller
         if($input["estado"]==6 || $input["estado"]==1 ){
 
             $ventas=DB::insert("INSERT INTO ventas ( cliente, valor_total, pedido_id, created_at) select cliente, valor_total, id, created_at  from pedidos where pedidos.id= $pedido->id");
-            $ventas_de=DB::insert("INSERT INTO ventas_detalles (venta_id, producto, cantidad) select v.id, producto, cantidad from pedidos_detalles inner join ventas as v where pedido = $pedido->id");
+            $ventas_de=DB::insert("INSERT INTO ventas_detalles (venta_id, producto, cantidad, created_at) select v.id, producto, cantidad, pd.created_at from pedidos_detalles as pd inner join ventas as v where pedido = $pedido->id");
             return redirect()->route('ventas.index',compact('ventas', 'ventas_de'))->with('success', 'Venta creada correctamente');
         }
             else{
@@ -93,13 +94,12 @@ class PedidoController extends Controller
 
     public function edit(Request $request, $id){
 
-        $pedido = pedido::all();
+        $pedidos = pedido::findOrfail($id);
+        $clientes=DB::select("SELECT nombre,apellido FROM clientes WHERE id = $pedidos->cliente");
         $productos = Producto::all();
-        $clientes = Cliente::all();
         $estado= Estados::all();
         $productos2 = [];
-
-        $a = pedido::findOrFail($id);
+        // return response()->json($pedido);
         if($id != null){
             $productos2 = Producto::select("productos.*", "pedidos_detalles.cantidad as cantidad_c")
             ->join("pedidos_detalles", "productos.id", "=", "pedidos_detalles.producto")
@@ -107,16 +107,16 @@ class PedidoController extends Controller
             ->get();
         }
 
-        return view('pedidos_detalles.edit', compact('productos','productos2','clientes','pedido','estado'));
+        return view('pedidos_detalles.edit', compact('productos','productos2','clientes','pedidos','estado'));
     }
 
 
 
 
 
-    public function update(Request $request, $id )
+    public function update(PedidoEditRequest $request, $id )
     {
-       $pedido=Pedido::findOrFail($id);
+       $pedidos=Pedido::findOrFail($id);
 
        $pedido_detalle=pedidos_detalles::all();
        $productox=[];
@@ -129,6 +129,7 @@ class PedidoController extends Controller
 
        if ($productox != null) {
          /* return response()->json($data); */
+         DB::beginTransaction();
         for ($i=0; $i < strlen($productox) ; $i++) {
 
             if ($productox[$i] != ",") {
@@ -140,7 +141,8 @@ class PedidoController extends Controller
         for ($i=0; $i < count($array2) ; $i++) {
             $array[$i] = intval($array2[$i]);
         }
-        $pedido_p = DB::select("SELECT * FROM pedidos_detalles WHERE pedido = $pedido->id");
+
+        $pedido_p = DB::select("SELECT * FROM pedidos_detalles WHERE pedido = $pedidos->id");
 
         $p=0;
             foreach ($pedido_p as $key) {
@@ -156,12 +158,20 @@ class PedidoController extends Controller
                         if ($pe >=$key->cantidad) {
 
                             $producto_borrar=DB::DELETE("DELETE FROM pedidos_detalles WHERE producto= $array[$i] and pedido = $id");
+
                             $producto_edit=DB::UPDATE("UPDATE productos SET Stock = Stock + $key->cantidad WHERE id=?", [$array[$i]]);
+                        }
+                        else{
+                            DB::rollback();
+                            return redirect()->route('pedidos.index')->with('success', 'No se pudo editar el pedido');
+
                         }
                     }
                 }
+                DB::commit();
             }
        }
+
 
        if ($request->producto_id != null) {
 
@@ -187,8 +197,18 @@ class PedidoController extends Controller
 
        }
 
-       $pedido->update($data);
+       $pedidos->update($data);
+    //    return response()->json($pedidos);
+
+       if($pedidos["estado"]==6 || $pedidos["estado"]==1 ){
+
+        $ventas=DB::insert("INSERT INTO ventas ( cliente, valor_total, pedido_id, created_at) select cliente, valor_total, id, created_at  from pedidos where pedidos.id= $pedidos->id");
+        $ventas_de=DB::insert("INSERT INTO ventas_detalles (venta_id, producto, cantidad, created_at) select v.id, producto, cantidad, pd.created_at from pedidos_detalles as pd inner join ventas as v where pedido = $pedidos->id");
+        return redirect()->route('ventas.index',compact('ventas', 'ventas_de'))->with('success', 'Venta creada correctamente');
+    }
+    else{
         return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado correctamente');
+    }
 
     }
 

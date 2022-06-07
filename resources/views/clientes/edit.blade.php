@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="row">
-                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                <label for="email" class="col-sm-2 col-form-label">Correo</label>
                 <div class="col-sm-7">
                 <input type="email" class="form-control" name="email" value="{{ old('email', $cliente->email)}}">
                 @if ($errors->has('email'))

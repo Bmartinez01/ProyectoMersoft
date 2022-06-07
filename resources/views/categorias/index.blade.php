@@ -13,7 +13,7 @@
                             <div class="card">
                                 <div class="card-header card-header-info">
                                     <h4 class="card-title text-dark" style="font-weight: 900; font-size:24px">Categorías</h4>
-                                    <p class="card-category text-dark" style="font-size:17px">Categorias Registradas</p>
+                                    <p class="card-category text-dark" style="font-size:17px">Categorías Registradas</p>
                                 </div>
                                 <div class="card-body">
                                     @if (session('success'))
@@ -37,7 +37,7 @@
                                                 <th>ID</th>
                                                 <th>Nombre</th>
                                                 <th>Estado</th>
-                                                <th >Funciones</th>
+                                                <th >Función</th>
                                             </thead>
                                             <tbody>
                                                 @foreach ($categorias as $categoria)
