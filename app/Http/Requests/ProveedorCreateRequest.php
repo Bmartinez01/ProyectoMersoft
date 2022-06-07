@@ -32,7 +32,7 @@ class ProveedorCreateRequest extends FormRequest
         'categoria_id' => 'required',
         'direccion' => 'required|min:7|max:50',
         'telefono' => 'required|min:10|max:10',
-        'email'=> 'required|email|unique:proveedores|not_regex:/^.+$/i',
+        'email'=> 'required|email|unique:proveedores',
         'estado' => 'nullable'
         ];
     }
