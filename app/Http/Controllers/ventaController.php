@@ -12,6 +12,7 @@ use App\Models\Estados;
 use App\Models\ventas_detalle;
 use Illuminate\Http\Request;
 use DB;
+use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ventaController extends Controller
@@ -80,19 +81,22 @@ class ventaController extends Controller
           return view('ventas.charts', $data, compact('year','año','año_pro'));
     }
 
-    // public function pdf(Request $request, $id){
+    public function pdf(Request $request, $id){
 
-    //     // $venta_De=DB::select("SELECT id, venta_id, producto, cantidad from ventas_detalles ");
-    //     $Venta = DB::select('SELECT v.pedido_id, v.valor_total, c.nombre, c.apellido FROM ventas as v  JOIN clientes as c WHERE v.id = ? AND c.id = v.cliente', [$id] );
-    //     $a = venta::find($id);
-    //     $productos = [];
-    //     if($a != null){
-    //         $productos = Producto::select("productos.*", "ventas_detalles.cantidad as cantidad_c")
-    //         ->join("ventas_detalles", "productos.id", "=", "ventas_detalles.producto")
-    //         ->where("ventas_detalles.id", $id)
-    //         ->get();
-    //     }
-    //     return view('ventas.pdf', compact('Venta','productos'));
+        $Venta = DB::select('SELECT v.id, v.pedido_id, v.valor_total, c.nombre, c.apellido FROM ventas as v  JOIN clientes as c WHERE v.id = ? AND c.id = v.cliente', [$id] );
+        $a = venta::find($id);
+        $productos = [];
+        if($a != null){
+            $productos = Producto::select("productos.*", "ventas_detalles.cantidad as cantidad_c")
+            ->join("ventas_detalles", "productos.id", "=", "ventas_detalles.producto")
+            ->where("ventas_detalles.id", $id)
+            ->get();
+        }
+        $fecha = date("d")."-".date("m")."-".date("Y");
+        $pdf = PDF::loadView('ventas.pdf', compact('Venta','productos'));
+            // return $pdf->download("venta-$fecha.pdf");
+            return $pdf->stream();
+        //return view('ventas.pdf', compact('Venta','productos'));
 
-    // }
+    }
 }

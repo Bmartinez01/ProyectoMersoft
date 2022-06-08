@@ -98,7 +98,7 @@ return [
     ],
     'multiple_of' => 'El campo :attribute debe ser un múltiplo de :value.',
     'not_in' => 'El campo :attribute seleccionado es invalido.',
-    'not_regex' => 'El formato del campo :attribute no es válido.',
+    'not_regex' => 'El campo :attribute no es válido.',
     'numeric' => 'El campo :attribute debe ser un número.',
     'password' => 'La contraseña es incorrecta.',
     'present' => 'El campo :attribute debe estar presente.',

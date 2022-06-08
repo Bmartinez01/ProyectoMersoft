@@ -25,7 +25,7 @@ class CategoriaCreateRequest extends FormRequest
     {
         return [
             
-            'nombre' => 'required|min:4|max:20|unique:categorias'
+            'nombre' => 'required|min:4|max:20|regex:/^[\pL\s\-]+$/u|unique:categorias'
         ];
     }
 

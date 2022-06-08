@@ -23,16 +23,16 @@
             background-color: rgb(182, 189, 188);
         }
 
-        #estado{
+        #cliente{
             margin-left: 294px;
             border:0;
         }
-        #estad{
-            margin-left: 145px;
+        #clie{
+            margin-left: 154px;
             margin-top:9px;
             border:0;
         }
-        #clien{
+        #pedid{
             border:0;
         }
         #valor{
@@ -40,8 +40,6 @@
         }
 
     </style>
-
-@if (count($productos) > 0)
 
 <div class="content">
     <div class="container-fluid">
@@ -51,34 +49,28 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header card-header-info ">
-                            <h3 align="center"><strong>Detalle de la venta</strong></h3>
+                        <div class="card-header card-header-info">
+                            <h3 align="center">Recibo de venta</h3>
                         </div>
                         <div class="card-body">
                         @foreach ($Venta as $venta)
 
                             <div class="row">
-                                <label for="cliente"  class="col-md-1 col-form-label text-dark control-label asterisco">Cliente:</label>
-                                <label for="estado" id="estado" class="col-1 offset-1 col-form-label text-dark control-label asterisco">Estado: </label>
+                            <label for="pedido" > #Pedido :</label>
+                            <label for="cliente" id="cliente">Cliente :</label>
 
+                            <div class="col-sm-3">
+                                <input type="text" id="pedid" class="form-control" value="{{$venta->pedido_id}}" readonly>
+                                <input type="text" id="clie" class="form-control" value="{{$venta->nombre}} {{$venta->apellido}}" readonly>
+                            </div>
+                            <div class="row offset-md-6">
+                                <label for="valor_total"  class="col-2 text-dark col-form-label ">Valor final :</label>
                                 <div class="col-sm-3">
-                                    <input type="text" id="clien" class="form-control" value="{{$pedido->nombre}} {{$pedido->apellido}}" readonly>
-                                    <input type="text" id="estad" class="form-control" value="{{($pedido->estado)}}" readonly >
-
-                                </div>
-
-                            </div>
-                            <div class="row offset-md-5">
-                                <label for="valor_total" class="col-3 col-form-label control-label asterisco">Valor final: </label>
-                                <div class="col-sm-5">
-                                <input type="text" id="valor" class="form-control" id="valor_total" value="{{$pedido->valor_total}}" name="valor_total" readonly>
+                                <input type="text" id="valor" class="form-control" id="valor_total" value="{{$venta->valor_total}}" name="valor_total" readonly>
                                 </div>
                             </div>
                             <br>
-
                             <br>
-                            <br>
-                            @endforeach
 
                             <div class="table-responsive">
                                 <table  id="compras" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
@@ -90,31 +82,30 @@
 
                                     </thead>
                                     <tbody >
-                                    <tr>
-                                        @foreach ($productos as $row)
+                                    @foreach ($productos as $row)
+                                        <tr>
+
                                             <td>{{ $row->Nombre}} {{$row->unidad}}</td>
                                             <td>{{ $row->cantidad_c}}</td>
                                             <td>{{ $row->precio}}</td>
                                             <td>{{ $row->precio * $row->cantidad_c}}</td>
 
                                         </tr>
-                                     @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
-
-
                         </div>
-
+                        @endforeach
+                        @endforeach
+                        </div>
                     </div>
 
                 </div>
             </div>
         </div>
      </div>
-
-
-@endif
+</div>
 </body>
 
 </html>

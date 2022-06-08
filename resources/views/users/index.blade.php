@@ -56,7 +56,7 @@
                                                 <td>{{ $user->direccion }}</td>
                                                 <td>
                                                     @forelse ($user->roles as $role)
-                                                    <span class="badge badge-info">{{ $role->name}}</span>
+                                                    <span class="badge badge-info text-dark">{{ $role->name}}</span>
                                                     @empty
                                                     <span class="badge badge-danger">No hay Roles seleccionados</span>
                                                     @endforelse

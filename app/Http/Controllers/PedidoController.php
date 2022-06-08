@@ -49,8 +49,16 @@ class PedidoController extends Controller
     public function store(PedidocrearRequest $request)
     {
         /* return response()->json($request); */
-
         $input = $request->all();
+        foreach($input["producto_id"] as $key => $value){
+            $cantidades = $input["cantidades"][$key];
+            $productoo = Producto::find($value);
+            if($productoo < $cantidades){
+                return redirect()->route('pedidos.index')->with('success', 'Esta vaina esta mala');
+                die();
+            }
+        }
+        
         $pedido = pedido::create([
             "cliente"=>$input["cliente"],
             // "tipo"=>$input["tipo"],
@@ -58,15 +66,39 @@ class PedidoController extends Controller
             "valor_total"=>$this->calcular_precio($input["producto_id"], $input["cantidades"]),
 
         ]);
-
+        $array=[];
+        $array[0]=True;
+        $datosPe=[];
         foreach($input["producto_id"] as $key => $value){
-            pedidos_detalles::create([
+            $pd = pedidos_detalles::create([
                 "pedido"=> $pedido->id,
                 "producto"=>$value,
                 "cantidad"=>  $input["cantidades"][$key],
             ]);
             $producto = Producto::find($value);
-            $producto->update(["Stock"=>$producto->Stock - $input["cantidades"][$key]]);
+            if($producto->Stock < $input["cantidades"][$key]){
+                $array[0]=False;
+                // $pedido->delete();
+                // $pd->delete();
+                // return redirect()->route('pedidos.index')->with('success', 'Esta vaina esta mala');
+            }
+            else{
+                $dic = array("producto"=>$producto->id,"cantidad"=>$pd->cantidad);
+                array_push($datosPe, $dic);
+                // $producto->update(["Stock"=>$producto->Stock - $input["cantidades"][$key]]);
+            }
+        }
+        if($array[0]==True){
+            foreach ($datosPe as $key) {
+                $producto = Producto::find($key['producto']);
+                $producto->update(["Stock"=>$producto->Stock - $key['producto']]);
+                return redirect()->route('pedidos.index')->with('success', 'Pedido creado correctamente');
+            }
+        }
+        else{
+            $pedido->delete();
+            $pd->delete();
+            return redirect()->route('pedidos.index')->with('success', 'Esta vaina esta mala');
         }
         if($input["estado"]==6 || $input["estado"]==1 ){
 

@@ -30,7 +30,7 @@ class ClienteEditRequest extends FormRequest
             'apellido' => ['required','min:4','max:50'],
             'direccion' => ['required','min:7','max:50'],
             'telefono' => ['required','min:4','max:20'],
-            'email'=> ['required','unique:clientes,email,' . request()->route('cliente')->id],
+            'email'=> ['required','not_regex:/^.+$/i','unique:clientes,email,' . request()->route('cliente')->id],
             'estado' => ['nullable']
         ];
     }
