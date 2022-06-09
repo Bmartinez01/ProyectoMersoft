@@ -92,24 +92,26 @@ class PedidoController extends Controller
             foreach ($datosPe as $key) {
                 $producto = Producto::find($key['producto']);
                 $producto->update(["Stock"=>$producto->Stock - $key['producto']]);
-                return redirect()->route('pedidos.index')->with('success', 'Pedido creado correctamente');
+               
             }
+            if($input["estado"]==6 || $input["estado"]==1 ){
+
+                $ventas=DB::insert("INSERT INTO ventas ( cliente, valor_total, pedido_id, created_at) select cliente, valor_total, id, created_at  from pedidos where pedidos.id= $pedido->id");
+                $ventas_de=DB::insert("INSERT INTO ventas_detalles (venta_id, producto, cantidad, created_at) select v.id, producto, cantidad, pd.created_at from pedidos_detalles as pd inner join ventas as v where pedido = $pedido->id");
+                // return response()->json($ventas_de);
+                return redirect()->route('ventas.index',compact('ventas', 'ventas_de'))->with('success', 'Venta creada correctamente');
+            }
+                else{
+                    // return response()->json($input);
+                    return redirect()->route('pedidos.index')->with('success', 'Pedido creado correctamente');
+                }
         }
         else{
             $pedido->delete();
             $pd->delete();
             return redirect()->route('pedidos.index')->with('danger', 'Esta vaina esta mala');
         }
-        if($input["estado"]==6 || $input["estado"]==1 ){
-
-            $ventas=DB::insert("INSERT INTO ventas ( cliente, valor_total, pedido_id, created_at) select cliente, valor_total, id, created_at  from pedidos where pedidos.id= $pedido->id");
-            $ventas_de=DB::insert("INSERT INTO ventas_detalles (venta_id, producto, cantidad, created_at) select v.id, producto, cantidad, pd.created_at from pedidos_detalles as pd inner join ventas as v where pedido = $pedido->id");
-            return redirect()->route('ventas.index',compact('ventas', 'ventas_de'))->with('success', 'Venta creada correctamente');
-        }
-            else{
-                // return response()->json($input);
-                return redirect()->route('pedidos.index')->with('success', 'Pedido creado correctamente');
-            }
+       
 
 
 
@@ -236,6 +238,7 @@ class PedidoController extends Controller
 
         $ventas=DB::insert("INSERT INTO ventas ( cliente, valor_total, pedido_id, created_at) select cliente, valor_total, id, created_at  from pedidos where pedidos.id= $pedidos->id");
         $ventas_de=DB::insert("INSERT INTO ventas_detalles (venta_id, producto, cantidad, created_at) select v.id, producto, cantidad, pd.created_at from pedidos_detalles as pd inner join ventas as v where pedido = $pedidos->id");
+
         return redirect()->route('ventas.index',compact('ventas', 'ventas_de'))->with('success', 'Venta creada correctamente');
     }
     else{

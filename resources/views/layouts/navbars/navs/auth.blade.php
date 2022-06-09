@@ -56,6 +56,14 @@
                 <label for="message-text" class="col-form-label">Nombre:</label>
                 <input class="form-control" id="message-text" readonly value="{{Auth::user()->name}}">
               </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Celular:</label>
+                <input class="form-control" id="message-text" readonly value="{{Auth::user()->telefono}}">
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Dirección:</label>
+                <input class="form-control" id="message-text" readonly value="{{Auth::user()->direccion}}">
+              </div>
             <div class="mb-3">
               <label for="message-text" class="col-form-label">Email:</label>
               <input class="form-control" id="message-text" readonly value="{{Auth::user()->email}}">

@@ -71,23 +71,13 @@
             <label for="email" class="col-sm-2 col-form-label">Estado</label>
             <div class="col-sm-7">
                 <select class="form-control" name="estado" id="estado">
-
-                        @if($cliente->estado==1)
-
-
+                    @if($cliente->estado==1)
                     <option value="1">Activo</option>
                     <option value="0">Inactivo</option>
-
-                        @else
-
+                    @else
                     <option value="0">Inactivo</option>
                     <option value="1">Activo</option>
-
                     @endif
-                {{-- </option>
-                    <option value="0">Inactivo</<option>
-                    <option value="1">Activo</option>
-                 --}}
                 </select>
           </div>
         </div>

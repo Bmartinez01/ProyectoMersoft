@@ -184,15 +184,6 @@
             }
         });
 
-        function imprim1(myChart) {
-            var printContents = document.getElementById('myChart').innerHTML;
-            w = window.open();
-            w.document.write(printContents);
-            w.document.close(); // necessary for IE >= 10
-            w.focus(); // necessary for IE >= 10
-            w.print();
-            w.close();
-            return true;
-        }
+       
     </script>
 @endsection
