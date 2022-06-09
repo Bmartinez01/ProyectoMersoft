@@ -37,11 +37,13 @@ class ventaController extends Controller
         $a = venta::find($id);
         $productos = [];
         if($a != null){
-            $productos = Producto::select("productos.*", "ventas_detalles.cantidad as cantidad_c")
-            ->join("ventas_detalles", "productos.id", "=", "ventas_detalles.producto")
-            ->where("ventas_detalles.id", $id)
-            ->get();
+            // $productos = Producto::select("productos.*", "ventas_detalles.cantidad as cantidad_c")
+            // ->join("ventas_detalles", "productos.id", "=", "ventas_detalles.producto")
+            // ->where("ventas_detalles.id", $id)
+            // ->get();
+            
         }
+        // return response()->json($productos);
         return view('ventas.show', compact('Venta','productos'));
 
     }
@@ -59,7 +61,7 @@ class ventaController extends Controller
 
         $ventas = DB::select("SELECT MonthName(created_at) AS meses, SUM(valor_total) AS suma_ventas, Month(created_at) AS mes FROM ventas WHERE Year(created_at) = $year GROUP BY mes,MonthName(created_at) ORDER BY mes");
         $ventas_años = DB::select("SELECT year(created_at) AS años, SUM(valor_total) AS suma_ventas FROM ventas WHERE Year(created_at) = $año GROUP BY year(created_at)  ORDER BY year(created_at)");
-        $productos_c = DB::select("SELECT p.Nombre AS nombre, p.unidad , SUM(cantidad) AS cantidades FROM  ventas_detalles  as v JOIN productos as p WHERE p.id = producto AND Year(v.created_at) = $año_pro GROUP BY p.unidad,p.Nombre,producto ORDER BY cantidades DESC LIMIT 5");
+        $productos_c = DB::select("SELECT p.Nombre AS nombre, p.unidad , SUM(cantidad) AS cantidades FROM  ventas_detalles  as v JOIN productos as p ON p.id = producto WHERE Year(v.created_at) = $año_pro GROUP BY p.unidad,p.Nombre,producto ORDER BY cantidades DESC LIMIT 5");
         $data = [];
         foreach ($ventas as $venta){
             $data['label1'][] = $venta->meses;

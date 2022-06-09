@@ -57,6 +57,7 @@
                                             <td>{{ $row->precio * $row->cantidad_c}}</td>
 
                                         </tr>
+                                        @endforeach
 
                                     </tbody>
                                 </table>
@@ -69,7 +70,6 @@
                                 </div>
                                 </div>
                         </div>
-                        @endforeach
                         @endforeach
                         <div class="card-footer ml-auto mr-auto col-md-1">
 
