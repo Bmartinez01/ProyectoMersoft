@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\PedidosExport;
 use App\Http\Requests\PedidocrearRequest;
+use App\Http\Requests\PedidoEditRequest;
 use App\Models\pedido;
 use App\Models\venta;
 use App\Models\Cliente;
@@ -21,7 +22,7 @@ class PedidoController extends Controller
     public function index()
     {
 
-    $pedidos = DB::select("SELECT pedidos.id,pedidos.created_at,clientes.nombre as nombclient,clientes.apellido as apellclient ,valor_total,estados.Estado as estadoEst,estados.Tipo as tipoEst FROM pedidos INNER JOIN clientes ON cliente = clientes.id   INNER JOIN estados ON pedidos.estado = estados.id ");
+    $pedidos = DB::select("SELECT pedidos.id,pedidos.created_at,clientes.nombre as nombclient,clientes.apellido as apellclient ,valor_total,estados.Estado as estadoEst,estados.Tipo as tipoEst FROM pedidos INNER JOIN clientes ON cliente = clientes.id   INNER JOIN estados ON pedidos.estado = estados.id");
     // $productos = Producto::all();
 
 
@@ -48,8 +49,16 @@ class PedidoController extends Controller
     public function store(PedidocrearRequest $request)
     {
         /* return response()->json($request); */
-
         $input = $request->all();
+        foreach($input["producto_id"] as $key => $value){
+            $cantidades = $input["cantidades"][$key];
+            $productoo = Producto::find($value);
+            if($productoo < $cantidades){
+                return redirect()->route('pedidos.index')->with('success', 'Esta vaina esta mala');
+                die();
+            }
+        }
+
         $pedido = pedido::create([
             "cliente"=>$input["cliente"],
             // "tipo"=>$input["tipo"],
@@ -57,15 +66,39 @@ class PedidoController extends Controller
             "valor_total"=>$this->calcular_precio($input["producto_id"], $input["cantidades"]),
 
         ]);
-
+        $array=[];
+        $array[0]=True;
+        $datosPe=[];
         foreach($input["producto_id"] as $key => $value){
-            pedidos_detalles::create([
+            $pd = pedidos_detalles::create([
                 "pedido"=> $pedido->id,
                 "producto"=>$value,
                 "cantidad"=>  $input["cantidades"][$key],
             ]);
             $producto = Producto::find($value);
-            $producto->update(["Stock"=>$producto->Stock - $input["cantidades"][$key]]);
+            if($producto->Stock < $input["cantidades"][$key]){
+                $array[0]=False;
+                // $pedido->delete();
+                // $pd->delete();
+                // return redirect()->route('pedidos.index')->with('success', 'Esta vaina esta mala');
+            }
+            else{
+                $dic = array("producto"=>$producto->id,"cantidad"=>$pd->cantidad);
+                array_push($datosPe, $dic);
+                // $producto->update(["Stock"=>$producto->Stock - $input["cantidades"][$key]]);
+            }
+        }
+        if($array[0]==True){
+            foreach ($datosPe as $key) {
+                $producto = Producto::find($key['producto']);
+                $producto->update(["Stock"=>$producto->Stock - $key['producto']]);
+                return redirect()->route('pedidos.index')->with('success', 'Pedido creado correctamente');
+            }
+        }
+        else{
+            $pedido->delete();
+            $pd->delete();
+            return redirect()->route('pedidos.index')->with('danger', 'Esta vaina esta mala');
         }
         if($input["estado"]==6 || $input["estado"]==1 ){
 
@@ -113,7 +146,7 @@ class PedidoController extends Controller
 
 
 
-    public function update(Request $request, $id )
+    public function update(PedidoEditRequest $request, $id )
     {
        $pedidos=Pedido::findOrFail($id);
 
@@ -140,6 +173,7 @@ class PedidoController extends Controller
         for ($i=0; $i < count($array2) ; $i++) {
             $array[$i] = intval($array2[$i]);
         }
+
         $pedido_p = DB::select("SELECT * FROM pedidos_detalles WHERE pedido = $pedidos->id");
 
         $p=0;
@@ -170,6 +204,7 @@ class PedidoController extends Controller
             }
        }
 
+
        if ($request->producto_id != null) {
 
            $productos=[];
@@ -193,8 +228,10 @@ class PedidoController extends Controller
            }
 
        }
+
        $pedidos->update($data);
     //    return response()->json($pedidos);
+
        if($pedidos["estado"]==6 || $pedidos["estado"]==1 ){
 
         $ventas=DB::insert("INSERT INTO ventas ( cliente, valor_total, pedido_id, created_at) select cliente, valor_total, id, created_at  from pedidos where pedidos.id= $pedidos->id");
@@ -204,6 +241,7 @@ class PedidoController extends Controller
     else{
         return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado correctamente');
     }
+
     }
 
 

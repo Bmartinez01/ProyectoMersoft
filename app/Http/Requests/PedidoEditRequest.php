@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoriaEditRequest extends FormRequest
+class PedidoEditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,13 +23,19 @@ class CategoriaEditRequest extends FormRequest
      */
     public function rules()
     {
-        $categoria = $this->route('categoria');
         return [
-            //
-            'nombre' => ['required','min:4','max:20','unique:categorias,nombre,' . request()->route('categoria')->id]
-
-
-
+            // 'cliente' => 'required',
+            'cantidad' => 'nullable',
+            'producto' => 'nullable',
+            'valor_unitario'=> 'nullable',
+            'valor_total'=> 'required|min:3',
+            'estado' => 'required',
+        ];
+    }
+    public function messages()
+    {
+        return [
+        'valor_total.min' => 'Este campo debe contener un valor mayor a 0'
         ];
     }
 }

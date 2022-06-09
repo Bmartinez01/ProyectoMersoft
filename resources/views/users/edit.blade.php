@@ -42,6 +42,24 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <label for="telefono" class="col-sm-2 col-form-label ">Teléfono</label>
+                                <div class="col-sm-7">
+                                    <input type="number" class="form-control" name="telefono"  value="{{old ('telefono', $user->telefono)}}" autofocus >
+                                    @if ($errors->has('telefono'))
+                                    <span class="error text-danger" for="input-telefono">{{ $errors->first('telefono') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="direccion" class="col-sm-2 col-form-label ">Dirección</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="direccion" placeholder="Ingrese su dirección" value="{{old('direccion', $user->direccion)}}">
+                                    @if ($errors->has('direccion'))
+                                    <span class="error text-danger" for="input-direccion">{{ $errors->first('direccion') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
                                 <label for="password" class="col-sm-2 col-form-label ">Contraseña:</label>
                                 <div class="col-sm-7">
                                     <input type="password" class="form-control" name="password" placeholder="ingrese contraseña si desea modificarla">

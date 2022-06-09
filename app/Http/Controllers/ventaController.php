@@ -37,11 +37,10 @@ class ventaController extends Controller
         $a = venta::find($id);
         $productos = [];
         if($a != null){
-            // $productos = Producto::select("productos.*", "ventas_detalles.cantidad as cantidad_c")
-            // ->join("ventas_detalles", "productos.id", "=", "ventas_detalles.producto")
-            // ->where("ventas_detalles.id", $id)
-            // ->get();
-            
+            $productos = Producto::select("productos.*", "ventas_detalles.cantidad as cantidad_c")
+            ->join("ventas_detalles", "productos.id", "=", "ventas_detalles.producto")
+            ->where("ventas_detalles.venta_id", $id)
+            ->get();
         }
         // return response()->json($productos);
         return view('ventas.show', compact('Venta','productos'));

@@ -99,6 +99,9 @@
                                 <label for="valor_total" class="col-3 col-form-label control-label asterisco">Valor final </label>
                                 <div class="col-sm-5">
                                 <input type="number" class="form-control" id="valor_total" value="{{$pedidos->valor_total}}" name="valor_total" readonly>
+                                @if ($errors->has('valor_total'))
+                                    <span class="error text-danger" for="input-valor_total">{{ $errors->first('valor_total') }}</span>
+                                    @endif
                                 </div>
                                 </div>
                         </div>
