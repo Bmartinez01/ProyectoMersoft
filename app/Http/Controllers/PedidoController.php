@@ -58,7 +58,7 @@ class PedidoController extends Controller
                 die();
             }
         }
-        
+
         $pedido = pedido::create([
             "cliente"=>$input["cliente"],
             // "tipo"=>$input["tipo"],
@@ -98,7 +98,7 @@ class PedidoController extends Controller
         else{
             $pedido->delete();
             $pd->delete();
-            return redirect()->route('pedidos.index')->with('success', 'Esta vaina esta mala');
+            return redirect()->route('pedidos.index')->with('danger', 'Esta vaina esta mala');
         }
         if($input["estado"]==6 || $input["estado"]==1 ){
 

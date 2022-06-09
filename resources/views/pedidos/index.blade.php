@@ -21,6 +21,11 @@
                                     {{ session('success') }}
                                 </div>
                                 @endif
+                                @if (session('danger'))
+                               <div id="mensaj" class="alert alert-danger" role="success">
+                                    {{ session('danger') }}
+                                </div>
+                                @endif
                                 <div class="row">
                                 <div class="col-4 text-left mb-3">
                                     {{-- @can('pedido_descargar excel')
