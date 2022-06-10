@@ -25,16 +25,21 @@ class PedidoController extends Controller
     $pedidos = DB::select("SELECT pedidos.id,pedidos.created_at,clientes.nombre as nombclient,clientes.apellido as apellclient ,valor_total,estados.Estado as estadoEst,estados.Tipo as tipoEst FROM pedidos INNER JOIN clientes ON cliente = clientes.id   INNER JOIN estados ON pedidos.estado = estados.id");
     // $productos = Producto::all();
 
+        $minimos=DB::Select("SELECT min(date_format(created_at,'%Y-%d-%m')) as fecha_pedido from pedidos ");
+        $maximos=DB::Select("SELECT max(date_format(created_at,'%Y-%d-%m')) as fecha_pedido from pedidos ");
+        
+        foreach ($minimos as $minimo){$Fecha_minima=$minimo->fecha_pedido;}
+        foreach ($maximos as $maximo){$Fecha_maxima=$maximo->fecha_pedido;}
 
-        return view('pedidos.index', compact('pedidos'));
+        return view('pedidos.index', compact('pedidos','Fecha_minima', 'Fecha_maxima'));
     }
 
 
-    public function excel()
-    {
-        $fecha = date("d")."-".date("m").date("Y") ;
-        return Excel::download(new PedidosExport, "Pedidos-$fecha.xlsx");
-    }
+    // public function excel()
+    // {
+    //     $fecha = date("d")."-".date("m").date("Y") ;
+    //     return Excel::download(new PedidosExport, "Pedidos-$fecha.xlsx");
+    // }
     public function excel2(Request $request)
     {
         $method = $request->all();
@@ -293,7 +298,113 @@ class PedidoController extends Controller
         $pedido->delete();
         return back()->with('success', 'Pedido cancelado correctamente');
     }
+    public function Excel(){
+        date_default_timezone_set("America/Bogota");
+        $fecha_actual = date("Y-m-d H:i");
 
+
+        $Desicion=$_POST['Desicion'];
+
+        $Valores = DB:: select("SELECT if( COUNT(DISTINCT(id))>1,1,0) as CONTADOR FROM compras");
+        
+        header("Content-Type: application/xls");
+        header("Content-Disposition: attachment; filename=Pedidos ". $fecha_actual .".xls");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
+        $tabla = "";
+
+        $tabla .="
+        <table>
+            <thead>
+                <tbody>
+                    <tr>
+                        <th>#pedido</th>
+                        <th>Cliente</th>
+                        <th>Cantidad</th>
+                        <th>Producto</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                    </tr>
+        ";
+
+        foreach ($Valores as $valores)
+
+        if ($valores->CONTADOR==1){
+
+            if ($Desicion=="Todo"){
+
+
+                $Pedidos = DB:: select("select pedidos_detalles.pedido , clientes.nombre as cliente , pedidos.valor_total , estados.Estado , date_format(pedidos.created_at,'%Y-%d-%m') as created_at ,  productos.Nombre as productos ,   pedidos_detalles.cantidad from pedidos_detalles
+       
+                join pedidos on (pedidos_detalles.pedido =  pedidos.id)
+                join productos on (pedidos_detalles.producto =  productos.id)
+                join estados on (pedidos.estado =  estados.id)
+                join clientes on (pedidos.cliente =  clientes.id)");
+
+                foreach ($Pedidos as $pedido) {
+                    $tabla .="
+                        <tr>
+                            <td>".$pedido->pedido."</td>
+                            <td>".$pedido->cliente."</td>
+                            <td>".$pedido->cantidad."</td>
+                            <td>".$pedido->productos."</td>
+                            <td>".$pedido->valor_total."</td>
+                            <td>".$pedido->Estado."</td>
+                            <td>".$pedido->created_at."</td>
+                        </tr>
+                    ";
+                }
+
+                $tabla .="
+                        </tbody>
+                    </thead>
+                </table>
+                ";
+                echo $tabla;
+            }
+            else{
+                $Fecha_maxima=$_POST['Fecha_maxima'];
+                $Fecha_minima=$_POST['Fecha_minima'];
+
+                $Pedidos = DB:: select("select pedidos_detalles.pedido , clientes.nombre as cliente , pedidos.valor_total , estados.Estado , date_format(pedidos.created_at,'%Y-%d-%m') as created_at ,  productos.Nombre as productos ,   pedidos_detalles.cantidad from pedidos_detalles
+       
+                join pedidos on (pedidos_detalles.pedido =  pedidos.id)
+                join productos on (pedidos_detalles.producto =  productos.id)
+                join estados on (pedidos.estado =  estados.id)
+                join clientes on (pedidos.cliente =  clientes.id)
+                
+                where date_format(pedidos.created_at,'%Y-%d-%m') BETWEEN '".$Fecha_minima."' and '".$Fecha_maxima."'");
+
+                foreach ($Pedidos as $pedido) {
+                    $tabla .="
+                    <tr>
+                        <td>".$pedido->pedido."</td>
+                        <td>".$pedido->cliente."</td>
+                        <td>".$pedido->cantidad."</td>
+                        <td>".$pedido->productos."</td>
+                        <td>".$pedido->valor_total."</td>
+                        <td>".$pedido->Estado."</td>
+                        <td>".$pedido->created_at."</td>
+                    </tr>
+                    ";
+                }
+
+                $tabla .="
+                        </tbody>
+                    </thead>
+                </table>
+                ";
+                echo $tabla;
+            }
+        }
+        else {
+            return redirect('compras')
+                ->with('Vacio', ' ');
+        }
+        // return Excel::download(new ventas, 'Ventas '.$fecha_actual.'.csv');
+    }
 }
 
 

@@ -20,7 +20,14 @@ class CompraController extends Controller
     {
         $compras = DB::select("SELECT compras.id, recibo,fecha_compra,proveedores.nombre as nombreprov ,proveedores.apellido as apelliprov, valor_total FROM compras INNER JOIN proveedores ON proveedor = proveedores.id");
         $productos = Producto::all();
-        return view('compras.index', compact('compras','productos'));
+
+        $minimos=DB::Select("SELECT min(fecha_compra) AS fecha_compra FROM compras");
+        $maximos=DB::Select("SELECT max(fecha_compra) AS fecha_compra FROM compras");
+        
+        foreach ($minimos as $minimo){$Fecha_minima=$minimo->fecha_compra;}
+        foreach ($maximos as $maximo){$Fecha_maxima=$maximo->fecha_compra;}
+
+        return view('compras.index', compact('compras','productos','Fecha_minima', 'Fecha_maxima'));
 
 
     }
@@ -107,11 +114,11 @@ public function destroy(Compra $compra)
 
         return view('compras.index');
     }
-    public function excel()
-    {
-        $fecha = date("d")."-".date("m")."-".date("Y") ;
-        return Excel::download(new ComprasExport, "Compras-$fecha.xlsx");
-    }
+    // public function excel()
+    // {
+    //     $fecha = date("d")."-".date("m")."-".date("Y") ;
+    //     return Excel::download(new ComprasExport, "Compras-$fecha.xlsx");
+    // }
     public function excel2(Request $request)
     {
         $method = $request->all();
@@ -173,4 +180,110 @@ public function destroy(Compra $compra)
     //       return view('compras.charts', $data);
     //    // return response()->json($compras);
     // }
+    public function Excel(){
+
+        date_default_timezone_set("America/Bogota");
+        $fecha_actual = date("Y-m-d H:i");
+
+
+        $Desicion=$_POST['Desicion'];
+
+        $Valores = DB:: select("SELECT if( COUNT(DISTINCT(id))>1,1,0) as CONTADOR FROM compras");
+        
+        header("Content-Type: application/xls");
+        header("Content-Disposition: attachment; filename=Compras ". $fecha_actual .".xls");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
+        $tabla = "";
+
+        $tabla .="
+        <table>
+            <thead>
+                <tbody>
+                    <tr>
+                        <th>Recibo</th>
+                        <th>Cliente</th>
+                        <th>Producto</th>
+                        <th>Fecha de compra</th>
+                        <th>Cantidad</th>
+                        <th>Iva</th>
+                        <th>Precio</th>
+                    </tr>
+        ";
+
+        foreach ($Valores as $valores)
+
+        if ($valores->CONTADOR==1){
+
+            if ($Desicion=="Todo"){
+
+
+                $Compras = DB:: select("select compras.id, compras.recibo, compras.fecha_compra, proveedores.nombre as cliente, compras.iva, compras.valor_total,compra__detalles.cantidad,productos.Nombre as producto,compra__detalles.precio from compra__detalles
+
+                join compras on  (compra__detalles.compras_id = compras.id)
+                join productos on (compra__detalles.producto = productos.id)
+                join proveedores on (compras.proveedor = proveedores.id)");
+
+                foreach ($Compras as $compras) {
+                    $tabla .="
+                        <tr>
+                            <td>".$compras->recibo."</td>
+                            <td>".$compras->cliente."</td>
+                            <td>".$compras->producto."</td>
+                            <td>".$compras->fecha_compra."</td>
+                            <td>".$compras->cantidad."</td>
+                            <td>".$compras->iva."</td>
+                            <td>".$compras->precio."</td>
+                        </tr>
+                    ";
+                }
+
+                $tabla .="
+                        </tbody>
+                    </thead>
+                </table>
+                ";
+                echo $tabla;
+            }
+            else{
+                $Fecha_maxima=$_POST['Fecha_maxima'];
+                $Fecha_minima=$_POST['Fecha_minima'];
+
+                $Compras = DB:: select("select compras.id, compras.recibo, compras.fecha_compra, proveedores.nombre as cliente, compras.iva, compras.valor_total,compra__detalles.cantidad,productos.Nombre as producto,compra__detalles.precio from compra__detalles
+
+                join compras on  (compra__detalles.compras_id = compras.id)
+                join productos on (compra__detalles.producto = productos.id)
+                join proveedores on (compras.proveedor = proveedores.id)
+                
+                where compras.fecha_compra BETWEEN '".$Fecha_minima."' and '".$Fecha_maxima."'");
+
+                foreach ($Compras as $compras) {
+                    $tabla .="
+                        <tr>
+                            <td>".$compras->recibo."</td>
+                            <td>".$compras->cliente."</td>
+                            <td>".$compras->producto."</td>
+                            <td>".$compras->fecha_compra."</td>
+                            <td>".$compras->cantidad."</td>
+                            <td>".$compras->iva."</td>
+                            <td>".$compras->precio."</td>
+                        </tr>
+                    ";
+                }
+
+                $tabla .="
+                        </tbody>
+                    </thead>
+                </table>
+                ";
+                echo $tabla;
+            }
+        }
+        else {
+            return redirect('compras')
+                ->with('Vacio', ' ');
+        }
+        // return Excel::download(new ventas, 'Ventas '.$fecha_actual.'.csv');
+    }
 }
