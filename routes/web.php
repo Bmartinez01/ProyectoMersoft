@@ -42,7 +42,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('productos',  App\Http\Controllers\ProductoController::class)->middleware('auth');
 
 Route::get('excel', [App\Http\Controllers\ProductoController::class, 'excel'])->name('productos.excel');
-
+Route::POST('excelproducto', [App\Http\Controllers\CompraController::class, 'Excel'])->name('productos_excel');
 Route::post('excel2', [App\Http\Controllers\ProductoController::class, 'excel2'])->name('productos.excel2');
 Route::resource('ventas',  App\Http\Controllers\ventaController::class)->middleware('auth');
 Route::get('/ventas/{venta}/pdf', [App\Http\Controllers\ventaController::class, 'pdf'])->name('ventas.pdf');

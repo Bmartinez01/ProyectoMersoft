@@ -1,7 +1,7 @@
 @extends('layouts.main', ['activePage' => 'pedidos', 'titlePage' => 'Pedidos'])
 @section('css')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" >
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" >
 @endsection
 @section('content')
     <div class="content">
@@ -27,43 +27,25 @@
                                 </div>
                                 @endif
                                 <div class="row">
-                                <div class="col-4 text-left mb-3">
-                                    {{-- @can('pedido_descargar excel')
-                                        <a href="{{route('pedidos.excel')}}" title="Descargar Excel" class="btn btn-sm btn-success" ><i class="material-icons">downloading</i>  Excel</a>
-                                    @endcan --}}
-                                    </div>
-                                    <div class="col-6 text-left mb-3">
-                                    <form action="{{route('pedidos.excel2')}}" method="POST">
-                                        @csrf
-                                        <div class="container">
-                                            <div class="row">
-                                                <label for="from" class="col-form-label">Desde</label>
-                                                <div class="col-md-2">
-                                                    <input type="date" class="form-control input-sm" id="from" name="from"  max="<?= date('Y-m-d'); ?>">
-                                                </div>
-                                                <label for="from" class="col-form-label">Hasta</label>
-                                                <div class="col-md-2">
-                                                    <input type="date" class="form-control input-sm" id="to" name="to"  max="<?= date('Y-m-d'); ?>">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <button type="submit" class="btn btn-outline-dark btn-sm" name="search" ><i class="material-icons">search</i></button>
-                                                    <a href="{{route('pedidos.index')}}" class="btn btn-sm btn-warning">Regresar</a>
-
-                                                </div>
-                                                @can('compra_descargar excel')
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Fecha">Excel
-                                                @endcan
-
-                                            </div>
+                                        <div class="col-1 text-left mb-3">
+                                                <a href="{{route('pedidos.index')}}" class="btn btn-sm btn-secondary"><i class="material-icons">reply</i></a>
                                         </div>
-                                    </form>
+                                    <div class="col-1 text-left mb-3">
+                                            @can('pedido_descargar excel')
+                                            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#Fecha"><i class="material-icons">save_alt</i> Excel 
+                                            @endcan
                                     </div>
-                                    <div class="col-12 text-right">
-                                    @can('pedido_crear')
-                                        <a href="{{route('pedidos_detalles.create')}}" class="btn btn-sm btn-facebook">Agregar Pedido</a>
+                                    <div class="col-2 text-left mb-3">
+                                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#Filtro">Filtrar
+                                    </div>
+                                    
+                                    <div class="col-8 text-right">
+                                    @can('producto_crear')
+                                    <a href="{{route('pedidos_detalles.create')}}" class="btn btn-sm btn-facebook">Agregar Pedido</a>
                                     @endcan
                                     </div>
                                 </div>
+                                
                                 <div class="table-responsive">
                                     <table  id="Pedido" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                         <thead class="text-white" id="fondo">
@@ -74,7 +56,7 @@
                                             <th>Valor Total</th>
                                             <th>Tipo</th>
                                             <th>Estado</th>
-                                            <th class="text-right">Función</th>
+                                            <th class="text-left">Función</th>
                                         </thead>
                                         <tbody>
                                             <tr>
@@ -86,7 +68,7 @@
                                                     <td>{{ $pedido->valor_total }}</td>
                                                     <td>{{ $pedido->tipoEst}}</td>
                                                     <td>{{ $pedido->estadoEst}}</td>
-                                                    <td class="td-actions text-right">
+                                                    <td class="td-actions text-left">
 
                                                         @can('pedido_descargar pdf')
                                                         <a href="{{ route('pedidos.pdf', $pedido->id) }}"
@@ -166,8 +148,48 @@
                                             </form>
                                         </div>
                                     </div>
-                                    {{--------------------------}}
                                 </div>
+                                {{--------------------------}}
+                                {{-- Modal filtro --}}
+                                <div class="modal fade" id="Filtro" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Filtrar</h5>
+                                                @can('Exportar')
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                @endcan
+                                            </div>
+                            
+                                            @csrf
+                                            <div class="modal-body">
+                                                <div class="Text-center">
+                                        
+                                
+                                                <form action="{{ route('pedidos.excel2')}}" method="post">
+                                                    @csrf
+                                                    <label for="">Desde</label>
+                                                    <br>
+                                                    <input type="date" class="form-control" id="from" name="from"  max="<?= date('Y-m-d'); ?>" >
+                                                    <br>
+                                                    <label for="">Hasta</label>
+                                                    <br>
+                                                    <input type="date" class="form-control" id="to" name="to"  max="<?= date('Y-m-d'); ?>" >
+                                
+                                                    
+                                                </div>
+                                                <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-outline-dark btn-sm" name="search" ><i class="material-icons">search</i></button>
+                                                </div>
+                                                </form>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                {{--------------------------}}
                             </div>
                         </div>
                     </div>
@@ -177,25 +199,11 @@
         </div>
     </div>
     @section('script')
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
 
-    <script>
-    $(document).ready(function() {
-    function gettime()
-    {
-        var date = new Date();
-        // var newdate = (date.getHours() % 12 || 12) + "_" + date.getDay() + "_" + date.getSeconds();
-        var newdate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
-        //setInterval(gettime, 1000);
-        return newdate;
-    }
+<script>
+$(document).ready(function() {
     $('#Pedido').DataTable( {
         "language": {
             "lengthMenu": "Mostrar "+
@@ -206,7 +214,7 @@
                     <option value='20'>20</option>
                     <option value='-1'>Todos</option>
                 </select>`+
-                `<span class= "mr-5">registros por pagina</span>`,
+                " registros por pagina",
             "zeroRecords": "No se encontraron datos",
             "info": "Mostrando la página _PAGE_ de _PAGES_",
             "infoEmpty": "No records available",
@@ -216,27 +224,11 @@
                 "next":"Siguiente",
                 "previous":"Anterior"
             }
-        },
-        @can('pedido_descargar excel')
-        dom: 'Bfrtip',
-        dom: '<"top"lBf>rt<"bottom"ip>',
-        buttons: [
-            {
-                extend:'excelHtml5',
-                titleAttr: 'Descargar Excel Por Filtro',
-                className: 'btn btn-outline-success',
-                title: 'Pedidos',
-                filename: 'Pedidos ' + gettime(),
-                exportOptions: {
-                    columns: ':not(:last-child)'
-                }
-            }
-            // /* 'copy', 'csv', */ 'excel'/* , 'pdf', 'print' */
-        ]
-        @endcan
+        }
     } );
-    } );
-    </script>
-    @endsection
+} );
+
+</script>
+@endsection
 
 @endsection

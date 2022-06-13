@@ -25,8 +25,8 @@ class PedidoController extends Controller
     $pedidos = DB::select("SELECT pedidos.id,pedidos.created_at,clientes.nombre as nombclient,clientes.apellido as apellclient ,valor_total,estados.Estado as estadoEst,estados.Tipo as tipoEst FROM pedidos INNER JOIN clientes ON cliente = clientes.id   INNER JOIN estados ON pedidos.estado = estados.id");
     // $productos = Producto::all();
 
-        $minimos=DB::Select("SELECT min(date_format(created_at,'%Y-%d-%m')) as fecha_pedido from pedidos ");
-        $maximos=DB::Select("SELECT max(date_format(created_at,'%Y-%d-%m')) as fecha_pedido from pedidos ");
+        $minimos=DB::Select("SELECT min(date_format(created_at,'%Y-%m-%d')) as fecha_pedido from pedidos ");
+        $maximos=DB::Select("SELECT max(date_format(created_at,'%Y-%m-%d')) as fecha_pedido from pedidos ");
         
         foreach ($minimos as $minimo){$Fecha_minima=$minimo->fecha_pedido;}
         foreach ($maximos as $maximo){$Fecha_maxima=$maximo->fecha_pedido;}
@@ -47,7 +47,13 @@ class PedidoController extends Controller
         $to   = $request->input('to');
         $pedidos = DB::select("SELECT pedidos.id,pedidos.created_at,clientes.nombre as nombclient,clientes.apellido as apellclient ,valor_total,estados.Estado as estadoEst,estados.Tipo as tipoEst FROM pedidos INNER JOIN clientes ON cliente = clientes.id   INNER JOIN estados ON pedidos.estado = estados.id where pedidos.created_at  BETWEEN '$from 00:00:00' and '$to 23:00:00'");
 
-        return view('pedidos.index', compact('pedidos'));
+        $minimos=DB::Select("SELECT min(date_format(created_at,'%Y-%m-%d')) as fecha_pedido from pedidos ");
+        $maximos=DB::Select("SELECT max(date_format(created_at,'%Y-%m-%d')) as fecha_pedido from pedidos ");
+        
+        foreach ($minimos as $minimo){$Fecha_minima=$minimo->fecha_pedido;}
+        foreach ($maximos as $maximo){$Fecha_maxima=$maximo->fecha_pedido;}
+
+        return view('pedidos.index', compact('pedidos','Fecha_minima', 'Fecha_maxima'));
 
     }
 
@@ -256,6 +262,7 @@ class PedidoController extends Controller
 
 
     public function show(Request $request, $id){
+        
         $pedido = DB::select('SELECT e.estado, valor_total, c.nombre, c.apellido FROM pedidos as p JOIN estados as e ON e.id = p.estado JOIN clientes as c WHERE p.id = ? AND c.id = p.cliente', [$id] );
         $a = pedido::find($id);
         $estado= Estados::all();
@@ -270,6 +277,7 @@ class PedidoController extends Controller
         return view('pedidos_detalles.show', compact('productos','pedido','estado'));
     }
     public function pdf(Request $request, $id){
+        
         $pedido = DB::select('SELECT e.estado, valor_total, c.nombre, c.apellido FROM pedidos as p JOIN estados as e ON e.id = p.estado JOIN clientes as c WHERE p.id = ? AND c.id = p.cliente', [$id] );
         $a = pedido::find($id);
         $estado= Estados::all();
@@ -299,6 +307,8 @@ class PedidoController extends Controller
         return back()->with('success', 'Pedido cancelado correctamente');
     }
     public function Excel(){
+        
+        abort_if(Gate::denies('pedido_descargar excel'),403);
         date_default_timezone_set("America/Bogota");
         $fecha_actual = date("Y-m-d H:i");
 
@@ -319,7 +329,7 @@ class PedidoController extends Controller
             <thead>
                 <tbody>
                     <tr>
-                        <th>#pedido</th>
+                        <th>#Pedido</th>
                         <th>Cliente</th>
                         <th>Cantidad</th>
                         <th>Producto</th>
@@ -336,7 +346,7 @@ class PedidoController extends Controller
             if ($Desicion=="Todo"){
 
 
-                $Pedidos = DB:: select("select pedidos_detalles.pedido , clientes.nombre as cliente , pedidos.valor_total , estados.Estado , date_format(pedidos.created_at,'%Y-%d-%m') as created_at ,  productos.Nombre as productos ,   pedidos_detalles.cantidad from pedidos_detalles
+                $Pedidos = DB:: select("select pedidos_detalles.pedido , clientes.nombre as cliente , pedidos.valor_total , estados.Estado , date_format(pedidos.created_at,'%Y-%m-%d') as created_at ,  productos.Nombre as productos ,   pedidos_detalles.cantidad from pedidos_detalles
        
                 join pedidos on (pedidos_detalles.pedido =  pedidos.id)
                 join productos on (pedidos_detalles.producto =  productos.id)
@@ -368,14 +378,14 @@ class PedidoController extends Controller
                 $Fecha_maxima=$_POST['Fecha_maxima'];
                 $Fecha_minima=$_POST['Fecha_minima'];
 
-                $Pedidos = DB:: select("select pedidos_detalles.pedido , clientes.nombre as cliente , pedidos.valor_total , estados.Estado , date_format(pedidos.created_at,'%Y-%d-%m') as created_at ,  productos.Nombre as productos ,   pedidos_detalles.cantidad from pedidos_detalles
+                $Pedidos = DB:: select("select pedidos_detalles.pedido , clientes.nombre as cliente , pedidos.valor_total , estados.Estado , date_format(pedidos.created_at,'%Y-%m-%d') as created_at ,  productos.Nombre as productos ,   pedidos_detalles.cantidad from pedidos_detalles
        
                 join pedidos on (pedidos_detalles.pedido =  pedidos.id)
                 join productos on (pedidos_detalles.producto =  productos.id)
                 join estados on (pedidos.estado =  estados.id)
                 join clientes on (pedidos.cliente =  clientes.id)
                 
-                where date_format(pedidos.created_at,'%Y-%d-%m') BETWEEN '".$Fecha_minima."' and '".$Fecha_maxima."'");
+                where date_format(pedidos.created_at,'%Y-%m-%d') BETWEEN '".$Fecha_minima."' and '".$Fecha_maxima."'");
 
                 foreach ($Pedidos as $pedido) {
                     $tabla .="

@@ -67,6 +67,22 @@
 
         <div class="collapse" id="Compras">
           <ul class="nav">
+            @can('categoria_listar')
+            <li class="nav-item{{ $activePage == 'categorias' ? ' active' : '' }}">
+              <a class="nav-link" href="{{route('categorias.index')}}">
+                <i class="material-icons">receipt_long</i>
+                  <p>{{ __('Categorías') }}</p>
+              </a>
+            </li>
+            @endcan
+            @can('producto_listar')
+            <li class="nav-item{{ $activePage == 'productos' ? ' active' : '' }}">
+              <a class="nav-link" href="{{route('productos.index')}}">
+                <i class="material-icons">view_in_ar</i>
+                  <p>{{ __('Productos') }}</p>
+              </a>
+            </li>
+            @endcan
             @can('proveedor_listar')
             <li class="nav-item{{ $activePage == 'proveedores' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('proveedores.index') }}">
@@ -83,27 +99,11 @@
               </a>
             </li>
             @endcan
-            @can('compra_listar')
+            @can('compra_informe')
             <li class="nav-item{{ $activePage == 'informes' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('compras.charts')}}">
                 <i class="material-icons">bar_chart</i>
                 <p>{{ __('Informes') }}</p>
-              </a>
-            </li>
-            @endcan
-            @can('categoria_listar')
-            <li class="nav-item{{ $activePage == 'categorias' ? ' active' : '' }}">
-              <a class="nav-link" href="{{route('categorias.index')}}">
-                <i class="material-icons">receipt_long</i>
-                  <p>{{ __('Categorías') }}</p>
-              </a>
-            </li>
-            @endcan
-            @can('producto_listar')
-            <li class="nav-item{{ $activePage == 'productos' ? ' active' : '' }}">
-              <a class="nav-link" href="{{route('productos.index')}}">
-                <i class="material-icons">view_in_ar</i>
-                  <p>{{ __('Productos') }}</p>
               </a>
             </li>
             @endcan
@@ -135,18 +135,22 @@
               </a>
             </li>
           @endcan
+          @can('venta_listar')
             <li class="nav-item{{ $activePage == 'ventas' ?' active' : '' }}">
               <a class="nav-link" href="{{route('ventas.index')}}">
                 <i class="material-icons">currency_exchange</i>
                 <p>{{ __('Ventas') }}</p>
               </a>
             </li>
+            @endcan
+          @can('venta_informe')
             <li class="nav-item{{ $activePage == 'informesv' ? ' active' : '' }}">
               <a class="nav-link" href="{{route('ventas.charts')}}">
                 <i class="material-icons">bar_chart</i>
                 <p>{{ __('Informes') }}</p>
               </a>
             </li>
+          @endcan  
           </ul>
         </div>
       </li>

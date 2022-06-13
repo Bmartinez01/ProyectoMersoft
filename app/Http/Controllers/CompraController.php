@@ -125,7 +125,12 @@ public function destroy(Compra $compra)
         $from = $request->input('from');
         $to   = $request->input('to');
         $compras = DB::select("SELECT compras.id, recibo,fecha_compra,proveedores.nombre as nombreprov ,proveedores.apellido as apelliprov, valor_total FROM compras JOIN proveedores ON compras.proveedor = proveedores.id WHERE compras.fecha_compra  BETWEEN '$from' and '$to'");
-        return view('compras.index', compact('compras'));
+        $minimos=DB::Select("SELECT min(fecha_compra) AS fecha_compra FROM compras");
+        $maximos=DB::Select("SELECT max(fecha_compra) AS fecha_compra FROM compras");
+        
+        foreach ($minimos as $minimo){$Fecha_minima=$minimo->fecha_compra;}
+        foreach ($maximos as $maximo){$Fecha_maxima=$maximo->fecha_compra;}
+        return view('compras.index', compact('compras','Fecha_minima', 'Fecha_maxima'));
 
     }
     public function charts(Request $request){
@@ -181,7 +186,6 @@ public function destroy(Compra $compra)
     //    // return response()->json($compras);
     // }
     public function Excel(){
-
         date_default_timezone_set("America/Bogota");
         $fecha_actual = date("Y-m-d H:i");
 
