@@ -18,15 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('venta_id');
             $table->unsignedBigInteger('producto');
             $table->string('cantidad');
-            $table->string('valor_total')->nullable();
-            $table->string('producto_dev')->nullable();
-            $table->string('producto_reg')->nullable();
-            $table->string('valor_dev')->nullable();
-            $table->string('valor_defi')->nullable();
             $table->timestamps();
-
-
-
             $table->foreign('venta_id')->references('id')->on('ventas');
             $table->foreign('producto')->references('id')->on('productos');
         });

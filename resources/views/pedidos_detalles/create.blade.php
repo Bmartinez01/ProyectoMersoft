@@ -71,8 +71,8 @@
                                 <br>
                                 <br>
                                 <div class="row">
-                                    <div class="col-12 text-right">
-                                        <a href="{{route('pedidos.create')}}" class="btn btn-sm btn-facebook" data-toggle="modal" data-target="#Form">Agregar Producto</a>
+                                    <div class="col-12 text-left">
+                                        <a href="{{route('pedidos.create')}}" class="btn btn-sm btn-success" data-toggle="modal" data-target="#Form">Agregar Producto</a>
                                     </div>
                                 </div>
 
@@ -102,7 +102,7 @@
                                 </div>
 
                                 <div class="card-footer ml-auto mr-auto col-md-3">
-                                    <button type="submit" class="btn btn-facebook">Guardar</button>
+                                    <button type="submit" class="btn btn-facebook">Enviar</button>
                                     <div class="">
                                         <a href="{{route('pedidos.index')}}" class="btn btn-danger">Cancelar</a>
                                     </div>

@@ -57,7 +57,7 @@
 
                                                         @endif
                                                     </td>
-                                                        <td class="td-actions ">
+                                                        <td class="td-actions text-left">
                                                         @can('categoria_editar')
                                                             <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn btn-warning">
                                                             <i class="material-icons">edit</i></a>

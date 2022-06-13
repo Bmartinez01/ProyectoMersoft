@@ -34,13 +34,13 @@
                                         </div>
                                     <div class="col-1 text-left mb-3">
                                         @can('producto_descargar excel')
-                                        <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#Fecha"><i class="material-icons">save_alt</i> Excel 
+                                        <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#Fecha"><i class="material-icons">save_alt</i> Excel
                                         @endcan
                                     </div>
                                     <div class="col-8 text-left mb-3">
-                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#Filtro">Filtrar                                    
+                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#Filtro">Filtrar
                                     </div>
-                                    
+
                                     <div class="col-2 text-right">
                                     @can('producto_crear')
                                         <a href="{{route('productos.create')}}" class="btn btn-sm btn-facebook">Agregar productos</a>
@@ -57,7 +57,7 @@
                                             <th>Cantidad</th>
                                             <th>Precio</th>
                                             <th>Estado</th>
-                                            <th class="text-right">Función</th>
+                                            <th class="text-left">Función</th>
                                         </thead>
                                         <tbody>
                                             @foreach ($productos as $Producto)
@@ -69,7 +69,7 @@
                                                 <td>{{ $Producto->nombrecat}}</td>
                                                 <td>{{ $Producto->Stock}}</td>
                                                 <td>{{ $Producto->precio}}</td>
-                                                <td class="td-actions text-right">
+                                                <td class="td-actions text-left">
                                                 @if ($Producto->estado==1)
                                                 <button type="button" class="btn btn-success btn-sm">
                                                     Activo
@@ -82,7 +82,7 @@
 
                                                 @endif
                                                </td>
-                                               <td class="td-actions text-right">
+                                               <td class="td-actions text-left">
                                                @can('producto_editar')
                                                  <a href="{{ route('productos.edit', $Producto->id) }}"
                                                     class="btn btn-warning"><i class="material-icons">edit</i></a>
@@ -107,7 +107,7 @@
                                                     </button>
                                                     @endcan
                                                 </div>
-                                
+
                                                 @csrf
                                                 <div class="modal-body">
                                                     <div class="Text-center">
@@ -118,7 +118,7 @@
                                                             <button type="submit" class="btn btn-outline-dark" >Descargar todo</button>
                                                         </div>
                                                     </form>
-                                    
+
                                                     <form action="{{ route('productos_excel')}}" method="post">
                                                         @csrf
                                                         <label for="">Fecha minima</label>
@@ -128,7 +128,7 @@
                                                         <label for="">Fecha Maxima</label>
                                                         <br>
                                                         <input type="date" class="form-control" required name="Fecha_maxima" id="Fecha_maxima" value="<?php echo $Fecha_maxima?>" min="<?php echo $Fecha_minima ?>" max="<?php echo $Fecha_maxima ?>" >
-                                    
+
                                                         <input type="text" hidden name="Desicion" value="Filtrar">
                                                     </div>
                                                     <div class="modal-footer">
@@ -136,9 +136,9 @@
                                                     </div>
                                                     </form>
                                                 </div>
-                                             
+
                                             </div>
-                                        </div>                                    
+                                        </div>
                                     </div>
                                     {{--------------------------}}
                                     {{-- Modal filtro --}}
@@ -153,12 +153,12 @@
                                                         </button>
                                                         @endcan
                                                     </div>
-                                    
+
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="Text-center">
-                                                
-                                        
+
+
                                                         <form action="{{ route('productos.excel2')}}" method="post">
                                                             @csrf
                                                             <label for="">Desde</label>
@@ -168,17 +168,17 @@
                                                             <label for="">Hasta</label>
                                                             <br>
                                                             <input type="date" class="form-control" id="to" name="to"  max="<?= date('Y-m-d'); ?>" >
-                                        
-                                                            
+
+
                                                         </div>
                                                         <div class="modal-footer">
                                                                 <button type="submit" class="btn btn-outline-dark btn-sm" name="search" ><i class="material-icons">search</i></button>
                                                         </div>
                                                         </form>
                                                     </div>
-                                                 
+
                                                 </div>
-                                            </div>                                    
+                                            </div>
                                         </div>
                                         {{--------------------------}}
                             </div>

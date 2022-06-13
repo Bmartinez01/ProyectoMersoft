@@ -43,7 +43,7 @@
                                             <th>Celular</th>
                                             <th>Correo</th>
                                             <th>Estado</th>
-                                            <th class="text-right">Función</th>
+                                            <th class="text-left">Función</th>
                                         </thead>
                                         <tbody>
                                             @foreach ($clientes as $cliente)
@@ -58,7 +58,7 @@
                                                 <td>{{ $cliente->direccion }}</td>
                                                 <td>{{ $cliente->telefono }}</td>
                                                 <td>{{ $cliente->email }}</td>
-                                                <td class="td-actions text-right">
+                                                <td class="td-actions text-left">
                                                 @if ($cliente->estado==1)
                                                 <button type="button" class="btn btn-success btn-sm">
                                                     Activo
@@ -71,7 +71,7 @@
 
                                                 @endif
                                                </td>
-                                               <td class="td-actions text-right">
+                                               <td class="td-actions text-left">
                                                @can('cliente_editar')
                                                  <a href="{{ route('clientes.edit', $cliente->id) }}"
                                                     class="btn btn-warning"><i class="material-icons">edit</i></a>
