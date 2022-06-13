@@ -54,7 +54,7 @@
                                                 <td>{{ $role->name }}</td>
                                                 <td class="">
                                                     @forelse ($role->permissions as $permission)
-                                                    <span class="badge badge-pill badge-primary text-dark">{{ $permission->name}}</span>
+                                                    <span class="badge badge-pill badge-info text-dark">{{ $permission->name}}</span>
                                                     @empty
                                                     <span class="badge badge-pill badge-danger text-dark">No hay permisos seleccionados</span>
                                                     @endforelse

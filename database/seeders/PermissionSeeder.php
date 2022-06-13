@@ -49,6 +49,7 @@ class PermissionSeeder extends Seeder
             'compra_cancelar',
             'compra_descargar pdf',
             'compra_descargar excel',
+            'compra_informe',
 
             'pedido_listar',
             'pedido_crear',
@@ -57,7 +58,11 @@ class PermissionSeeder extends Seeder
             'pedido_cancelar',
             'pedido_descargar pdf',
             'pedido_descargar excel',
-
+            
+            'venta_listar',
+            'venta_ver detalle',
+            'venta_descargar recibo',
+            'venta_informe',
         ];
 
         foreach ($permissions as $permission){

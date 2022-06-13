@@ -20,7 +20,6 @@ class ventaController extends Controller
 
     public function index()
     {
-
         $ventas = DB::select("SELECT v.id,pedido_id,v.created_at,clientes.nombre, clientes.apellido, valor_total FROM ventas  as v INNER JOIN clientes ON cliente = clientes.id");
         // $productos = Producto::all();
         // $ventas = venta::paginate();
@@ -32,7 +31,7 @@ class ventaController extends Controller
     public function show(Request $request, $id){
 
         // $venta_De=DB::select("SELECT id, venta_id, producto, cantidad from ventas_detalles ");
-
+        // abort_if(Gate::denies('venta_ver detalle'),403);
         $Venta = DB::select('SELECT v.id, v.pedido_id, v.valor_total, c.nombre, c.apellido FROM ventas as v  JOIN clientes as c WHERE v.id = ? AND c.id = v.cliente', [$id] );
         $a = venta::find($id);
         $productos = [];
@@ -92,14 +91,13 @@ $compras = DB::select("SELECT SUM(valor_total) as 'ct' from compras WHERE Year(f
 
 
     public function pdf(Request $request, $id){
-
         $Venta = DB::select('SELECT v.id, v.pedido_id, v.valor_total, c.nombre, c.apellido FROM ventas as v  JOIN clientes as c WHERE v.id = ? AND c.id = v.cliente', [$id] );
         $a = venta::find($id);
         $productos = [];
         if($a != null){
             $productos = Producto::select("productos.*", "ventas_detalles.cantidad as cantidad_c")
             ->join("ventas_detalles", "productos.id", "=", "ventas_detalles.producto")
-            ->where("ventas_detalles.id", $id)
+            ->where("ventas_detalles.venta_id", $id)
             ->get();
         }
         $fecha = date("d")."-".date("m")."-".date("Y");

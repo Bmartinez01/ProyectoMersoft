@@ -91,12 +91,12 @@
                                             <td>{{ $row->precio * $row->cantidad_c}}</td>
 
                                         </tr>
-
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        @endforeach
+
                         @endforeach
                         </div>
                     </div>
