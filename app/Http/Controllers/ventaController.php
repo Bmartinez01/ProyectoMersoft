@@ -42,6 +42,7 @@ class ventaController extends Controller
             ->where("ventas_detalles.venta_id", $id)
             ->get();
         }
+        // return response()->json($productos);
         return view('ventas.show', compact('Venta','productos'));
 
     }
@@ -56,10 +57,11 @@ class ventaController extends Controller
             $año = date("Y");
 
         }
+$compras = DB::select("SELECT SUM(valor_total) as 'ct' from compras WHERE Year(fecha_compra) = $year UNION SELECT SUM(valor_total) as 'vt' FROM ventas WHERE Year(created_at) = $year");
 
         $ventas = DB::select("SELECT MonthName(created_at) AS meses, SUM(valor_total) AS suma_ventas, Month(created_at) AS mes FROM ventas WHERE Year(created_at) = $year GROUP BY mes,MonthName(created_at) ORDER BY mes");
         $ventas_años = DB::select("SELECT year(created_at) AS años, SUM(valor_total) AS suma_ventas FROM ventas WHERE Year(created_at) = $año GROUP BY year(created_at)  ORDER BY year(created_at)");
-        $productos_c = DB::select("SELECT p.Nombre AS nombre, p.unidad , SUM(cantidad) AS cantidades FROM  ventas_detalles  as v JOIN productos as p WHERE p.id = producto AND Year(v.created_at) = $año_pro GROUP BY p.unidad,p.Nombre,producto ORDER BY cantidades DESC LIMIT 5");
+        $productos_c = DB::select("SELECT p.Nombre AS nombre, p.unidad , SUM(cantidad) AS cantidades FROM  ventas_detalles  as v JOIN productos as p ON p.id = producto WHERE Year(v.created_at) = $año_pro GROUP BY p.unidad,p.Nombre,producto ORDER BY cantidades DESC LIMIT 5");
         $data = [];
         foreach ($ventas as $venta){
             $data['label1'][] = $venta->meses;
@@ -75,11 +77,19 @@ class ventaController extends Controller
 
         }
 
+            foreach ($compras as $compra){
+                 $data['label'][0] = "Compras Total";
+                 $data['label'][1] = "Ventas Total";
+                 $data['data'][] = $compra->ct;
+            }
 
         $data['data'] = json_encode($data);
         // return response()->json($data);
           return view('ventas.charts', $data, compact('year','año','año_pro'));
     }
+
+
+
 
     public function pdf(Request $request, $id){
 

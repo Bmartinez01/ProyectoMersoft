@@ -82,7 +82,32 @@
                                     </div>
 
                                 </div>
+           {{-- Inicia la 4 grafica  --}}
+           <div class="conteiner-fluid">
+            <div class="text-center">
+                <div id="tabla4" class="col-12 text-center">
+                    <?php
+                        $cont = date('Y');
+                        ?>
+                        <h3 style="font-family: cursive"><strong>VENTAS VS COMPRAS</strong></h3>
+                        <select style="border-radius: 5px; width: 70px; text-align: center" id="año" name="año">
+                            @while ($cont >=2000)
+                            <option @if ($año == $cont)
+                            selected="true"  value={{$cont}}>{{$cont}}</option>
+                            @else
+                            <option value="{{$cont}}">{{$cont}}
+                           </option>
+                           @endif
+                           {{$cont--}}
+                           @endwhile
+                        </select>
+                        <button type="submit" class="btn btn-outline-dark btn-sm" name="search"><i
+                                class="material-icons">search</i></button>
+                     </div>
+                <canvas id="myChartVC" width="150" height="50"></canvas>
+            </div>
 
+        </div>
 
 
 @endsection
@@ -122,8 +147,8 @@
             }
         });
                             //  Inicia la 2 grafica
-        const ctxa = document.getElementById('myChart_año').getContext('2d');
-        const myCharta = new Chart(ctxa, {
+        const ctxaA = document.getElementById('myChart_año').getContext('2d');
+        const myChartaA = new Chart(ctxaA, {
             type: 'bar',
             data: {
                 labels: cData.label2,
@@ -193,5 +218,36 @@
             w.close();
             return true;
         }
+                            //  Inicia la 4 grafica
+        const ctxa = document.getElementById('myChartVC').getContext('2d');
+        const myCharta = new Chart(ctxa, {
+            type: 'bar',
+            data: {
+                labels: cData.label,
+                datasets: [{
+                    label: 'TotaL COMPRAS VS VENTAS',
+                    data: cData.data,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
     </script>
 @endsection

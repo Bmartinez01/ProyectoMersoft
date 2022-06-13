@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use DB;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserEditRequest;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -32,4 +34,15 @@ class HomeController extends Controller
         $clientes=DB::select('SELECT count(*) as c FROM clientes ');
         return view('home', compact('usuarios','compras','proveedores','categorias','productos','clientes'));
     }
+    // public function show(User $user){
+
+    // }
+    // public function update(UserEditRequest $request, User $user){
+    //     $data= $request->only("name", "email","telefono","direccion");
+
+    //     $user->update($data);
+    //     return response()->json($data);
+
+    //     return redirect()->route('homes',compact('users'))->with('success','Usuario Editado correctamente');
+    // }
 }

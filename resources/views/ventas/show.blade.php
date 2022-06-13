@@ -69,7 +69,6 @@
                                 </div>
                                 </div>
                         </div>
-
                         @endforeach
                         <div class="card-footer ml-auto mr-auto col-md-1">
 

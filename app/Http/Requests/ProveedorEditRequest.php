@@ -32,7 +32,7 @@ class ProveedorEditRequest extends FormRequest
         'categoria_id' => ['required'],
         'direccion' => ['required','min:7','max:50'],
         'telefono' => ['required','min:1','max:1'],
-        'email'=> ['required','not_regex:/^.+$/i','unique:proveedores,email,' . request()->route('proveedore')->id],
+        'email'=> ['required','unique:proveedores,email,' . request()->route('proveedore')->id],
         'estado' => ['nullable']   
         ];
         

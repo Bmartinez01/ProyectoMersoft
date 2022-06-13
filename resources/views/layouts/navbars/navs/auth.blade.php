@@ -51,10 +51,18 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form >
             <div class="mb-3">
                 <label for="message-text" class="col-form-label">Nombre:</label>
                 <input class="form-control" id="message-text" readonly value="{{Auth::user()->name}}">
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Celular:</label>
+                <input class="form-control" id="message-text" readonly value="{{Auth::user()->telefono}}">
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Dirección:</label>
+                <input class="form-control" id="message-text" readonly value="{{Auth::user()->direccion}}">
               </div>
             <div class="mb-3">
               <label for="message-text" class="col-form-label">Email:</label>

@@ -30,7 +30,7 @@
                                     <div class="col-4 text-left mb-3">
                                     {{-- @can('compra_descargar excel')
                                         <a href="{{route('compras.excel')}}" title="Descargar Excel" class="btn btn-sm btn-success" ><i class="material-icons">downloading</i>  Excel</a>
-                                    @endcan --}}
+                                    @endcan  --}}
                                     </div>
                                     <div class="col-6 text-left mb-3">
                                     <form action="{{route('compras.excel2')}}" method="POST">
@@ -49,7 +49,9 @@
                                                     <button type="submit" class="btn btn-outline-dark btn-sm" name="search" ><i class="material-icons">search</i></button>
                                                     <a href="{{route('compras.index')}}" class="btn btn-sm btn-warning">Regresar</a>
                                                 </div>
-
+                                                @can('compra_descargar excel')
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Fecha">Excel
+                                                @endcan
                                             </div>
                                         </div>
                                     </form>
@@ -106,6 +108,51 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                {{-- Modal descargar --}}
+                                    <div class="modal fade" id="Fecha" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Filtrado de descarga</h5>
+                                                @can('Exportar')
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                @endcan
+                                            </div>
+                                
+                                                @csrf
+                                                <div class="modal-body">
+                                                <div class="Text-center">
+                                                <form action="{{ route('compras_excel')}}" method="post">
+                                                    @csrf
+                                                    <div class="text-center" >
+                                                        <input type="text" hidden name="Desicion" value="Todo">
+                                                        <button type="submit" class="btn btn-secondary" >Descargar todo</button>
+                                                    </div>
+                                                </form>
+                                
+                                                <form action="{{ route('compras_excel')}}" method="post">
+                                                    @csrf
+                                                    <label for="">Fecha minima</label>
+                                                    <br>
+                                                    <input type="date" class="form-control" required name="Fecha_minima" id="Fecha_minima" value="<?php echo $Fecha_minima ?>" min="<?php echo $Fecha_minima ?>" max="<?php echo $Fecha_maxima ?>" >
+                                                    <br>
+                                                    <label for="">Fecha Maxima</label>
+                                                    <br>
+                                                    <input type="date" class="form-control" required name="Fecha_maxima" id="Fecha_maxima" value="<?php echo $Fecha_maxima?>" min="<?php echo $Fecha_minima ?>" max="<?php echo $Fecha_maxima ?>" >
+                                
+                                                    <input type="text" hidden name="Desicion" value="Filtrar">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                                                </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                {{--------------------------}}
+
                                 </div>
                             </div>
                         </div>
