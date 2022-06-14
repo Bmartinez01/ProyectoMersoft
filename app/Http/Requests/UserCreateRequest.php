@@ -33,4 +33,21 @@ class UserCreateRequest extends FormRequest
 
         ];
     }
+    public function messages()
+    {
+        return [
+        'name.required' => 'El campo nombre es requerido',
+        'name.min' => 'El campo nombre debe tener al menos 5 caracteres',
+        'name.regex' => 'El campo nombre solo puede contener letras',
+        'email.required' => 'El campo correo es requerido',
+        'email.unique' => 'El campo correo ya esta registrado',
+        'direccion.required' => 'El campo dirección es requerido',
+        'direccion.max' => 'El campo dirección debe ser menos a 50 caracteres',
+        'direccion.min' => 'El campo dirección debe ser mayor a 7 caracteres',
+        'password.required' => 'El campo contraseña es requerido',
+        'password.confirmed' => 'el campo de confirmacion de contraseña no coincide',
+        'password.min' => 'El campo contraseña debe ser mayor a 8 caracteres',
+        'password.max' => 'El campo contraseña debe ser menos a 20 caracteres'
+        ];
+    }
 }

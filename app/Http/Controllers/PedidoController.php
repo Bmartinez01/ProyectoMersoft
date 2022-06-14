@@ -58,14 +58,7 @@ class PedidoController extends Controller
     {
         /* return response()->json($request); */
         $input = $request->all();
-        foreach($input["producto_id"] as $key => $value){
-            $cantidades = $input["cantidades"][$key];
-            $productoo = Producto::find($value);
-            if($productoo < $cantidades){
-                return redirect()->route('pedidos.index')->with('success', 'Esta vaina esta mala');
-                die();
-            }
-        }
+       
 
         $pedido = pedido::create([
             "cliente"=>$input["cliente"],
@@ -94,13 +87,13 @@ class PedidoController extends Controller
             else{
                 $dic = array("producto"=>$producto->id,"cantidad"=>$pd->cantidad);
                 array_push($datosPe, $dic);
-                // $producto->update(["Stock"=>$producto->Stock - $input["cantidades"][$key]]);
+                $producto->update(["Stock"=>$producto->Stock - $input["cantidades"][$key]]);
             }
         }
         if($array[0]==True){
             foreach ($datosPe as $key) {
                 $producto = Producto::find($key['producto']);
-                $producto->update(["Stock"=>$producto->Stock - $key['producto']]);
+                // $producto->update(["Stock"=>$producto->Stock - $key['producto']]);
             }
             if($input["estado"]==6 || $input["estado"]==1 ){
                 // $ventas=DB::insert("INSERT INTO ventas ( cliente, valor_total, pedido_id) Values ($pedido->cliente, $pedido->valor_total, $pedido->id)");
