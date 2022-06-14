@@ -55,7 +55,7 @@
                                             <th>Fecha Compra</th>
                                             <th>Proveedor</th>
                                             <th>Valor Total</th>
-                                            <th class="text-right">Función</th>
+                                            <th class="text-left">Función</th>
                                         </thead>
                                         <tbody>
 
@@ -66,7 +66,7 @@
                                                 <td>{{ $compra->fecha_compra}}</td>
                                                 <td>{{ $compra->nombreprov}} {{$compra->apelliprov}}</td>
                                                 <td>{{ $compra->valor_total }}</td>
-                                               <td class="td-actions text-right">
+                                               <td class="td-actions text-left">
                                                 @can('compra_descargar pdf')
                                                 <a href="{{route('compras.pdf', $compra->id)}}"
                                                     class="btn btn-outline-danger"><span class="material-icons">picture_as_pdf </span></a>

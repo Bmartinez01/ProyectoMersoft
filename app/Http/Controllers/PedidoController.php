@@ -58,8 +58,6 @@ class PedidoController extends Controller
     {
         /* return response()->json($request); */
         $input = $request->all();
-       
-
         $pedido = pedido::create([
             "cliente"=>$input["cliente"],
             // "tipo"=>$input["tipo"],
@@ -87,7 +85,7 @@ class PedidoController extends Controller
             else{
                 $dic = array("producto"=>$producto->id,"cantidad"=>$pd->cantidad);
                 array_push($datosPe, $dic);
-                $producto->update(["Stock"=>$producto->Stock - $input["cantidades"][$key]]);
+                 $producto->update(["Stock"=>$producto->Stock - $input["cantidades"][$key]]);
             }
         }
         if($array[0]==True){

@@ -35,7 +35,7 @@
                                             <th>Cliente</th>
                                             <th>Valor Total</th>
 
-                                            <th class="text-right">Función</th>
+                                            <th class="text-left">Función</th>
                                         </thead>
                                         <tbody>
                                             <tr>
@@ -48,12 +48,12 @@
                                                     <td>{{ $venta->valor_total}}</td>
 
 
-                                                    <td class="td-actions text-right">
+                                                    <td class="td-actions text-left">
 
                                                     @can('venta_ver detalle')
                                                     <a href="{{route('ventas.show', $venta->id)}}"
                                                             class="btn btn-warning"><span class="material-icons">visibility </span></a>
-                        
+
                                                     @endcan
                                                     @can('venta_descargar recibo')
                                                     <a href="{{route('ventas.pdf', $venta->id)}}"

@@ -101,6 +101,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @if($user->id !=1)
                             <div class="row">
                                 <label for="email" class="col-sm-2 col-form-label">Estado</label>
                                 <div class="col-sm-7">
@@ -125,6 +126,7 @@
                                     </select>
                                 </div>
                             </div>
+                            @endif
                         </div>
                         <div class="card-footer ml-auto mr-auto col-md-3">
                             <button type="submit" class="btn btn-facebook">Enviar</button>
