@@ -46,9 +46,9 @@
                                             <th class="text-left">Función</th>
                                         </thead>
                                         <tbody>
+                                            @if (Auth::user()->id==$users[0]->id)
                                             @foreach ($users as $user)
                                             <tr>
-
                                                 <td>{{$user->id}}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
@@ -85,7 +85,47 @@
 
                                             </tr>
                                             <!-- javascript init -->
+                                            @endforeach
+                                            @endif
+                                            @foreach ($users as $user)
+                                            @if (Auth::user()->id==$user->id && $user->id>1)
+                                            <tr>
+                                                <td>{{$user->id}}</td>
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->telefono }}</td>
+                                                <td>{{ $user->direccion }}</td>
+                                                <td>
+                                                    @forelse ($user->roles as $role)
+                                                    <span class="badge badge-info text-dark">{{ $role->name}}</span>
+                                                    @empty
+                                                    <span class="badge badge-danger">No hay Roles seleccionados</span>
+                                                    @endforelse
+                                                </td>
+                                                {{-- <td>{{ $user->created_at }}</td> --}}
 
+                                                <td class="td-actions text-right">
+                                                @if ($user->estado==1)
+                                                <button type="button" class="btn btn-success btn-sm">
+                                                    Activo
+                                                </button>
+
+                                                @else
+                                                <button type="button" class="btn btn-danger btn-sm">
+                                                    Inactivo
+                                                </button>
+
+                                                @endif
+                                               </td>
+                                               <td class="td-actions text-right">
+                                               @can('usuario_editar')
+                                                 <a href="{{route('users.edit', $user->id)}}"
+                                                    class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                @endcan
+                                               </td>
+
+                                            </tr>
+                                            @endif
                                             @endforeach
                                         </tbody>
                                     </table>
