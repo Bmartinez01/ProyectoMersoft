@@ -163,7 +163,7 @@
         </a>
         <div class="collapse" id="ayuda_linea">
           <ul class="nav">
-            <li class="nav-item{{ $activePage == 'ayuda_linea' ? ' active' : '' }}"><a class="nav-link" href="#">
+            <li class="nav-item{{ $activePage == 'ayuda_linea' ? ' active' : '' }}"><a class="nav-link" href="https://www.youtube.com/watch?v=UDfkZdkvD6E" Target="_blank">
                 <i class="material-icons">settings_suggest</i>
                   <p>{{ __('Configuraciones') }}</p>
               </a>
@@ -172,7 +172,7 @@
         </div>
         <div class="collapse" id="ayuda_linea">
             <ul class="nav">
-              <li class="nav-item{{ $activePage == 'ayuda_linea' ? ' active' : '' }}"><a class="nav-link" href="#">
+              <li class="nav-item{{ $activePage == 'ayuda_linea' ? ' active' : '' }}"><a class="nav-link" href="https://www.youtube.com/watch?v=DOmhnXAXpVk" Target="_blank">
                   <i class="material-icons">person</i>
                     <p>{{ __('Usuarios') }}</p>
                 </a>
@@ -181,7 +181,7 @@
           </div>
           <div class="collapse" id="ayuda_linea">
             <ul class="nav">
-              <li class="nav-item{{ $activePage == 'ayuda_linea' ? ' active' : '' }}"><a class="nav-link" href="#">
+              <li class="nav-item{{ $activePage == 'ayuda_linea' ? ' active' : '' }}"><a class="nav-link" href="https://www.youtube.com/watch?v=paKqm67Yd2I" Target="_blank">
                   <i class="material-icons">shopping_bag</i>
                     <p>{{ __('Compras') }}</p>
                 </a>
@@ -190,7 +190,7 @@
           </div>
           <div class="collapse" id="ayuda_linea">
             <ul class="nav">
-              <li class="nav-item{{ $activePage == 'ayuda_linea' ? ' active' : '' }}"><a class="nav-link" href="#">
+              <li class="nav-item{{ $activePage == 'ayuda_linea' ? ' active' : '' }}"><a class="nav-link" href="https://www.youtube.com/watch?v=i6e91w4zdYQ" Target="_blank">
                   <i class="material-icons">real_estate_agent</i>
                     <p>{{ __('Ventas') }}</p>
                 </a>
