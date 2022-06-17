@@ -47,7 +47,9 @@ class UserCreateRequest extends FormRequest
         'password.required' => 'El campo contraseña es requerido',
         'password.confirmed' => 'el campo de confirmacion de contraseña no coincide',
         'password.min' => 'El campo contraseña debe ser mayor a 8 caracteres',
-        'password.max' => 'El campo contraseña debe ser menos a 20 caracteres'
+        'password.max' => 'El campo contraseña debe ser menos a 20 caracteres',
+        'telefono.required' => 'El campo teléfono es requerido'
+
         ];
     }
 }

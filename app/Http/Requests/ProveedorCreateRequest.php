@@ -24,7 +24,7 @@ class ProveedorCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            
+
         'nit_empresa' => 'required|min:3|max:13|unique:proveedores',
         'nombre' => 'required|min:3|max:20|regex:/^[\pL\s\-]+$/u',
         'apellido' => 'required|min:4|max:50|regex:/^[\pL\s\-]+$/u',
@@ -40,7 +40,11 @@ class ProveedorCreateRequest extends FormRequest
     public function messages()
     {
         return [
-        'categoria_id.required' => 'El campo categoria es requerido'
+        'categoria_id.required' => 'El campo categoría es requerido',
+        'email.required' => 'El campo correo es requerido',
+        'direccion.required' => 'El campo dirección es requerido',
+        'telefono.required' => 'El campo teléfono es requerido',
+
         ];
     }
 }

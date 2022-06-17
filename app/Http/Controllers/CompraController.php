@@ -42,8 +42,8 @@ class CompraController extends Controller
             ->get();
             $fecha = date("d")."-".date("m")."-".date("Y");
             $pdf = PDF::loadView('compras.pdf',compact('productos','compras'));
-            // return $pdf->download("compra-$fecha.pdf");
-            return $pdf->stream();
+            return $pdf->download("compra-$fecha.pdf");
+            // return $pdf->stream();
             // return view('compras.pdf', compact('productos','compras'));
         }
 
@@ -79,14 +79,22 @@ class CompraController extends Controller
 }
 public function destroy(Compra $compra)
 {
-
     $compra_p = DB::select('SELECT * FROM compra__detalles WHERE compras_id = ? ', [$compra->id]);
-
     foreach ($compra_p as $key) {
-      $product_upd = DB::update("UPDATE productos SET Stock = Stock - $key->cantidad WHERE id = ?", [$key->producto]);
+        $cantidades = DB::select("SELECT * FROM productos WHERE id = $key->producto");
+        foreach($cantidades as $cantidad){
+            if($cantidad->Stock < $key->cantidad){
+                return back()->with('error', 'La compra no se pudo anular');
+                die;
+            }
+            else{
+                $product_upd = DB::update("UPDATE productos SET Stock = Stock - $key->cantidad WHERE id = ?", [$key->producto]);
+                $compra->delete();
+                return back()->with('success', 'Compra anulada correctamente');
+            }
+        // return response()->json($key);
+        }
     }
-    $compra->delete();
-    return back()->with('success', 'Compra anulada correctamente');
 }
     public function calcular_precio($productos,$cantidades,$precios,$iva){
         $precio = 0;
@@ -127,7 +135,7 @@ public function destroy(Compra $compra)
         $compras = DB::select("SELECT compras.id, recibo,fecha_compra,proveedores.nombre as nombreprov ,proveedores.apellido as apelliprov, valor_total FROM compras JOIN proveedores ON compras.proveedor = proveedores.id WHERE compras.fecha_compra  BETWEEN '$from' and '$to'");
         $minimos=DB::Select("SELECT min(fecha_compra) AS fecha_compra FROM compras");
         $maximos=DB::Select("SELECT max(fecha_compra) AS fecha_compra FROM compras");
-        
+
         foreach ($minimos as $minimo){$Fecha_minima=$minimo->fecha_compra;}
         foreach ($maximos as $maximo){$Fecha_maxima=$maximo->fecha_compra;}
         return view('compras.index', compact('compras','Fecha_minima', 'Fecha_maxima'));

@@ -36,7 +36,11 @@ class ClienteCreateRequest extends FormRequest
     public function messages()
     {
         return [
-        'nombre.required' => 'El campo nombre solo puede contener letras'
+        'nombre.required' => 'El campo nombre es requerido',
+        'direccion.required' => 'El campo dirección es requerido',
+        'telefono.required' => 'El campo celular es requerido',
+        'email.required' => 'El campo correo es requerido'
+
         ];
     }
 }

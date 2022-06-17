@@ -30,22 +30,22 @@
                                         <div class="col-1 text-left mb-3">
                                                 <a href="{{route('pedidos.index')}}" class="btn btn-sm btn-secondary"><i class="material-icons">reply</i></a>
                                         </div>
-                                    <div class="col-1 text-left mb-3">
+                                    <div class="col-2 text-left mb-3">
                                             @can('pedido_descargar excel')
-                                            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#Fecha"><i class="material-icons">save_alt</i> Excel 
+                                            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#Fecha"><i class="material-icons">save_alt</i> Excel
                                             @endcan
                                     </div>
                                     <div class="col-2 text-left mb-3">
                                             <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#Filtro">Filtrar
                                     </div>
-                                    
-                                    <div class="col-8 text-right">
+
+                                    <div class="col-7 text-right">
                                     @can('producto_crear')
                                     <a href="{{route('pedidos_detalles.create')}}" class="btn btn-sm btn-facebook">Agregar Pedido</a>
                                     @endcan
                                     </div>
                                 </div>
-                                
+
                                 <div class="table-responsive">
                                     <table  id="Pedido" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                         <thead class="text-white" id="fondo">
@@ -117,7 +117,7 @@
                                                 </button>
                                                 @endcan
                                             </div>
-                                
+
                                                 @csrf
                                                 <div class="modal-body">
                                                 <div class="Text-center">
@@ -128,7 +128,7 @@
                                                         <button type="submit" class="btn btn-secondary" >Descargar todo</button>
                                                     </div>
                                                 </form>
-                                
+
                                                 <form action="{{ route('pedidos_excel')}}" method="post">
                                                     @csrf
                                                     <label for="">Fecha minima</label>
@@ -138,7 +138,7 @@
                                                     <label for="">Fecha Maxima</label>
                                                     <br>
                                                     <input type="date" class="form-control" required name="Fecha_maxima" id="Fecha_maxima" value="<?php echo $Fecha_maxima?>" min="<?php echo $Fecha_minima ?>" max="<?php echo $Fecha_maxima ?>" >
-                                
+
                                                     <input type="text" hidden name="Desicion" value="Filtrar">
                                                 </div>
                                                 <div class="modal-footer">
@@ -162,12 +162,12 @@
                                                 </button>
                                                 @endcan
                                             </div>
-                            
+
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="Text-center">
-                                        
-                                
+
+
                                                 <form action="{{ route('pedidos.excel2')}}" method="post">
                                                     @csrf
                                                     <label for="">Desde</label>
@@ -177,17 +177,17 @@
                                                     <label for="">Hasta</label>
                                                     <br>
                                                     <input type="date" class="form-control" id="to" name="to"  max="<?= date('Y-m-d'); ?>" >
-                                
-                                                    
+
+
                                                 </div>
                                                 <div class="modal-footer">
                                                         <button type="submit" class="btn btn-outline-dark btn-sm" name="search" ><i class="material-icons">search</i></button>
                                                 </div>
                                                 </form>
                                             </div>
-                                            
+
                                         </div>
-                                    </div>                                    
+                                    </div>
                                 </div>
                                 {{--------------------------}}
                             </div>

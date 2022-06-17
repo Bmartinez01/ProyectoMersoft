@@ -23,19 +23,19 @@ class ProveedorEditRequest extends FormRequest
      */
     public function rules()
     {
-        
+
         return [
-        'nit_empresa' => ['required','min:3','max:13','unique:proveedores,nit_empresa,'. request()->route('proveedore')->id],    
+        'nit_empresa' => ['required','min:3','max:13','unique:proveedores,nit_empresa,'. request()->route('proveedore')->id],
         'nombre' => ['required','min:3','max:20','regex:/^[\pL\s\-]+$/u'],
         'apellido' => ['required','min:4','max:50','regex:/^[\pL\s\-]+$/u'],
         'empresa' => ['required','min:3','max:50'],
         'categoria_id' => ['required'],
         'direccion' => ['required','min:7','max:50'],
-        'telefono' => ['required','min:1','max:1'],
+        'telefono' => ['required','min:10','max:10'],
         'email'=> ['required','unique:proveedores,email,' . request()->route('proveedore')->id],
-        'estado' => ['nullable']   
+        'estado' => ['nullable']
         ];
-        
+
     }
 
     public function messages()

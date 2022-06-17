@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('Categorías')->unsigned();
             $table->string('Stock')->default(0);
             $table->string('precio');
+            $table->string('unidad')->nullable();
             $table->boolean('estado')->nullable()->default(1);
             $table->timestamps();
             $table->foreign('Categorías')->references('id')->on('categorias')->onDelete("cascade");
@@ -36,8 +37,5 @@ return new class extends Migration
     public function down()
     {
             Schema::dropIfExists('users');
-            Schema::table('productos', function (Blueprint $table) {
-                $table->string('unidad')->after('Nombre');
-            });
     }
 };

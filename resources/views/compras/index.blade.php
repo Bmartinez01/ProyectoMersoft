@@ -30,7 +30,7 @@
                                         <div class="col-1 text-left mb-3">
                                                 <a href="{{route('compras.index')}}" class="btn btn-sm btn-secondary"><i class="material-icons">reply</i></a>
                                         </div>
-                                    <div class="col-1 text-left mb-3">
+                                    <div class="col-2 text-left mb-3">
                                             @can('compra_descargar excel')
                                             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#Fecha"><i class="material-icons">save_alt</i> Excel
                                             @endcan
@@ -39,7 +39,7 @@
                                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#Filtro">Filtrar
                                     </div>
 
-                                    <div class="col-8 text-right">
+                                    <div class="col-7 text-right">
                                     @can('compra_crear')
                                     <a href="{{route('compras_detalle.create')}}" class="btn btn-sm btn-facebook">Agregar Compra</a>
                                     @endcan

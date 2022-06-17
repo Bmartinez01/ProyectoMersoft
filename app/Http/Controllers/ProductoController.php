@@ -17,10 +17,10 @@ class ProductoController extends Controller
     {
         abort_if(Gate::denies('producto_listar'),403);
         $productos = DB::select("SELECT productos.id, productos.unidad, productos.Nombre, categorias.nombre  as nombrecat, Stock, precio, productos.estado FROM productos INNER JOIN categorias ON Categorías = categorias.id");
-        
+
         $minimos=DB::Select("SELECT min(date_format(created_at,'%Y-%m-%d')) as fecha_producto from productos ");
         $maximos=DB::Select("SELECT max(date_format(created_at,'%Y-%m-%d')) as fecha_producto from productos ");
-        
+
         foreach ($minimos as $minimo){$Fecha_minima=$minimo->fecha_producto;}
         foreach ($maximos as $maximo){$Fecha_maxima=$maximo->fecha_producto;}
 
@@ -42,7 +42,7 @@ class ProductoController extends Controller
 
         $minimos=DB::Select("SELECT min(date_format(created_at,'%Y-%m-%d')) as fecha_producto from productos ");
         $maximos=DB::Select("SELECT max(date_format(created_at,'%Y-%m-%d')) as fecha_producto from productos ");
-        
+
         foreach ($minimos as $minimo){$Fecha_minima=$minimo->fecha_producto;}
         foreach ($maximos as $maximo){$Fecha_maxima=$maximo->fecha_producto;}
 
@@ -97,7 +97,7 @@ class ProductoController extends Controller
         $Desicion=$_POST['Desicion'];
 
         $Valores = DB:: select("SELECT if( COUNT(DISTINCT(id))>1,1,0) as CONTADOR FROM productos");
-        
+
         header("Content-Type: application/xls");
         header("Content-Disposition: attachment; filename=Productos ". $fecha_actual .".xls");
         header("Pragma: no-cache");
@@ -155,7 +155,7 @@ class ProductoController extends Controller
 
                 $Productos = DB:: select("select productos.id,CONCAT( productos.Nombre, ' ', productos.unidad) AS nombre, categorias.nombre as Categoria, productos.Stock, productos.precio, date_format(productos.created_at,'%Y-%m-%d') as created_at from productos
                 join categorias on (productos.Categorías = categorias.id)
-                
+
                 where date_format(productos.created_at,'%Y-%m-%d') BETWEEN '".$Fecha_minima."' and '".$Fecha_maxima."'");
 
                 foreach ($Productos as $producto) {

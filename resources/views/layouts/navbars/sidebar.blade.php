@@ -5,7 +5,7 @@
       Tip 2: you can also add an image using data-image tag
   -->
   <div class="logo">
-    <a href="{{route('home')}}" class="simple-text logo-normal text-info">
+    <a class="simple-text logo-normal text-info">
       {{ __('MERSOFT') }}
     </a>
   </div>
@@ -150,9 +150,53 @@
                 <p>{{ __('Informes') }}</p>
               </a>
             </li>
-          @endcan  
+          @endcan
           </ul>
         </div>
+      </li>
+      <li class="nav-item{{ $activePage == 'ayuda_linea' ? ' active' : '' }}">
+        <a class="nav-link" data-bs-toggle="collapse" href="#ayuda_linea" aria-expanded="false" aria-controls="ayuda_linea">
+          <i class="material-icons">video_settings</i>
+            <p>{{ __('Ayuda en linea') }}
+              <b class="caret"></b>
+            </p>
+        </a>
+        <div class="collapse" id="ayuda_linea">
+          <ul class="nav">
+            <li class="nav-item{{ $activePage == 'ayuda_linea' ? ' active' : '' }}"><a class="nav-link" href="#">
+                <i class="material-icons">settings_suggest</i>
+                  <p>{{ __('Configuraciones') }}</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="collapse" id="ayuda_linea">
+            <ul class="nav">
+              <li class="nav-item{{ $activePage == 'ayuda_linea' ? ' active' : '' }}"><a class="nav-link" href="#">
+                  <i class="material-icons">person</i>
+                    <p>{{ __('Usuarios') }}</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="collapse" id="ayuda_linea">
+            <ul class="nav">
+              <li class="nav-item{{ $activePage == 'ayuda_linea' ? ' active' : '' }}"><a class="nav-link" href="#">
+                  <i class="material-icons">shopping_bag</i>
+                    <p>{{ __('Compras') }}</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="collapse" id="ayuda_linea">
+            <ul class="nav">
+              <li class="nav-item{{ $activePage == 'ayuda_linea' ? ' active' : '' }}"><a class="nav-link" href="#">
+                  <i class="material-icons">real_estate_agent</i>
+                    <p>{{ __('Ventas') }}</p>
+                </a>
+              </li>
+            </ul>
+          </div>
       </li>
     </ul>
   </div>

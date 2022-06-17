@@ -211,9 +211,9 @@
                 }
                 else {
                     alert("Se debe ingresar un producto valido,  cantidad y/o precio valido");
-                    // $("#producto").val('');
-                    // $("#cantidad").val('');
-                    // $("#precio").val('');
+                      $("#producto").val('');
+                      $("#cantidad").val('');
+                      $("#precio").val('');
                     die();
                 }
                 $("#producto").val('');

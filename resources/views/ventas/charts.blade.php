@@ -86,24 +86,14 @@
            <div class="conteiner-fluid">
             <div class="text-center">
                 <div id="tabla4" class="col-12 text-center">
-                    <?php
-                        $cont = date('Y');
-                        ?>
-                        <h3 style="font-family: cursive"><strong>VENTAS VS COMPRAS</strong></h3>
-                        <select style="border-radius: 5px; width: 70px; text-align: center" id="año" name="año">
-                            @while ($cont >=2000)
-                            <option @if ($año == $cont)
-                            selected="true"  value={{$cont}}>{{$cont}}</option>
-                            @else
-                            <option value="{{$cont}}">{{$cont}}
-                           </option>
-                           @endif
-                           {{$cont--}}
-                           @endwhile
-                        </select>
-                        <button type="submit" class="btn btn-outline-dark btn-sm" name="search"><i
-                                class="material-icons">search</i></button>
-                     </div>
+                        <h3 style="font-family: cursive"><strong>Compras vs Ventas</strong></h3>
+                        @if ($n<0)
+                       Diferencia: <span class="text-danger">{{$n}}</span>
+                        @else
+                        Diferencia: <span class="text-success">{{$n}}</span>
+                        @endif
+
+                         </div>
                 <canvas id="myChartVC" width="150" height="50"></canvas>
             </div>
 
@@ -225,7 +215,7 @@
             data: {
                 labels: cData.label,
                 datasets: [{
-                    label: 'TotaL COMPRAS VS VENTAS',
+                    label: 'Total compras vs ventas',
                     data: cData.data,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',

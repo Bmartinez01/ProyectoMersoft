@@ -25,7 +25,7 @@ class ProductoCreateRequest extends FormRequest
     {
         return [
 
-            'Nombre' => 'required|min:4|max:30|unique:productos',
+            'Nombre' => 'required|min:4|unique:productos',
             'Categorías' => 'required|min:1|max:20',
             'unidad' => 'required',
             'Precio' => 'required|min:1|max:20',

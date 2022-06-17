@@ -69,8 +69,8 @@
                                 <option value="mililitros">Mililitros</option>
 
                             </select>
-                            @if ($errors->has('Categorías'))
-                            <span class="error text-danger" for="input-Categorías">{{ $errors->first('Categorías') }}</span>
+                            @if ($errors->has('unidad'))
+                            <span class="error text-danger" for="input-unidad">{{ $errors->first('unidad') }}</span>
                             @endif
                     </div>
                 </div>

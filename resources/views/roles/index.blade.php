@@ -43,7 +43,6 @@
                                             <th>No.</th>
                                             <th>Nombre</th>
                                             <th>Permisos</th>
-                                            <th>Estado</th>
                                             <th>Función</th>
                                         </thead>
                                         <tbody>
@@ -59,20 +58,7 @@
                                                     <span class="badge badge-pill badge-danger text-dark">No hay permisos seleccionados</span>
                                                     @endforelse
                                                 </td>
-                                                <td class="td-actions text-left">
-                                                    @if ($role->estado==1)
-                                                    <button type="button" class="btn btn-success btn-sm">
-                                                        Activo
-                                                    </button>
-
-                                                    @else
-                                                    <button type="button" class="btn btn-danger btn-sm">
-                                                        Inactivo
-                                                    </button>
-
-                                                    @endif
-                                                </td>
-                                                <td class="td-actions">
+                                               <td class="td-actions">
                                                 @can('rol_editar')
                                                  <a href="{{route('roles.edit', $role->id)}}"
                                                     class="btn btn-warning"><i class="material-icons">edit</i></a>

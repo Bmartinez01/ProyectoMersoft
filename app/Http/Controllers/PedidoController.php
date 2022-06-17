@@ -199,15 +199,15 @@ class PedidoController extends Controller
 
 
                         $pe=$consulta[0]->Stock;
+                        // return response()->json($key);
                         if ($pe >=$key->cantidad) {
-
                             $producto_borrar=DB::DELETE("DELETE FROM pedidos_detalles WHERE producto= $array[$i] and pedido = $id");
 
                             $producto_edit=DB::UPDATE("UPDATE productos SET Stock = Stock + $key->cantidad WHERE id=?", [$array[$i]]);
                         }
                         else{
                             DB::rollback();
-                            return redirect()->route('pedidos.index')->with('success', 'No se pudo editar el pedido');
+                            return redirect()->route('pedidos.index')->with('danger', 'No se pudo editar el pedido');
 
                         }
                     }
@@ -301,9 +301,9 @@ class PedidoController extends Controller
             ->get();
         }
         $fecha = date("d")."-".date("m")."-".date("Y");
-        $pdf = PDF::loadView('pedidos_detalles.pdf',compact('productos','pedido','estado'));
-        // // return $pdf->download("pedido-$fecha.pdf");
-        return $pdf->stream();
+         $pdf = PDF::loadView('pedidos_detalles.pdf',compact('productos','pedido','estado'));
+         return $pdf->download("pedido-$fecha.pdf");
+        // return $pdf->stream();
         // return view('pedidos_detalles.pdf', compact('productos','clientes','pedido','estado'));
 
     }
@@ -320,7 +320,7 @@ class PedidoController extends Controller
     }
     public function Excel(){
 
-        abort_if(Gate::denies('pedido_descargar excel'),403);
+        // abort_if(Gate::denies('pedido_descargar excel'),403);
         date_default_timezone_set("America/Bogota");
         $fecha_actual = date("Y-m-d H:i");
 

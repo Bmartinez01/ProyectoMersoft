@@ -35,7 +35,6 @@
                                     <div class="table-responsive ">
                                         <table  id="proveedores" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                                             <thead class="text-white "id="fondo">
-                                                <th>ID</th>
                                                 <th>Nit Empresa</th>
                                                 <th>Nombre</th>
                                                 <th>Apellido</th>
@@ -50,7 +49,6 @@
                                             <tbody>
                                                 @foreach ($proveedores as $proveedore)
                                                     <tr>
-                                                        <td>{{ $proveedore->id }}</td>
                                                         <td>{{ $proveedore->nit_empresa }}</td>
                                                         <td>{{ $proveedore->nombre }}</td>
                                                         <td>{{ $proveedore->apellido }}</td>

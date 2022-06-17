@@ -55,27 +55,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <label for="estado" class="col-sm-2 col-form-label">Estado</label>
-                                <div class="col-sm-7">
-                                    <select class="form-control" name="estado" id="estado">
-
-                                        @if($role->estado==1)
-
-
-                                        <option value="1">Activo</option>
-                                        <option value="0">Inactivo</<option>
-
-                                        @else
-
-                                        <option value="0">Inactivo</option>
-                                        <option value="1">Activo</<option>
-
-                                        @endif
-
-                                    </select>
-                                </div>
-                            </div>
                         </div>
                         <div class="card-footer ml-auto mr-auto col-md-3">
                             <button type="submit" class="btn btn-facebook">Enviar</button>
